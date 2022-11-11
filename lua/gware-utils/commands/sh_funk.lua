@@ -10,6 +10,8 @@
 
 
 if SERVER then
+    util.AddNetworkString("gWare.Commands.Funk.ChatMessage")
+
     hook.Add("PlayerSay", "gWare.Commands.funk", function(ply, chatInput)
         local text = chatInput:lower()
 
@@ -36,5 +38,6 @@ if CLIENT then
         local sender = net.ReadEntity()
         local receiverName = net.ReadString()
 
+        
     end)
 end
