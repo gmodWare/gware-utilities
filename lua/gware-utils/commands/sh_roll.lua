@@ -8,14 +8,14 @@ if SERVER then
     util.AddNetworkString("GWare.RollCommand.ChatMessage")
 
     hook.Add("PlayerSay", "GWare.RollCommand", function(ply, text)
-        if (text:lower() == "/roll") or (text:lower() == "!roll") then
-            local randomNumber = math.Rand(1, 100)
+        if not (text:lower() == "/roll" or text:lower() == "!roll") then return end
+        
+        local randomNumber = math.Rand(1, 100)
 
-            net.Start("GWare.RollCommand.ChatMessage")
-                net.WriteUInt(randomNumber, 7)
-                net.WriteEntity(ply)
-            net.Broadcast()
-        end
+        net.Start("GWare.RollCommand.ChatMessage")
+            net.WriteUInt(randomNumber, 7)
+            net.WriteEntity(ply)
+        net.Broadcast()
     end)
 end
 
@@ -25,22 +25,19 @@ if CLIENT then
         ["good"] = Color(2, 2, 2),
         ["ok"] = Color(2, 2, 2),
         ["bad"] = Color(138, 8, 8),
-        ["default"] = Color(255, 255, 255),
-        ["brackets"] = Color(231, 192, 15),
-        ["commandColor"] = Color(154, 75, 245)
+        ["brackets"] = Color(40, 42, 46),
+        ["commandColor"] = Color(75, 92, 245)
     }
 
-    local pingColor = color_white
-
-    local function GWareReturnRollColor(ping)
+    local function getRollColor(ping)
         if (ping <= 25) then
-            pingColor = colors["bad"]
+            return colors["bad"]
         elseif (ping <= 50) then
-            pingColor = colors["ok"]
+            return colors["ok"]
         elseif (ping <= 75) then
-            pingColor = colors["good"]
+            return colors["good"]
         elseif (ping <= 100) then
-            pingColor = colors["perfect"]
+            return colors["perfect"]
         end
     end
 
@@ -48,8 +45,7 @@ if CLIENT then
         local randNum = net.ReadUInt(7)
         local ply = net.ReadEntity()
 
-        GWareReturnRollColor(randNum)
-
-        chat.AddText(colors["brackets"], "[", colors["commandColor"], "ROLL", colors["brackets"], "] ", ply:Nick() .. " hat eine ", pingColor, tostring(randNum), colors["commandColor"], " gerollt!")
+        local rollColor = getRollColor(randNum)
+        chat.AddText(colors["brackets"], "[", colors["commandColor"], "ROLL", colors["brackets"], "] ", color_white, ply:Nick() .. " hat eine ", rollColor, tostring(randNum), color_white, " gerollt!")
     end)
 end

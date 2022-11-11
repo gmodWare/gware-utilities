@@ -21,10 +21,20 @@ if SERVER then
         local namePart = start:Replace("!funk", ""):Replace("/funk")
         local message = args[2]
 
-        local targetedPlayer = gWare.Utils.GetPlayerByNamePart(namePart)
-        local fullName = targetedPlayer and targetedPlayer:Name() or namePart
+        local target = gWare.Utils.GetPlayerByNamePart(namePart)
+        local fullName = target and target:Name() or namePart
 
         net.Start("gWare.Commands.Funk.ChatMessage")
-            net.Write
+            net.WriteEntity(ply)
+            net.WriteString(fullName)
+        net.Broadcast()
+    end)
+end
+
+if CLIENT then
+    net.Receive("gWare.Commands.Funk.ChatMessage", function()
+        local sender = net.ReadEntity()
+        local receiverName = net.ReadString()
+
     end)
 end

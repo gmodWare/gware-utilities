@@ -1,0 +1,1 @@
+gWare.Utils.Config = {}
