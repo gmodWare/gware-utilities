@@ -9,7 +9,7 @@ if SERVER then
 
     hook.Add("PlayerSay", "GWare.RollCommand", function(ply, text)
         if not (text:lower() == "/roll" or text:lower() == "!roll") then return end
-        
+
         local randomNumber = math.Rand(1, 100)
 
         net.Start("GWare.RollCommand.ChatMessage")
@@ -23,8 +23,8 @@ if CLIENT then
     local colors = {
         ["perfect"] = Color(9, 168, 30),
         ["good"] = Color(160, 226, 6),
-        ["ok"] = Color(172, 169, 14),
-        ["bad"] = Color(138, 8, 8),
+        ["ok"] = Color(172, 104, 14),
+        ["bad"] = Color(151, 28, 28),
         ["brackets"] = Color(40, 42, 46),
         ["commandColor"] = Color(75, 92, 245)
     }
