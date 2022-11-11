@@ -17,7 +17,7 @@ if SERVER then
 
         local args = chatInput:Split("*")
         local start = message[1]
-,
+
         local namePart = start:Replace("!funk", ""):Replace("/funk")
         local message = args[2]
 
