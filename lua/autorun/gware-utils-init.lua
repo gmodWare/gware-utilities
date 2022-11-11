@@ -1,4 +1,13 @@
 gWare = gWare or {}
 gWare.Utils = gWare.Utils or {}
 
--- sowy leute
+-- TODO: load files
+if SERVER then
+
+end
+
+if CLIENT then
+
+end
+
+-- shared
