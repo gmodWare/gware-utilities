@@ -16,6 +16,8 @@ if SERVER then
             net.WriteUInt(randomNumber, 7)
             net.WriteEntity(ply)
         net.Broadcast()
+
+        return ""
     end)
 end
 
