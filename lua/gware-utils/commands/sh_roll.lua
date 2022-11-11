@@ -9,13 +9,15 @@ if SERVER then
 
     hook.Add("PlayerSay", "GWare.RollCommand", function(ply, text)
         if not (text:lower() == "/roll" or text:lower() == "!roll") then return end
-        
+
         local randomNumber = math.Rand(1, 100)
 
         net.Start("GWare.RollCommand.ChatMessage")
             net.WriteUInt(randomNumber, 7)
             net.WriteEntity(ply)
         net.Broadcast()
+
+        return ""
     end)
 end
 
