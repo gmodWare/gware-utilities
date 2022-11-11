@@ -10,10 +10,11 @@ if SERVER then
     AddCSLuaFile("gware-utils/commands/sh_roll.lua")
     AddCSLuaFile("gware-utils/commands/sh_vfunk.lua")
     AddCSLuaFile("gware-utils/settings/sv_settings.lua")
+
+    print("[gWare Utils] Successfully loaded!")
 end
 
 if CLIENT then
-    -- Sowy Leute heute kein GTA
 end
 
 -- Shared
