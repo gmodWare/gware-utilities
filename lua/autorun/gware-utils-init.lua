@@ -15,6 +15,7 @@ if SERVER then
 end
 
 if CLIENT then
+    print("RP CLIENT")
 end
 
 -- Shared

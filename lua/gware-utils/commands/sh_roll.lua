@@ -21,9 +21,9 @@ end
 
 if CLIENT then
     local colors = {
-        ["perfect"] = Color(2, 2, 2),
-        ["good"] = Color(2, 2, 2),
-        ["ok"] = Color(2, 2, 2),
+        ["perfect"] = Color(9, 168, 30),
+        ["good"] = Color(160, 226, 6),
+        ["ok"] = Color(172, 169, 14),
         ["bad"] = Color(138, 8, 8),
         ["brackets"] = Color(40, 42, 46),
         ["commandColor"] = Color(75, 92, 245)
