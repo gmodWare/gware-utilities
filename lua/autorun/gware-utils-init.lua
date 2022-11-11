@@ -1,7 +1,6 @@
 gWare = gWare or {}
 gWare.Utils = gWare.Utils or {}
 
--- TODO: load files
 if SERVER then
     AddCSLuaFile("gware-utils/commands/sh_akt.lua")
     AddCSLuaFile("gware-utils/commands/sh_decode.lua")
