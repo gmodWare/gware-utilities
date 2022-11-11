@@ -10,3 +10,4 @@
     Example Chat: [Verschlüsselter Funk] *1835 Menschlich an 5125 Ryzen* Antritt des Dienstes.
     Example Encrypted Chat: [Verschlüsselter Funk] *1835 Menschlich an 5125 Ryzen* Borsjuu eft Ejfotuft.
 ]]
+
