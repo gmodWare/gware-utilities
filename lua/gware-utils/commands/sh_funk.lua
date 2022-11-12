@@ -18,7 +18,7 @@ if SERVER then
         if not (text:StartWith("/funk") or text:StartWith("!funk")) then return end
 
         local args = chatInput:Split("*")
-        local start = message[1]
+        local start = args[1]
 
         local namePart = start:Replace("!funk", ""):Replace("/funk")
         local message = args[2]
@@ -31,6 +31,8 @@ if SERVER then
             net.WriteString(fullName)
             net.WriteEntity(ply)
         net.Broadcast()
+
+        return ""
     end)
 end
 
@@ -42,10 +44,10 @@ if CLIENT then
     }
 
     net.Receive("gWare.Commands.Funk.ChatMessage", function()
-        local message = net.ReadString()
+        local sendetMessage = net.ReadString()
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
-        chat.AddText(colors["brackets"], "[", colors["commandColor"], "FUNK", colors["brackets"], "] ", colors["color1"], "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message)
+        chat.AddText(colors["brackets"], "[", colors["commandColor"], "FUNK", colors["brackets"], "] ", colors["color1"], "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, sendetMessage)
     end)
 end
