@@ -27,17 +27,25 @@ if SERVER then
         local fullName = target and target:Name() or namePart
 
         net.Start("gWare.Commands.Funk.ChatMessage")
-            net.WriteEntity(ply)
+            net.WriteString(message)
             net.WriteString(fullName)
+            net.WriteEntity(ply)
         net.Broadcast()
     end)
 end
 
 if CLIENT then
-    net.Receive("gWare.Commands.Funk.ChatMessage", function()
-        local sender = net.ReadEntity()
-        local receiverName = net.ReadString()
+    local colors = {
+        ["color1"] = Color(0, 38, 255),
+        ["brackets"] = Color(40, 42, 46),
+        ["commandColor"] = Color(245, 200, 75)
+    }
 
-        
+    net.Receive("gWare.Commands.Funk.ChatMessage", function()
+        local message = net.ReadString()
+        local receiverName = net.ReadString()
+        local sender = net.ReadEntity()
+
+        chat.AddText(colors["brackets"], "[", colors["commandColor"], "FUNK", colors["brackets"], "] ", colors["color1"], "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message)
     end)
 end

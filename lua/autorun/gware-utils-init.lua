@@ -10,12 +10,13 @@ if SERVER then
     AddCSLuaFile("gware-utils/commands/sh_roll.lua")
     AddCSLuaFile("gware-utils/commands/sh_vfunk.lua")
     AddCSLuaFile("gware-utils/settings/sv_settings.lua")
+    AddCSLuaFile("gware-utils/utils/sh_utils.lua")
 
-    print("[gWare Utils] Successfully loaded!")
+    print("[gWare Utils - Server] Successfully loaded!")
 end
 
 if CLIENT then
-    print("RP CLIENT")
+    print("[gWare Utils - Client] Successfully loaded!")
 end
 
 -- Shared
@@ -27,3 +28,4 @@ include("gware-utils/commands/sh_ooc.lua")
 include("gware-utils/commands/sh_roll.lua")
 include("gware-utils/commands/sh_vfunk.lua")
 include("gware-utils/settings/sv_settings.lua")
+include("gware-utils/utils/sh_utils.lua")
