@@ -11,3 +11,13 @@
     Example Encrypted Chat: [Verschlüsselter Funk] *1835 Menschlich an 5125 Ryzen* Borsjuu eft Ejfotuft.
 ]]
 
+if SERVER then
+    hook.Add("PlayerSay", "gWare.Commands.vfunk", function(ply, chatInput)
+        local text = chatInput:lower()
+
+        if not text:StartWithAny("/vfunk", "!vfunk") then return end
+
+        local args = text:Split(text, " ")
+        local message = args[1]:ReplacePrefix("vfunk")
+    end)
+end
