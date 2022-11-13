@@ -18,7 +18,7 @@ end
     Returns: string
 ]]
 function string.ReplacePrefix(str, command)
-    for k, prefix in ipairs({"!", "/"}) do
+    for k, prefix in ipairs({"/", "!"}) do
         str = string.Replace(str, prefix, "")
     end
     

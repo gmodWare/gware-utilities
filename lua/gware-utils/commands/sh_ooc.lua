@@ -7,21 +7,23 @@
 ]]
 
 -- TODO: Don't forget to override darkrp ooc!
+-- TODO: Fix Bug: When using '//' there is one additional space after the name which shouldnt be there
+-- example Chat : '[OOC] Menschlich:  Hallo'
 
 if SERVER then
     util.AddNetworkString("gWare.Commands.OOC.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.OOC", function(ply, text)
-        if (text:StartWithAny("/ooc", "//")) then
-            local message = text:ReplacePrefix("/ooc ", "// ")
+        if not text:StartWithAny("/ooc", "//", "!ooc") then return end
 
-            net.Start("gWare.Commands.OOC.ChatMessage")
-                net.WriteString(message)
-                net.WriteEntity(ply)
-            net.Broadcast()
+        local message = text:ReplacePrefix("ooc")
 
-            return ""
-        end
+        net.Start("gWare.Commands.OOC.ChatMessage")
+            net.WriteString(message)
+            net.WriteEntity(ply)
+        net.Broadcast()
+
+        return ""
     end)
 end
 
