@@ -34,9 +34,12 @@ if CLIENT then
     }
 
     net.Receive("gWare.Commands.OOC.ChatMessage", function()
-        local receivedMessage = net.ReadString()
+        local message = net.ReadString()
         local sender = net.ReadEntity()
 
-        chat.AddText(colors["brackets"], "[", colors["commandColor"], "OOC", colors["brackets"], "] ", color_white, sender:Nick() .. ": " .. receivedMessage)
+        gWare.Utils.Print(
+            "ooc", 
+            sender:Nick() .. ": " .. message
+        )
     end)
 end

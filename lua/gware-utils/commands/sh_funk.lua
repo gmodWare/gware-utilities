@@ -42,10 +42,13 @@ if CLIENT then
     }
 
     net.Receive("gWare.Commands.Funk.ChatMessage", function()
-        local sendetMessage = net.ReadString()
+        local message = net.ReadString()
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
-        chat.AddText(colors["brackets"], "[", colors["commandColor"], "FUNK", colors["brackets"], "] ", colors["color1"], "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, sendetMessage)
+        gWare.Utils.Print(
+            "funk",
+            "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
+        )
     end)
 end
