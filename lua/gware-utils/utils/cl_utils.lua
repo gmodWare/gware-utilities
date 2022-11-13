@@ -4,6 +4,15 @@
 ]]--
 function gWare.Utils.GetCommandPrefix(name)
     local colors = gWare.Utils.Colors
-    local commandColor = colors.Commands[name] or color.Commands["default"]
-    return unpack({colors.Brackets, "[", commandColor, name:upper(), colors.Brackets, "] ", color_white})
+    local commandColor = colors.Commands[name] or colors.Commands["default"]
+    return {colors.Brackets, "[", commandColor, name:upper(), colors.Brackets, "] ", color_white}
+end
+
+function gWare.Utils.Print(prefix, ...)
+    local text = {...}
+
+    local prefixTbl = gWare.Utils.GetCommandPrefix(prefix)
+    local combinedTable = table.Add(prefixTbl, text)
+
+    chat.AddText(unpack(combinedTable))
 end

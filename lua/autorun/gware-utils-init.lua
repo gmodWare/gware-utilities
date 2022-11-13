@@ -4,7 +4,7 @@ gWare.Utils = gWare.Utils or {}
 local rootDir = "gware-utils"
 
 local function AddFile(File, dir)
-    local fileSide = string.lower(string.Left(File , 3))
+    local fileSide = string.lower(string.Left(File, 3))
 
     if SERVER and fileSide == "sv_" then
         include(dir..File)

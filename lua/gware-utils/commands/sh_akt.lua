@@ -27,7 +27,6 @@ if CLIENT then
         local receivedMessage = net.ReadString()
         local ply = net.ReadEntity()
 
-        local prefix = gWare.Utils.GetCommandPrefix("akt")
-        chat.AddText(prefix, ply:Nick() .. " " .. receivedMessage)
+        gWare.Utils.Print("akt", ply:Nick() .. " ", receivedMessage)
     end)
 end
