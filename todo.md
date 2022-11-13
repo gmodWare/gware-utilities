@@ -2,7 +2,7 @@
 
 ## When done, this will be published on gmod workshop.
 
-####Settings: (ingame config)
+#### Settings: (ingame config)
 - Disable NPC Weapon Drops
 - Disable Toolgun Sounds
 - Disable Toolgon Effects
@@ -20,26 +20,26 @@
 - Disable Q-Menu for Users (4)
 - Diable C-Menu for Users (5)
 
-####Additional Permissions:
+#### Additional Permissions:
 - Disable Q-Menu for Users (4)
 - Diable C-Menu for Users (5)
 
-####Menu Tools:
+#### Menu Tools:
 - DarkRP Job Spawn Setter
 
-####Entities:
+#### Entities:
 - Information Panels
 
-####Sonstiges:
+#### Sonstiges:
 - Third Person
 - Simple Voting System
 
-####Commands:
-- funk 
+#### Commands:
+- ✅~~funk~~
 - vfunk (2)
 - deocde (3)
-- ooc
+- ✅~~ooc~~
 - looc
-- akt
-- makt - medic akt
-- roll
+- ✅~~akt~~
+- makt (medic akt)
+- ✅~~roll~~
