@@ -37,8 +37,8 @@
 #### Commands:
 - ✅funk
 - 🔄vfunk (2)
-- deocde (3)
-- ✅ooc
+- decode (3)
+- ⚠️ooc
 - looc
 - ✅akt
 - makt (medic akt)
