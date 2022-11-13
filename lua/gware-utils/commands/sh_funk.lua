@@ -12,15 +12,13 @@
 if SERVER then
     util.AddNetworkString("gWare.Commands.Funk.ChatMessage")
 
-    hook.Add("PlayerSay", "gWare.Commands.funk", function(ply, chatInput)
-        local text = chatInput:lower()
+    hook.Add("PlayerSay", "gWare.Commands.funk", function(ply, text)
+        if not (text:lower():StartWithAny("/funk", "!funk")) then return end
 
-        if not (text:StartWith("/funk") or text:StartWith("!funk")) then return end
-
-        local args = chatInput:Split("*")
+        local args = text:Split("*")
         local start = args[1]
 
-        local namePart = start:Replace("!funk ", ""):Replace("/funk ")
+        local namePart = start:ReplacePrefix("funk") 
         local message = args[2]
 
         local target = gWare.Utils.GetPlayerByNamePart(namePart)

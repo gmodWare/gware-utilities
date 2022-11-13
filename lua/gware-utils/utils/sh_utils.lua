@@ -18,12 +18,11 @@ end
     Returns: string
 ]]
 function string.ReplacePrefix(str, command)
-    local prefix1 = "!" .. command
-    local prefix2 = "/" .. command
-
-    local temp = string.Replace(str, prefix1)
+    for k, prefix in ipairs({"!", "/"}) do
+        str = string.Replace(str, prefix, "")
+    end
     
-    return string.Replace(temp, prefix2)
+    return string.Replace(str, command .. " ", "")
 end
 
 --[[
