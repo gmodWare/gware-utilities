@@ -20,7 +20,7 @@ if SERVER then
         local args = chatInput:Split("*")
         local start = args[1]
 
-        local namePart = start:Replace("!funk", ""):Replace("/funk")
+        local namePart = start:Replace("!funk ", ""):Replace("/funk ")
         local message = args[2]
 
         local target = gWare.Utils.GetPlayerByNamePart(namePart)
