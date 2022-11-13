@@ -15,3 +15,17 @@ hook.Add("InitPostEntity", "gWare.Utils.ClientReady", function()
     net.Start("gWare.Utils.ClientReady")
     net.SendToServer()
 end)
+
+net.Receive("gWare.Utils.UpdateClient", function(len)
+    local name = net.ReadString
+    local val = net.ReadBool
+
+    gWare.Utils.Settings[name].value = val
+end)
+
+function gWare.Utils.UpdateSetting(settingName, settingValue)
+    net.Start("gWare.Utils.UpdateServer")
+        net.WriteString(settingName)
+        net.WriteBool(settingValue)
+    net.SendToServer()
+end

@@ -30,6 +30,15 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
     end)
 end)
 
+function gWare.Utils.ChangeSetting(settingName, settingValue)
+    if not getSetting(settingName) then return end
+
+    gWare.Utils.UpdateSetting(settingName, settingValue)
+    gWare.Utils.Settings[settingName].value = settingValue
+
+    gWare.Utils.UpdateClient(settingName, settingValue)
+end
+
 gWare.Utils.AddSetting({
     name = "kxx",
     description = "kxx ist toll",
