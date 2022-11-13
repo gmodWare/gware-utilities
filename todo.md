@@ -43,6 +43,7 @@
 - ✅akt
 - makt (medic akt)
 - ✅roll
+- unstuck
 
 
 ##
