@@ -27,19 +27,17 @@ if CLIENT then
         ["good"] = Color(160, 226, 6),
         ["ok"] = Color(172, 104, 14),
         ["bad"] = Color(151, 28, 28),
-        ["brackets"] = Color(40, 42, 46),
-        ["commandColor"] = Color(75, 92, 245)
     }
 
     local function getRollColor(ping)
         if (ping <= 25) then
-            return colors["bad"]
+            return gWare.Utils.Colors.Bad
         elseif (ping <= 50) then
-            return colors["ok"]
+            return gWare.Utils.Colors.Okay
         elseif (ping <= 75) then
-            return colors["good"]
+            return gWare.Utils.Colors.Good
         elseif (ping <= 100) then
-            return colors["perfect"]
+            return gWare.Utils.Colors.Perfect
         end
     end
 
@@ -48,6 +46,10 @@ if CLIENT then
         local ply = net.ReadEntity()
 
         local rollColor = getRollColor(randNum)
-        chat.AddText(colors["brackets"], "[", colors["commandColor"], "ROLL", colors["brackets"], "] ", color_white, ply:Nick() .. " hat eine ", rollColor, tostring(randNum), color_white, " gerollt!")
+
+        gWare.Utils.Print(
+            "roll",
+            ply:Nick() .. " hat eine ", rollColor, tostring(randNum), color_white, " gerollt!"
+        )
     end)
 end

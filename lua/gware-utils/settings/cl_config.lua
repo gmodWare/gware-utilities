@@ -2,6 +2,7 @@ gWare.Utils.Config = {}
 
 gWare.Utils.Colors = {
     Brackets = Color(50, 54, 61),
+    
     Perfect = Color(9, 168, 30),
     Good = Color(160, 226, 6),
     Okay = Color(172, 104, 14),
