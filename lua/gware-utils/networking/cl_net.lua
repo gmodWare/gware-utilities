@@ -1,4 +1,4 @@
-net.Receive("gWare.Utils.UpdateClient", function(len)
+net.Receive("gWare.Utils.SendSettingToClient", function(len)
     local count = net.ReadUInt(5)
 
     for i = 1, count do
