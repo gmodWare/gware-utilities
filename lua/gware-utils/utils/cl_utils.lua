@@ -5,5 +5,5 @@
 function gWare.Utils.GetCommandPrefix(name)
     local colors = gWare.Utils.Colors
     local commandColor = colors.Commands[name] or color.Commands["default"]
-    return unpack({colors.Brackets, "[", name:upper(), colors.Brackets, "] ", color_white})
+    return unpack({colors.Brackets, "[", commandColor, name:upper(), colors.Brackets, "] ", color_white})
 end
