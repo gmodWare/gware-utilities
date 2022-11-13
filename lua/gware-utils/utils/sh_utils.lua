@@ -40,3 +40,16 @@ function string.StartWithAny(str, ...)
 
     return false
 end
+
+--[[
+    Replaces 1 with true, and rest with false. Needed for SQL (fuck u SQLLite)
+    Returns: boolean
+]]
+
+function gWare.Utils.IntToBool(int)
+    if int == 1 then
+        return true
+    else
+        return false
+    end
+end
