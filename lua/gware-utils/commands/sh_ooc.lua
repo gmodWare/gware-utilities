@@ -7,3 +7,34 @@
 ]]
 
 -- TODO: Don't forget to override darkrp ooc!
+
+if SERVER then
+    util.AddNetworkString("gWare.Commands.OOC.ChatMessage")
+
+    hook.Add("PlayerSay", "gWare.Commands.OOC", function()
+        if (text:lower():StartWith("/ooc")) then
+            local message = text:Replace("/ooc ", "")
+
+            net.Start("gWare.Commands.OOC.ChatMessage")
+                net.WriteString(message)
+                net.WriteEntity(ply)
+            net.Broadcast()
+
+            return ""
+        end
+    end)
+end
+
+if CLIENT then
+    local colors = {
+        ["brackets"] = Color(40, 42, 46),
+        ["commandColor"] = Color(169, 75, 245)
+    }
+
+    net.Receive("gWare.Commands.OOC.ChatMessage", function()
+        local receivedMessage = net.ReadString()
+        local sender = net.ReadEntity()
+
+        chat.AddText(colors["brackets"], "[", colors["commandColor"], "OOC", colors["brackets"], "] ", color_white, sender:Nick() .. ": " .. receivedMessage)
+    end)
+end
