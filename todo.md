@@ -35,11 +35,11 @@
 - Simple Voting System
 
 #### Commands:
-✅ ~~funk~~
+- ✅~~funk~~
 - vfunk (2)
 - deocde (3)
-✅ ~~ooc~~
+- ✅~~ooc~~
 - looc
-✅ ~~akt~~
+- ✅~~akt~~
 - makt (medic akt)
-✅ ~~roll~~
+- ✅~~roll~~
