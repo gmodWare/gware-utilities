@@ -1,31 +1,50 @@
 gWare = gWare or {}
 gWare.Utils = gWare.Utils or {}
 
-if SERVER then
-    AddCSLuaFile("gware-utils/commands/sh_akt.lua")
-    AddCSLuaFile("gware-utils/commands/sh_decode.lua")
-    AddCSLuaFile("gware-utils/commands/sh_funk.lua")
-    AddCSLuaFile("gware-utils/commands/sh_looc.lua")
-    AddCSLuaFile("gware-utils/commands/sh_ooc.lua")
-    AddCSLuaFile("gware-utils/commands/sh_roll.lua")
-    AddCSLuaFile("gware-utils/commands/sh_vfunk.lua")
-    AddCSLuaFile("gware-utils/settings/sv_settings.lua")
-    AddCSLuaFile("gware-utils/utils/sh_utils.lua")
+local rootDir = "gware-utils"
 
-    print("[gWare Utils - Server] Successfully loaded!")
+local function AddFile(File, dir)
+    local fileSide = string.lower(string.Left(File , 3))
+
+    if SERVER and fileSide == "sv_" then
+        include(dir..File)
+    elseif fileSide == "sh_" then
+        if SERVER then 
+            AddCSLuaFile(dir..File)
+        end
+
+        include(dir..File)
+    elseif fileSide == "cl_" then
+        if SERVER then 
+            AddCSLuaFile(dir..File)
+        elseif CLIENT then
+            include(dir..File)
+        end
+    end
 end
 
-if CLIENT then
-    print("[gWare Utils - Client] Successfully loaded!")
+local function IncludeDir(dir)
+    dir = dir .. "/"
+    local File, Directory = file.Find(dir.."*", "LUA")
+
+    for k, v in ipairs(File) do
+        if string.EndsWith(v, ".lua") then
+            AddFile(v, dir)
+        end
+    end
+    
+    for k, v in ipairs(Directory) do
+        IncludeDir(dir..v)
+    end
 end
 
--- Shared
-include("gware-utils/commands/sh_akt.lua")
-include("gware-utils/commands/sh_decode.lua")
-include("gware-utils/commands/sh_funk.lua")
-include("gware-utils/commands/sh_looc.lua")
-include("gware-utils/commands/sh_ooc.lua")
-include("gware-utils/commands/sh_roll.lua")
-include("gware-utils/commands/sh_vfunk.lua")
-include("gware-utils/settings/sv_settings.lua")
-include("gware-utils/utils/sh_utils.lua")
+if (VoidLib) then
+    IncludeDir(rootDir)
+    print("[gWare Utils] Addon Loaded Successfully")
+else
+    hook.Add("VoidLib.Loaded", "KXX.AttachmentShop.Init.WaitForVoidLib", function ()
+        IncludeDir(rootDir)
+        print("[gWare Utils] Addon Loaded Successfully")
+    end)
+end
+
