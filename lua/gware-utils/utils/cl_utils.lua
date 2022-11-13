@@ -8,6 +8,14 @@ function gWare.Utils.GetCommandPrefix(name)
     return {colors.Brackets, "[", commandColor, name:upper(), colors.Brackets, "] ", color_white}
 end
 
+--[[
+    Prints a colored message with the given prefix followed
+    by the varargs given.
+    
+    Example code usage: gWare.Utils.Print("akt", color_white, ply:Nick(), " ", message)
+    Example chat usage: '/akt isst eine Banane'
+    Chat: '[AKT] Menschlich isst eine Banane'
+]]
 function gWare.Utils.Print(prefix, ...)
     local text = {...}
 
