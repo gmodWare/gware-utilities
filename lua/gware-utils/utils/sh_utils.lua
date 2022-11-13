@@ -33,8 +33,8 @@ function string.StartWithAny(str, ...)
     local args = {...}
 
     for _, v in ipairs(args) do
-        if string.StartWith(str, v) then 
-            return true 
+        if string.StartWith(str, v) then
+            return true
         end
     end
 
@@ -42,7 +42,7 @@ function string.StartWithAny(str, ...)
 end
 
 --[[
-    Replaces 1 with true, and rest with false. Needed for SQL (fuck u SQLLite)
+    Replaces 1 with true, and rest with false. Needed for SQL (fuck u)
     Returns: boolean
 ]]
 

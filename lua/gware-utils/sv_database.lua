@@ -37,9 +37,7 @@ function gWare.Utils.GetSetting(setting_name, callback)
         query:Where("setting_name", setting_name)
         query:Select("setting_value")
         query:Callback(function (tblData)
-            for _, setting in ipairs(tblData) do
-                callback(gWare.Utils.IntToBool(tonumber(setting.setting_value)))
-            end
+            callback(tblData)
         end)
     query:Execute()
 end
@@ -49,12 +47,7 @@ function gWare.Utils.GetAllSettings(callback)
         query:Select("setting_name")
         query:Select("setting_value")
         query:Callback(function (tblData)
-            for _, settings in ipairs(tblData) do
-                local settingName = settings.setting_name
-                local settingValue = gWare.Utils.IntToBool(tonumber(settings.setting_value))
-
-                callback(settingName, settingValue)
-            end
+            callback(tblData)
         end)
     query:Execute()
 end

@@ -1,17 +1,5 @@
-gWare.Utils.Settings = gWare.Utils.Settings  or {}
-
-gWare.Utils.GetAllSettings(function (settingName, settingValue)
-    gWare.Utils.Settings[settingName] = settingValue
-end)
+gWare.Utils.Settings = gWare.Utils.Settings or {}
 
 function gWare.Utils.GetSettingValue(settingName)
-    local val = false
-
-    gWare.Utils.GetSetting(settingName, function (settingValue)
-        val = settingValue
-    end)
-
-    return val
+    return gWare.Utils.Settings[settingName].value
 end
-
-
