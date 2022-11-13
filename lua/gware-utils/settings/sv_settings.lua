@@ -39,21 +39,3 @@ function gWare.Utils.ChangeSetting(settingName, settingValue)
     gWare.Utils.UpdateClient(settingName, settingValue)
 end
 
-gWare.Utils.AddSetting({
-    name = "kxx",
-    description = "kxx ist toll",
-    defaultValue = false,
-    settingType = "bool"
-})
-gWare.Utils.AddSetting({
-    name = "menschlich",
-    description = "menschlich ist toll",
-    defaultValue = true,
-    settingType = "bool"
-})
-gWare.Utils.AddSetting({
-    name = "ryzen",
-    description = "ryzen ist toll",
-    defaultValue = true,
-    settingType = "bool"
-})
