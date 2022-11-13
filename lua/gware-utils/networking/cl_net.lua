@@ -1,4 +1,4 @@
-net.Receive("gWare.Utils.UpdateClient", function(len)
+net.Receive("gWare.Utils.SendSettingToClient", function(len)
     local count = net.ReadUInt(5)
 
     for i = 1, count do
@@ -17,10 +17,10 @@ hook.Add("InitPostEntity", "gWare.Utils.ClientReady", function()
 end)
 
 net.Receive("gWare.Utils.UpdateClient", function(len)
-    local name = net.ReadString
-    local val = net.ReadBool
+    local settingName = net.ReadString()
+    local settingValue = net.ReadBool()
 
-    gWare.Utils.Settings[name].value = val
+    gWare.Utils.Settings[settingName].value = settingValue
 end)
 
 function gWare.Utils.UpdateSetting(settingName, settingValue)
