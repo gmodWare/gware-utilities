@@ -49,4 +49,4 @@
 ✅ Done —
 🔄 Work in Progress —
 ❌ Won't do for now —
-⚠️ Issues, broken right now —
+⚠️ Issues, broken right now
