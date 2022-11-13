@@ -11,9 +11,9 @@
 if SERVER then
     util.AddNetworkString("gWare.Commands.OOC.ChatMessage")
 
-    hook.Add("PlayerSay", "gWare.Commands.OOC", function()
-        if (text:lower():StartWith("/ooc")) then
-            local message = text:Replace("/ooc ", "")
+    hook.Add("PlayerSay", "gWare.Commands.OOC", function(ply, text)
+        if (text:StartWithAny("/ooc", "//")) then
+            local message = text:ReplacePrefix("/ooc ", "// ")
 
             net.Start("gWare.Commands.OOC.ChatMessage")
                 net.WriteString(message)
