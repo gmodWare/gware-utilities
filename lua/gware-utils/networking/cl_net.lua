@@ -9,6 +9,8 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
 
         gWare.Utils.Settings[i] = { name = settingName, description = settingDescription, value = settingValue, settingType = settingType}
     end
+
+    hook.Run("gWare.Utils.ClientReady")
 end)
 
 hook.Add("InitPostEntity", "gWare.Utils.ClientReady", function()
