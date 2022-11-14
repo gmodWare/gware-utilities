@@ -11,8 +11,15 @@ end
 function gWare.Utils.AddSetting(tblData)
     gWare.Utils.Settings[tblData.name] = {name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
 
-    timer.Simple(0, function()
-        hook.Run("gWare.Utils.SettingsLoaded")
+    gWare.Utils.GetAllSettings(function (tblData)
+        local tblDataCount = table.Count(tblData)
+        local settingsDataCount = table.Count(gWare.Utils.Settings)
+
+        if settingsDataCount != tblDataCount then return end
+
+        timer.Simple(0, function ()
+            hook.Run("gWare.Utils.SettingsLoaded")
+        end)
     end)
 
     if getSetting(tblData.name) then return end
