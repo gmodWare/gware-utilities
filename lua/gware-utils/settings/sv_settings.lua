@@ -50,6 +50,24 @@ function gWare.Utils.ChangeSetting(index, settingValue)
 end
 
 ///////////////////////////
+//       SETTINGS        //
+///////////////////////////
+
+hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
+    local index = 10
+    if not gWare.Utils.GetSettingValue(index) then return end
+
+    local s64 = ply:SteamID64()
+    local ownerS64 = ply:OwnerSteamID64()
+
+    if ownerS64 == s64 then print("check") return end
+
+    ply:Kick("[gWare] Du wurdest gekickt, aufgrund von Family Sharing!")
+end)
+
+
+
+///////////////////////////
 // IN-GAME CONFIGURATION //
 ///////////////////////////
 
