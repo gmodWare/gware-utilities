@@ -7,7 +7,7 @@
 - Disable Toolgun Sounds
 - Disable Toolgon Effects
 - Auto-Cloak on NoClip
-- Disable Killfeed
+- ✅Disable Killfeed
 - Disable Suicide
 - Disable All Weapon Drop
 - Which jobs can use vfunk (2)
@@ -15,7 +15,7 @@
 - Automatic Workshop Download
 - Disable Advert (DarkRP Billboards)
 - Enable Classic Advert
-- Disable Family Sharing
+- ✅Disable Family Sharing
 - Disable Voice Panels
 - Disable Q-Menu for Users (4)
 - Diable C-Menu for Users (5)
