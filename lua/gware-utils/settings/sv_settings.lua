@@ -8,14 +8,16 @@ local function getSetting(name)
     return val
 end
 
+local i = 1
 function gWare.Utils.AddSetting(tblData)
-    gWare.Utils.Settings[tblData.name] = {name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
+    gWare.Utils.Settings[i] = {name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
+    i = i + 1
 
-    gWare.Utils.GetAllSettings(function (tblData)
-        local tblDataCount = table.Count(tblData)
+    gWare.Utils.GetAllSettings(function (sqlData)
+        local sqlDataCount = table.Count(sqlData)
         local settingsDataCount = table.Count(gWare.Utils.Settings)
 
-        if settingsDataCount != tblDataCount then return end
+        if settingsDataCount != sqlDataCount then return end
 
         timer.Simple(0, function ()
             hook.Run("gWare.Utils.SettingsLoaded")
@@ -28,24 +30,26 @@ end
 
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
     gWare.Utils.GetAllSettings(function (tblData)
-        for _, settings in ipairs(tblData) do
-            local settingName = settings.setting_name
+        for index, settings in ipairs(tblData) do
             local settingValue = gWare.Utils.IntToBool(tonumber(settings.setting_value))
 
-            gWare.Utils.Settings[settingName].value = settingValue
+            gWare.Utils.Settings[index].value = settingValue
         end
+
+        PrintTable(gWare.Utils.Settings)
     end)
 end)
 
-function gWare.Utils.ChangeSetting(settingName, settingValue)
+function gWare.Utils.ChangeSetting(index, settingValue)
+    local settingName = gWare.Utils.Settings[index].name
+
     if not getSetting(settingName) then return end
 
     gWare.Utils.UpdateSetting(settingName, settingValue)
-    gWare.Utils.Settings[settingName].value = settingValue
+    gWare.Utils.Settings[index].value = settingValue // change
 
-    gWare.Utils.UpdateClient(settingName, settingValue)
+    gWare.Utils.UpdateClient(index, settingValue)
 end
-
 
 ///////////////////////////
 // IN-GAME CONFIGURATION //

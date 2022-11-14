@@ -4,11 +4,11 @@ util.AddNetworkString("gWare.Utils.SendSettingToClient")
 util.AddNetworkString("gWare.Utils.UpdateServer")
 
 function gWare.Utils.SendSettingToClient(len, ply)
-    local count = table.Count(gWare.Utils.Settings)
+    local count = #gWare.Utils.Settings
 
     net.Start("gWare.Utils.SendSettingToClient")
         net.WriteUInt(count, 5)
-    for _, settingsData in pairs(gWare.Utils.Settings) do
+    for _, settingsData in ipairs(gWare.Utils.Settings) do
         net.WriteString(settingsData.name)
         net.WriteString(settingsData.description)
         net.WriteBool(settingsData.value)
@@ -17,9 +17,9 @@ function gWare.Utils.SendSettingToClient(len, ply)
     net.Send(ply)
 end
 
-function gWare.Utils.UpdateClient(settingName, settingValue)
+function gWare.Utils.UpdateClient(index, settingValue)
     net.Start("gWare.Utils.UpdateClient")
-        net.WriteString(settingName)
+        net.WriteUInt(index, 5)
         net.WriteBool(settingValue)
     net.Broadcast()
 end
@@ -27,8 +27,8 @@ end
 net.Receive("gWare.Utils.ClientReady", gWare.Utils.SendSettingToClient)
 
 net.Receive("gWare.Utils.UpdateServer", function(len, ply)
-    local settingName = net.ReadString()
+    local index = net.ReadUInt(5)
     local settingValue = net.ReadBool()
 
-    gWare.Utils.ChangeSetting(settingName, settingValue)
+    gWare.Utils.ChangeSetting(index, settingValue)
 end)

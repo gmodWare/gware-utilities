@@ -7,7 +7,7 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
         local settingValue = net.ReadBool()
         local settingType = net.ReadString()
 
-        gWare.Utils.Settings[settingName] = { name = settingName, description = settingDescription, value = settingValue, settingType = settingType}
+        gWare.Utils.Settings[i] = { name = settingName, description = settingDescription, value = settingValue, settingType = settingType}
     end
 end)
 
@@ -17,15 +17,17 @@ hook.Add("InitPostEntity", "gWare.Utils.ClientReady", function()
 end)
 
 net.Receive("gWare.Utils.UpdateClient", function(len)
-    local settingName = net.ReadString()
+    local index = net.ReadUInt(5)
     local settingValue = net.ReadBool()
 
-    gWare.Utils.Settings[settingName].value = settingValue
+    gWare.Utils.Settings[index].value = settingValue
+
+    PrintTable(gWare.Utils.Settings)
 end)
 
-function gWare.Utils.UpdateSetting(settingName, settingValue)
+function gWare.Utils.UpdateSetting(index, settingValue)
     net.Start("gWare.Utils.UpdateServer")
-        net.WriteString(settingName)
+        net.WriteUInt(index, 5)
         net.WriteBool(settingValue)
     net.SendToServer()
 end

@@ -9,7 +9,7 @@ function PANEL:Init()
     scrollbar:Dock(FILL)
     scrollbar:SDockMargin(5, 5, 5, 5)
 
-    for _, data in pairs(gWare.Utils.Settings) do
+    for index, data in ipairs(gWare.Utils.Settings) do
         local option = scrollbar:Add("VoidUI.BackgroundPanel")
         option:Dock(TOP)
         option:SetTall(60)
@@ -20,7 +20,7 @@ function PANEL:Init()
             option.input:SetChecked(data.value)
 
             function option.input:OnChange(val)
-                gWare.Utils.UpdateSetting(data.name, val)
+                gWare.Utils.UpdateSetting(index, val)
             end
         end
 
