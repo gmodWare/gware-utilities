@@ -21,8 +21,6 @@ net.Receive("gWare.Utils.UpdateClient", function(len)
     local settingValue = net.ReadBool()
 
     gWare.Utils.Settings[index].value = settingValue
-
-    PrintTable(gWare.Utils.Settings)
 end)
 
 function gWare.Utils.UpdateSetting(index, settingValue)

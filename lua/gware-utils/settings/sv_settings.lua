@@ -35,8 +35,6 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
 
             gWare.Utils.Settings[index].value = settingValue
         end
-
-        PrintTable(gWare.Utils.Settings)
     end)
 end)
 
