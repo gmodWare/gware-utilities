@@ -6,8 +6,10 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
         local settingDescription = net.ReadString()
         local settingValue = net.ReadBool()
         local settingType = net.ReadString()
+        local settingID = net.ReadString()
 
         gWare.Utils.Settings[i] = { name = settingName, description = settingDescription, value = settingValue, settingType = settingType}
+        gWare.Utils.IDs[settingID] = i
     end
 
     hook.Run("gWare.Utils.ClientReady")

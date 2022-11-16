@@ -11,6 +11,7 @@ end
 local i = 1
 function gWare.Utils.AddSetting(tblData)
     gWare.Utils.Settings[i] = {name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
+    gWare.Utils.IDs[tblData.id] = i
     i = i + 1
 
     gWare.Utils.GetAllSettings(function (sqlData)
@@ -72,6 +73,7 @@ end)
 ///////////////////////////
 
 gWare.Utils.AddSetting({
+    id = "npcDisabledWeapons",
     name = "NPC Waffen Drop",
     description = "Sollen NPCs beim Tod ihre Waffe fallen lassen?",
     defaultValue = true,
@@ -100,6 +102,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "showKillfeed",
     name = "Killfeed anzeigen",
     description = "Sollen Spielertode rechts oben angezeigt werden?",
     defaultValue = true,

@@ -13,6 +13,7 @@ function gWare.Utils.SendSettingToClient(len, ply)
         net.WriteString(settingsData.description)
         net.WriteBool(settingsData.value)
         net.WriteString(settingsData.settingType)
+        net.WriteString(settingsData.id)
     end
     net.Send(ply)
 end
