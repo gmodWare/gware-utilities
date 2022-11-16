@@ -60,7 +60,7 @@ hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
     local s64 = ply:SteamID64()
     local ownerS64 = ply:OwnerSteamID64()
 
-    if ownerS64 == s64 then print("check") return end
+    if ownerS64 == s64 then return end
 
     ply:Kick("[gWare] Du wurdest gekickt, aufgrund von Family Sharing!")
 end)
