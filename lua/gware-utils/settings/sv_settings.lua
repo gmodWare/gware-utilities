@@ -10,7 +10,7 @@ end
 
 local i = 1
 function gWare.Utils.AddSetting(tblData)
-    gWare.Utils.Settings[i] = {name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
+    gWare.Utils.Settings[i] = {id = tblData.id, name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
     gWare.Utils.IDs[tblData.id] = i
     i = i + 1
 
@@ -55,8 +55,7 @@ end
 ///////////////////////////
 
 hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
-    local index = 10
-    if not gWare.Utils.GetSettingValue(index) then return end
+    if not gWare.Utils.GetSettingValue("familySharing") then return end
 
     local s64 = ply:SteamID64()
     local ownerS64 = ply:OwnerSteamID64()
@@ -81,6 +80,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "toolgunSounds",
     name = "Toolgun Geräusche",
     description = "Soll die Toolgun beim benutzen Geräusche machen?",
     defaultValue = true,
@@ -88,6 +88,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "toolgunEffects",
     name = "Toolgun Effekte",
     description = "Soll die Toolgun beim benutzen Effekte machen?",
     defaultValue = true,
@@ -95,6 +96,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "automaticCloak",
     name = "Automatischer Cloak bei Noclip",
     description = "Soll der Spieler bei Noclip automatisch unsichtbar werden?",
     defaultValue = false,
@@ -110,6 +112,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "commitSuicide",
     name = "Selbstmord erlauben?",
     description = "Kann ein spieler sich selbst umbringen (Konsolen Befehl)?",
     defaultValue = true,
@@ -117,6 +120,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "weaponDrop",
     name = "Spieler Waffen drop erlauben?",
     description = "Kann ein Spieler seine Waffen fallen lassen?",
     defaultValue = true,
@@ -124,6 +128,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "workshopDownload",
     name = "Automatischer Workshop-Download",
     description = "Sollen alle User bei joinen die Kollektion automatisch downloaden?",
     defaultValue = false,
@@ -131,6 +136,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "darkrpBlackboard",
     name = "DarkRP Tafeln aktivieren?",
     description = "Sollen bei '/advert' Tafeln gespawned werden?",
     defaultValue = true,
@@ -138,6 +144,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "familySharing",
     name = "Family Sharing verbieten?",
     description = "Sollen User die Family-Sharing benutzen, sofort gekickt werden?",
     defaultValue = false,
@@ -145,6 +152,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "voicePanels",
     name = "Sprachanzeige deaktiveren?",
     description = "Soll die Sprachanzeige Rechts unten deaktiviert werden?",
     defaultValue = false,
@@ -152,6 +160,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "disableSpawnmenu",
     name = "Spawnmenü für User deaktivieren?",
     description = "Braucht der user eine permission um das Spawnmenü öffnen zu können?",
     defaultValue = false,
@@ -159,6 +168,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "disableContextmenu",
     name = "Context-Menü für User deaktivieren?",
     description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
     defaultValue = false,
