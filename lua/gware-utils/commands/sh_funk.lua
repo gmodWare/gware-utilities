@@ -21,6 +21,11 @@ if SERVER then
         local namePart = start:ReplacePrefix("funk") 
         local message = args[2]
 
+        if not message then 
+            VoidLib.Notify(ply, "Invalider Funk", "Funk Beispiel: /funk Commander Rex* Wo befinden Sie sich?", VoidUI.Colors.Red, 10)
+            return
+        end
+
         local target = gWare.Utils.GetPlayerByNamePart(namePart)
         local fullName = target and target:Name() or namePart
 
@@ -46,8 +51,7 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
-        gWare.Utils.Print(
-            "funk",
+        gWare.Utils.Print("funk",
             "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )
     end)

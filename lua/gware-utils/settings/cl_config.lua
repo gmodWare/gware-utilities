@@ -7,6 +7,7 @@ gWare.Utils.Colors = {
     Good = Color(160, 226, 6),
     Okay = Color(172, 104, 14),
     Bad =  Color(151, 28, 28),
+    Orange = Color(218, 178, 0),
 
     Commands = {
         ["default"] = Color(150, 150, 150),

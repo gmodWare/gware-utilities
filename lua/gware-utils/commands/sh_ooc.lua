@@ -18,6 +18,11 @@ if SERVER then
 
         local message = text:ReplacePrefix("ooc")
 
+        if message:Trim() == "" then
+            VoidLib.Notify(ply, "Invalider OOC", "Du kannst keinen Leere Nachricht senden!", VoidUI.Colors.Red, 5)
+            return
+        end
+
         net.Start("gWare.Commands.OOC.ChatMessage")
             net.WriteString(message)
             net.WriteEntity(ply)
@@ -37,8 +42,7 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
-        gWare.Utils.Print(
-            "ooc", 
+        gWare.Utils.Print("ooc", 
             sender:Nick() .. ": " .. message
         )
     end)

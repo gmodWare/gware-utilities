@@ -27,6 +27,8 @@ if CLIENT then
         local receivedMessage = net.ReadString()
         local ply = net.ReadEntity()
 
-        gWare.Utils.Print("akt", ply:Nick() .. " ", receivedMessage)
+        gWare.Utils.Print("akt", 
+            ply:Nick() .. " ", receivedMessage
+        )
     end)
 end
