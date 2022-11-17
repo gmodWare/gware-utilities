@@ -1,3 +1,5 @@
+gWare.Utils.JobAccess = gWare.Utils.JobAccess or {}
+
 local function getSetting(name)
     local val = false
 
@@ -49,6 +51,8 @@ function gWare.Utils.ChangeSetting(index, settingValue)
 
     gWare.Utils.UpdateClient(index, settingValue)
 end
+
+
 
 ///////////////////////////
 //       SETTINGS        //
