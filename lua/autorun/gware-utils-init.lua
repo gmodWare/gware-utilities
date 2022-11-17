@@ -42,7 +42,7 @@ if (VoidLib) then
     IncludeDir(rootDir)
     print("[gWare Utils] Addon Loaded Successfully")
 else
-    hook.Add("VoidLib.Loaded", "KXX.AttachmentShop.Init.WaitForVoidLib", function ()
+    hook.Add("VoidLib.Loaded", "gWare.Utils.Init.WaitForVoidLib", function ()
         IncludeDir(rootDir)
         print("[gWare Utils] Addon Loaded Successfully")
     end)

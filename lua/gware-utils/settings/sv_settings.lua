@@ -65,6 +65,15 @@ hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
     ply:Kick("[gWare] Du wurdest gekickt, aufgrund von Family Sharing!")
 end)
 
+hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function()
+    if not gWare.Utils.GetSettingValue("workshopDownload") then return end
+    for _, addon in ipairs(engine.GetAddons()) do
+        if not addon.mounted then return end
+
+        resource.AddWorkshop(addon.wsid)
+    end
+end)
+
 
 
 ///////////////////////////
