@@ -46,7 +46,7 @@ function gWare.Utils.ChangeSetting(index, settingValue)
     if not getSetting(settingName) then return end
 
     gWare.Utils.UpdateSetting(settingName, settingValue)
-    gWare.Utils.Settings[index].value = settingValue // change
+    gWare.Utils.Settings[index].value = settingValue
 
     gWare.Utils.UpdateClient(index, settingValue)
 end

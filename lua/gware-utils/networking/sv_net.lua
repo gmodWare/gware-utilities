@@ -38,8 +38,12 @@ function gWare.Utils.SendJobsToClient(len, ply)
     net.Send(ply)
 end
 
-net.Receive("gWare.Utils.ClientReady", gWare.Utils.SendSettingToClient)
-net.Receive("gWare.Utils.ClientReady", gWare.Utils.SendJobsToClient)
+function gWare.Utils.SendEverythingToClient(len, ply)
+    gWare.Utils.SendSettingToClient(len, ply)
+    gWare.Utils.SendJobsToClient(len, ply)
+end
+
+net.Receive("gWare.Utils.ClientReady", gWare.Utils.SendEverythingToClient)
 
 function gWare.Utils.UpdateClient(index, settingValue)
     net.Start("gWare.Utils.UpdateClient")
