@@ -61,8 +61,8 @@ end
 
 function gWare.Utils.InsertJob(jobCommand, settingID)
     local query = database:Insert("gware_jobsaccess")
-        query:Insert(jobCommand)
-        query:Insert(settingID)
+        query:Insert("job_command", jobCommand)
+        query:Insert("setting_id", settingID)
     query:Execute()
 end
 
