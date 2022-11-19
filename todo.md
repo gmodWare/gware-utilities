@@ -3,10 +3,10 @@
 ## When done, this will be published on gmod workshop.
 
 #### Settings: (ingame config)
-- Disable NPC Weapon Drops
+- ✅Disable NPC Weapon Drops
 - Disable Toolgun Sounds
 - Disable Toolgon Effects
-- Auto-Cloak on NoClip
+- ✅Auto-Cloak on NoClip
 - ✅Disable Killfeed
 - ✅Disable Suicide
 - Disable All Weapon Drop
