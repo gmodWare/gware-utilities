@@ -61,18 +61,8 @@ end
 
 function gWare.Utils.InsertJob(jobCommand, settingID)
     local query = database:Insert("gware_jobsaccess")
-        query:Insert(jobCommand)
-        query:Insert(settingID)
-    query:Execute()
-end
-
-function gWare.Utils.GetJob(settingID, callback)
-    local query = database:Select("gware_jobsaccess")
-        query:Where("setting_id", settingID)
-        query:Select("job_command")
-        query:Callback(function (tblData)
-            callback(tblData)
-        end)
+        query:Insert("job_command", jobCommand)
+        query:Insert("setting_id", settingID)
     query:Execute()
 end
 

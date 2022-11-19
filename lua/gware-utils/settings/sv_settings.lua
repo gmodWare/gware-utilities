@@ -1,5 +1,3 @@
-gWare.Utils.JobAccess = gWare.Utils.JobAccess or {}
-
 local function getSetting(name)
     local val = false
 
@@ -52,7 +50,13 @@ function gWare.Utils.ChangeSetting(index, settingValue)
     gWare.Utils.UpdateClient(index, settingValue)
 end
 
-
+gWare.Utils.GetAllJobs(function(tblData)
+    if tblData == nil then return end
+    for _, jobData in ipairs(tblData) do
+        gWare.Utils.JobAccess[jobData.setting_id] = gWare.Utils.JobAccess[jobData.setting_id] or {}
+        gWare.Utils.JobAccess[jobData.setting_id][jobData.job_command] = true
+    end
+end)
 
 ///////////////////////////
 //       SETTINGS        //
