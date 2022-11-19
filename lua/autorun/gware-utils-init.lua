@@ -9,7 +9,7 @@ local function AddFile(File, dir)
     if SERVER and fileSide == "sv_" then
         include(dir .. File)
     elseif fileSide == "sh_" then
-        if SERVER then 
+        if SERVER then
             AddCSLuaFile(dir .. File)
         end
 
