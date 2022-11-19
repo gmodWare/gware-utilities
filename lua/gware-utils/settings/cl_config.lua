@@ -9,6 +9,8 @@ gWare.Utils.Colors = {
     Bad =  Color(151, 28, 28),
     Orange = Color(218, 178, 0),
 
+    -- TODO: Split commands in prefix and actual text in the brackets
+    -- this will be used for example in "vfunk" => "Verschlüsselter Funk"
     Commands = {
         ["default"] = Color(150, 150, 150),
         ["akt"] = Color(234, 245, 75),

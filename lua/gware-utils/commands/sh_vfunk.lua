@@ -19,6 +19,8 @@ if SERVER then
 
         if not text:StartWithAny("/vfunk", "!vfunk") then return end
 
+        -- TODO: add permission check here
+
         local args = text:Split("*")
         local start = args[1]
 
