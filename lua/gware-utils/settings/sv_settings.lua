@@ -14,6 +14,10 @@ function gWare.Utils.AddSetting(tblData)
     gWare.Utils.IDs[tblData.id] = i
     i = i + 1
 
+    if not getSetting(tblData.name) then
+        gWare.Utils.InsertSetting(tblData.name, tblData.defaultValue)
+    end
+
     gWare.Utils.GetAllSettings(function (sqlData)
         local sqlDataCount = table.Count(sqlData)
         local settingsDataCount = table.Count(gWare.Utils.Settings)
@@ -24,9 +28,6 @@ function gWare.Utils.AddSetting(tblData)
             hook.Run("gWare.Utils.SettingsLoaded")
         end)
     end)
-
-    if getSetting(tblData.name) then return end
-    gWare.Utils.InsertSetting(tblData.name, tblData.defaultValue)
 end
 
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
