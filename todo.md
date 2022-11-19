@@ -31,7 +31,7 @@
 - Information Panels
 
 #### Sonstiges:
-- Third Person
+- ❌Third Person
 - 🔄Simple Voting System
 
 #### Commands:
