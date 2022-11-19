@@ -38,7 +38,7 @@
 - ✅funk
 - ⚠️vfunk (2)
 - decode (3)
-- ⚠️ooc
+- ✅ooc
 - looc
 - ✅akt
 - me (akt but locally)

@@ -191,3 +191,11 @@ gWare.Utils.AddSetting({
     defaultValue = false,
     settingType = "bool"
 })
+
+gWare.Utils.AddSetting({
+    id = "jobExample",
+    name = "This is an job example?",
+    description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
+    defaultValue = {},
+    settingType = "job_multi_select"
+})
