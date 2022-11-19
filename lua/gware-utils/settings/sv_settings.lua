@@ -180,7 +180,7 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "disableSpawnmenu",
     name = "Spawnmenü für User deaktivieren?",
-    description = "Braucht der user eine permission um das Spawnmenü öffnen zu können?",
+    description = "Braucht man eine permission um das Spawnmenü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"
 })
@@ -188,7 +188,7 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "disableContextmenu",
     name = "Context-Menü für User deaktivieren?",
-    description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
+    description = "Braucht man eine permission um das C-Menü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"
 })
