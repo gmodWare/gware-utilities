@@ -43,10 +43,10 @@ if SERVER then
         end
 
         local clearTextReceivers = {}
-        table.Add(clearTextReceivers, ply)
+        table.insert(clearTextReceivers, ply)
 
         if IsEntity(receiver) then
-            table.Add(clearTextReceivers, receiver)
+            table.insert(clearTextReceivers, receiver)
         end
 
         local receiverName = IsEntity(receiver) and receiver:Name() or receiver
@@ -78,7 +78,7 @@ if CLIENT then
         local sender = net.ReadEntity()
 
         gWare.Utils.Print("vfunk", 
-            col.Orange, "*", sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
+            gWare.Utils.Colors.Orange, "*", sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )
     end)
 end
