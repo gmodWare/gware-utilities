@@ -36,7 +36,7 @@
 
 #### Commands:
 - ✅funk
-- ⚠️vfunk (2)
+- ✅vfunk (2)
 - decode (3)
 - ✅ooc
 - looc
