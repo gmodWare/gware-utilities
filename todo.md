@@ -10,15 +10,15 @@
 - ✅Disable Killfeed
 - Disable Suicide
 - Disable All Weapon Drop
-- Which jobs can use vfunk (2)
-- Which jobs can decode (3)
+- 🔄Which jobs can use vfunk (2)
+- 🔄Which jobs can decode (3)
 - ✅Automatic Workshop Download
 - Disable Advert (DarkRP Billboards)
 - Enable Classic Advert
 - ✅Disable Family Sharing
 - Disable Voice Panels
-- 🔄Disable Q-Menu for Users (4) :TODO:
-- 🔄Diable C-Menu for Users (5)  :TODO:
+- Disable Q-Menu for Users (4) :TODO:
+- Diable C-Menu for Users (5)  :TODO:
 
 #### Additional Permissions:
 - Disable Q-Menu for Users (4)
@@ -32,7 +32,7 @@
 
 #### Sonstiges:
 - Third Person
-- Simple Voting System
+- 🔄Simple Voting System
 
 #### Commands:
 - ✅funk
