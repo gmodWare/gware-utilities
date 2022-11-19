@@ -8,7 +8,7 @@
 - Disable Toolgon Effects
 - Auto-Cloak on NoClip
 - ✅Disable Killfeed
-- Disable Suicide
+- ✅Disable Suicide
 - Disable All Weapon Drop
 - 🔄Which jobs can use vfunk (2)
 - 🔄Which jobs can decode (3)
