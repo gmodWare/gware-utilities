@@ -2,69 +2,53 @@ hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     return gWare.Utils.GetSettingValue("commitSuicide")
 end)
 
-local invisList = {}
+// this doesn't seem to hide the physgun glow, i dont know why
+local function hideWeapons(ply, shouldHide)
+    for _, v in pairs(ply:GetWeapons()) do
+        v:SetNoDraw(should_hide)
+    end
+
+    local physgunBeams = ents.FindByClassAndParent("physgun_beam", ply)
+    if (physgunBeams) then
+        for i = 1, #physgunBeams do
+            physgunBeams[i]:SetNoDraw(should_hide)
+        end
+    end
+end
+
+local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
-    if (desiredNoClipState) then
-        ply:DrawShadow(false)
-        ply:SetMaterial("models/effects/vol_light001")
-        ply:SetRenderMode(RENDERMODE_TRANSALPHA)
-        ply:Fire("alpha", 0)
+    if (not gWare.Utils.GetSettingValue("automaticCloak")) then return end
 
-        local aWeapon = ply:GetaWeapon()
-        if (IsValid(aWeapon)) then
-            aWeapon:SetRenderMode( RENDERMODE_TRANSALPHA )
-			aWeapon:Fire( "alpha", visibility )
-			aWeapon:SetMaterial( "models/effects/vol_light001" )
-			if (aWeapon:GetClass() == "gmod_tool") then
-				ply:DrawWorldModel( false )
-			end
-        end
+    ply:SetNoDraw(desiredNoClipState)
+    ply:DrawWorldModel(not desiredNoClipState)
+    ply:SetRenderMode(desiredNoClipState and RENDERMODE_TRANSALPHA or RENDERMODE_NORMAL)
+    ply:Fire("alpha", desiredNoClipState and 0 or 255, 0)
+    hideWeapons(ply, desiredNoClipState)
 
-        invisList[ply] = {
-            vis = true,
-            wep = aWeapon
-        }
-    else
-        ply:DrawShadow(true)
-        ply:SetMaterial("")
-        ply:SetRenderMode(RENDERMODE_NORMAL)
-        ply:Fire("alpha", 255)
+    hiddenPlayers[ply] = desiredNoClipState and true or nil
+end)
 
-        local aWeapon = ply:GetaWeapon()
-        if (IsValid(aWeapon)) then
-            aWeapon:SetRenderMode( RENDERMODE_NORMAL )
-			aWeapon:Fire( "alpha", 255, 0 )
-			aWeapon:SetMaterial( "" )
-            if (aWeapon:GetClass() == "gmod_tool") then
-                ply:DrawWorldModel(true)
+hook.Add("PlayerSpawn", "gWare.Utils.DisableCloak", function(ply)
+    hiddenPlayers[ply] = nil
+end)
+
+hook.Add("PlayerSwitchWeapon", "gWare.Utils.DisableCloak", function(ply)
+    if (hiddenPlayers[ply]) then
+        timer.Create("gWare.Utils.HideWeps" .. ply:SteamID(), 0, 1, function()
+            if (IsValid(ply) and hiddenPlayers[ply]) then
+                hideWeapons(ply, true)
             end
-        end
-
-        invisList[ply] = nil
+        end)
     end
 end)
 
-local activeWeapon
+hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attacker, inflictor)
+    if (not gWare.Utils.GetSettingValue("npcDisabledWeapons")) then return end
 
-hook.Add("Think", "gWare.Utils.HandleInvis", function()
-    if (table.IsEmpty(invisList)) then return end
-
-	for player, invisInfo in pairs(invisList) do
-        if (not IsValid(player)) then
-            inivsList[player] = nil
-            continue
-        end
-
-        activeWeapon = player:GetActiveWeapon()
-        if (player:Alive() and IsValid(activeWeapon) and activeWeapon ~= invisInfo.wep) then
-            if (invisInfo.wep and IsValid(invisInfo.wep)) then
-                invisInfo.wep:SetRenderMode(RENDERMODE_NORMAL)
-                invisInfo.wep:Fire("alpha", 255)
-                invisInfo.wep:SetMaterial("")
-            end
-
-            invisList[player].wep = activeWeapon
-        end
+    local npcWeapon = npc:GetActiveWeapon()
+    if (IsValid(npcWeapon)) then
+        npcWeapon:Remove()
     end
 end)
