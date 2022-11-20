@@ -24,14 +24,22 @@ if SERVER then
             return
         end
 
-        for k, v in ipairs(player.GetAll()) do
-            if not (CheckPos(ply, v, 500)) then return end
-        end
+        local players
 
-        net.Start("gWare.Commands.LOOC.ChatMessage")
-            net.WriteString(message)
-            net.WriteEntity(ply)
-        net.Broadcast()
+        for k, v in ipairs(player.GetAll()) do
+            players = v
+        end
+            if not (CheckPos(ply, players, 500)) then
+                net.Start("gWare.Commands.LOOC.ChatMessage")
+                    net.WriteString(message)
+                    net.WriteEntity(ply)
+                net.Send(ply)
+            else
+                net.Start("gWare.Commands.LOOC.ChatMessage")
+                    net.WriteString(message)
+                    net.WriteEntity(ply)
+                net.Send(players)
+            end
 
         return ""
     end)
