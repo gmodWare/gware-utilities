@@ -4,8 +4,8 @@
 
 #### Settings: (ingame config)
 - ✅Disable NPC Weapon Drops
-- Disable Toolgun Sounds
-- Disable Toolgon Effects
+- ✅Disable Toolgun Sounds
+- Disable Toolgun Effects
 - ✅Auto-Cloak on NoClip
 - ✅Disable Killfeed
 - ✅Disable Suicide
