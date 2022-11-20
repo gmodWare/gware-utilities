@@ -17,12 +17,13 @@
 - Enable Classic Advert
 - ✅Disable Family Sharing
 - ✅Disable Voice Panels
-- Disable Q-Menu for Users (4) :TODO:
-- Diable C-Menu for Users (5)  :TODO:
+- ✅Disable Q-Menu for Users (4)
+- ✅Disable C-Menu for Users (5)
+- Language
 
 #### Additional Permissions:
-- Disable Q-Menu for Users (4)
-- Diable C-Menu for Users (5)
+- ✅Disable Q-Menu for Users
+- ✅Diable C-Menu for Users
 
 #### Menu Tools:
 - DarkRP Job Spawn Setter
@@ -39,13 +40,15 @@
 - ✅vfunk (2)
 - ✅decode (3)
 - ✅ooc
-- looc
+- ⚠️looc
 - ✅akt
 - me (akt but locally)
 - makt (medic akt)
 - ✅roll
 - unstuck
 
+#### Languages
+- Add English
 
 ##
 ✅ Done —

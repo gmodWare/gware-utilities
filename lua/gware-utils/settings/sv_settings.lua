@@ -63,6 +63,7 @@ end)
 //       SETTINGS        //
 ///////////////////////////
 
+-- FamilySharing
 hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
     if not gWare.Utils.GetSettingValue("familySharing") then return end
 
@@ -74,12 +75,74 @@ hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
     ply:Kick("[gWare] Du wurdest gekickt, aufgrund von Family Sharing!")
 end)
 
+
+-- workshopDownload
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function()
     if not gWare.Utils.GetSettingValue("workshopDownload") then return end
     for _, addon in ipairs(engine.GetAddons()) do
         if not addon.mounted then return end
 
         resource.AddWorkshop(addon.wsid)
+    end
+end)
+
+
+-- commitSuicide
+hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
+    return gWare.Utils.GetSettingValue("commitSuicide")
+end)
+
+
+-- automatic noclip
+local function hideWeapons(ply, shouldHide)
+    for _, v in pairs(ply:GetWeapons()) do
+        v:SetNoDraw(should_hide)
+    end
+
+    local physgunBeams = ents.FindByClassAndParent("physgun_beam", ply)
+    if (physgunBeams) then
+        for i = 1, #physgunBeams do
+            physgunBeams[i]:SetNoDraw(should_hide)
+        end
+    end
+end
+
+local hiddenPlayers = {}
+
+hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
+    if (not gWare.Utils.GetSettingValue("automaticCloak")) then return end
+
+    ply:SetNoDraw(desiredNoClipState)
+    ply:DrawWorldModel(not desiredNoClipState)
+    ply:SetRenderMode(desiredNoClipState and RENDERMODE_TRANSALPHA or RENDERMODE_NORMAL)
+    ply:Fire("alpha", desiredNoClipState and 0 or 255, 0)
+    hideWeapons(ply, desiredNoClipState)
+
+    hiddenPlayers[ply] = desiredNoClipState and true or nil
+end)
+
+hook.Add("PlayerSpawn", "gWare.Utils.DisableCloak", function(ply)
+    hiddenPlayers[ply] = nil
+end)
+
+hook.Add("PlayerSwitchWeapon", "gWare.Utils.DisableCloak", function(ply)
+    if (hiddenPlayers[ply]) then
+        timer.Create("gWare.Utils.HideWeps" .. ply:SteamID(), 0, 1, function()
+            if (IsValid(ply) and hiddenPlayers[ply]) then
+                hideWeapons(ply, true)
+            end
+        end)
+    end
+end)
+
+
+-- npcDisabledWeapons
+hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attacker, inflictor)
+    if (not gWare.Utils.GetSettingValue("npcDisabledWeapons")) then return end
+
+    local npcWeapon = npc:GetActiveWeapon()
+    if (IsValid(npcWeapon)) then
+        npcWeapon:Remove()
     end
 end)
 
@@ -180,7 +243,7 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "disableSpawnmenu",
     name = "Spawnmenü für User deaktivieren?",
-    description = "Braucht der user eine permission um das Spawnmenü öffnen zu können?",
+    description = "Braucht man eine permission um das Spawnmenü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"
 })
@@ -188,7 +251,7 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "disableContextmenu",
     name = "Context-Menü für User deaktivieren?",
-    description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
+    description = "Braucht man eine permission um das C-Menü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"
 })
