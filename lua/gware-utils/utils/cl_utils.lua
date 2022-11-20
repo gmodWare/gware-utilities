@@ -25,8 +25,10 @@ function gWare.Utils.Print(prefix, ...)
     chat.AddText(unpack(combinedTable))
 end
 
-function g_VoicePanelList:OnChildAdded( chld )
-    if (gWare.Utils.GetSettingValue("voicePanels") and chld:IsValid()) then
-        chld:Remove()
+hook.Add("InitPostEntity", "gWare.Utils.InitPostEntity", function()
+    function g_VoicePanelList:OnChildAdded(child)
+        if (child:IsValid() and gWare.Utils.GetSettingValue("voicePanels")) then
+            child:Remove()
+        end
     end
-end
+end)
