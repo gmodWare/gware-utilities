@@ -16,7 +16,7 @@
 - Disable Advert (DarkRP Billboards)
 - Enable Classic Advert
 - ✅Disable Family Sharing
-- Disable Voice Panels
+- ✅Disable Voice Panels
 - Disable Q-Menu for Users (4) :TODO:
 - Diable C-Menu for Users (5)  :TODO:
 

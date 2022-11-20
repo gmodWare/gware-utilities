@@ -24,3 +24,9 @@ function gWare.Utils.Print(prefix, ...)
 
     chat.AddText(unpack(combinedTable))
 end
+
+function g_VoicePanelList:OnChildAdded( chld )
+    if (gWare.Utils.GetSettingValue("voicePanels") and chld:IsValid()) then
+        chld:Remove()
+    end
+end
