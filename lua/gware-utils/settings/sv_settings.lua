@@ -157,6 +157,12 @@ hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
 end)
 
 
+-- darkrpBlackboard
+hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
+    if (not gWare.Utils.GetSettingValue("darkrpBlackboard")) then
+        return false
+    end
+end)
 
 ///////////////////////////
 // IN-GAME CONFIGURATION //
