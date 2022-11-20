@@ -40,7 +40,7 @@
 - ✅vfunk (2)
 - ✅decode (3)
 - ✅ooc
-- looc
+- ⚠️looc
 - ✅akt
 - me (akt but locally)
 - makt (medic akt)
