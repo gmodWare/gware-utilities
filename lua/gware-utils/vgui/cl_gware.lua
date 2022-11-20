@@ -16,7 +16,7 @@ hook.Add("OnPlayerChat", "gWare.Utils.OpenSettingsMenu1", function(ply, text)
 end)
 
 list.Set("DesktopWindows", "gware_settings", {
-    title = "Open gWare Settings",
+    title = "gWare",
     icon = "gware/gware_icon.png",
     init = function(icon, window)
         -- todo: check for access
