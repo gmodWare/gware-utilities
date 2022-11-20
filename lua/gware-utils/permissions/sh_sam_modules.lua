@@ -1,7 +1,6 @@
 hook.Add("SAM.LoadedConfig", "gWare.Utils.SamModules.WaitForClient", function()
     if SAM_LOADED then
         sam.permissions.add("can_access_c-menu", "gWare", "superadmin")
-        print("added context permission in sam")
     else
         CAMI.RegisterPrivilege({
             Name = "can_access_c-menu",
