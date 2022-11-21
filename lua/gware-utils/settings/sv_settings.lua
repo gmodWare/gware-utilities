@@ -147,6 +147,22 @@ hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attack
 end)
 
 
+-- toolgunSounds
+hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
+    if (not gWare.Utils.GetSettingValue("toolgunSounds")) then return end
+
+    if (data.Entity:IsValid() and data.Entity:IsPlayer() and data.Entity:GetActiveWeapon():IsValid() and data.Entity:GetActiveWeapon():GetClass() == "gmod_tool") then
+        return false
+    end
+end)
+
+
+-- darkrpBlackboard
+hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
+    if (not gWare.Utils.GetSettingValue("darkrpBlackboard")) then
+        return false
+    end
+end)
 
 ///////////////////////////
 // IN-GAME CONFIGURATION //
