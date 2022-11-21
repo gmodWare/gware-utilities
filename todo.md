@@ -13,7 +13,7 @@
 - 🔄Which jobs can use vfunk (2)
 - 🔄Which jobs can decode (3)
 - ✅Automatic Workshop Download
-- Disable Advert (DarkRP Billboards)
+- ✅Disable Advert (DarkRP Billboards)
 - Enable Classic Advert
 - ✅Disable Family Sharing
 - ✅Disable Voice Panels
