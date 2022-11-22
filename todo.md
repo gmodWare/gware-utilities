@@ -43,7 +43,7 @@
 - ⚠️looc
 - ✅akt
 - me (akt but locally)
-- makt (medic akt)
+- ✅makt (medic akt)
 - ✅roll
 - unstuck
 
