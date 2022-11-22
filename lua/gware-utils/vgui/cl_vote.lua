@@ -1,4 +1,9 @@
 local PANEL = {}
+local scrw, scrh = ScrW(), ScrH()
+
+local function sc(x)
+    return x / 1080 * scrh
+end
 
 function PANEL:Init()
     local scrollbar = self:Add("VoidUI.ScrollPanel")
@@ -48,6 +53,8 @@ function PANEL:Init()
     sendVote:DockMargin(10, 10, 10, 10)
     sendVote:SetText("Send Vote")
     sendVote.DoClick = function()
+        questionV = question:GetValue()
+
         if (questionV == "") or (questionV == nil) or (questionV == "Question:") then
             VoidLib.Notify("ERROR", "You didn't have give a Question", VoidUI.Colors.Red, 5)
             return
@@ -60,7 +67,7 @@ function PANEL:Init()
             net.WriteString(questionV)
             net.WriteUInt(#valueTbl, 6)
             for k, v in ipairs(valueTbl) do
-                net.WriteString(v)
+                net.WriteTable(v.answer)
             end
         net.SendToServer()
 
@@ -73,3 +80,25 @@ function PANEL:Paint()
 end
 
 vgui.Register("gWare.Utils.Vote", PANEL)
+
+net.Receive("gWare.VoteSystem.SendVoteToAll", function()
+    local answersTbl = net.ReadTable()
+    local question = net.ReadString()
+
+    local voteFrame = vgui.Create("VoidUI.Frame")
+    voteFrame:SSetSize(350, 450)
+    voteFrame:SetPos(sc(50), sc(150))
+    voteFrame:SetTitle(question)
+
+    local scrollbar = voteFrame:Add("VoidUI.ScrollPanel")
+    scrollbar:Dock(FILL)
+    scrollbar:SDockMargin(5, 5, 5, 5)
+
+    for k, v in ipairs(answersTbl) do
+        local answers = scrollbar:Add("VoidUI.Button")
+        answers:SSetSize(300, 55)
+        answers:Dock(TOP)
+        answers:DockMargin(10, 10, 10, 10)
+        answers:SetText(v.value)
+    end
+end)

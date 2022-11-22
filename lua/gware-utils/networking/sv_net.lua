@@ -5,7 +5,9 @@ local nets = {
     "gWare.Utils.SendSettingToClient",
     "gWare.Utils.SendJobsToClient",
     "gWare.Utils.UpdateServer",
-    "gWare.Utils.ChangeJobAccess"
+    "gWare.Utils.ChangeJobAccess",
+    "gWare.VoteSystem.SendVoteToServer",
+    "gWare.VoteSystem.SendVoteToAll"
 }
 
 for k, v in pairs(nets) do
@@ -82,18 +84,23 @@ net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
     gWare.Utils.InsertJob(jobCommand, settingID)
 end)
 
-net.Receive("gWare.VoteSystem.SendVoteToAll", function(len, ply)
+net.Receive("gWare.VoteSystem.SendVoteToServer", function(len, ply)
     local question = net.ReadString()
     local answerAmmount = net.ReadUInt(6)
+    local str = net.ReadString()
 
     local answers = {}
 
     for i = 1, answerAmmount do
         answers[#answers + 1] = {
-            value = net.ReadString()
+            value = str,
         }
     end
 
     PrintTable(answers)
 
+    net.Start("gWare.VoteSystem.SendVoteToAll")
+        net.WriteString(question)
+        net.WriteTable(answers)
+    net.Broadcast()
 end)
