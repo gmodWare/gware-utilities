@@ -20,5 +20,7 @@ gWare.Utils.Colors = {
         ["looc"] = Color(205, 75, 245),
         ["roll"] = Color(75, 92, 245),
         ["vfunk"] = Color(48, 15, 194),
+        ["makt"] = Color(87, 32, 93),
+        ["advert"] = Color(2, 84, 17),
     }
 }

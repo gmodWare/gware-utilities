@@ -7,7 +7,8 @@ local nets = {
     "gWare.Utils.UpdateServer",
     "gWare.Utils.ChangeJobAccess",
     "gWare.VoteSystem.SendVoteToServer",
-    "gWare.VoteSystem.SendVoteToAll"
+    "gWare.VoteSystem.SendVoteToAll",
+    "gWare.JobSetter.SetJob"
 }
 
 for k, v in pairs(nets) do
@@ -103,4 +104,12 @@ net.Receive("gWare.VoteSystem.SendVoteToServer", function(len, ply)
         net.WriteString(question)
         net.WriteTable(answers)
     net.Broadcast()
+end)
+
+net.Receive("gWare.JobSetter.SetJob", function(len, ply)
+    local job = net.ReadString()
+    local ent = net.ReadEntity()
+
+    local setTeam = target_ply.changeTeam or target_ply.SetTeam
+    setTeam(ent, job, true)
 end)
