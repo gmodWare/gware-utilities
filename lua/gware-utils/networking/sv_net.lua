@@ -1,9 +1,17 @@
-util.AddNetworkString("gWare.Utils.UpdateClient")
-util.AddNetworkString("gWare.Utils.ClientReady")
-util.AddNetworkString("gWare.Utils.SendSettingToClient")
-util.AddNetworkString("gWare.Utils.SendJobsToClient")
-util.AddNetworkString("gWare.Utils.UpdateServer")
-util.AddNetworkString("gWare.Utils.ChangeJobAccess")
+local nets = {
+    "gWare.VoteSystem.SendVoteToAll",
+    "gWare.Utils.UpdateClient",
+    "gWare.Utils.ClientReady",
+    "gWare.Utils.SendSettingToClient",
+    "gWare.Utils.SendJobsToClient",
+    "gWare.Utils.UpdateServer",
+    "gWare.Utils.ChangeJobAccess"
+}
+
+for k, v in pairs(nets) do
+    util.AddNetworkString(v)
+end
+
 
 function gWare.Utils.SendSettingToClient(len, ply)
     local count = #gWare.Utils.Settings
@@ -72,4 +80,20 @@ net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
 
     gWare.Utils.JobAccess[settingID][jobCommand] = true
     gWare.Utils.InsertJob(jobCommand, settingID)
+end)
+
+net.Receive("gWare.VoteSystem.SendVoteToAll", function(len, ply)
+    local question = net.ReadString()
+    local answerAmmount = net.ReadUInt(6)
+
+    local answers = {}
+
+    for i = 1, answerAmmount do
+        answers[#answers + 1] = {
+            value = net.ReadString()
+        }
+    end
+
+    PrintTable(answers)
+
 end)
