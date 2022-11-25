@@ -114,6 +114,7 @@ local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
     if (not gWare.Utils.GetSettingValue("automaticCloak")) then return end
+    print((desiredNoClipState and "Started" or "Leaved") .. " noclip") -- not getting printed, broken?
 
     ply:SetNoDraw(desiredNoClipState)
     ply:DrawWorldModel(not desiredNoClipState)
