@@ -1,25 +1,10 @@
 --[[
-    Finds a player by a part of its name
-    Returns: player | nil
-]]
-function gWare.Utils.GetPlayerByNamePart(namePart)
-    for _, ply in ipairs(player.GetAll()) do
-        if ply:Name():lower():find(namePart) then
-            return ply
-        end
-    end
-
-    return nil
-end
-
---[[
     Replaces both '/' and '!' including the
     command name with empty string.
     Returns: string
 ]]
 function string.ReplacePrefix(str, command)
-    local add = str[#command+2] == " " and 1 or 0
-    return string.sub(str, #command + add)
+    return string.sub(str, #command + 3) -- prefix, space, AFTER the letter
 end
 
 --[[
@@ -39,14 +24,47 @@ function string.StartWithAny(str, ...)
 end
 
 --[[
+    WIP: Command Handler Step 1
+]]--
+function string.isCommand(str, prefix)
+    if not (str[1] == "!" or str[1] == "/") then return false end
+
+    local spacePos = string.find(str, " ")
+    local cmdName, message
+
+    if not spacePos then
+        message = ""
+        cmdName = string.sub(str, 2)
+    else 
+        cmdName = string.sub(str, 2, spacePos)
+        message = string.sub(str, spacePos + 1)
+    end
+
+    return cmdName:lower(), message
+end
+
+--[[
     Replaces 1 with true, and rest with false. Needed for SQL (fuck u)
     Returns: boolean
 ]]
-
 function gWare.Utils.IntToBool(int)
     if int == 1 then
         return true
     else
         return false
     end
+end
+
+--[[
+    Finds a player by a part of its name
+    Returns: player | nil
+]]
+function gWare.Utils.GetPlayerByNamePart(namePart)
+    for _, ply in ipairs(player.GetAll()) do
+        if ply:Name():lower():find(namePart) then
+            return ply
+        end
+    end
+
+    return nil
 end
