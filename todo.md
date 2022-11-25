@@ -52,6 +52,9 @@
 #### Languages
 - Add English
 
+#### Secure Database
+- gWare admin setting check in net receives
+
 ##
 ✅ Done —
 🔄 Work in Progress —
