@@ -19,6 +19,17 @@ hook.Add("SAM.LoadedConfig", "gWare.Utils.SamModules.WaitForClient", function()
             Description = "Can the player open the spawnmenu?",
         })
     end
+
+    if SAM_LOADED then
+        sam.permissions.add("can_access_vote", "gWare", "superadmin")
+        print("added vote permission in sam")
+    else
+        CAMI.RegisterPrivilege({
+            Name = "can_access_vote",
+            MinAccess = "superadmin",
+            Description = "Can the player open the vote menu?",
+        })
+    end
 end)
 
 hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
