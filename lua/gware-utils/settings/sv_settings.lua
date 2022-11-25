@@ -89,7 +89,10 @@ end)
 
 -- commitSuicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
-    return gWare.Utils.GetSettingValue("commitSuicide")
+    if not gWare.Utils.GetSettingValue("commitSuicide") then
+        VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
+        return false
+    end
 end)
 
 
