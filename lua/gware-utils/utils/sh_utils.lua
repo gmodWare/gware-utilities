@@ -68,3 +68,20 @@ function gWare.Utils.GetPlayerByNamePart(namePart)
 
     return nil
 end
+
+--[[
+    Check if the player can access a specific gWare Module
+    Works with SAM & CAMI
+    Returns: boolean
+]]--
+function gWare.Utils.HasPermission(name, ply)
+    if CLIENT then
+        ply = LocalPlayer()
+    end
+
+    if SAM_LOADED then
+        return ply:HasPermission(name)
+    else
+        return CAMI.PlayerHasAccess(ply, name)
+    end
+end

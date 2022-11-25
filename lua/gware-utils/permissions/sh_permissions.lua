@@ -29,6 +29,16 @@ hook.Add("SAM.LoadedConfig", "gWare.Utils.SamModules.WaitForClient", function()
             Description = "Can the player open the vote menu?",
         })
     end
+
+    if SAM_LOADED then
+        sam.permissions.add("can_change_gware_settings", "gWare", "superadmin")
+    else
+        CAMI.RegisterPrivilege({
+            Name = "can_change_gware_settings",
+            MinAccess = "superadmin",
+            Description = "Can the player change the gWare settings?",
+        })
+    end
 end)
 
 hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
