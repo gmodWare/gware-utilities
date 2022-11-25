@@ -1,8 +1,5 @@
--- print("### MENU STUFF LOADED")
-
 local function OpenMenu()
-    local mainframe = vgui.Create("gWare.Utils.Frame")
-    -- todo: add sidebar
+    vgui.Create("gWare.Utils.Frame")
 end
 
 hook.Add("OnPlayerChat", "gWare.Utils.OpenSettingsMenu1", function(ply, text)

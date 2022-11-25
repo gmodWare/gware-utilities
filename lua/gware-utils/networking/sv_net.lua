@@ -98,8 +98,6 @@ net.Receive("gWare.VoteSystem.SendVoteToServer", function(len, ply)
         }
     end
 
-    PrintTable(answers)
-
     net.Start("gWare.VoteSystem.SendVoteToAll")
         net.WriteString(question)
         net.WriteTable(answers)

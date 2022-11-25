@@ -34,15 +34,12 @@ if SERVER then
             net.WriteString(clearText)
         net.Send(ply)
 
-        print("sended msg")
-
         return ""
     end)
 end
 
 if CLIENT then
     net.Receive("gWare.Commands.decode.ChatMessage", function()
-        print("received msg")
         local text = net.ReadString()
 
         gWare.Utils.Print("Entschlüsselt", 
