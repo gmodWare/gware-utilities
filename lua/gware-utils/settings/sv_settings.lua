@@ -65,20 +65,20 @@ end)
 
 -- FamilySharing
 hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
-    if not gWare.Utils.GetSettingValue("familySharing") then return end
+    if not gWare.Utils.GetSettingValue("disableFamilySharing") then return end
 
     local s64 = ply:SteamID64()
     local ownerS64 = ply:OwnerSteamID64()
 
     if ownerS64 == s64 then return end
 
-    ply:Kick("[gWare] Du wurdest gekickt, aufgrund von Family Sharing!")
+    ply:Kick("[gWare] Du wurdest aufgrund von Family Sharing gekickt!")
 end)
 
 
 -- workshopDownload
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function()
-    if not gWare.Utils.GetSettingValue("workshopDownload") then return end
+    if not gWare.Utils.GetSettingValue("enableWorkshopDownload") then return end
     for _, addon in ipairs(engine.GetAddons()) do
         if not addon.mounted then return end
 
@@ -89,10 +89,10 @@ end)
 
 -- commitSuicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
-    if not gWare.Utils.GetSettingValue("commitSuicide") then
-        VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
-        return false
-    end
+    if not gWare.Utils.GetSettingValue("disallowSuicide") then return end
+    
+    VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
+    return false
 end)
 
 
@@ -113,7 +113,7 @@ end
 local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
-    if (not gWare.Utils.GetSettingValue("automaticCloak")) then return end
+    if not gWare.Utils.GetSettingValue("enableCloakOnNoclip") then return end
     print((desiredNoClipState and "Started" or "Leaved") .. " noclip") -- not getting printed, broken?
 
     ply:SetNoDraw(desiredNoClipState)
@@ -142,7 +142,7 @@ end)
 
 -- npcDisabledWeapons
 hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attacker, inflictor)
-    if (not gWare.Utils.GetSettingValue("npcDisabledWeapons")) then return end
+    if not gWare.Utils.GetSettingValue("disableNPCWeaponDrop") then return end
 
     local npcWeapon = npc:GetActiveWeapon()
     if (IsValid(npcWeapon)) then
@@ -153,7 +153,7 @@ end)
 
 -- toolgunSounds
 hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
-    if (not gWare.Utils.GetSettingValue("toolgunSounds")) then return end
+    if not gWare.Utils.GetSettingValue("disableToolgunSounds") then return end
 
     if (data.Entity:IsValid() and data.Entity:IsPlayer() and data.Entity:GetActiveWeapon():IsValid() and data.Entity:GetActiveWeapon():GetClass() == "gmod_tool") then
         return false
@@ -163,9 +163,9 @@ end)
 
 -- darkrpBlackboard
 hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
-    if (not gWare.Utils.GetSettingValue("darkrpBlackboard")) then
-        return false
-    end
+    if not gWare.Utils.GetSettingValue("disableDarkRPBlackboard") then return end
+    
+    return false
 end)
 
 ///////////////////////////
@@ -173,63 +173,63 @@ end)
 ///////////////////////////
 
 gWare.Utils.AddSetting({
-    id = "npcDisabledWeapons",
+    id = "disableNPCWeaponDrop",
     name = "NPC Waffen Drop",
-    description = "Sollen NPCs beim Tod ihre Waffe fallen lassen?",
-    defaultValue = true,
-    settingType = "bool"
-})
-
-gWare.Utils.AddSetting({
-    id = "toolgunSounds",
-    name = "Toolgun Geräusche",
-    description = "Soll die Toolgun beim benutzen Geräusche machen?",
-    defaultValue = true,
-    settingType = "bool"
-})
-
-gWare.Utils.AddSetting({
-    id = "toolgunEffects",
-    name = "Toolgun Effekte",
-    description = "Soll die Toolgun beim benutzen Effekte machen?",
-    defaultValue = true,
-    settingType = "bool"
-})
-
-gWare.Utils.AddSetting({
-    id = "automaticCloak",
-    name = "Automatischer Cloak bei Noclip",
-    description = "Soll der Spieler bei Noclip automatisch unsichtbar werden?",
+    description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
-    id = "showKillfeed",
-    name = "Killfeed anzeigen",
-    description = "Sollen Spielertode rechts oben angezeigt werden?",
-    defaultValue = true,
+    id = "disableToolgunSounds",
+    name = "Toolgun Geräusche",
+    description = "Toolgun Geräusche deaktiviern?",
+    defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
-    id = "commitSuicide",
-    name = "Selbstmord erlauben?",
-    description = "Kann ein spieler sich selbst umbringen (Konsolen Befehl)?",
-    defaultValue = true,
+    id = "disableToolgunEffects",
+    name = "Toolgun Effekte",
+    description = "Toolgun Effekte deaktivieren?",
+    defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
-    id = "weaponDrop",
-    name = "Spieler Waffen drop erlauben?",
-    description = "Kann ein Spieler seine Waffen fallen lassen?",
-    defaultValue = true,
+    id = "enableCloakOnNoclip",
+    name = "Automatischer Cloak bei Noclip",
+    description = "Automatisch Cloaken bei Noclip?",
+    defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
-    id = "workshopDownload",
+    id = "disableKillfeed",
+    name = "Killfeed ausblenden",
+    description = "Sollen Spielertode ausgeblendet werden?",
+    defaultValue = false,
+    settingType = "bool"
+})
+
+gWare.Utils.AddSetting({
+    id = "disallowSuicide",
+    name = "Selbstmord verbieten?",
+    description = "'Kill' in Konsole verbieten?",
+    defaultValue = false,
+    settingType = "bool"
+})
+
+gWare.Utils.AddSetting({
+    id = "disablePlayersWeaponDrop",
+    name = "Spieler Waffen drop verbieten?",
+    description = "Der Spieler kann keine Waffen fallen lassen?",
+    defaultValue = false,
+    settingType = "bool"
+})
+
+gWare.Utils.AddSetting({
+    id = "enableWorkshopDownload",
     name = "Automatischer Workshop-Download",
     description = "Sollen alle User bei joinen die Kollektion automatisch downloaden?",
     defaultValue = false,
@@ -237,15 +237,15 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "darkrpBlackboard",
-    name = "DarkRP Tafeln aktivieren?",
-    description = "Sollen bei '/advert' Tafeln gespawned werden?",
-    defaultValue = true,
+    id = "disableDarkRPBlackboard",
+    name = "DarkRP Tafeln deaktvieren?",
+    description = "Sollen bei '/advert' keine Tafeln gespawned werden?",
+    defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
-    id = "familySharing",
+    id = "disableFamilySharing",
     name = "Family Sharing verbieten?",
     description = "Sollen User die Family-Sharing benutzen, sofort gekickt werden?",
     defaultValue = false,
@@ -253,16 +253,16 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "voicePanels",
+    id = "disableVoicePanels",
     name = "Sprachanzeige deaktiveren?",
-    description = "Soll die Sprachanzeige Rechts unten deaktiviert werden?",
+    description = "Sprachanzeige rechts unten deaktivieren?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "disableSpawnmenu",
-    name = "Spawnmenü für User deaktivieren?",
+    name = "Spawnmenü deaktivieren?",
     description = "Braucht man eine permission um das Spawnmenü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"
@@ -270,7 +270,7 @@ gWare.Utils.AddSetting({
 
 gWare.Utils.AddSetting({
     id = "disableContextmenu",
-    name = "Context-Menü für User deaktivieren?",
+    name = "Context-Menü deaktivieren?",
     description = "Braucht man eine permission um das C-Menü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"

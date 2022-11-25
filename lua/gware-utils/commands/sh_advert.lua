@@ -9,7 +9,7 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.Advert.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.Advert", function(ply, text)
-        if gWare.Utils.GetSettingValue("darkrpBlackboard") then return end
+        if not gWare.Utils.GetSettingValue("disableDarkRPBlackboard") then return end
 
         if (text:lower():StartWithAny("/advert ", "!advert ")) then
             local message = text:ReplacePrefix("advert")

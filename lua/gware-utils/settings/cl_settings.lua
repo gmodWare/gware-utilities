@@ -11,13 +11,13 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
         return false
     end)
 
-    hook.Add("ContextMenuOpen", "C-Menu", function()
+    hook.Add("ContextMenuOpen", "gWare.Utils.DisableCMenu", function()
         if not gWare.Utils.GetSettingValue("disableContextmenu") then return end // TODO : add cami permission
 
         return false
     end)
 
-    hook.Add( "SpawnMenuOpen", "DisallowSpawnMenu", function()
+    hook.Add( "SpawnMenuOpen", "gWare.Utils.DisallowSpawnMenu", function()
         if not gWare.Utils.GetSettingValue("disableSpawnmenu") then return end // TODO : add cami permission
 
         return false
