@@ -64,3 +64,29 @@ function gWare.Utils.ChangeJobAccess(jobCommand, settingID)
         net.WriteString(settingID)
     net.SendToServer()
 end
+
+local function sc(x)
+    return x / 1080 * ScrH()
+end
+
+net.Receive("gWare.Utils.VoteSystem.SendVoteToAll", function()
+    local question = net.ReadString()
+    local answersTbl = net.ReadTable()
+
+    local voteFrame = vgui.Create("VoidUI.Frame")
+    voteFrame:SSetSize(350, 450)
+    voteFrame:SetPos(sc(50), sc(150))
+    voteFrame:SetTitle(question)
+
+    local scrollbar = voteFrame:Add("VoidUI.ScrollPanel")
+    scrollbar:Dock(FILL)
+    scrollbar:SDockMargin(5, 5, 5, 5)
+
+    for k, v in ipairs(answersTbl) do
+        local answers = scrollbar:Add("VoidUI.Button")
+        answers:SSetSize(300, 55)
+        answers:Dock(TOP)
+        answers:DockMargin(10, 10, 10, 10)
+        answers:SetText(v.value)
+    end
+end)

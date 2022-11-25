@@ -45,7 +45,7 @@ function PANEL:Init()
             --return
         --end
 
-        net.Start("gWare.JobSetter.SetJob")
+        net.Start("gWare.Utils.JobSetter.SetJob")
             net.WriteString(job)
             net.WriteEntity(ply)
         net.SendToServer()

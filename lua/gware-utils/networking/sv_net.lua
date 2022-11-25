@@ -1,14 +1,13 @@
 local nets = {
-    "gWare.VoteSystem.SendVoteToAll",
+    "gWare.Utils.VoteSystem.SendVoteToAll",
     "gWare.Utils.UpdateClient",
     "gWare.Utils.ClientReady",
     "gWare.Utils.SendSettingToClient",
     "gWare.Utils.SendJobsToClient",
     "gWare.Utils.UpdateServer",
     "gWare.Utils.ChangeJobAccess",
-    "gWare.VoteSystem.SendVoteToServer",
-    "gWare.VoteSystem.SendVoteToAll",
-    "gWare.JobSetter.SetJob"
+    "gWare.Utils.VoteSystem.SendVoteToServer",
+    "gWare.Utils.JobSetter.SetJob"
 }
 
 for k, v in pairs(nets) do
@@ -85,28 +84,30 @@ net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
     gWare.Utils.InsertJob(jobCommand, settingID)
 end)
 
-net.Receive("gWare.VoteSystem.SendVoteToServer", function(len, ply)
+net.Receive("gWare.Utils.VoteSystem.SendVoteToServer", function(len, ply)
     local question = net.ReadString()
     local answerAmmount = net.ReadUInt(6)
     local str = net.ReadString()
 
+    print("Read Informations!")
+
     local answers = {}
 
     for i = 1, answerAmmount do
-        answers[#answers + 1] = {
+        answers[#answers + i] = {
             value = str,
         }
     end
 
     PrintTable(answers)
 
-    net.Start("gWare.VoteSystem.SendVoteToAll")
+    net.Start("gWare.Utils.VoteSystem.SendVoteToAll")
         net.WriteString(question)
         net.WriteTable(answers)
     net.Broadcast()
 end)
 
-net.Receive("gWare.JobSetter.SetJob", function(len, ply)
+net.Receive("gWare.Utils.JobSetter.SetJob", function(len, ply)
     local job = net.ReadString()
     local ent = net.ReadEntity()
 

@@ -20,7 +20,7 @@ function PANEL:Init()
 
     questionV = question:GetValue()
 
-    local answers = 2
+    local answers = 3
 
     local answer
 
@@ -33,7 +33,7 @@ function PANEL:Init()
         answer:DockMargin(10, 10, 10, 10)
         answer:SetValue("Answer " .. i)
 
-        valueTbl[#valueTbl + 1] = {
+        valueTbl[#valueTbl + i] = {
             answer = answer:GetValue()
         }
     end
@@ -44,7 +44,7 @@ function PANEL:Init()
     addNewAnswer:DockMargin(10, 10, 10, 10)
     addNewAnswer:SetText("Add New Answer")
     addNewAnswer.DoClick = function()
-
+        answers = answers + 1
     end
 
     local sendVote = scrollbar:Add("VoidUI.Button")
@@ -53,6 +53,9 @@ function PANEL:Init()
     sendVote:DockMargin(10, 10, 10, 10)
     sendVote:SetText("Send Vote")
     sendVote.DoClick = function()
+
+        print("Do Click!")
+
         questionV = question:GetValue()
 
         if (questionV == "") or (questionV == nil) or (questionV == "Question:") then
@@ -63,13 +66,15 @@ function PANEL:Init()
 
         self:Remove()
 
-        net.Start("gWare.VoteSystem.SendVoteToAll")
+        net.Start("gWare.Utils.VoteSystem.SendVoteToServer")
             net.WriteString(questionV)
             net.WriteUInt(#valueTbl, 6)
             for k, v in ipairs(valueTbl) do
-                net.WriteTable(v.answer)
+                net.WriteString(v.answer)
             end
         net.SendToServer()
+
+        print("Sended Netmessage!")
 
         VoidLib.Notify("SUCCESSFULLY", "You have start a vote", VoidUI.Colors.Green, 5)
     end
@@ -80,25 +85,3 @@ function PANEL:Paint()
 end
 
 vgui.Register("gWare.Utils.Vote", PANEL)
-
-net.Receive("gWare.VoteSystem.SendVoteToAll", function()
-    local answersTbl = net.ReadTable()
-    local question = net.ReadString()
-
-    local voteFrame = vgui.Create("VoidUI.Frame")
-    voteFrame:SSetSize(350, 450)
-    voteFrame:SetPos(sc(50), sc(150))
-    voteFrame:SetTitle(question)
-
-    local scrollbar = voteFrame:Add("VoidUI.ScrollPanel")
-    scrollbar:Dock(FILL)
-    scrollbar:SDockMargin(5, 5, 5, 5)
-
-    for k, v in ipairs(answersTbl) do
-        local answers = scrollbar:Add("VoidUI.Button")
-        answers:SSetSize(300, 55)
-        answers:Dock(TOP)
-        answers:DockMargin(10, 10, 10, 10)
-        answers:SetText(v.value)
-    end
-end)
