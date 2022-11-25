@@ -31,7 +31,7 @@
 - DarkRP Job Spawn Setter
 
 #### Entities:
-- Information Panels
+- ❌Information Panels
 
 #### Sonstiges:
 - ❌Third Person
