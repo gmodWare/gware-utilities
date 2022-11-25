@@ -101,7 +101,7 @@ net.Receive("gWare.Utils.VoteSystem.SendVoteToServer", function(len, ply)
 
     PrintTable(answers)
 
-    net.Start("gWare.Utils.VoteSystem.SendVoteToAll")
+    net.Start("gWare.VoteSystem.SendVoteToAll")
         net.WriteString(question)
         net.WriteTable(answers)
     net.Broadcast()

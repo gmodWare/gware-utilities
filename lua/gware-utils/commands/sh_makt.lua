@@ -9,7 +9,7 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.MAkt.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.MAkt", function(ply, text)
-        if (text:lower():StartWithAny("/makt", "!makt")) then
+        if (text:lower():StartWithAny("/makt ", "!makt ")) then
             local message = text:ReplacePrefix("makt")
 
             net.Start("gWare.Commands.MAkt.ChatMessage")

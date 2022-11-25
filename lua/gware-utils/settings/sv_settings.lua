@@ -89,7 +89,10 @@ end)
 
 -- commitSuicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
-    return gWare.Utils.GetSettingValue("commitSuicide")
+    if not gWare.Utils.GetSettingValue("commitSuicide") then
+        VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
+        return false
+    end
 end)
 
 
@@ -111,6 +114,7 @@ local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
     if (not gWare.Utils.GetSettingValue("automaticCloak")) then return end
+    print((desiredNoClipState and "Started" or "Leaved") .. " noclip") -- not getting printed, broken?
 
     ply:SetNoDraw(desiredNoClipState)
     ply:DrawWorldModel(not desiredNoClipState)

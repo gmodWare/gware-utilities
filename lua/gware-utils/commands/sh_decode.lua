@@ -11,7 +11,7 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commans.decode", function(ply, chatInput)
         local text = chatInput:lower()
 
-        if not text:StartWithAny("!decode", "/decode") then return end
+        if not text:StartWithAny("!decode ", "/decode ") then return end
 
         -- TODO: add permission check here
 
@@ -34,15 +34,12 @@ if SERVER then
             net.WriteString(clearText)
         net.Send(ply)
 
-        print("sended msg")
-
         return ""
     end)
 end
 
 if CLIENT then
     net.Receive("gWare.Commands.decode.ChatMessage", function()
-        print("received msg")
         local text = net.ReadString()
 
         gWare.Utils.Print("Entschlüsselt", 

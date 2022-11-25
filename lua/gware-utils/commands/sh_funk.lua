@@ -13,13 +13,13 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.Funk.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.funk", function(ply, text)
-        if not (text:lower():StartWithAny("/funk", "!funk")) then return end
+        if not (text:lower():StartWithAny("/funk ", "!funk ")) then return end
 
         local args = text:Split("*")
         local start = args[1]
 
         local namePart = start:ReplacePrefix("funk") 
-        local message = args[2]
+        local message = args[2]:sub(2)
 
         if not message then 
             VoidLib.Notify(ply, "Invalider Funk", "Funk Beispiel: /funk Commander Rex* Wo befinden Sie sich?", VoidUI.Colors.Red, 10)

@@ -17,7 +17,7 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.vfunk", function(ply, chatInput)
         local text = chatInput:lower()
 
-        if not text:StartWithAny("/vfunk", "!vfunk") then return end
+        if not text:StartWithAny("/vfunk ", "!vfunk ") then return end
 
         -- TODO: add permission check here
 

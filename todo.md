@@ -6,7 +6,7 @@
 - ✅Disable NPC Weapon Drops
 - ✅Disable Toolgun Sounds
 - Disable Toolgun Effects
-- ✅Auto-Cloak on NoClip
+- ⚠️Auto-Cloak on NoClip
 - ✅Disable Killfeed
 - ✅Disable Suicide
 - Disable All Weapon Drop
@@ -31,7 +31,7 @@
 - DarkRP Job Spawn Setter
 
 #### Entities:
-- Information Panels
+- ❌Information Panels
 
 #### Sonstiges:
 - ❌Third Person
