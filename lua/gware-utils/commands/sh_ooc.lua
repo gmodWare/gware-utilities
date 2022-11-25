@@ -14,9 +14,16 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.OOC.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.OOC", function(ply, text)
-        if not text:StartWithAny("/ooc", "//", "!ooc") then return end
+        local symbol = text[1]
+        if not text:StartWithAny(symbol .. "ooc ", "// ") then return end
 
-        local message = text:ReplacePrefix("ooc")
+        local message
+
+        if text:StartWith(symbol .. "ooc ") then
+            message = text:sub(6)
+        else
+            message = text:sub(4)
+        end
 
         if message:Trim() == "" then
             VoidLib.Notify(ply, "Invalider OOC", "Du kannst keinen Leere Nachricht senden!", VoidUI.Colors.Red, 5)

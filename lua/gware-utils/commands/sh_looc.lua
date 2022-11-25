@@ -15,7 +15,7 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.LOOC.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.LOOC", function(ply, text)
-        if not text:StartWithAny("/looc", "!looc") then return end
+        if not text:StartWithAny("/looc ", "!looc ") then return end
 
         local message = text:ReplacePrefix("looc")
 

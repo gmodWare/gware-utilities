@@ -11,7 +11,7 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commans.decode", function(ply, chatInput)
         local text = chatInput:lower()
 
-        if not text:StartWithAny("!decode", "/decode") then return end
+        if not text:StartWithAny("!decode ", "/decode ") then return end
 
         -- TODO: add permission check here
 
