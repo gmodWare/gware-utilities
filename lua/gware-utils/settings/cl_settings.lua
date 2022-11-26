@@ -6,7 +6,7 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
     // Add hooks or functions in here, if u have to wait for client to get the settingsTable
 
     hook.Add("DrawDeathNotice", "gWare.Utils.KillFeed", function()
-        if gWare.Utils.GetSettingValue("showKillfeed") then return end
+        if gWare.Utils.GetSettingValue("disableKillfeed") then return end
 
         return false
     end)
