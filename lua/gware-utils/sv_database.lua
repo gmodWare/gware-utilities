@@ -21,9 +21,70 @@ function database:OnConnected()
         query:Create("setting_id", "VARCHAR(15) NOT NULL")
         query:PrimaryKey("id")
     query:Execute()
+
+    query = database:Create("gware_npc_spawns")
+        query:Create("id", "INTEGER NOT NULL AUTO_INCREMENT")
+        query:Create("npc_name", "VARCHAR(15) NOT NULL")
+        query:Create("npc_pos", "INTEGER")
+        query:PrimaryKey("id")
+    query:Execute()
+
+    query = database:Create("gware_npc_jobs")
+        query:Create("id", "INTEGER NOT NULL AUTO_INCREMENT")
+        query:Create("npc_name", "VARCHAR(15) NOT NULL")
+        query:Create("job_command", "VARCHAR(15) NOT NULL")
+        query:PrimaryKey("id")
+    query:Execute()
 end
 
 database:Connect()
+
+function gWare.Utils.InsertNPCJob(npc_name, job_command)
+    local query = database:Insert("gware_npc_jobs")
+        query:Insert("npc_name", npc_name)
+        query:Insert("job_command", job_command)
+    query:Execute()
+end
+
+function gWare.Utils.GetNPCJobs(npc_name, callback)
+    local query = database:Select("gware_npc_jobs")
+        query:Where("npc_name", npc_name)
+        query:Select("job_command")
+        query:Callback(function (tblData)
+            callback(tblData)
+        end)
+    query:Execute()
+end
+
+function gWare.Utils.DeleteNPCJob(npc_name, job_command)
+    local query = database:Delete("gware_npc_jobs")
+        query:Where("npc_name", npc_name)
+        query:Where("job_command", job_command)
+    query:Execute()
+end
+
+function gWare.Utils.InsertNPCSpawn(npc_name, npc_pos)
+    local query = database:Insert("gware_npc_spawns")
+        query:Insert("npc_name", npc_name)
+        query:Insert("npc_pos", npc_pos)
+    query:Execute()
+end
+
+function gWare.Utils.GetAllNPCPos(callback)
+    local query = database:Select("gware_npc_spawns")
+        query:Select("npc_name")
+        query:Select("npc_pos")
+        query:Callback(function (tblData)
+            callback(tblData)
+        end)
+    query:Execute()
+end
+
+function gWare.Utils.DeleteNPCSpawn(npc_name)
+    local query = database:Delete("gware_npc_spawns")
+        query:Where("npc_name", npc_name)
+    query:Execute()
+end
 
 function gWare.Utils.InsertSetting(setting_name, setting_value)
     local query = database:Insert("gware_settings")
