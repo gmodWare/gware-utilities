@@ -59,6 +59,21 @@ gWare.Utils.GetAllJobs(function(tblData)
     end
 end)
 
+gWare.Utils.GetAllNPCPos(function (npcTblData)
+    for _, npcData in ipairs(npcTblData) do
+
+        gWare.Utils.NPCSpawns[npcData.npc_name] = npcData.npc_pos
+
+        gWare.Utils.GetNPCJobs(npcData.npc_name, function (jobTblData)
+            for _, jobData in ipairs(jobTblData) do
+
+                gWare.Utils.NPCJobs[npcData.npc_name] = gWare.Utils.NPCJobs[npcData.npc_name] or {}
+                gWare.Utils.NPCJobs[npcData.npc_name][jobData.job_command] = true
+            end
+        end)
+    end
+end)
+
 ///////////////////////////
 //       SETTINGS        //
 ///////////////////////////

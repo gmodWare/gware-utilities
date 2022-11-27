@@ -7,19 +7,55 @@ local nets = {
     "gWare.Utils.UpdateServer",
     "gWare.Utils.ChangeJobAccess",
     "gWare.Utils.VoteSystem.SendVoteToServer",
-    "gWare.Utils.JobSetter.SetJob"
+    "gWare.Utils.JobSetter.SetJob",
+    "gWare.Utils.AddNPC",
+    "gWare.Utils.AddJobsToNPC",
+    "gWare.Utils.DeleteJobsFromNPC",
+    "gWare.Utils.DeleteNPC",
+    "gWare.Utils.GetNPCSpawnsAndJobs",
+    "gWare.Utils.SendNPCSpawnsToClient",
+    "gWare.Utils.SendNPCJobsToClient",
+    "gWare.Utils.UpdateNPCSpawn",
+    "gWare.Utils.UpdateNPCJobs"
 }
 
 for k, v in pairs(nets) do
     util.AddNetworkString(v)
 end
 
+function gWare.Utils.SendNPCSpawnsAndJobsToClient(len, ply)
+    local npcSpawnsCount = table.Count(gWare.Utils.NPCSpawns)
+
+    net.Start("gWare.Utils.SendNPCSpawnsToClient")
+        net.WriteUInt(npcSpawnsCount, 7)
+        for npcName, npcPos in pairs(gWare.Utils.NPCSpawns) do
+            net.WriteString(npcName)
+            net.WriteString(npcPos) // TODO : Change to Vector!!!!
+        end
+    net.Send(ply)
+
+    local npcJobsCount = table.Count(gWare.Utils.NPCJobs)
+
+    net.Start("gWare.Utils.SendNPCJobsToClient")
+        net.WriteUInt(npcJobsCount, 7)
+        for npcName, data in pairs(gWare.Utils.NPCJobs) do
+            local dataCount = table.Count(data)
+
+            net.WriteUInt(dataCount, 7)
+            net.WriteString(npcName)
+
+            for jobCommand, _ in pairs(data) do
+                net.WriteString(jobCommand)
+            end
+        end
+    net.Send(ply)
+end
 
 function gWare.Utils.SendSettingToClient(len, ply)
     local count = #gWare.Utils.Settings
 
     net.Start("gWare.Utils.SendSettingToClient")
-        net.WriteUInt(count, 5)
+        net.WriteUInt(count, 7)
         for _, settingsData in ipairs(gWare.Utils.Settings) do
             net.WriteString(settingsData.id)
             net.WriteString(settingsData.name)
@@ -51,6 +87,7 @@ end
 function gWare.Utils.SendEverythingToClient(len, ply)
     gWare.Utils.SendSettingToClient(len, ply)
     gWare.Utils.SendJobsToClient(len, ply)
+    gWare.Utils.SendNPCSpawnsAndJobsToClient(len, ply)
 end
 
 net.Receive("gWare.Utils.ClientReady", gWare.Utils.SendEverythingToClient)
@@ -60,6 +97,34 @@ function gWare.Utils.UpdateClient(index, settingValue)
         net.WriteUInt(index, 5)
         net.WriteBool(settingValue)
     net.Broadcast()
+end
+
+function gWare.Utils.UpdateNPCSpawn(name, pos)
+    net.Start("gWare.Utils.UpdateNPCSpawn")
+        net.WriteString(name)
+        net.WriteVector(pos)
+    net.Broadcast()
+
+    if gWare.Utils.NPCSpawns[name] then
+        gWare.Utils.NPCSpawns[name] = nil
+        return
+    end
+
+    gWare.Utils.NPCSpawns[name] = pos
+end
+
+function gWare.Utils.UpdateNPCJobs(name, jobCommand)
+    net.Start("gWare.Utils.UpdateNPCJobs")
+        net.WriteString(name)
+        net.WriteString(jobCommand)
+    net.Broadcast()
+
+    if gWare.Utils.NPCJobs[name][jobCommand] then
+        gWare.Utils.NPCJobs[name][jobCommand] = nil
+        return
+    end
+
+    gWare.Utils.NPCJobs[name][jobCommand] = true
 end
 
 net.Receive("gWare.Utils.UpdateServer", function(len, ply)
@@ -113,4 +178,35 @@ net.Receive("gWare.Utils.JobSetter.SetJob", function(len, ply)
 
     local setTeam = target_ply.changeTeam or target_ply.SetTeam
     setTeam(ent, job, true)
+end)
+
+net.Receive("gWare.Utils.AddNPC", function(len, ply)
+    local name = net.ReadString()
+    local pos = net.ReadVector()
+
+    gWare.Utils.UpdateNPCSpawn(name, pos)
+    gWare.Utils.InsertNPCSpawn(name, pos)
+end)
+
+net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
+    local name = net.ReadString()
+
+    gWare.Utils.UpdateNPCSpawn(name, Vector(zero))
+    gWare.Utils.DeleteNPCSpawn(name)
+end)
+
+net.Receive("gWare.Utils.AddJobsToNPC", function(len, ply)
+    local name = net.ReadString()
+    local jobCommand = net.ReadString()
+
+    gWare.Utils.UpdateNPCJobs(name, jobCommand)
+    gWare.Utils.InsertNPCJob(name, jobCommand)
+end)
+
+net.Receive("gWare.Utils.DeleteJobsFromNPC", function(len, ply)
+    local name = net.ReadString()
+    local jobCommand = net.ReadString()
+
+    gWare.Utils.UpdateNPCJobs(name, jobCommand)
+    gWare.Utils.DeleteNPCJob(name, jobCommand)
 end)
