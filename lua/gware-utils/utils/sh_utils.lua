@@ -85,3 +85,17 @@ function gWare.Utils.HasPermission(name, ply)
         return CAMI.PlayerHasAccess(ply, name)
     end
 end
+
+--[[
+    Converts a string in to a vector data (fuck u sqllite)
+    Returns: Vector
+]]
+function gWare.Utils.StringToVector(str)
+    local args = string.Split(str, " ")
+
+    x = args[1]
+    y = args[2]
+    z = args[3]
+
+    return Vector(x, y, z)
+end
