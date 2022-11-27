@@ -36,7 +36,7 @@ net.Receive("gWare.Utils.SendNPCSpawnsToClient", function(len)
 
     for i = 1, count do
         local name = net.ReadString()
-        local pos = net.ReadString()
+        local pos = net.ReadVector()
 
         gWare.Utils.NPCSpawns[name] = pos
     end

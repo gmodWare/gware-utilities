@@ -30,7 +30,7 @@ function gWare.Utils.SendNPCSpawnsAndJobsToClient(len, ply)
         net.WriteUInt(npcSpawnsCount, 7)
         for npcName, npcPos in pairs(gWare.Utils.NPCSpawns) do
             net.WriteString(npcName)
-            net.WriteString(npcPos) // TODO : Change to Vector!!!!
+            net.WriteVector(npcPos)
         end
     net.Send(ply)
 
