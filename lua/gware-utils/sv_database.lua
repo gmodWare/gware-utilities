@@ -64,6 +64,12 @@ function gWare.Utils.DeleteNPCJob(npc_name, job_command)
     query:Execute()
 end
 
+function gWare.Utils.DeleteAllNPCJobs(npc_name)
+    local query = database:Delete("gware_npc_jobs")
+        query:Where("npc_name", npc_name)
+    query:Execute()
+end
+
 function gWare.Utils.InsertNPCSpawn(npc_name, npc_pos)
     local query = database:Insert("gware_npc_spawns")
         query:Insert("npc_name", npc_name)

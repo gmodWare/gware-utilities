@@ -194,6 +194,7 @@ net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
     local name = net.ReadString()
 
     gWare.Utils.UpdateNPCSpawn(name, Vector(zero))
+    gWare.Utils.DeleteAllNPCJobs(name)
     gWare.Utils.DeleteNPCSpawn(name)
 end)
 
