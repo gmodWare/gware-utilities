@@ -49,10 +49,11 @@ net.Receive("gWare.Utils.SendNPCJobsToClient", function(len)
         local dataCount = net.ReadUInt(7)
         local name = net.ReadString()
 
+        gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
+
         for j = 1, dataCount do
             local jobCommand = net.ReadString()
 
-            gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
             gWare.Utils.NPCJobs[name][jobCommand] = true
         end
     end
@@ -160,6 +161,8 @@ end)
 net.Receive("gWare.Utils.UpdateNPCJobs", function(len)
     local name = net.ReadString()
     local jobCommand = net.ReadString()
+
+    gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
 
     if gWare.Utils.NPCJobs[name][jobCommand] then
         gWare.Utils.NPCJobs[name][jobCommand] = nil

@@ -119,6 +119,8 @@ function gWare.Utils.UpdateNPCJobs(name, jobCommand)
         net.WriteString(jobCommand)
     net.Broadcast()
 
+    gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
+
     if gWare.Utils.NPCJobs[name][jobCommand] then
         gWare.Utils.NPCJobs[name][jobCommand] = nil
         return
