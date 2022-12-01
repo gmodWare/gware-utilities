@@ -105,6 +105,8 @@ function gWare.Utils.UpdateNPCSpawn(name, pos)
         net.WriteVector(pos)
     net.Broadcast()
 
+    gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
+
     if gWare.Utils.NPCSpawns[name] then
         gWare.Utils.NPCSpawns[name] = nil
         return
@@ -201,6 +203,11 @@ end)
 net.Receive("gWare.Utils.AddJobsToNPC", function(len, ply)
     local name = net.ReadString()
     local jobCommand = net.ReadString()
+    local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
+    local pos = gWare.Utils.NPCSpawns[name]
+
+    DarkRP.removeTeamSpawnPos(index)
+    DarkRP.addTeamSpawnPos(index, pos)
 
     gWare.Utils.UpdateNPCJobs(name, jobCommand)
     gWare.Utils.InsertNPCJob(name, jobCommand)
@@ -209,6 +216,9 @@ end)
 net.Receive("gWare.Utils.DeleteJobsFromNPC", function(len, ply)
     local name = net.ReadString()
     local jobCommand = net.ReadString()
+    local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
+
+    DarkRP.removeTeamSpawnPos(index)
 
     gWare.Utils.UpdateNPCJobs(name, jobCommand)
     gWare.Utils.DeleteNPCJob(name, jobCommand)

@@ -150,6 +150,8 @@ net.Receive("gWare.Utils.UpdateNPCSpawn", function(len)
     local name = net.ReadString()
     local pos = net.ReadVector()
 
+    gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
+
     if gWare.Utils.NPCSpawns[name] then
         gWare.Utils.NPCSpawns[name] = nil
         return
