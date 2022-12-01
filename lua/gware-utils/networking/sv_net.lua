@@ -180,6 +180,12 @@ net.Receive("gWare.Utils.JobSetter.SetJob", function(len, ply)
     local job = net.ReadString()
     local ent = net.ReadEntity()
 
+    if SAM_LOADED then
+        if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
+    else
+        if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
+    end
+
     local setTeam = target_ply.changeTeam or target_ply.SetTeam
     setTeam(ent, job, true)
 end)
@@ -188,12 +194,24 @@ net.Receive("gWare.Utils.AddNPC", function(len, ply)
     local name = net.ReadString()
     local pos = net.ReadVector()
 
+    if SAM_LOADED then
+        if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
+    else
+        if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
+    end
+
     gWare.Utils.UpdateNPCSpawn(name, pos)
     gWare.Utils.InsertNPCSpawn(name, pos)
 end)
 
 net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
     local name = net.ReadString()
+
+    if SAM_LOADED then
+        if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
+    else
+        if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
+    end
 
     gWare.Utils.UpdateNPCSpawn(name, Vector(zero))
     gWare.Utils.DeleteAllNPCJobs(name)
@@ -206,6 +224,12 @@ net.Receive("gWare.Utils.AddJobsToNPC", function(len, ply)
     local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
     local pos = gWare.Utils.NPCSpawns[name]
 
+    if SAM_LOADED then
+        if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
+    else
+        if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
+    end
+
     DarkRP.removeTeamSpawnPos(index)
     DarkRP.addTeamSpawnPos(index, pos)
 
@@ -217,6 +241,12 @@ net.Receive("gWare.Utils.DeleteJobsFromNPC", function(len, ply)
     local name = net.ReadString()
     local jobCommand = net.ReadString()
     local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
+
+    if SAM_LOADED then
+        if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
+    else
+        if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
+    end
 
     DarkRP.removeTeamSpawnPos(index)
 

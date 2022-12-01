@@ -39,6 +39,16 @@ hook.Add("SAM.LoadedConfig", "gWare.Utils.SamModules.WaitForClient", function()
             Description = "Can the player change the gWare settings?",
         })
     end
+
+    if SAM_LOADED then
+        sam.permissions.add("can_set_jobs-spawns_gware_tool", "gWare", "superadmin")
+    else
+        CAMI.RegisterPrivilege({
+            Name = "can_set_jobs-spawns_gware_tool",
+            MinAccess = "superadmin",
+            Description = "Can the player set the job spawns per gWare tool?",
+        })
+    end
 end)
 
 hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
