@@ -99,3 +99,16 @@ function gWare.Utils.StringToVector(str)
 
     return Vector(x, y, z)
 end
+
+--[[
+    Returns the job index of a DarkRP team by its command (fuck u darkrp)
+    Returns: Integer
+]]
+
+function gWare.Utils.GetJobIndexByCommand(command)
+    for index, jobData in ipairs(RPExtraTeams) do
+        if jobData.command != command then continue end
+
+        return index
+    end
+end
