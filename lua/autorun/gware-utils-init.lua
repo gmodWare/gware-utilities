@@ -2,7 +2,7 @@ gWare = gWare or {}
 gWare.Utils = gWare.Utils or {}
 
 local rootDir = "gware-utils"
-
+ 
 local function AddFile(File, dir)
     local fileSide = string.lower(string.Left(File, 3))
 
