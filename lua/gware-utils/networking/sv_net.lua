@@ -135,12 +135,24 @@ net.Receive("gWare.Utils.UpdateServer", function(len, ply)
     local index = net.ReadUInt(5)
     local settingValue = net.ReadBool()
 
+    if SAM_LOADED then
+        if not ply:HasPermission("can_change_gware_settings") then return end
+    else
+        if not CAMI.PlayerHasAccess(ply, "can_change_gware_settings") then return end
+    end
+
     gWare.Utils.ChangeSetting(index, settingValue)
 end)
 
 net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
     local jobCommand = net.ReadString()
     local settingID = net.ReadString()
+
+    if SAM_LOADED then
+        if not ply:HasPermission("can_change_gware_settings") then return end
+    else
+        if not CAMI.PlayerHasAccess(ply, "can_change_gware_settings") then return end
+    end
 
     if gWare.Utils.JobAccess[settingID][jobCommand] then
         gWare.Utils.JobAccess[settingID][jobCommand] = nil
