@@ -154,6 +154,8 @@ net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
         if not CAMI.PlayerHasAccess(ply, "can_change_gware_settings") then return end
     end
 
+    gWare.Utils.JobAccess[settingID] = gWare.Utils.JobAccess[settingID] or {}
+
     if gWare.Utils.JobAccess[settingID][jobCommand] then
         gWare.Utils.JobAccess[settingID][jobCommand] = nil
         gWare.Utils.DeleteJob(jobCommand, settingID)

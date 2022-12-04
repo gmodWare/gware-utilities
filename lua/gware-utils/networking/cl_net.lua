@@ -79,6 +79,8 @@ function gWare.Utils.UpdateSetting(index, settingValue)
 end
 
 function gWare.Utils.ChangeJobAccess(jobCommand, settingID)
+    gWare.Utils.JobAccess[settingID] = gWare.Utils.JobAccess[settingID] or {}
+
     if gWare.Utils.JobAccess[settingID][jobCommand] then
         gWare.Utils.JobAccess[settingID][jobCommand] = nil
     else
