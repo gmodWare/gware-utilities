@@ -53,7 +53,7 @@ function PANEL:Init()
 
             option.input.DoClick = function()
                 // TODO: when VoidLib is updated on workshop we can use the normal ItemSelect again
-                local selector = vgui.Create("VoidUI.ItemSelect2") 
+                local selector = vgui.Create("VoidUI.ItemSelect") 
                 selector:SetParent(option)
                 selector:SetMultipleChoice(true)
 
