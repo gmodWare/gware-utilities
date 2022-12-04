@@ -22,6 +22,19 @@ local function Reload()
     RunConsoleCommand("spawnmenu_reload")
 end
 
+local function RemoveClientEnts()
+    timer.Simple(0, function()
+        for _, ent in ipairs(ents.GetAll()) do
+            if ent:GetClass() != "gware_utils_spawnnpc" then continue end
+
+            ent:Remove()
+        end
+
+        npcSpawns = false
+    end)
+end
+
+
 function TOOL:LeftClick(trace)
     if SERVER then return end
     if not IsFirstTimePredicted() then return end
@@ -37,6 +50,10 @@ function TOOL:LeftClick(trace)
         ent:SetMaterial("models/shadertest/shader4")
 
         gWare.Utils.AddNPC(textInput, ent:GetPos())
+
+        VoidLib.Notify("gWare Job Spawn Setter", "Du hast erfolgreich den NPC " .. textInput .. " erstellt.", VoidUI.Colors.Green, 5)
+
+        Reload()
     end)
 
     nameInput:Cancel("Abbrechen", function()
@@ -192,7 +209,9 @@ function TOOL.BuildCPanel(panel)
         VoidLib.Notify("gWare Job Spawn Setter", "Du hast " .. npcName .. " erfolgreich gelöscht!", VoidUI.Colors.Red, 5)
 
         gWare.Utils.DeleteNPC(npcName)
+
         Reload()
+        RemoveClientEnts()
     end
 end
 
@@ -228,6 +247,7 @@ function TOOL:Think()
     if SERVER then return end
 
     if not npcSpawns then
+        print("npcSpawns is nil")
         self:Deploy()
     end
 
@@ -237,6 +257,7 @@ end
 
 function TOOL:Deploy()
     if SERVER then return end
+    if not IsFirstTimePredicted() then return end
 
     npcSpawns = true
 
@@ -249,21 +270,13 @@ function TOOL:Deploy()
     end
 end
 
-function TOOL:RemoveClientEnts()
-    for _, ent in ipairs(ents.GetAll()) do
-        if ent:GetClass() != "gware_utils_spawnnpc" then continue end
-
-        ent:Remove()
-    end
-end
-
 function TOOL:Holster()
     if SERVER then return end
+    if not IsFirstTimePredicted() then return end
 
     if IsValid(self.GhostHuman) then
         self.GhostHuman:Remove()
     end
 
-    npcSpawns = false
-    self:RemoveClientEnts()
+    RemoveClientEnts()
 end
