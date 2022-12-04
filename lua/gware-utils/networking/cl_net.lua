@@ -8,7 +8,7 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
         local settingValue = net.ReadBool()
         local settingType = net.ReadString()
 
-        gWare.Utils.Settings[i] = { name = settingName, description = settingDescription, value = settingValue, settingType = settingType}
+        gWare.Utils.Settings[i] = { id = settingID, name = settingName, description = settingDescription, value = settingValue, settingType = settingType}
         gWare.Utils.IDs[settingID] = i
     end
 
@@ -81,9 +81,7 @@ end
 function gWare.Utils.ChangeJobAccess(jobCommand, settingID)
     if gWare.Utils.JobAccess[settingID][jobCommand] then
         gWare.Utils.JobAccess[settingID][jobCommand] = nil
-    end
-
-    if not gWare.Utils.JobAccess[settingID][jobCommand] then
+    else
         gWare.Utils.JobAccess[settingID][jobCommand] = true
     end
 
