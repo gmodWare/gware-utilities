@@ -26,6 +26,10 @@ if SERVER then
 
         local players = {}
 
+        players[#players + 1] = {
+            ent = ply,
+        }
+
         for k, v in ipairs(player.GetAll()) do
             if (CheckPos(ply, v, 500)) then
                 players[#players + 1] = {
@@ -38,7 +42,7 @@ if SERVER then
             net.Start("gWare.Commands.LOOC.ChatMessage")
                 net.WriteString(message)
                 net.WriteEntity(ply)
-            net.Send(players)
+            net.Send(v.ent)
         end
 
         return ""
