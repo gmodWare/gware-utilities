@@ -1,6 +1,9 @@
 gWare = gWare or {}
 gWare.Utils = gWare.Utils or {}
 
+gWare.Addons = gWare.Addons or {}
+gWare.Addons["gWareUtils"] = true
+
 local rootDir = "gware-utils"
  
 local function AddFile(File, dir)
