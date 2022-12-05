@@ -27,7 +27,9 @@ end
 
 hook.Add("InitPostEntity", "gWare.Utils.InitPostEntity", function()
     function g_VoicePanelList:OnChildAdded(child)
-        if (child:IsValid() and gWare.Utils.GetSettingValue("voicePanels")) then
+        if not gWare.Utils.GetSettingValue("disableVoicePanels") then return end
+        
+        if (child:IsValid()) then
             child:Remove()
         end
     end

@@ -25,10 +25,10 @@
 - ✅Disable Q-Menu for Users
 - ✅Diable C-Menu for Users
 - Can Create Votes
-- Can Set DarkRP Spawns
+- ✅Can Set DarkRP Spawns
 
 #### Menu Tools:
-- DarkRP Job Spawn Setter
+- ✅DarkRP Job Spawn Setter
 
 #### Entities:
 - ❌Information Panels
@@ -40,7 +40,7 @@
 #### Commands:
 - ✅funk
 - ✅vfunk (2)
-- ✅decode (3)
+- ⚠️decode (3)
 - ✅ooc
 - ⚠️looc
 - ✅akt
@@ -51,6 +51,9 @@
 
 #### Languages
 - Add English
+
+#### Secure Database
+-✅ gWare admin setting check in net receives
 
 ##
 ✅ Done —

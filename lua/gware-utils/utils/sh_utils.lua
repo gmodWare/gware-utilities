@@ -68,3 +68,47 @@ function gWare.Utils.GetPlayerByNamePart(namePart)
 
     return nil
 end
+
+--[[
+    Check if the player can access a specific gWare Module
+    Works with SAM & CAMI
+    Returns: boolean
+]]--
+function gWare.Utils.HasPermission(name, ply)
+    if CLIENT then
+        ply = LocalPlayer()
+    end
+
+    if SAM_LOADED then
+        return ply:HasPermission(name)
+    else
+        return CAMI.PlayerHasAccess(ply, name)
+    end
+end
+
+--[[
+    Converts a string in to a vector data (fuck u sqllite)
+    Returns: Vector
+]]
+function gWare.Utils.StringToVector(str)
+    local args = string.Split(str, " ")
+
+    x = args[1]
+    y = args[2]
+    z = args[3]
+
+    return Vector(x, y, z)
+end
+
+--[[
+    Returns the job index of a DarkRP team by its command (fuck u darkrp)
+    Returns: Integer
+]]
+
+function gWare.Utils.GetJobIndexByCommand(command)
+    for index, jobData in ipairs(RPExtraTeams) do
+        if jobData.command != command then continue end
+
+        return index
+    end
+end
