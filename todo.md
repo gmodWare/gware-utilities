@@ -19,7 +19,7 @@
 - ✅Disable Voice Panels
 - ✅Disable Q-Menu for Users (4)
 - ✅Disable C-Menu for Users (5)
-- Language
+- 🔄Language
 
 #### Additional Permissions:
 - ✅Disable Q-Menu for Users
