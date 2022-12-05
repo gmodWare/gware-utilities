@@ -5,45 +5,32 @@
     Example Chat: [LOOC] 501st CMD Menschlich: Lol der ist einfach umgefallen xD
 ]]
 
-local function CheckPos(ply, target, dist)
-    local distSqr = dist * dist
-
-    return ply:GetPos():DistToSqr(target:GetPos()) < distSqr
-end
-
 if SERVER then
     util.AddNetworkString("gWare.Commands.LOOC.ChatMessage")
 
-    hook.Add("PlayerSay", "gWare.Commands.LOOC", function(ply, text)
+    hook.Add("PlayerSay", "gWare.Commands.LOOC", function(sender, text)
         if not text:StartWithAny("/looc ", "!looc ") then return end
 
         local message = text:ReplacePrefix("looc")
 
         if message:Trim() == "" then
-            VoidLib.Notify(ply, "Invalider LOOC", "Du kannst keinen Leere Nachricht senden!", VoidUI.Colors.Red, 5)
+            VoidLib.Notify(sender, "Invalider LOOC", "Du kannst keine leere Nachricht senden!", VoidUI.Colors.Red, 5)
             return
         end
 
-        local players = {}
+        local receivers = {sender}
+        local distSqr = 500 * 500
 
-        players[#players + 1] = {
-            ent = ply,
-        }
+        for _, ply in ipairs(player.GetAll()) do
+            if ply:GetPos():DistToSqr(sender:GetPos()) > distSqr then continue end
 
-        for k, v in ipairs(player.GetAll()) do
-            if (CheckPos(ply, v, 500)) then
-                players[#players + 1] = {
-                    ent = v,
-                }
-            end
+            table.insert(receivers, ply)
         end
 
-        for k, v in ipairs(players) do
-            net.Start("gWare.Commands.LOOC.ChatMessage")
-                net.WriteString(message)
-                net.WriteEntity(ply)
-            net.Send(v.ent)
-        end
+        net.Start("gWare.Commands.Looc.ChatMessage")
+            net.WriteString(message)
+            net.WriteEntity(sender)
+        net.Send(receivers)
 
         return ""
     end)
