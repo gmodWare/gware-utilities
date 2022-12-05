@@ -24,7 +24,7 @@
 #### Additional Permissions:
 - ✅Disable Q-Menu for Users
 - ✅Diable C-Menu for Users
-- Can Create Votes
+- 🔄Can Create Votes
 - ✅Can Set DarkRP Spawns
 
 #### Menu Tools:
@@ -50,7 +50,7 @@
 - unstuck
 
 #### Languages
-- Add English
+- ⚠️Add English
 
 #### Secure Database
 -✅ gWare admin setting check in net receives
