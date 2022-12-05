@@ -24,33 +24,28 @@ if SERVER then
             return
         end
 
-        local players
+        local players = {}
 
         for k, v in ipairs(player.GetAll()) do
-            players = v
-        end
-            if not (CheckPos(ply, players, 500)) then
-                net.Start("gWare.Commands.LOOC.ChatMessage")
-                    net.WriteString(message)
-                    net.WriteEntity(ply)
-                net.Send(ply)
-            else
-                net.Start("gWare.Commands.LOOC.ChatMessage")
-                    net.WriteString(message)
-                    net.WriteEntity(ply)
-                net.Send(players)
+            if (CheckPos(ply, v, 500)) then
+                players[#players + 1] = {
+                    ent = v,
+                }
             end
+        end
+
+        for k, v in ipairs(players) do
+            net.Start("gWare.Commands.LOOC.ChatMessage")
+                net.WriteString(message)
+                net.WriteEntity(ply)
+            net.Send(players)
+        end
 
         return ""
     end)
 end
 
 if CLIENT then
-    local colors = {
-        ["brackets"] = Color(40, 42, 46),
-        ["commandColor"] = Color(169, 75, 245)
-    }
-
     net.Receive("gWare.Commands.LOOC.ChatMessage", function()
         local message = net.ReadString()
         local sender = net.ReadEntity()

@@ -14,7 +14,7 @@
 - 🔄Which jobs can decode (3)
 - ✅Automatic Workshop Download
 - ✅Disable Advert (DarkRP Billboards)
-- Enable Classic Advert
+- ✅Enable Classic Advert
 - ✅Disable Family Sharing
 - ✅Disable Voice Panels
 - ✅Disable Q-Menu for Users (4)
