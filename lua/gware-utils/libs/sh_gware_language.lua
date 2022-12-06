@@ -1,6 +1,6 @@
 local branch = "master"
 local rawURL = "https://raw.githubusercontent.com/gmodWare/gware-lang/"
-local apiEndPoint = "https://api.github.com/gmodWare/gware-lang/git/trees/master?recursive=1"
+local apiEndPoint = "https://api.github.com/repos/gmodWare/gware-lang/git/trees/master?recursive=1"
 
 gWare.Lang = gWare.Lang or {}
 
