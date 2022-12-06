@@ -11,7 +11,7 @@ if (SERVER) then
         if (!ply:IsSuperAdmin()) then return end
 
         for name, v in pairs(gWare.Addons) do
-            local gTable = _G[name]
+            local gTable = _G["gWare"][name]
             if (!gTable) then continue end
 
             gWare.Lang:LoadLocalLanguages(name, true)
@@ -31,7 +31,7 @@ if (CLIENT) then
         local addon = net.ReadString()
         local tbl = VoidLib.ReadCompressedTable()
 
-        local gTable = _G[addon]
+        local gTable = _G["gWare"][addon]
         if (!gTable) then return end
 
         gTable.Lang.Langs = tbl
@@ -41,7 +41,7 @@ if (CLIENT) then
 end
 
 function gWare.Lang:Init(addon)
-    local gTable = _G[addon]
+    local gTable = _G["gWare"][addon]
     if (!gTable) then return end
 
     gTable.Lang = gTable.Lang or {}
@@ -69,7 +69,7 @@ function gWare.Lang:Init(addon)
 end
 
 function gWare.Lang:GetAvailableLanguages(addon, callback, failCallback)
-    local gTable = _G[addon]
+    local gTable = _G["gWare"][addon]
     if (!gTable) then return end
     local url = apiEndpoint
 
@@ -107,7 +107,7 @@ function gWare.Lang:GetAvailableLanguages(addon, callback, failCallback)
 end
 
 function gWare.Lang:GetLangPhrase(addon, phrase)
-    local gTable = _G[addon]
+    local gTable = _G["gWare"][addon]
     if (!gTable) then return end
 
     local langRef = gTable.Config.Language
@@ -176,7 +176,7 @@ end
 function gWare.Lang:LoadLocalLanguages(addon, reload)
     if (!SERVER) then return end
 
-    local gTable = _G[addon]
+    local gTable = _G["gWare"][addon]
     if (!gTable) then return end
 
     local files = file.Find("gware-languages/" .. addon .. "/*.json", "DATA")
@@ -228,7 +228,7 @@ function gWare.Lang:NetworkLocalLanguages(addon, tbl, ply)
 end
 
 function gWare.Lang:LoadLanguages(addon)
-    local gTable = _G[addon]
+    local gTable = _G["gWare"][addon]
     if (!gTable) then return end
 
     for _, lang in pairs(gTable.Lang.AvailableLangs or {}) do
@@ -267,7 +267,7 @@ function gWare.Lang:LoadLanguages(addon)
 end
 
 function gWare.Lang:DownloadLanguages(addon, callback)
-    local gTable = _G[addon]
+    local gTable = _G["gWare"][addon]
     if (!gTable) then return end
 
     self:GetAvailableLanguages(addon, function(languages)

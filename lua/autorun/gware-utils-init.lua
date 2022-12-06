@@ -16,7 +16,7 @@ local UtilsBranding = [[
   |___/  ]]
 
 gWare.Addons = gWare.Addons or {}
-gWare.Addons["gWareUtils"] = true
+gWare.Addons["Utils"] = true
 
 gWare.Utils.Lang = gWare.Utils.Lang or {}
 gWare.Utils.Dir = "gware-utils"
@@ -86,6 +86,9 @@ end
 function gWare.Utils.LoadAll()
     -- load libraries first
     gWare.Utils.Load(gWare.Utils.Dir .. "/libs")
+
+    -- init languages
+    gWare.Lang:Init("Utils")
 
     -- then database
     gWare.Utils.Load(gWare.Utils.Dir)

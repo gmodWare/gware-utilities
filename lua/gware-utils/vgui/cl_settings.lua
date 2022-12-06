@@ -1,3 +1,6 @@
+local L = gWare.Utils.Lang.Get
+
+
 local PANEL = {}
 
 function PANEL:Init()
@@ -77,7 +80,7 @@ function PANEL:Init()
             option.input:MarginRight(10)
         end
 
-        option:SetTitle(data.name, data.description)
+        option:SetTitle(L("setting_" .. data.id.. "_name"), L("setting_" .. data.id .. "_desc"))
     end
 end
 

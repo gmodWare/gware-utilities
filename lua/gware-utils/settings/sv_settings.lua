@@ -191,15 +191,15 @@ end)
 ///////////////////////////
 
 gWare.Utils.AddSetting({
-    id = "disableNPCWeaponDrop",
-    name = "setting_npc-weapon-drop_name",
+    id = "npc-weapon-drop",
+    name = "Toolgun Geräusche",
     description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
-    id = "disableToolgunSounds",
+    id = "toolgun-sounds",
     name = "Toolgun Geräusche",
     description = "Toolgun Geräusche deaktiviern?",
     defaultValue = false,
@@ -207,7 +207,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disableToolgunEffects",
+    id = "toolgun-effects",
     name = "Toolgun Effekte",
     description = "Toolgun Effekte deaktivieren?",
     defaultValue = false,
@@ -215,7 +215,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "enableCloakOnNoclip",
+    id = "auto-cloak",
     name = "Automatischer Cloak bei Noclip",
     description = "Automatisch Cloaken bei Noclip?",
     defaultValue = false,
@@ -223,7 +223,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disableKillfeed",
+    id = "killfeed",
     name = "Killfeed ausblenden",
     description = "Sollen Spielertode ausgeblendet werden?",
     defaultValue = false,
@@ -231,7 +231,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disallowSuicide",
+    id = "suicide",
     name = "Selbstmord verbieten?",
     description = "'Kill' in Konsole verbieten?",
     defaultValue = false,
@@ -239,7 +239,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disablePlayersWeaponDrop",
+    id = "player-weapon-drop",
     name = "Spieler Waffen drop verbieten?",
     description = "Der Spieler kann keine Waffen fallen lassen?",
     defaultValue = false,
@@ -247,7 +247,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "enableWorkshopDownload",
+    id = "auto-workshop-dl",
     name = "Automatischer Workshop-Download",
     description = "Sollen alle User bei joinen die Kollektion automatisch downloaden?",
     defaultValue = false,
@@ -255,7 +255,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disableDarkRPBlackboard",
+    id = "billboards",
     name = "DarkRP Tafeln deaktvieren?",
     description = "Sollen bei '/advert' keine Tafeln gespawned werden?",
     defaultValue = false,
@@ -263,7 +263,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disableFamilySharing",
+    id = "family-sharing",
     name = "Family Sharing verbieten?",
     description = "Sollen User die Family-Sharing benutzen, sofort gekickt werden?",
     defaultValue = false,
@@ -271,7 +271,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disableVoicePanels",
+    id = "voice-panels",
     name = "Sprachanzeige deaktiveren?",
     description = "Sprachanzeige rechts unten deaktivieren?",
     defaultValue = false,
@@ -279,7 +279,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disableSpawnmenu",
+    id = "spawnmenu",
     name = "Spawnmenü deaktivieren?",
     description = "Braucht man eine permission um das Spawnmenü öffnen zu können?",
     defaultValue = false,
@@ -287,7 +287,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "disableContextmenu",
+    id = "contextmenu",
     name = "Context-Menü deaktivieren?",
     description = "Braucht man eine permission um das C-Menü öffnen zu können?",
     defaultValue = false,
@@ -295,7 +295,7 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
-    id = "encryptedComms",
+    id = "encrypted-comms",
     name = "Encrypted Comms Stuff?",
     description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
     defaultValue = {},
