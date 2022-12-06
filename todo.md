@@ -5,7 +5,7 @@
 #### Settings: (ingame config)
 - ✅Disable NPC Weapon Drops
 - ✅Disable Toolgun Sounds
-- Disable Toolgun Effects
+- 🔄Disable Toolgun Effects
 - ⚠️Auto-Cloak on NoClip
 - ✅Disable Killfeed
 - ✅Disable Suicide
@@ -42,7 +42,7 @@
 - ✅vfunk (2)
 - ⚠️decode (3)
 - ✅ooc
-- ⚠️looc
+- ✅looc
 - ✅akt
 - me (akt but locally)
 - ✅makt (medic akt)
@@ -50,7 +50,7 @@
 - unstuck
 
 #### Languages
-- ⚠️Add English
+- 🔄Add English
 
 #### Secure Database
 -✅ gWare admin setting check in net receives
