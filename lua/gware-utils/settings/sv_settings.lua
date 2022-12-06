@@ -109,7 +109,7 @@ end)
 -- commitSuicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     if not gWare.Utils.GetSettingValue("disallowSuicide") then return end
-    
+
     VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
     return false
 end)
@@ -132,7 +132,7 @@ end
 local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
-    if gWare.Utils.GetSettingValue("enableCloakOnNoclip") then return end
+    if not gWare.Utils.GetSettingValue("enableCloakOnNoclip") then return end
 
     ply:SetNoDraw(desiredNoClipState)
     ply:DrawWorldModel(not desiredNoClipState)
@@ -182,7 +182,7 @@ end)
 -- darkrpBlackboard
 hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
     if not gWare.Utils.GetSettingValue("disableDarkRPBlackboard") then return end
-    
+
     return false
 end)
 
