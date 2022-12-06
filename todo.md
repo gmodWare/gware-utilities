@@ -44,7 +44,7 @@
 - ✅ooc
 - ✅looc
 - ✅akt
-- me (akt but locally)
+- ✅me (akt but locally)
 - ✅makt (medic akt)
 - ✅roll
 - unstuck
