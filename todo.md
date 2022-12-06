@@ -40,7 +40,7 @@
 #### Commands:
 - ✅funk
 - ✅vfunk (2)
-- ⚠️decode (3)
+- ✅decode (3)
 - ✅ooc
 - ✅looc
 - ✅akt
