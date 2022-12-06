@@ -84,7 +84,7 @@ end)
 
 -- FamilySharing
 hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
-    if not gWare.Utils.GetSettingValue("disableFamilySharing") then return end
+    if not gWare.Utils.GetSettingValue("family-sharing") then return end
 
     local s64 = ply:SteamID64()
     local ownerS64 = ply:OwnerSteamID64()
@@ -97,7 +97,7 @@ end)
 
 -- workshopDownload
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function()
-    if not gWare.Utils.GetSettingValue("enableWorkshopDownload") then return end
+    if not gWare.Utils.GetSettingValue("auto-workshop-dl") then return end
     for _, addon in ipairs(engine.GetAddons()) do
         if not addon.mounted then return end
 
@@ -108,7 +108,7 @@ end)
 
 -- commitSuicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
-    if not gWare.Utils.GetSettingValue("disallowSuicide") then return end
+    if not gWare.Utils.GetSettingValue("suicide") then return end
 
     VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
     return false
@@ -132,7 +132,7 @@ end
 local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
-    if not gWare.Utils.GetSettingValue("enableCloakOnNoclip") then return end
+    if not gWare.Utils.GetSettingValue("auto-cloak") then return end
 
     ply:SetNoDraw(desiredNoClipState)
     ply:DrawWorldModel(not desiredNoClipState)
@@ -160,7 +160,7 @@ end)
 
 -- npcDisabledWeapons
 hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attacker, inflictor)
-    if not gWare.Utils.GetSettingValue("disableNPCWeaponDrop") then return end
+    if not gWare.Utils.GetSettingValue("npc-weapon-drop") then return end
 
     local npcWeapon = npc:GetActiveWeapon()
     if (IsValid(npcWeapon)) then
@@ -171,7 +171,7 @@ end)
 
 -- toolgunSounds
 hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
-    if not gWare.Utils.GetSettingValue("disableToolgunSounds") then return end
+    if not gWare.Utils.GetSettingValue("toolgun-sounds") then return end
 
     if (data.Entity:IsValid() and data.Entity:IsPlayer() and data.Entity:GetActiveWeapon():IsValid() and data.Entity:GetActiveWeapon():GetClass() == "gmod_tool") then
         return false
@@ -181,7 +181,7 @@ end)
 
 -- darkrpBlackboard
 hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
-    if not gWare.Utils.GetSettingValue("disableDarkRPBlackboard") then return end
+    if not gWare.Utils.GetSettingValue("billboards") then return end
 
     return false
 end)
