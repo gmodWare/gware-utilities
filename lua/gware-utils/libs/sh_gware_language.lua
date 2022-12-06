@@ -71,7 +71,8 @@ end
 function gWare.Lang:GetAvailableLanguages(addon, callback, failCallback)
     local gTable = _G["gWare"][addon]
     if (!gTable) then return end
-    local url = apiEndpoint
+    local url = apiEndPoint
+    print(url)
 
     http.Fetch(url, function (body, size, headers, code)
         -- Success
@@ -260,7 +261,7 @@ function gWare.Lang:LoadLanguages(addon)
         return
     end
 
-    gTable:Log("Loaded " .. table.Count(gTable.Lang.Langs) .. " languages!", "Languages")
+    print("Loaded " .. table.Count(gTable.Lang.Langs) .. " languages!", "Languages")
 
     gTable.Lang.LanguagesLoaded = true
     hook.Run(addon .. ".Lang.LanguagesLoaded")
@@ -281,7 +282,7 @@ function gWare.Lang:DownloadLanguages(addon, callback)
 
         for _, lang in pairs(languages) do
             local formattedLangName = lang:gsub("^%l", string.upper)
-            local url = rawUrl .. branch .. "/" .. addon .. "/" .. lang .. ".json"
+            local url = rawURL .. branch .. "/" .. addon .. "/" .. lang .. ".json"
             http.Fetch(url, function (body, size, headers, code)
                 callbacksDone = callbacksDone + 1
             
