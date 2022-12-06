@@ -42,7 +42,7 @@
 - ✅vfunk (2)
 - ⚠️decode (3)
 - ✅ooc
-- ⚠️looc
+- ✅looc
 - ✅akt
 - me (akt but locally)
 - ✅makt (medic akt)
@@ -50,10 +50,15 @@
 - unstuck
 
 #### Languages
-- ⚠️Add English
+- 🔄Add English
 
 #### Secure Database
 -✅ gWare admin setting check in net receives
+
+#### Warnings
+- DarkRP required
+- VoidLib required
+- SAM/ULX/sAdmin required (fuck xAdmin!!)
 
 ##
 ✅ Done —
