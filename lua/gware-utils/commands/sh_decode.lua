@@ -17,7 +17,7 @@ if SERVER then
 
         local encrypted = text:ReplacePrefix("decode")
 
-        if not encrypted then 
+        if not encrypted then
             VoidLib.Notify(ply, "Invalider Decode", "Decode Beispiel: /decode 20 68 61 6c 6c 6f", VoidUI.Colors.Red, 10)
             return
         end
@@ -26,6 +26,8 @@ if SERVER then
         local clearText = ""
 
         for i, hex in ipairs(hexTbl) do
+            if hex == "" then continue end
+
             local ascii = bit.tobit(tonumber(hex, 16))
             clearText = clearText .. string.char(ascii)
         end
