@@ -49,6 +49,8 @@ function gWare.Utils.ChangeSetting(index, settingValue)
     gWare.Utils.Settings[index].value = settingValue
 
     gWare.Utils.UpdateClient(index, settingValue)
+
+    hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
 end
 
 gWare.Utils.GetAllJobs(function(tblData)
@@ -62,13 +64,13 @@ end)
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WaitForAddon", function()
     gWare.Utils.GetAllNPCPos(function (npcTblData)
         for _, npcData in ipairs(npcTblData) do
-    
+
             gWare.Utils.NPCSpawns[npcData.npc_name] = gWare.Utils.StringToVector(npcData.npc_pos)
             gWare.Utils.NPCJobs[npcData.npc_name] = gWare.Utils.NPCJobs[npcData.npc_name] or {}
-    
+
             gWare.Utils.GetNPCJobs(npcData.npc_name, function (jobTblData)
                 for _, jobData in ipairs(jobTblData) do
-    
+
                     gWare.Utils.NPCJobs[npcData.npc_name][jobData.job_command] = true
                 end
             end)
@@ -107,7 +109,7 @@ end)
 -- commitSuicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     if not gWare.Utils.GetSettingValue("disallowSuicide") then return end
-    
+
     VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
     return false
 end)
@@ -131,7 +133,6 @@ local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
     if not gWare.Utils.GetSettingValue("enableCloakOnNoclip") then return end
-    print((desiredNoClipState and "Started" or "Leaved") .. " noclip") -- not getting printed, broken?
 
     ply:SetNoDraw(desiredNoClipState)
     ply:DrawWorldModel(not desiredNoClipState)
@@ -181,7 +182,7 @@ end)
 -- darkrpBlackboard
 hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
     if not gWare.Utils.GetSettingValue("disableDarkRPBlackboard") then return end
-    
+
     return false
 end)
 

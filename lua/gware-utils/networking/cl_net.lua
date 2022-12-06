@@ -69,6 +69,8 @@ net.Receive("gWare.Utils.UpdateClient", function(len)
     local settingValue = net.ReadBool()
 
     gWare.Utils.Settings[index].value = settingValue
+
+    hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
 end)
 
 function gWare.Utils.UpdateSetting(index, settingValue)
