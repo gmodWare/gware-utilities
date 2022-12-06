@@ -19,11 +19,6 @@ gWare.Addons = gWare.Addons or {}
 gWare.Addons["gWareUtils"] = true
 
 gWare.Utils.Lang = gWare.Utils.Lang or {}
-
-function gWare.Utils.Lang.Get(phrase)
-    gWare.Lang:GetLangPhrase("gWareUtils", phrase)
-end
-
 gWare.Utils.Dir = "gware-utils"
 
 --[[---------------------------------------------------------
@@ -78,6 +73,10 @@ end
 
 function gWare.Utils.Print(...)
 	MsgC(Color(23, 89, 255), "[gWare Utilities]: ", Color(255, 255, 255), ..., "\n")
+end
+
+function gWare.Utils.Lang.Get(phrase)
+    gWare.Lang:GetLangPhrase("gWareUtils", phrase)
 end
 
 --[[---------------------------------------------------------

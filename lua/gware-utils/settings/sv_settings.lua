@@ -192,7 +192,7 @@ end)
 
 gWare.Utils.AddSetting({
     id = "disableNPCWeaponDrop",
-    name = "NPC Waffen Drop",
+    name = "setting_npc-weapon-drop_name",
     description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = false,
     settingType = "bool"
