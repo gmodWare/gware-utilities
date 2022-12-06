@@ -5,7 +5,7 @@ gWare.Addons = gWare.Addons or {}
 gWare.Addons["gWareUtils"] = true
 
 local rootDir = "gware-utils"
- 
+
 local function AddFile(File, dir)
     local fileSide = string.lower(string.Left(File, 3))
 
@@ -42,10 +42,12 @@ local function IncludeDir(dir)
 end
 
 if (VoidLib) then
+    AddFile("sh_cami.lua", "autorun/")
     IncludeDir(rootDir)
     print("[gWare Utils] Addon Loaded Successfully")
 else
     hook.Add("VoidLib.Loaded", "gWare.Utils.Init.WaitForVoidLib", function ()
+        AddFile("sh_cami.lua", "autorun/")
         IncludeDir(rootDir)
         print("[gWare Utils] Addon Loaded Successfully")
     end)

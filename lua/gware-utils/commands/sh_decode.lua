@@ -8,7 +8,7 @@
 if SERVER then
     util.AddNetworkString("gWare.Commands.decode.ChatMessage")
 
-    hook.Add("PlayerSay", "gWare.Commans.decode", function(ply, chatInput)
+    hook.Add("PlayerSay", "gWare.Commands.decode", function(ply, chatInput)
         local text = chatInput:lower()
 
         if not text:StartWithAny("!decode ", "/decode ") then return end
