@@ -106,7 +106,7 @@ function gWare.Lang:GetAvailableLanguages(addon, callback, failCallback)
     end)
 end
 
-function gWare.Lang:GetLangPhrase(addon, phrase, x)
+function gWare.Lang:GetLangPhrase(addon, phrase)
     local gTable = _G[addon]
     if (!gTable) then return end
 
