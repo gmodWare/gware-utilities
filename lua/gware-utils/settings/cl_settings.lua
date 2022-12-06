@@ -5,7 +5,7 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     // Add hooks or functions in here, if u have to wait for client to get the settingsTable
     cvars.AddChangeCallback("gmod_drawtooleffects", function(convar_name, value_old, value_new)
-        if (not gWare.Utils.GetSettingValue("toolgunEffects") and value_new == "1") then
+        if (gWare.Utils.GetSettingValue("toolgunEffects") and value_new == "1") then
             RunConsoleCommand("gmod_drawtooleffects", "0")
         end
     end)
@@ -17,7 +17,7 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
     end)
 
     hook.Add("InitPostEntity", "gWare.Utils.PreventToolGunEffect", function()
-        if (not gWare.Utils.GetSettingValue("toolgunEffects")) then
+        if (gWare.Utils.GetSettingValue("toolgunEffects")) then
             RunConsoleCommand("gmod_drawtooleffects", "0")
         end
     end)
