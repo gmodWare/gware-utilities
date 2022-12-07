@@ -5,7 +5,13 @@ gWare.Utils.NPCSpawns = gWare.Utils.NPCSpawns or {}
 gWare.Utils.NPCJobs = gWare.Utils.NPCJobs or {}
 
 function gWare.Utils.GetSettingValue(index)
-    return gWare.Utils.Settings[gWare.Utils.IDs[index]].value
+    local id = gWare.Utils.IDs[index]
+
+    if not id then
+        error("Setting id '" .. tostring(index) .. "' does not exist!")
+    end
+
+    return gWare.Utils.Settings[id].value
 end
 
 function gWare.Utils.HasJobAccess(settingID, ply)

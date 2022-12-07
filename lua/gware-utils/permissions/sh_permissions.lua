@@ -46,7 +46,7 @@ hook.Add("SAM.LoadedConfig", "gWare.Utils.SamModules.WaitForClient", function()
 end)
 
 hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
-    if not gWare.Utils.GetSettingValue("disableContextmenu") then return end
+    if not gWare.Utils.GetSettingValue("contextmenu") then return end
 
     if SAM_LOADED then
         if not LocalPlayer():HasPermission("can_access_c-menu") then return false end
@@ -56,7 +56,7 @@ hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
 end)
 
 hook.Add("OnSpawnMenuOpen", "gWare.Utils.SpawnMenuCheck", function()
-    if not gWare.Utils.GetSettingValue("disableSpawnmenu") then return end
+    if not gWare.Utils.GetSettingValue("spawnmenu") then return end
 
     if SAM_LOADED then
         if not LocalPlayer():HasPermission("can_access_spawnmenu") then return false end
