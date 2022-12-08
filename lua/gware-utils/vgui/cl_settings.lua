@@ -1,4 +1,4 @@
-local L = gWare.Utils.Lang.Get
+local L = gWare.Utils.Lang.GetPhrase
 
 
 local PANEL = {}

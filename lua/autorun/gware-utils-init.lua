@@ -71,12 +71,17 @@ end
 	Name: Functions
 -----------------------------------------------------------]]
 
-function gWare.Utils.Print(...)
-	MsgC(Color(23, 89, 255), "[gWare Utilities]: ", Color(255, 255, 255), ..., "\n")
-end
 
-function gWare.Utils.Lang.Get(phrase)
-    gWare.Lang:GetLangPhrase("gWareUtils", phrase)
+function gWare.Utils.Print(str, type)
+	local color = Color(23, 89, 255)
+
+	if type == "error" then
+		color = Color(255, 23, 23)
+	elseif type == "warning" then
+		color = Color(255, 182, 23)
+	end
+
+	MsgC(color, "[gWare Utilities]: ", Color(255, 255, 255), str, "\n")
 end
 
 --[[---------------------------------------------------------

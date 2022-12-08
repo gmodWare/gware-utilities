@@ -22,7 +22,7 @@ if (SERVER) then
             end
         end
 
-        print("Successfully reloaded local languages!")
+        gWare.Utils.Print("Successfully reloaded local languages!")
     end)
 end
 
@@ -36,7 +36,7 @@ if (CLIENT) then
 
         gTable.Lang.Langs = tbl
 
-        print("Received local languages from server!")
+        gWare.Utils.Print("Received local languages from server!")
     end)
 end
 
@@ -48,8 +48,8 @@ function gWare.Lang:Init(addon)
     gTable.Lang.Langs = gTable.Lang.Langs or {}
     gTable.Lang.AvailableLangs = gTable.Lang.AvailableLangs or {}
 
-    function gTable.Lang.GetPhrase(phrase, x)
-        return gWare.Lang:GetLangPhrase(addon, phrase, x)
+    function gTable.Lang.GetPhrase(phrase)
+        return gWare.Lang:GetLangPhrase(addon, phrase)
     end
 
     -- We need to wait until first tick is called because of HTTP API not working yet
@@ -58,7 +58,7 @@ function gWare.Lang:Init(addon)
 
         gWare.Lang:DownloadLanguages(addon, function(failed)
             if (failed) then
-                print("Failed to fetch available languages - using only local languages!")
+                gWare.Utils.Print("Failed to fetch available languages - using only local languages!", "error")
             end
 
             timer.Simple(2, function () -- Wait until files are written
@@ -72,18 +72,17 @@ function gWare.Lang:GetAvailableLanguages(addon, callback, failCallback)
     local gTable = _G["gWare"][addon]
     if (!gTable) then return end
     local url = apiEndPoint
-    print(url)
 
     http.Fetch(url, function (body, size, headers, code)
         -- Success
         if (code != 200 or !body or body == "") then
-            print("Couldn't get available languages - error code " .. code .. " (please try again later)")
+            gWare.Utils.Print("Couldn't get available languages - error code " .. code .. " (please try again later)", "error")
             return
         end
 
         local tbl = util.JSONToTable(body)
         if (!tbl or table.Count(tbl) < 1) then
-            print("Couldn't parse available languages - no languages exist?")
+            gWare.Utils.Print("Couldn't parse available languages - no languages exist?", "error")
             return
         end
 
@@ -102,7 +101,7 @@ function gWare.Lang:GetAvailableLanguages(addon, callback, failCallback)
 
     end, function (err)
         -- Failure
-        print("Couldn't get available languages - error: " .. err)
+        gWare.Utils.Print("Couldn't get available languages - error: " .. err, "error")
         failCallback()
     end)
 end
@@ -113,7 +112,7 @@ function gWare.Lang:GetLangPhrase(addon, phrase)
 
     local langRef = gTable.Config.Language
     if (!langRef) then
-        print("Tried to get langauge phrase, but no selected language! Falling back to English.")
+        gWare.Utils.Print("Tried to get langauge phrase, but no selected language! Falling back to English.", "error")
         gTable.Config.Language = "English"
 
         return phrase
@@ -124,7 +123,7 @@ function gWare.Lang:GetLangPhrase(addon, phrase)
 
     local langs = gTable.Lang.Langs
     if (!langs) then
-        print("Langs table not initialized yet!")
+        gWare.Utils.Print("Langs table not initialized yet!", "error")
         return phrase
     end
     
@@ -135,10 +134,6 @@ function gWare.Lang:GetLangPhrase(addon, phrase)
     elseif (langs["english"] and langs["english"][phrase]) then
         -- If not, fallback to english
         returnVal = langs["english"][phrase]
-    end
-
-    if (x) then
-        returnVal = VoidLib.StringFormat(returnVal, x)
     end
 
     -- If no langauge has the phrase, return the phrase itself
@@ -198,7 +193,7 @@ function gWare.Lang:LoadLocalLanguages(addon, reload)
             continue
         end
 
-        print("Loaded " .. langName .. " local language! (" .. length .. " phrases)")
+        gWare.Utils.Print("Loaded " .. langName .. " local language! (" .. length .. " phrases)")
 
         langs[langName] = tbl
     end
@@ -211,7 +206,7 @@ function gWare.Lang:LoadLocalLanguages(addon, reload)
     if (totalLangs > 0) then
         table.Merge(gTable.Lang.Langs, langs)
 
-        print("Loaded " .. totalLangs .. " local languages!")
+        gWare.Utils.Print("Loaded " .. totalLangs .. " local languages!")
     end
 end
 
@@ -235,19 +230,19 @@ function gWare.Lang:LoadLanguages(addon)
     for _, lang in pairs(gTable.Lang.AvailableLangs or {}) do
         local langExists, langFile = self:IsLanguageInstalled(addon, lang)
         if (!langExists) then
-            print("Tried to load " .. lang .. ", but langauge is not installed!")
+            gWare.Utils.Print("Tried to load " .. lang .. ", but langauge is not installed!", "warning")
             continue
         end
 
         local json = file.Read(langFile)
         if (!json or json == "") then
-            print("Tried to load " .. lang .. ", but langauge file is empty!")
+            gWare.Utils.Print("Tried to load " .. lang .. ", but langauge file is empty!", "warning")
             continue
         end
         
         local tbl = util.JSONToTable(json)
         if (!tbl or table.Count(tbl) < 1) then
-            print("Tried to load " .. lang .. ", but langauge file is corrupt/empty!")
+            gWare.Utils.Print("Tried to load " .. lang .. ", but langauge file is corrupt/empty!", "warning")
             continue
         end
 
@@ -257,11 +252,11 @@ function gWare.Lang:LoadLanguages(addon)
     gWare.Lang:LoadLocalLanguages(addon)
 
     if (table.Count(gTable.Lang.Langs) < 1) then
-        print("Tried to load languages, but none downloaded!")
+        gWare.Utils.Print("Tried to load languages, but none downloaded!", "error")
         return
     end
 
-    print("Loaded " .. table.Count(gTable.Lang.Langs) .. " languages!", "Languages")
+    gWare.Utils.Print("Loaded " .. table.Count(gTable.Lang.Langs) .. " languages!")
 
     gTable.Lang.LanguagesLoaded = true
     hook.Run(addon .. ".Lang.LanguagesLoaded")
@@ -287,7 +282,7 @@ function gWare.Lang:DownloadLanguages(addon, callback)
                 callbacksDone = callbacksDone + 1
             
                 if (code != 200 or !body or body == "") then
-                    print("Couldn't get " .. lang .. " language: " .. code .. " (please try again later)")
+                    gWare.Utils.Print("Couldn't get " .. lang .. " language: " .. code .. " (please try again later)", "error")
                     if (callbacksDone == #languages) then
                         callback()
                     end
@@ -296,7 +291,7 @@ function gWare.Lang:DownloadLanguages(addon, callback)
 
                 local tbl = util.JSONToTable(body)
                 if (!tbl or table.Count(tbl) < 1) then
-                    print("Couldn't parse language " .. lang .. " - incorrect or empty JSON!")
+                    gWare.Utils.Print("Couldn't parse language " .. lang .. " - incorrect or empty JSON!", "error")
                     if (callbacksDone == #languages) then
                         callback()
                     end
@@ -306,11 +301,11 @@ function gWare.Lang:DownloadLanguages(addon, callback)
                 local isLatest, isUpdating = gWare.Lang:IsLatest(addon, lang, body)
                 if (!isLatest) then
                     local operationString = isUpdating and "Updated" or "Downloaded"
-                    print(operationString .. " " .. formattedLangName .. " language")
+                    gWare.Utils.Print(operationString .. " " .. formattedLangName .. " language")
 
                     self:WriteLanguage(addon, lang, body)
                 elseif (gTable.Debug) then
-                    print(formattedLangName .. " language is up to date!", "Languages")
+                    gWare.Utils.Print(formattedLangName .. " language is up to date!", "Languages")
                 end
 
                 if (callbacksDone == #languages) then
@@ -319,7 +314,7 @@ function gWare.Lang:DownloadLanguages(addon, callback)
                 
 
             end, function (err)
-                print("Couldn't download " .. lang .. " language - error: " .. err)
+                gWare.Utils.Print("Couldn't download " .. lang .. " language - error: " .. err, "error")
             end)
         end
 
