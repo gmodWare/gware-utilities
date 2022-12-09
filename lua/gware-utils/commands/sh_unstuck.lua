@@ -67,7 +67,7 @@ if CLIENT then
     net.Receive("gWare.Commands.unstuck.ChatMessage", function()
         local text = net.ReadString()
 
-        gWare.Utils.Print("Unstuck",
+        gWare.Utils.ChatPrint("Unstuck",
             text
         )
     end)

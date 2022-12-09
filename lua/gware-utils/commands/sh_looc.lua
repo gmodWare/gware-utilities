@@ -41,7 +41,7 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
-        gWare.Utils.Print("looc",
+        gWare.Utils.PrChatPrintint("looc",
             sender:Nick() .. ": " .. message
         )
     end)

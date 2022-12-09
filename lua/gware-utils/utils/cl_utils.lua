@@ -12,11 +12,11 @@ end
     Prints a colored message with the given prefix followed
     by the varargs given.
     
-    Example code usage: gWare.Utils.Print("akt", color_white, ply:Nick(), " ", message)
+    Example code usage: gWare.Utils.ChatPrint("akt", color_white, ply:Nick(), " ", message)
     Example chat usage: '/akt isst eine Banane'
     Chat: '[AKT] Menschlich isst eine Banane'
 ]]
-function gWare.Utils.Print(prefix, ...)
+function gWare.Utils.ChatPrint(prefix, ...)
     local text = {...}
 
     local prefixTbl = gWare.Utils.GetCommandPrefix(prefix)

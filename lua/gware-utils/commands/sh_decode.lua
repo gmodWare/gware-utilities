@@ -44,7 +44,7 @@ if CLIENT then
     net.Receive("gWare.Commands.decode.ChatMessage", function()
         local text = net.ReadString()
 
-        gWare.Utils.Print("Entschlüsselt", 
+        gWare.Utils.ChatPrint("Entschlüsselt", 
             text
         )
     end)
