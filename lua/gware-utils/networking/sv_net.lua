@@ -171,9 +171,18 @@ end)
 
 net.Receive("gWare.Utils.VoteSystem.SendVoteToServer", function(len, ply)
     local question = net.ReadString()
-    local valueTBL = net.ReadTable()
+    local value = net.ReadString()
+    local num = net.ReadUInt(3)
 
     print("Read Informations!")
+
+    local valueTBL = {}
+
+    for i = 1, num do
+        valueTBL[#valueTBL + 1] = {
+            name = value,
+        }
+    end
 
     PrintTable(valueTBL)
 

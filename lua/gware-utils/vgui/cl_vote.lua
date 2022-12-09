@@ -67,7 +67,10 @@ function PANEL:Init()
 
         net.Start("gWare.Utils.VoteSystem.SendVoteToServer")
             net.WriteString(questionV)
-            net.WriteTable(valueTbl)
+            for k, v in ipairs(valueTbl) do
+                net.WriteString(v)
+            end
+            net.WriteUInt(#valueTbl, 3)
         net.SendToServer()
 
         print("Sended Netmessage!")
