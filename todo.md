@@ -53,7 +53,7 @@
 - ✅Add English
 
 #### Secure Database
--✅ gWare admin setting check in net receives
+- ✅ gWare admin setting check in net receives
 
 #### Warnings
 - DarkRP required
