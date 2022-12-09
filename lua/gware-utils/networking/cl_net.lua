@@ -102,6 +102,7 @@ end
 net.Receive("gWare.Utils.VoteSystem.SendVoteToAll", function()
     local question = net.ReadString()
     local answersTbl = net.ReadTable()
+    local voted = false
 
     local voteFrame = vgui.Create("VoidUI.Frame")
     voteFrame:SSetSize(350, 450)
@@ -113,11 +114,27 @@ net.Receive("gWare.Utils.VoteSystem.SendVoteToAll", function()
     scrollbar:SDockMargin(5, 5, 5, 5)
 
     for k, v in ipairs(answersTbl) do
+        local number = 0
+
         local answers = scrollbar:Add("VoidUI.Button")
         answers:SSetSize(300, 55)
         answers:Dock(TOP)
         answers:DockMargin(10, 10, 10, 10)
-        answers:SetText(v.value)
+        answers:SetText(v .. "(" .. number .. ")")
+        answers.DoClick = function()
+            net.Start("gWare.Utils.UpdateVoteNum")
+            net.SendToServer()
+
+            net.Receive("gWare.Utils.UpdateVoteNumToClient", function()
+                local newNum = number + net.ReadUInt(1)
+
+                answers:SetText(v .. "(" .. newNum .. ")")
+
+                timer.Create("RemoveFrame", 150, 1, function()
+                    voteFrame:Close()
+                end)
+            end)
+        end
     end
 end)
 

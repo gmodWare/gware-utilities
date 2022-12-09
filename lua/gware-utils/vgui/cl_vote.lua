@@ -32,10 +32,9 @@ function PANEL:Init()
         answer:Dock(TOP)
         answer:DockMargin(10, 10, 10, 10)
         answer:SetValue("Answer " .. i)
-
-        valueTbl[#valueTbl + i] = {
-            answer = answer:GetValue()
-        }
+        answer.OnValueChange = function()
+            valueTbl[#valueTbl + 1] = answer:GetValue()
+        end
     end
 
     local addNewAnswer = scrollbar:Add("VoidUI.Button")
@@ -68,10 +67,7 @@ function PANEL:Init()
 
         net.Start("gWare.Utils.VoteSystem.SendVoteToServer")
             net.WriteString(questionV)
-            net.WriteUInt(#valueTbl, 6)
-            for k, v in ipairs(valueTbl) do
-                net.WriteString(v.answer)
-            end
+            net.WriteTable(valueTbl)
         net.SendToServer()
 
         print("Sended Netmessage!")

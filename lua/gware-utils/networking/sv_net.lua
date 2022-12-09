@@ -16,7 +16,9 @@ local nets = {
     "gWare.Utils.SendNPCSpawnsToClient",
     "gWare.Utils.SendNPCJobsToClient",
     "gWare.Utils.UpdateNPCSpawn",
-    "gWare.Utils.UpdateNPCJobs"
+    "gWare.Utils.UpdateNPCJobs",
+    "gWare.Utils.UpdateVoteNum",
+    "gWare.Utils.UpdateVoteNumToClient"
 }
 
 for k, v in pairs(nets) do
@@ -169,24 +171,15 @@ end)
 
 net.Receive("gWare.Utils.VoteSystem.SendVoteToServer", function(len, ply)
     local question = net.ReadString()
-    local answerAmmount = net.ReadUInt(6)
-    local str = net.ReadString()
+    local valueTBL = net.ReadTable()
 
     print("Read Informations!")
 
-    local answers = {}
+    PrintTable(valueTBL)
 
-    for i = 1, answerAmmount do
-        answers[#answers + i] = {
-            value = str,
-        }
-    end
-
-    PrintTable(answers)
-
-    net.Start("gWare.VoteSystem.SendVoteToAll")
+    net.Start("gWare.Utils.VoteSystem.SendVoteToAll")
         net.WriteString(question)
-        net.WriteTable(answers)
+        net.WriteTable(valueTBL)
     net.Broadcast()
 end)
 
@@ -266,4 +259,12 @@ net.Receive("gWare.Utils.DeleteJobsFromNPC", function(len, ply)
 
     gWare.Utils.UpdateNPCJobs(name, jobCommand)
     gWare.Utils.DeleteNPCJob(name, jobCommand)
+end)
+
+net.Receive("gWare.Utils.UpdateVoteNum", function(len, ply)
+    local value = 1
+
+    net.Start("gWare.Utils.UpdateVoteNumToClient")
+        net.WriteUInt(value, 1)
+    net.Broadcast()
 end)
