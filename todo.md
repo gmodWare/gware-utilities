@@ -58,7 +58,7 @@
 #### Warnings
 - DarkRP required
 - VoidLib required
-- SAM/ULX/sAdmin required (fuck xAdmin!!)
+- ❌SAM/ULX/sAdmin required (fuck xAdmin!!)
 
 ##
 ✅ Done —
