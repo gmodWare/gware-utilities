@@ -2,7 +2,7 @@
 
 ## When done, this will be published on gmod workshop.
 
-#### Settings: (ingame config)
+#### ⚠️Settings: (ingame config)
 - ✅Disable NPC Weapon Drops
 - ✅Disable Toolgun Sounds
 - ✅Disable Toolgun Effects
@@ -19,7 +19,7 @@
 - ✅Disable Voice Panels
 - ✅Disable Q-Menu for Users (4)
 - ✅Disable C-Menu for Users (5)
-- 🔄Language
+- ⚠️Language
 
 #### Additional Permissions:
 - ✅Disable Q-Menu for Users
@@ -40,17 +40,17 @@
 #### Commands:
 - ✅funk
 - ✅vfunk (2)
-- ⚠️decode (3)
+- ✅decode (3)
 - ✅ooc
 - ✅looc
 - ✅akt
-- me (akt but locally)
+- ✅me (akt but locally)
 - ✅makt (medic akt)
 - ✅roll
-- unstuck
+- 🔄unstuck
 
 #### Languages
-- 🔄Add English
+- ✅Add English
 
 #### Secure Database
 -✅ gWare admin setting check in net receives
