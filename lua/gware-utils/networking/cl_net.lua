@@ -102,7 +102,6 @@ end
 net.Receive("gWare.Utils.VoteSystem.SendVoteToAll", function()
     local question = net.ReadString()
     local answersTbl = net.ReadTable()
-    local voted = false
 
     local voteFrame = vgui.Create("VoidUI.Frame")
     voteFrame:SSetSize(350, 450)
@@ -120,7 +119,7 @@ net.Receive("gWare.Utils.VoteSystem.SendVoteToAll", function()
         answers:SSetSize(300, 55)
         answers:Dock(TOP)
         answers:DockMargin(10, 10, 10, 10)
-        answers:SetText(v .. "(" .. number .. ")")
+        answers:SetText(v.name .. "(" .. number .. ")")
         answers.DoClick = function()
             net.Start("gWare.Utils.UpdateVoteNum")
             net.SendToServer()
