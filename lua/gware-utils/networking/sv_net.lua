@@ -110,6 +110,7 @@ function gWare.Utils.UpdateNPCSpawn(name, pos)
     gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
 
     if gWare.Utils.NPCSpawns[name] then
+        gWare.Utils.NPCJobs[name] = nil
         gWare.Utils.NPCSpawns[name] = nil
         return
     end
@@ -134,27 +135,27 @@ function gWare.Utils.UpdateNPCJobs(name, jobCommand)
 end
 
 net.Receive("gWare.Utils.UpdateServer", function(len, ply)
-    local index = net.ReadUInt(5)
-    local settingValue = net.ReadBool()
-
     if SAM_LOADED then
         if not ply:HasPermission("can_change_gware_settings") then return end
     else
         if not CAMI.PlayerHasAccess(ply, "can_change_gware_settings") then return end
     end
+
+    local index = net.ReadUInt(5)
+    local settingValue = net.ReadBool()
 
     gWare.Utils.ChangeSetting(index, settingValue)
 end)
 
 net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
-    local jobCommand = net.ReadString()
-    local settingID = net.ReadString()
-
     if SAM_LOADED then
         if not ply:HasPermission("can_change_gware_settings") then return end
     else
         if not CAMI.PlayerHasAccess(ply, "can_change_gware_settings") then return end
     end
+
+    local jobCommand = net.ReadString()
+    local settingID = net.ReadString()
 
     gWare.Utils.JobAccess[settingID] = gWare.Utils.JobAccess[settingID] or {}
 
@@ -207,27 +208,27 @@ net.Receive("gWare.Utils.JobSetter.SetJob", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.AddNPC", function(len, ply)
-    local name = net.ReadString()
-    local pos = net.ReadVector()
-
     if SAM_LOADED then
         if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
     else
         if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
     end
+
+    local name = net.ReadString()
+    local pos = net.ReadVector()
 
     gWare.Utils.UpdateNPCSpawn(name, pos)
     gWare.Utils.InsertNPCSpawn(name, pos)
 end)
 
 net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
-    local name = net.ReadString()
-
     if SAM_LOADED then
         if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
     else
         if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
     end
+
+    local name = net.ReadString()
 
     gWare.Utils.UpdateNPCSpawn(name, Vector(zero))
     gWare.Utils.DeleteAllNPCJobs(name)
@@ -235,16 +236,16 @@ net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.AddJobsToNPC", function(len, ply)
-    local name = net.ReadString()
-    local jobCommand = net.ReadString()
-    local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
-    local pos = gWare.Utils.NPCSpawns[name]
-
     if SAM_LOADED then
         if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
     else
         if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
     end
+
+    local name = net.ReadString()
+    local jobCommand = net.ReadString()
+    local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
+    local pos = gWare.Utils.NPCSpawns[name]
 
     DarkRP.removeTeamSpawnPos(index)
     DarkRP.addTeamSpawnPos(index, pos)
@@ -254,15 +255,15 @@ net.Receive("gWare.Utils.AddJobsToNPC", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.DeleteJobsFromNPC", function(len, ply)
-    local name = net.ReadString()
-    local jobCommand = net.ReadString()
-    local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
-
     if SAM_LOADED then
         if not ply:HasPermission("can_set_jobs-spawns_gware_tool") then return end
     else
         if not CAMI.PlayerHasAccess(ply, "can_set_jobs-spawns_gware_tool") then return end
     end
+
+    local name = net.ReadString()
+    local jobCommand = net.ReadString()
+    local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
 
     DarkRP.removeTeamSpawnPos(index)
 
