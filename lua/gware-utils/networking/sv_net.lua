@@ -1,9 +1,9 @@
 util.AddNetworkString("gWare.Utils.VoteSystem.SendVoteToAll")
-util.AddNetworkString("gWare.Utils.UpdateClient")
 util.AddNetworkString("gWare.Utils.ClientReady")
 util.AddNetworkString("gWare.Utils.SendSettingToClient")
 util.AddNetworkString("gWare.Utils.SendJobsToClient")
-util.AddNetworkString("gWare.Utils.UpdateServer")
+util.AddNetworkString("gWare.Utils.UpdateServerBool")
+util.AddNetworkString("gWare.Utils.UpdateServerString")
 util.AddNetworkString("gWare.Utils.ChangeJobAccess")
 util.AddNetworkString("gWare.Utils.VoteSystem.SendVoteToServer")
 util.AddNetworkString("gWare.Utils.JobSetter.SetJob")
@@ -129,11 +129,20 @@ function gWare.Utils.UpdateNPCJobs(name, jobCommand)
     gWare.Utils.NPCJobs[name][jobCommand] = true
 end
 
-net.Receive("gWare.Utils.UpdateServer", function(len, ply)
-    if not ply:HasGWarePermission("can_change_gware_settings") then return end
+net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
+    //if not ply:HasGWarePermission("can_change_gware_settings") then return end
 
     local index = net.ReadUInt(5)
     local settingValue = net.ReadBool()
+
+    gWare.Utils.ChangeSetting(index, settingValue)
+end)
+
+net.Receive("gWare.Utils.UpdateServerString", function(len, ply)
+    //if not ply:HasGWarePermission("can_change_gware_settings") then return end
+
+    local index = net.ReadUInt(5)
+    local settingValue = net.ReadString()
 
     gWare.Utils.ChangeSetting(index, settingValue)
 end)

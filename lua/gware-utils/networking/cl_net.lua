@@ -64,20 +64,26 @@ hook.Add("InitPostEntity", "gWare.Utils.ClientReady", function()
     net.SendToServer()
 end)
 
-net.Receive("gWare.Utils.UpdateClient", function(len)
-    local index = net.ReadUInt(5)
-    local settingValue = net.ReadBool()
+function gWare.Utils.UpdateSettingBool(index, settingValue)
+    net.Start("gWare.Utils.UpdateServerBool")
+        net.WriteUInt(index, 5)
+        net.WriteBool(settingValue)
+    net.SendToServer()
 
     gWare.Utils.Settings[index].value = settingValue
 
     hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
-end)
+end
 
-function gWare.Utils.UpdateSetting(index, settingValue)
-    net.Start("gWare.Utils.UpdateServer")
+function gWare.Utils.UpdateSettingString(index, settingValue)
+    net.Start("gWare.Utils.UpdateServerString")
         net.WriteUInt(index, 5)
-        net.WriteBool(settingValue)
+        net.WriteString(settingValue)
     net.SendToServer()
+
+    gWare.Utils.Settings[index].value = settingValue
+
+    hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
 end
 
 function gWare.Utils.ChangeJobAccess(jobCommand, settingID)
