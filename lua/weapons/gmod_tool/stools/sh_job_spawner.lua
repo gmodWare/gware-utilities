@@ -247,7 +247,6 @@ function TOOL:Think()
     if SERVER then return end
 
     if not npcSpawns then
-        print("npcSpawns is nil")
         self:Deploy()
     end
 
@@ -272,11 +271,8 @@ end
 
 function TOOL:Holster()
     if SERVER then return end
-    if not IsFirstTimePredicted() then return end
+    if not IsValid(self.GhostHuman) then return end
 
-    if IsValid(self.GhostHuman) then
-        self.GhostHuman:Remove()
-    end
-
+    self.GhostHuman:Remove()
     RemoveClientEnts()
 end
