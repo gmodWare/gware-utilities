@@ -8,6 +8,8 @@ function PANEL:Init()
     self.bg:Dock(FILL)
     self.bg:SDockMargin(10, 10, 10, 10)
 
+    local this = self
+
     local scrollbar = self.bg:Add("VoidUI.ScrollPanel")
     scrollbar:Dock(FILL)
     scrollbar:SDockMargin(5, 5, 5, 5)
@@ -73,6 +75,26 @@ function PANEL:Init()
             end
 
             option.input:SSetWide(150)
+        end
+
+        if data.settingType == "dropdown" then
+            option.input = option:Add("VoidUI.Dropdown")
+            option.input:Dock(RIGHT)
+            option.input:MarginRight(10)
+            option.input:SSetWide(120)
+
+            for i, lang in ipairs(gWare.Utils.Lang.AvailableLangs) do
+                local selected = lang:lower() == gWare.Utils.Config.Language:lower()
+                option.input:AddChoice(lang, lang:lower(), selected)
+            end
+
+            option.input.OnSelect = function(self, index, value, data)
+                gWare.Utils.Config.Language = value
+
+                -- todo add new function to update strings
+                --gWare.Utils.UpdateSetting(index, bool)
+                this:GetParent():Close()
+            end
         end
 
         if option.input then

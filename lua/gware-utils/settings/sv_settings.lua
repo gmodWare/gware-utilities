@@ -189,6 +189,14 @@ end)
 ///////////////////////////
 
 gWare.Utils.AddSetting({
+    id = "language",
+    name = "Toolgun Geräusche",
+    description = "Waffendrop von NPCs deaktivieren?",
+    defaultValue = "english",
+    settingType = "dropdown"
+})
+
+gWare.Utils.AddSetting({
     id = "npc-weapon-drop",
     name = "Toolgun Geräusche",
     description = "Waffendrop von NPCs deaktivieren?",

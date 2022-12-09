@@ -1,6 +1,7 @@
 ///////////////////////////
 //       SETTINGS        //
 ///////////////////////////
+
 hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     // Add hooks or functions in here, if u have to wait for client to get the settingsTable
@@ -39,5 +40,4 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
         return false
     end)
-
 end)
