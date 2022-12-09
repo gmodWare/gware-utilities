@@ -171,6 +171,7 @@ net.Receive("gWare.Utils.UpdateNPCSpawn", function(len)
     gWare.Utils.NPCJobs[name] = gWare.Utils.NPCJobs[name] or {}
 
     if gWare.Utils.NPCSpawns[name] then
+        gWare.Utils.NPCJobs[name] = nil
         gWare.Utils.NPCSpawns[name] = nil
         return
     end
