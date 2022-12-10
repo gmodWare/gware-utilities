@@ -214,6 +214,15 @@ net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
 
     local name = net.ReadString()
 
+    gWare.Utils.GetNPCJobs(name, function(tblData)
+        for _, jobData in ipairs(tblData) do
+            local jobCommand = jobData.job_command
+            local index = gWare.Utils.GetJobIndexByCommand(jobCommand)
+
+            DarkRP.removeTeamSpawnPos(index)
+        end
+    end)
+
     gWare.Utils.UpdateNPCSpawn(name, Vector(zero))
     gWare.Utils.DeleteAllNPCJobs(name)
     gWare.Utils.DeleteNPCSpawn(name)
