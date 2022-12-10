@@ -26,7 +26,7 @@ function PANEL:Init()
 
             function option.input.OnSelect(panel, value, data)
                 local bool = gWare.Utils.IntToBool(value)
-                gWare.Utils.UpdateSetting(index, bool)
+                gWare.Utils.UpdateSettingBool(index, bool)
             end
 
             option.input:Dock(RIGHT)
@@ -92,7 +92,7 @@ function PANEL:Init()
                 gWare.Utils.Config.Language = value
 
                 -- todo add new function to update strings
-                --gWare.Utils.UpdateSetting(index, bool)
+                gWare.Utils.UpdateSettingString(index, value) // TODO : dont know what the right value is
                 this:GetParent():Close()
             end
         end
