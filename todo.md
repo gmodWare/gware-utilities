@@ -36,6 +36,7 @@
 #### Sonstiges:
 - ❌Third Person
 - 🔄Simple Voting System
+- Custom Prefix for Commands
 
 #### Commands:
 - ✅funk
