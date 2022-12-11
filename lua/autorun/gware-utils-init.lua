@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------
-	Name: Setup
+    Name: Setup
 -----------------------------------------------------------]]
 gWare = gWare or {}
 gWare.Utils = gWare.Utils or {}
@@ -22,73 +22,79 @@ gWare.Utils.Lang = gWare.Utils.Lang or {}
 gWare.Utils.Dir = "gware-utils"
 
 --[[---------------------------------------------------------
-	Name: Directory Walker
+    Name: Directory Walker
 -----------------------------------------------------------]]
- 
+
 function gWare.Utils.Load(dir)
-	local files = file.Find(dir.. "/".. "*", "LUA")
+    local files = file.Find(dir.. "/".. "*", "LUA")
 
-	for k, filename in pairs(files) do
-		if filename:StartWith("cl") then
+    for k, filename in pairs(files) do
+        if filename:StartWith("cl") then
 
-			AddCSLuaFile(dir.. "/".. filename)
+            AddCSLuaFile(dir.. "/".. filename)
 
-			if CLIENT then
-				local load = include(dir .. "/" .. filename)
-				if load then load() end
-			end
-		end
+            if CLIENT then
+                local load = include(dir .. "/" .. filename)
+                if load then load() end
+            end
+        end
 
-		if filename:StartWith("sv") then
-			if SERVER then
-				local load = include(dir .. "/" .. filename)
-				if load then load() end
-			end
-		end
+        if filename:StartWith("sv") then
+            if SERVER then
+                local load = include(dir .. "/" .. filename)
+                if load then load() end
+            end
+        end
 
-		if filename:StartWith("sh") then
-			AddCSLuaFile(dir .. "/" .. filename)
+        if filename:StartWith("sh") then
+            AddCSLuaFile(dir .. "/" .. filename)
 
-			local load = include(dir .. "/".. filename)
-			if load then load() end
-		end
-	end
+            local load = include(dir .. "/".. filename)
+            if load then load() end
+        end
+    end
 end
 
 function gWare.Utils.AddCSDir(dir)
-	local files = file.Find(dir .. "/".. "*", "LUA")
+    local files = file.Find(dir .. "/".. "*", "LUA")
 
-	for k, v in pairs(files) do
-		AddCSLuaFile(dir.. "/".. v)
+    for k, v in pairs(files) do
+        AddCSLuaFile(dir.. "/".. v)
 
-		if CLIENT then
-			include(dir.. "/".. v)
-		end
-	end
+        if CLIENT then
+            include(dir.. "/".. v)
+        end
+    end
 end
 
 --[[---------------------------------------------------------
-	Name: Functions
+    Name: Functions
 -----------------------------------------------------------]]
 
 
 function gWare.Utils.Print(str, type)
-	local color = Color(23, 89, 255)
+    local color = Color(23, 89, 255)
 
-	if type == "error" then
-		color = Color(255, 23, 23)
-	elseif type == "warning" then
-		color = Color(255, 182, 23)
-	end
+    if type == "error" then
+        color = Color(255, 23, 23)
+    elseif type == "warning" then
+        color = Color(255, 182, 23)
+    end
 
-	MsgC(color, "[gWare Utilities]: ", Color(255, 255, 255), str, "\n")
+    MsgC(color, "[gWare Utilities]: ", Color(255, 255, 255), str, "\n")
 end
 
 --[[---------------------------------------------------------
-	Name: Loading
+    Name: Loading
 -----------------------------------------------------------]]
 
 function gWare.Utils.LoadAll()
+    -- check dependecy
+    if (not DarkRP) then
+        gWare.Utils.Print("DarkRP is required to run gWare Utilities.", "error")
+        return
+    end
+
     -- load libraries first
     gWare.Utils.Load(gWare.Utils.Dir .. "/libs")
 

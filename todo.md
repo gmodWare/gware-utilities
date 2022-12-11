@@ -33,9 +33,10 @@
 #### Entities:
 - ❌Information Panels
 
-#### Sonstiges:
+#### Extra Stuff:
 - ❌Third Person
 - 🔄Simple Voting System
+- Custom Prefix for Commands
 
 #### Commands:
 - ✅funk
@@ -56,8 +57,8 @@
 - ✅ gWare admin setting check in net receives
 
 #### Warnings
-- DarkRP required
-- VoidLib required
+- ✅DarkRP required
+- ✅VoidLib required
 - ❌SAM/ULX/sAdmin required (fuck xAdmin!!)
 
 ##

@@ -12,7 +12,7 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
         gWare.Utils.IDs[settingID] = i
     end
 
-    hook.Run("gWare.Utils.ClientReady")
+    hook.Run("gWare.Utils.ClientReady", LocalPlayer())
 end)
 
 net.Receive("gWare.Utils.SendJobsToClient", function(len)
