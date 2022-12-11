@@ -57,7 +57,7 @@ function gWare.Utils.SendSettingToClient(len, ply)
             net.WriteString(settingsData.id)
             net.WriteString(settingsData.name)
             net.WriteString(settingsData.description)
-            net.WriteBool(settingsData.value)
+            net.WriteType(settingsData.value)
             net.WriteString(settingsData.settingType)
         end
     net.Send(ply)

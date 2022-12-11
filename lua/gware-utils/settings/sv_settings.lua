@@ -33,9 +33,11 @@ end
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
     gWare.Utils.GetAllSettings(function (tblData)
         for index, settings in ipairs(tblData) do
-            local settingValue = gWare.Utils.IntToBool(tonumber(settings.setting_value))
-
-            gWare.Utils.Settings[index].value = settingValue
+            if settings.setting_value == "0" or settings.setting_value == "1" then
+                gWare.Utils.Settings[index].value = gWare.Utils.IntToBool(tonumber(settings.setting_value))
+            else
+                gWare.Utils.Settings[index].value = settings.setting_value
+            end
         end
     end)
 end)
@@ -188,7 +190,7 @@ end)
 
 gWare.Utils.AddSetting({
     id = "language",
-    name = "Toolgun Geräusche",
+    name = "Sprache",
     description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = "english",
     settingType = "dropdown"
@@ -196,7 +198,7 @@ gWare.Utils.AddSetting({
 
 gWare.Utils.AddSetting({
     id = "npc-weapon-drop",
-    name = "Toolgun Geräusche",
+    name = "Waffen Drop von NPCs",
     description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = false,
     settingType = "bool"
