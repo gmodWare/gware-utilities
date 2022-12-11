@@ -81,13 +81,17 @@ function gWare.Utils.SendJobsToClient(len, ply)
     net.Send(ply)
 end
 
+net.Receive("gWare.Utils.ClientReady", function(len, ply)
+    hook.Run("gWare.Utils.ClientReady", ply)
+end)
+
 function gWare.Utils.SendEverythingToClient(len, ply)
     gWare.Utils.SendSettingToClient(len, ply)
     gWare.Utils.SendJobsToClient(len, ply)
     gWare.Utils.SendNPCSpawnsAndJobsToClient(len, ply)
 end
 
-net.Receive("gWare.Utils.ClientReady", gWare.Utils.SendEverythingToClient)
+hook.Add("gWare.Utils.ClientReady", "gWare.Utils.SendEverythingToClient", gWare.Utils.SendEverythingToClient)
 
 function gWare.Utils.UpdateClient(index, settingValue)
     net.Start("gWare.Utils.UpdateClient")
