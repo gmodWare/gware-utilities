@@ -89,12 +89,6 @@ end
 -----------------------------------------------------------]]
 
 function gWare.Utils.LoadAll()
-    -- check dependecy
-    if (not DarkRP) then
-        gWare.Utils.Print("DarkRP is required to run gWare Utilities.", "error")
-        return
-    end
-
     -- load libraries first
     gWare.Utils.Load(gWare.Utils.Dir .. "/libs")
 
@@ -119,12 +113,18 @@ function gWare.Utils.LoadAll()
     gWare.Utils.Loaded = true
 end
 
-if not gWare.Utils.Loaded then
-    if VoidLib then
-        gWare.Utils.LoadAll()
-    else
-        hook.Add("VoidLib.Loaded", "gWare.Init.WaitForVoidLib", function ()
-            gWare.Utils.LoadAll()
-        end)
+hook.Add("Initialize", "gWare.Init", function()
+    if (not DarkRP) then
+        gWare.Utils.Print("DarkRP is required to run gWare Utilities.", "error")
+        return
     end
-end
+    if not gWare.Utils.Loaded then
+        if VoidLib then
+            gWare.Utils.LoadAll()
+        else
+            hook.Add("VoidLib.Loaded", "gWare.Init.WaitForVoidLib", function ()
+                gWare.Utils.LoadAll()
+            end)
+        end
+    end
+end)
