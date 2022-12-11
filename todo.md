@@ -33,7 +33,7 @@
 #### Entities:
 - ❌Information Panels
 
-#### Sonstiges:
+#### Extra Stuff:
 - ❌Third Person
 - 🔄Simple Voting System
 - Custom Prefix for Commands
