@@ -14,8 +14,9 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.unstuck", function(ply, chatInput)
         local text = chatInput:lower()
 
-        if text ~= "/unstuck" and text ~= "!unstuck" then return end
+        if text != "/unstuck" and text != "!unstuck" then return end
 
+        -- todo: refactor this command, its quite stupid to network the error message
         if (delay[ply] or 0) > CurTime() then
             net.Start("gWare.Commands.unstuck.ChatMessage")
                 net.WriteString("You are currently on cooldown for this command.")

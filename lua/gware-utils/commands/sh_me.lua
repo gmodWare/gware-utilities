@@ -14,6 +14,7 @@ if SERVER then
         local message = text:ReplacePrefix("me")
 
         if message:Trim() == "" then
+            -- todo: translate this
             VoidLib.Notify(sender, "Invalider me", "Du kannst keine leere Nachricht senden!", VoidUI.Colors.Red, 5)
             return
         end

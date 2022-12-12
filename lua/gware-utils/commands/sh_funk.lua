@@ -21,7 +21,8 @@ if SERVER then
         local namePart = start:ReplacePrefix("funk") 
         local message = args[2]:sub(2)
 
-        if not message then 
+        if not message then
+            -- todo: translate this
             VoidLib.Notify(ply, "Invalider Funk", "Funk Beispiel: /funk Commander Rex* Wo befinden Sie sich?", VoidUI.Colors.Red, 10)
             return
         end

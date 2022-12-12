@@ -26,6 +26,7 @@ if SERVER then
         end
 
         if message:Trim() == "" then
+            -- todo: translate this
             VoidLib.Notify(ply, "Invalider OOC", "Du kannst keinen Leere Nachricht senden!", VoidUI.Colors.Red, 5)
             return
         end

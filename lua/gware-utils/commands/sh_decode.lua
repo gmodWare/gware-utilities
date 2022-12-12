@@ -22,6 +22,7 @@ if SERVER then
         local encrypted = text:ReplacePrefix("decode")
 
         if not encrypted then
+            -- todo: translate this
             VoidLib.Notify(ply, "Invalider Decode", "Decode Beispiel: /decode 20 68 61 6c 6c 6f", VoidUI.Colors.Red, 10)
             return
         end
