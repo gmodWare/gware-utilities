@@ -56,7 +56,7 @@
 - ✅Translate Settings
 - Translate Commands
 - Translate Command Prefix
-- Translate VoidLib Notifications
+- 🔄Translate VoidLib Notifications
 - Translate Vote
 
 #### Security

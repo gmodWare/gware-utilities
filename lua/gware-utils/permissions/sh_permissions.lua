@@ -1,25 +1,3 @@
-function gWare.Utils.AddPermission(type, name, description)
-    if type == "CAMI" then
-        CAMI.RegisterPrivilege({
-            Name = name,
-            MinAccess = "superadmin",
-            Description = description,
-        })
-    elseif type == "SAM" then
-        CAMI.UnregisterPrivilege("gware_"..name)
-        sam.permissions.add(name, "gmodWare", "superadmin")
-    end
-end
-
-local function AddPermissionsToSAM()
-    gWare.Utils.AddPermission("SAM", "open_context_menu")
-    gWare.Utils.AddPermission("SAM", "open_spawnmenu")
-    gWare.Utils.AddPermission("SAM", "create_vote")
-    gWare.Utils.AddPermission("SAM", "edit_settings")
-    gWare.Utils.AddPermission("SAM", "set_job_spawns")
-end
-
-
 ////////////////
 // META TABLE //
 ////////////////
@@ -35,6 +13,36 @@ function meta:HasGWarePermission(name)
 end
 
 
+//////////////////////
+// Global Functions //
+//////////////////////
+
+function gWare.Utils.AddPermission(type, name, description)
+    if type == "CAMI" then
+        CAMI.RegisterPrivilege({
+            Name = name,
+            MinAccess = "superadmin",
+            Description = description,
+        })
+    elseif type == "SAM" then
+        CAMI.UnregisterPrivilege("gware_"..name)
+        sam.permissions.add(name, "gmodWare", "superadmin")
+    end
+end
+
+
+//////////////////////////
+// Register Permissions //
+//////////////////////////
+
+local function AddPermissionsToSAM()
+    gWare.Utils.AddPermission("SAM", "open_context_menu")
+    gWare.Utils.AddPermission("SAM", "open_spawnmenu")
+    gWare.Utils.AddPermission("SAM", "create_vote")
+    gWare.Utils.AddPermission("SAM", "edit_settings")
+    gWare.Utils.AddPermission("SAM", "set_job_spawns")
+end
+
 gWare.Utils.AddPermission("CAMI", "gware_open_context_menu", "Can the player open the c-menu?")
 gWare.Utils.AddPermission("CAMI", "gware_open_spawnmenu", "Can the player open the spawnmenu?")
 gWare.Utils.AddPermission("CAMI", "gware_create_vote", "Can the player open the vote menu?")
@@ -48,6 +56,3 @@ else
         AddPermissionsToSAM()
     end)
 end
-
-
-

@@ -11,6 +11,8 @@
     Example Encrypted Chat: [Verschlüsselter Funk] *1835 Menschlich an 5125 Ryzen* 0f 12 3e 2d e3 f1 9d 5a 8b 4d 90
 ]]
 
+local L = gWare.Utils.Lang.GetPhrase
+
 if SERVER then
     util.AddNetworkString("gWare.Commands.vFunk.ChatMessage")
 
@@ -20,8 +22,7 @@ if SERVER then
         if not text:StartWithAny("/vfunk ", "!vfunk ") then return end
 
         if not gWare.Utils.HasJobAccess("encrypted-comms", ply) then
-            -- todo: translate this
-            VoidLib.Notify(ply, "error", "You cannot use encrypted comms!", VoidUI.Colors.Red, 4)
+            VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
             return 
         end
 
@@ -32,8 +33,7 @@ if SERVER then
         local message = args[2]
 
         if not message then 
-            -- todo: translate this
-            VoidLib.Notify(ply, "Invalider Funk", "Funk Beispiel: /funk Commander Rex* Wo befinden Sie sich?", VoidUI.Colors.Red, 10)
+            VoidLib.Notify(ply, L"notify_invalid-encrypted-ecomms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 10)
             return
         end
 

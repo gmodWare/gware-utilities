@@ -5,6 +5,8 @@
     Example Chat: [Entschlüsselt] Antritt des Dienstes.
 ]]
 
+local L = gWare.Utils.Lang.GetPhrase
+
 if SERVER then
     util.AddNetworkString("gWare.Commands.decode.ChatMessage")
 
@@ -14,16 +16,14 @@ if SERVER then
         if not text:StartWithAny("!decode ", "/decode ") then return end
 
         if not gWare.Utils.HasJobAccess("decode", ply) then
-            -- todo: translate this
-            VoidLib.Notify(ply, "error", "You cannot deocode encrypted comms!", VoidUI.Colors.Red, 4)
+            VoidLib.Notify(ply, L"notify_decode_name", L"notify_decode_desc", VoidUI.Colors.Red, 4)
             return 
         end
 
         local encrypted = text:ReplacePrefix("decode")
 
         if not encrypted then
-            -- todo: translate this
-            VoidLib.Notify(ply, "Invalider Decode", "Decode Beispiel: /decode 20 68 61 6c 6c 6f", VoidUI.Colors.Red, 10)
+            VoidLib.Notify(ply, L"notify_invalid-decode_name", L"notify_invalid-decode_name", VoidUI.Colors.Red, 10)
             return
         end
 
@@ -49,6 +49,7 @@ if CLIENT then
     net.Receive("gWare.Commands.decode.ChatMessage", function()
         local text = net.ReadString()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("Entschlüsselt", 
             text
         )

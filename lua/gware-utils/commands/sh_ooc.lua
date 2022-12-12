@@ -10,6 +10,9 @@
 -- TODO: Fix Bug: When using '//' there is one additional space after the name which shouldnt be there
 -- example Chat : '[OOC] Menschlich:  Hallo'
 
+
+local L = gWare.Utils.Lang.GetPhrase
+
 if SERVER then
     util.AddNetworkString("gWare.Commands.OOC.ChatMessage")
 
@@ -26,8 +29,7 @@ if SERVER then
         end
 
         if message:Trim() == "" then
-            -- todo: translate this
-            VoidLib.Notify(ply, "Invalider OOC", "Du kannst keinen Leere Nachricht senden!", VoidUI.Colors.Red, 5)
+            VoidLib.Notify(ply, L"notify_empty_name", L"notify_empty_desc", VoidUI.Colors.Red, 5)
             return
         end
 

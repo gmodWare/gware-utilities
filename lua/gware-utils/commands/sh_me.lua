@@ -5,6 +5,8 @@
     Example Chat: [me] 501st CMD Menschlich: Lol der ist einfach umgefallen xD
 ]]
 
+local L = gWare.Utils.Lang.GetPhrase
+
 if SERVER then
     util.AddNetworkString("gWare.Commands.Me.ChatMessage")
 
@@ -14,8 +16,7 @@ if SERVER then
         local message = text:ReplacePrefix("me")
 
         if message:Trim() == "" then
-            -- todo: translate this
-            VoidLib.Notify(sender, "Invalider me", "Du kannst keine leere Nachricht senden!", VoidUI.Colors.Red, 5)
+            VoidLib.Notify(sender, L"notify_empty_name", L"notify_empty_desc", VoidUI.Colors.Red, 5)
             return
         end
 
@@ -42,6 +43,7 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("me",
             sender:Nick() .. " " .. message
         )
