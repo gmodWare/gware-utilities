@@ -18,6 +18,7 @@ util.AddNetworkString("gWare.Utils.UpdateNPCSpawn")
 util.AddNetworkString("gWare.Utils.UpdateNPCJobs")
 util.AddNetworkString("gWare.Utils.UpdateVoteNum")
 util.AddNetworkString("gWare.Utils.UpdateVoteNumToClient")
+util.AddNetworkString("gWare.Utils.SendVoteToServer")
 
 
 function gWare.Utils.SendNPCSpawnsAndJobsToClient(ply)

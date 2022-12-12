@@ -105,43 +105,16 @@ local function sc(x)
     return x / 1080 * ScrH()
 end
 
-net.Receive("gWare.Utils.VoteSystem.SendVoteToAll", function()
-    local question = net.ReadString()
-    local answersTbl = net.ReadTable()
+function gWare.Utils.SendVoteToServer(voteTable)
+    local count = #voteTable
 
-    local voteFrame = vgui.Create("VoidUI.Frame")
-    voteFrame:SSetSize(350, 450)
-    voteFrame:SetPos(sc(50), sc(150))
-    voteFrame:SetTitle(question)
-
-    local scrollbar = voteFrame:Add("VoidUI.ScrollPanel")
-    scrollbar:Dock(FILL)
-    scrollbar:SDockMargin(5, 5, 5, 5)
-
-    for k, v in ipairs(answersTbl) do
-        local number = 0
-
-        local answers = scrollbar:Add("VoidUI.Button")
-        answers:SSetSize(300, 55)
-        answers:Dock(TOP)
-        answers:DockMargin(10, 10, 10, 10)
-        answers:SetText(v.name .. "(" .. number .. ")")
-        answers.DoClick = function()
-            net.Start("gWare.Utils.UpdateVoteNum")
-            net.SendToServer()
-
-            net.Receive("gWare.Utils.UpdateVoteNumToClient", function()
-                local newNum = number + net.ReadUInt(1)
-
-                answers:SetText(v .. "(" .. newNum .. ")")
-
-                timer.Create("RemoveFrame", 150, 1, function()
-                    voteFrame:Close()
-                end)
-            end)
+    net.Start("gWare.Utils.SendVoteToServer")
+        net.WriteUInt(count, 3)
+        for _, voteValue in ipairs(voteTable) do
+            net.WriteString(voteValue)
         end
-    end
-end)
+    net.SendToServer()
+end
 
 function gWare.Utils.AddNPC(npcName, npcPos)
     net.Start("gWare.Utils.AddNPC")
