@@ -67,6 +67,9 @@
 - ✅VoidLib required
 - ❌SAM/ULX/sAdmin required (fuck xAdmin!!)
 
+#### Roadmap (Features aimed for after launch)
+- Ability to disable commands in settings (as staff member)
+
 ##
 ✅ Done —
 🔄 Work in Progress —
