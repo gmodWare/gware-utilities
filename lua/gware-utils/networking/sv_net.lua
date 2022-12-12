@@ -135,7 +135,7 @@ function gWare.Utils.UpdateNPCJobs(name, jobCommand)
 end
 
 net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
-    if not ply:HasGWarePermission("can_change_gware_settings") then return end
+    if not ply:HasGWarePermission("edit_settings") then return end
 
     local index = net.ReadUInt(5)
     local settingValue = net.ReadBool()
@@ -144,7 +144,7 @@ net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.UpdateServerString", function(len, ply)
-    if not ply:HasGWarePermission("can_change_gware_settings") then return end
+    if not ply:HasGWarePermission("edit_settings") then return end
 
     local index = net.ReadUInt(5)
     local settingValue = net.ReadString()
@@ -153,7 +153,7 @@ net.Receive("gWare.Utils.UpdateServerString", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
-    if not ply:HasGWarePermission("can_change_gware_settings") then return end
+    if not ply:HasGWarePermission("edit_settings") then return end
 
     local jobCommand = net.ReadString()
     local settingID = net.ReadString()
@@ -197,15 +197,14 @@ net.Receive("gWare.Utils.JobSetter.SetJob", function(len, ply)
     local job = net.ReadString()
     local ent = net.ReadEntity()
 
-    -- TODO: refactor this name wtf?!
-    if not ply:HasGWarePermission("can_set_jobs-spawns_gware_tool") then return end
+    if not ply:HasGWarePermission("set_job_spawns") then return end
 
     local setTeam = target_ply.changeTeam or target_ply.SetTeam
     setTeam(ent, job, true)
 end)
 
 net.Receive("gWare.Utils.AddNPC", function(len, ply)
-    if not ply:HasGWarePermission("can_set_jobs-spawns_gware_tool") then return end
+    if not ply:HasGWarePermission("set_job_spawns") then return end
 
     local name = net.ReadString()
     local pos = net.ReadVector()
@@ -215,7 +214,7 @@ net.Receive("gWare.Utils.AddNPC", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
-    if not ply:HasGWarePermission("can_set_jobs-spawns_gware_tool") then return end
+    if not ply:HasGWarePermission("set_job_spawns") then return end
 
     local name = net.ReadString()
 
@@ -234,7 +233,7 @@ net.Receive("gWare.Utils.DeleteNPC", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.AddJobsToNPC", function(len, ply)
-    if not ply:HasGWarePermission("can_set_jobs-spawns_gware_tool") then return end
+    if not ply:HasGWarePermission("set_job_spawns") then return end
 
     local name = net.ReadString()
     local jobCommand = net.ReadString()
@@ -249,7 +248,7 @@ net.Receive("gWare.Utils.AddJobsToNPC", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.DeleteJobsFromNPC", function(len, ply)
-    if not ply:HasGWarePermission("can_set_jobs-spawns_gware_tool") then return end
+    if not ply:HasGWarePermission("set_job_spawns") then return end
 
     local name = net.ReadString()
     local jobCommand = net.ReadString()

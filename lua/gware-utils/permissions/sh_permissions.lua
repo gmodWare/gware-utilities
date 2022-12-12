@@ -1,22 +1,22 @@
 function gWare.Utils.AddPermission(type, name, description)
     if type == "CAMI" then
         CAMI.RegisterPrivilege({
-            Name = "can_access_c-menu",
+            Name = "open_context_menu",
             MinAccess = "superadmin",
             Description = "Can the player open the c-menu?",
         })
     elseif type == "SAM" then
-        CAMI.UnregisterPrivilege(name)
+        CAMI.UnregisterPrivilege("gware_"..name)
         sam.permissions.add(name, "gWare", "superadmin")
     end
 end
 
 local function AddPermissionsToSAM()
-    gWare.Utils.AddPermission("SAM", "can_access_c-menu")
-    gWare.Utils.AddPermission("SAM", "can_access_spawnmenu")
-    gWare.Utils.AddPermission("SAM", "can_access_vote")
-    gWare.Utils.AddPermission("SAM", "can_change_gware_settings")
-    gWare.Utils.AddPermission("SAM", "can_set_jobs-spawns_gware_tool")
+    gWare.Utils.AddPermission("SAM", "open_context_menu")
+    gWare.Utils.AddPermission("SAM", "open_spawnmenu")
+    gWare.Utils.AddPermission("SAM", "create_vote")
+    gWare.Utils.AddPermission("SAM", "edit_settings")
+    gWare.Utils.AddPermission("SAM", "set_job_spawns")
 end
 
 
@@ -30,16 +30,16 @@ function meta:HasGWarePermission(name)
     if SAM_LOADED then
         return self:HasPermission(name)
     else
-        return CAMI.PlayerHasAccess(self, name)
+        return CAMI.PlayerHasAccess(self, "gware_"..name)
     end
 end
 
 
-gWare.Utils.AddPermission("CAMI", "can_access_c-menu", "Can the player open the c-menu?")
-gWare.Utils.AddPermission("CAMI", "can_access_spawnmenu", "Can the player open the spawnmenu?")
-gWare.Utils.AddPermission("CAMI", "can_access_vote", "Can the player open the vote menu?")
-gWare.Utils.AddPermission("CAMI", "can_change_gware_settings", "Can the player change the gWare settings?")
-gWare.Utils.AddPermission("CAMI", "can_set_jobs-spawns_gware_tool", "Can the player set the job spawns per gWare tool?")
+gWare.Utils.AddPermission("CAMI", "gware_open_context_menu", "Can the player open the c-menu?")
+gWare.Utils.AddPermission("CAMI", "gware_open_spawnmenu", "Can the player open the spawnmenu?")
+gWare.Utils.AddPermission("CAMI", "gware_create_vote", "Can the player open the vote menu?")
+gWare.Utils.AddPermission("CAMI", "gware_edit_settings", "Can the player change the gWare settings?")
+gWare.Utils.AddPermission("CAMI", "gware_set_job_spawns", "Can the player set the job spawns per gWare tool?")
 
 if SAM_LOADED then
     AddPermissionsToSAM()
@@ -51,10 +51,10 @@ end
 
 hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
     if not gWare.Utils.GetSettingValue("contextmenu") then return end
-    if not LocalPlayer():HasGWarePermission("can_access_c-menu") then return false end
+    if not LocalPlayer():HasGWarePermission("open_context_menu") then return false end
 end)
 
 hook.Add("OnSpawnMenuOpen", "gWare.Utils.SpawnMenuCheck", function()
     if not gWare.Utils.GetSettingValue("spawnmenu") then return end
-    if not LocalPlayer():HasGWarePermission("can_access_spawnmenu") then return false end
+    if not LocalPlayer():HasGWarePermission("open_spawnmenu") then return false end
 end)
