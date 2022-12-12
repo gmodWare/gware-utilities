@@ -29,12 +29,14 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
         return false
     end)
 
+    -- todo: check is this a duplicate
     hook.Add("ContextMenuOpen", "gWare.Utils.DisableCMenu", function()
         if not gWare.Utils.GetSettingValue("contextmenu") then return end
 
         return false
     end)
 
+    -- todo: check is this a duplicate
     hook.Add( "SpawnMenuOpen", "gWare.Utils.DisallowSpawnMenu", function()
         if not gWare.Utils.GetSettingValue("spawnmenu") then return end
 

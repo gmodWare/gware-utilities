@@ -77,6 +77,7 @@ gWare.Utils.GetAllNPCPos(function (npcTblData)
     end
 end)
 
+
 ///////////////////////////
 //       SETTINGS        //
 ///////////////////////////
@@ -93,7 +94,6 @@ hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
     ply:Kick("[gWare] Family Sharing is not allowed!")
 end)
 
-
 -- workshopDownload
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function()
     if not gWare.Utils.GetSettingValue("auto-workshop-dl") then return end
@@ -104,7 +104,6 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function
     end
 end)
 
-
 -- commitSuicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     if not gWare.Utils.GetSettingValue("suicide") then return end
@@ -112,7 +111,6 @@ hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
     return false
 end)
-
 
 -- automatic noclip
 local function hideWeapons(ply, shouldHide)
@@ -156,7 +154,6 @@ hook.Add("PlayerSwitchWeapon", "gWare.Utils.DisableCloak", function(ply)
     end
 end)
 
-
 -- npcDisabledWeapons
 hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attacker, inflictor)
     if not gWare.Utils.GetSettingValue("npc-weapon-drop") then return end
@@ -167,16 +164,16 @@ hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attack
     end
 end)
 
-
 -- toolgunSounds
 hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
     if not gWare.Utils.GetSettingValue("toolgun-sounds") then return end
 
-    if (data.Entity:IsValid() and data.Entity:IsPlayer() and data.Entity:GetActiveWeapon():IsValid() and data.Entity:GetActiveWeapon():GetClass() == "gmod_tool") then
+    local ent = data.Entity
+
+    if (ent:IsValid() and ent:IsPlayer() and ent:GetActiveWeapon():IsValid() and ent:GetActiveWeapon():GetClass() == "gmod_tool") then
         return false
     end
 end)
-
 
 -- darkrpBlackboard
 hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
@@ -189,6 +186,7 @@ end)
 hook.Add("canDropWeapon", "gWare.Utils.DisablePlayerWepDrop", function()
     return not gWare.Utils.GetSettingValue("player-weapon-drop")
 end)
+
 
 ///////////////////////////
 // IN-GAME CONFIGURATION //
