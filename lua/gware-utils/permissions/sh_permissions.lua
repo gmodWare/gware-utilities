@@ -1,9 +1,9 @@
 function gWare.Utils.AddPermission(type, name, description)
     if type == "CAMI" then
         CAMI.RegisterPrivilege({
-            Name = "open_context_menu",
+            Name = name,
             MinAccess = "superadmin",
-            Description = "Can the player open the c-menu?",
+            Description = description,
         })
     elseif type == "SAM" then
         CAMI.UnregisterPrivilege("gware_"..name)
