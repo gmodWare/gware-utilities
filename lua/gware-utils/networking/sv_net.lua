@@ -19,6 +19,8 @@ util.AddNetworkString("gWare.Utils.UpdateNPCJobs")
 util.AddNetworkString("gWare.Utils.UpdateVoteNum")
 util.AddNetworkString("gWare.Utils.UpdateVoteNumToClient")
 util.AddNetworkString("gWare.Utils.SendVoteToServer")
+util.AddNetworkString("gWare.Utils.BroadcastVote")
+util.AddNetworkString("gWare.Utils.SendResultToServer")
 
 
 function gWare.Utils.SendNPCSpawnsAndJobsToClient(ply)
@@ -171,29 +173,6 @@ net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
     gWare.Utils.InsertJob(jobCommand, settingID)
 end)
 
-net.Receive("gWare.Utils.VoteSystem.SendVoteToServer", function(len, ply)
-    local question = net.ReadString()
-    local value = net.ReadString()
-    local num = net.ReadUInt(3)
-
-    print("Read Informations!")
-
-    local valueTBL = {}
-
-    for i = 1, num do
-        valueTBL[#valueTBL + 1] = {
-            name = value,
-        }
-    end
-
-    PrintTable(valueTBL)
-
-    net.Start("gWare.Utils.VoteSystem.SendVoteToAll")
-        net.WriteString(question)
-        net.WriteTable(valueTBL)
-    net.Broadcast()
-end)
-
 net.Receive("gWare.Utils.JobSetter.SetJob", function(len, ply)
     local job = net.ReadString()
     local ent = net.ReadEntity()
@@ -261,10 +240,45 @@ net.Receive("gWare.Utils.DeleteJobsFromNPC", function(len, ply)
     gWare.Utils.DeleteNPCJob(name, jobCommand)
 end)
 
-net.Receive("gWare.Utils.UpdateVoteNum", function(len, ply)
-    local value = 1
+function gWare.Utils.BroadcastVote(voteTable)
+    local count = #voteTable
 
-    net.Start("gWare.Utils.UpdateVoteNumToClient")
-        net.WriteUInt(value, 1)
+    net.Start("gWare.Utils.BroadcastVote")
+        net.WriteUInt(count, 3)
+        for _, voteValue in ipairs(voteTable) do
+            net.WriteString(voteValue)
+        end
     net.Broadcast()
+end
+
+net.Receive("gWare.Utils.SendVoteToServer", function(len, ply)
+    local count = net.ReadUInt(3)
+    local values = {}
+
+    table.Empty(gWare.Utils.Vote)
+
+    for i = 1, count do
+        local value = net.ReadString()
+
+        table.insert(values, value)
+    end
+
+    for index, _ in ipairs(values) do
+        if index == 1 then continue end
+
+        gWare.Utils.Vote[index - 1] = 0
+    end
+
+    gWare.Utils.BroadcastVote(values)
 end)
+
+net.Receive("gWare.Utils.SendResultToServer", function(len, ply)
+    // TODO : check if player has already voted
+    local index = net.ReadUInt(3)
+
+    gWare.Utils.Vote[index] = gWare.Utils.Vote[index] + 1
+
+    // todo : send results to players
+end)
+
+

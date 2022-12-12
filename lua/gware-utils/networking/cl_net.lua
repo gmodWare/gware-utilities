@@ -101,10 +101,6 @@ function gWare.Utils.ChangeJobAccess(jobCommand, settingID)
     net.SendToServer()
 end
 
-local function sc(x)
-    return x / 1080 * ScrH()
-end
-
 function gWare.Utils.SendVoteToServer(voteTable)
     local count = #voteTable
 
@@ -170,4 +166,19 @@ net.Receive("gWare.Utils.UpdateNPCJobs", function(len)
     end
 
     gWare.Utils.NPCJobs[name][jobCommand] = true
+end)
+
+net.Receive("gWare.Utils.BroadcastVote", function()
+    local count = net.ReadUInt(3)
+    local voteTable = {}
+
+    for i = 1, count do
+        local value = net.ReadString()
+
+        voteTable[i] = value
+    end
+
+    local voteMenu = vgui.Create("gWare.Utils.VoteMenu")
+    voteMenu:SetValueTable(voteTable)
+    voteMenu:Vote()
 end)
