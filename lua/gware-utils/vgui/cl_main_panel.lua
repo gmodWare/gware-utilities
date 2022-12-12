@@ -1,7 +1,7 @@
 local PANEL = {}
 
 function PANEL:Init()
-    self:SSetSize(700, 450)
+    self:SSetSize(730, 450)
     self:Center()
     self:SetTitle("gWare Utilities")
     self:MakePopup()
