@@ -22,9 +22,8 @@ function PANEL:Init()
         option.strSlightFont = "VoidUI.S18"
         option.Paint = function(self, w, h)
             draw.RoundedBox(12, 0, 0, w, h, VoidUI.Colors.Primary)
-            draw.SimpleText(self.text, self.textFont, w/2, h/2, self.textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
             draw.SimpleText(self.title, self.textFont, sc(15), sc(15), self.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
-            draw.SimpleText(self.strDesc, self.strSlightFont, sc(15), sc(55), self.slightColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM)
+            draw.SimpleText(self.strDesc, self.strSlightFont, sc(15), sc(58), self.slightColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM)
         end
 
         if data.settingType == "bool" then
