@@ -56,7 +56,7 @@
 - ✅Translate Settings
 - Translate Commands
 - Translate Command Prefix
-- Translate VoidLib Notifications
+- 🔄Translate VoidLib Notifications
 - Translate Vote
 
 #### Security
@@ -66,6 +66,9 @@
 - ✅DarkRP required
 - ✅VoidLib required
 - ❌SAM/ULX/sAdmin required (fuck xAdmin!!)
+
+#### Roadmap (Features aimed for after launch)
+- Ability to disable commands in settings (as staff member)
 
 ##
 ✅ Done —

@@ -1,5 +1,4 @@
 local L = gWare.Utils.Lang.GetPhrase
-
 local sc = VoidUI.Scale
 
 
@@ -19,27 +18,12 @@ function PANEL:Init()
     for index, data in ipairs(gWare.Utils.Settings) do
         local option = scrollbar:Add("VoidUI.BackgroundPanel")
         option:Dock(TOP)
-        option:SetTall(60)
+        option:SSetTall(60)
         option.strSlightFont = "VoidUI.S18"
         option.Paint = function(self, w, h)
             draw.RoundedBox(12, 0, 0, w, h, VoidUI.Colors.Primary)
-        
-            if (self.hasText) then
-                if (self.wrapped) then
-                    draw.DrawText(self.wrappedText, self.textFont, sc(20), sc(15), self.textColor, TEXT_ALIGN_LEFT)
-                else
-                    draw.SimpleText(self.text, self.textFont, w/2, h/2, self.textColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-                end
-            end
-        
-            if (self.hasTitle) then
-                if (!self.strDesc) then
-                    draw.SimpleText(self.title, self.textFont, sc(15), sc(15), self.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
-                else
-                    draw.SimpleText(self.title, self.textFont, sc(15), sc(15), self.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
-                    draw.SimpleText(self.strDesc, self.strSlightFont, sc(15), sc(55), self.slightColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM)
-                end
-            end
+            draw.SimpleText(self.title, self.textFont, sc(15), sc(15), self.textColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+            draw.SimpleText(self.strDesc, self.strSlightFont, sc(15), sc(58), self.slightColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM)
         end
 
         if data.settingType == "bool" then
@@ -127,7 +111,5 @@ function PANEL:Init()
     end
 end
 
-function PANEL:Paint()
-end
 
 vgui.Register("gWare.Utils.Settings", PANEL)

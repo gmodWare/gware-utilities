@@ -12,6 +12,7 @@ function PANEL:Init()
     self.questionTextPanel:SSetPos(5, 0)
     self.questionTextPanel:SSetSize(550, 50)
     self.questionTextPanel.Paint = function(s, w, h)
+        -- todo: translate this
         draw.SimpleText("Question:", "VoidUI.R20", 0, 0, VoidUI.Colors.White, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
     end
 
@@ -19,6 +20,7 @@ function PANEL:Init()
     self.choiceTextPanel:SSetPos(5, 100)
     self.choiceTextPanel:SSetSize(550, 50)
     self.choiceTextPanel.Paint = function(s, w, h)
+        -- todo: translate this
         draw.SimpleText("Multiple Choice:", "VoidUI.R20", 0, 0, VoidUI.Colors.White, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
     end
 
@@ -48,6 +50,7 @@ function PANEL:Init()
     self.addChoice:SetColor(VoidUI.Colors.Blue)
     self.addChoice.DoClick = function(s)
         if choiceCounter >= 5 + 1 then
+            -- todo: translate this
             VoidLib.Notify("gWare", "Du kannst du nur 5 Wahlmöglichkeiten haben!", VoidUI.Colors.Red, 5)
             return
         end
@@ -77,6 +80,7 @@ function PANEL:Init()
             if panelData:GetName() != "VoidUI.TextInput" then continue end
 
             if panelData:GetValue() == "" then
+                -- todo: translate this
                 VoidLib.Notify("gWare", "Du musst alle Felder ausfüllen!", VoidUI.Colors.Red, 5)
 
                 table.Empty(values)
@@ -86,6 +90,7 @@ function PANEL:Init()
             table.insert(values, panelData:GetValue())
         end
 
+        -- todo: translate this
         VoidLib.Notify("gWare", "Du hast erfolgreich eine Abstimmung gestartet!", VoidUI.Colors.Green, 5)
         gWare.Utils.SendVoteToServer(values)
     end

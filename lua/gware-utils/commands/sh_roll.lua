@@ -40,6 +40,7 @@ if CLIENT then
 
         local rollColor = getRollColor(randNum)
 
+        -- todo: translate this
         gWare.Utils.ChatPrint("roll",
             ply:Nick() .. " hat eine ", rollColor, tostring(randNum), color_white, " gerollt!"
         )

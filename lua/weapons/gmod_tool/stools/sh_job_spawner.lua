@@ -34,7 +34,6 @@ local function RemoveClientEnts()
     end)
 end
 
-
 function TOOL:LeftClick(trace)
     if SERVER then return end
     if not IsFirstTimePredicted() then return end
@@ -50,9 +49,8 @@ function TOOL:LeftClick(trace)
         ent:SetMaterial("models/shadertest/shader4")
 
         gWare.Utils.AddNPC(textInput, ent:GetPos())
-
+        -- todo: translate this
         VoidLib.Notify("gWare Job Spawn Setter", "Du hast erfolgreich den NPC " .. textInput .. " erstellt.", VoidUI.Colors.Green, 5)
-
         Reload()
     end)
 
@@ -62,14 +60,13 @@ function TOOL:LeftClick(trace)
 end
 
 function TOOL:RightClick(trace)
-
 end
 
 function TOOL.BuildCPanel(panel)
     local background = vgui.Create("VoidUI.BackgroundPanel", panel)
     background:SetPos(-10, 0)
     background:SSetSize(350, 948)
-    background.Paint = function(s, w, h)
+    background.Paint = function(self, w, h)
         draw.RoundedBox(3, 0, 0 , w, h, VoidUI.Colors.Background)
     end
 
@@ -79,7 +76,7 @@ function TOOL.BuildCPanel(panel)
     npcDropdown:SSetSize(panel:GetWide() * 17, 50)
     npcDropdown:SetValue("Select NPC")
 
-    for npcName, _ in pairs(gWare.Utils.NPCSpawns) do
+    for npcName, bool in pairs(gWare.Utils.NPCSpawns) do
         npcDropdown:AddChoice(npcName)
     end
 
@@ -112,11 +109,13 @@ function TOOL.BuildCPanel(panel)
     clearButton:SetColor(VoidUI.Colors.Red)
     clearButton.DoClick = function()
         if not npcDropdown:GetSelected() then
+            -- todo: translate this
             VoidLib.Notify("ERROR", "Du musst ein NPC auswählen!", VoidUI.Colors.Red, 5)
             return
         end
 
         if table.IsEmpty(jobList:GetSelected()) then
+            -- todo: translate this
             VoidLib.Notify("ERROR", "Du musst Jobs auswählen die du löschen möchtest!", VoidUI.Colors.Red, 5)
             return
         end
@@ -127,14 +126,12 @@ function TOOL.BuildCPanel(panel)
             for _, jobData in pairs(RPExtraTeams) do
                 if jobData.name != panelData:GetColumnText(1) then continue end
 
-                local jobCommand = jobData.command
-
-                gWare.Utils.DeleteJobsFromNPC(npcName, jobCommand)
+                gWare.Utils.DeleteJobsFromNPC(npcName, jobData.command)
             end
         end
 
+        -- todo: translate this
         VoidLib.Notify("gWare Job Spawn Setter", "Die Jobs spawnen absofort nicht mehr bei dem NPC " .. npcName, VoidUI.Colors.Red, 5)
-
         Reload()
     end
 
@@ -145,6 +142,7 @@ function TOOL.BuildCPanel(panel)
     addButton:SetText("Add Jobs to NPC")
     addButton.DoClick = function()
         if not npcDropdown:GetSelected() then
+            -- todo: translate this
             VoidLib.Notify("ERROR", "Du musst ein NPC auswählen!", VoidUI.Colors.Red, 5)
             return
         end
@@ -186,8 +184,8 @@ function TOOL.BuildCPanel(panel)
                 gWare.Utils.AddJobsToNPC(npcName, jobCommand)
             end
 
+            -- todo: translate this
             VoidLib.Notify("gWare Job Spawn Setter", "Die Jobs spawnen absofort bei dem NPC " .. npcName, VoidUI.Colors.Green, 5)
-
             Reload()
         end
     end
@@ -200,14 +198,15 @@ function TOOL.BuildCPanel(panel)
     deleteButton:SetColor(VoidUI.Colors.Red)
     deleteButton.DoClick = function()
         if not npcDropdown:GetSelected() then
+            -- todo: translate this
             VoidLib.Notify("ERROR", "Du musst ein NPC auswählen!", VoidUI.Colors.Red, 5)
             return
         end
 
         local npcName, data = npcDropdown:GetSelected()
 
+        -- todo: translate this
         VoidLib.Notify("gWare Job Spawn Setter", "Du hast " .. npcName .. " erfolgreich gelöscht!", VoidUI.Colors.Red, 5)
-
         gWare.Utils.DeleteNPC(npcName)
 
         Reload()

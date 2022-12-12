@@ -1,3 +1,5 @@
+local L = gWare.Utils.Lang.GetPhrase
+
 --[[
     Replaces both '/' and '!' including the
     command name with empty string.
@@ -104,11 +106,24 @@ end
     Returns the job index of a DarkRP team by its command (fuck u darkrp)
     Returns: Integer
 ]]
-
 function gWare.Utils.GetJobIndexByCommand(command)
     for index, jobData in ipairs(RPExtraTeams) do
         if jobData.command != command then continue end
 
         return index
     end
+end
+
+--[[
+    Checks if a string is empty and throws an error message if it is
+]]--
+function gWare.Utils.IsMessageEmpty(str, ply)
+    ply = ply or LocalPlayer()
+
+    if (not str) or (str:Trim() == "") then
+        VoidLib.Notify(ply, L"notify_empty_name", L"notify_empty_desc", VoidUI.Colors.Red, 10)
+        return true
+    end
+
+    return false
 end

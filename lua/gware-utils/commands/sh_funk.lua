@@ -8,6 +8,7 @@
     Example Chat: [Funk] *1835 Menschlich an 501st CMD 5125 Ryzen* 10-20u
 ]]
 
+local L = gWare.Utils.Lang.GetPhrase
 
 if SERVER then
     util.AddNetworkString("gWare.Commands.Funk.ChatMessage")
@@ -21,8 +22,8 @@ if SERVER then
         local namePart = start:ReplacePrefix("funk") 
         local message = args[2]:sub(2)
 
-        if not message then 
-            VoidLib.Notify(ply, "Invalider Funk", "Funk Beispiel: /funk Commander Rex* Wo befinden Sie sich?", VoidUI.Colors.Red, 10)
+        if not message then
+            VoidLib.Notify(ply, L"notify_invalid-comms_name", L"notify_invalid-comms_desc", VoidUI.Colors.Red, 10)
             return
         end
 
@@ -51,6 +52,7 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("funk",
             "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )

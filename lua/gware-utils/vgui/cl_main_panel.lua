@@ -11,6 +11,7 @@ function PANEL:Init()
     self.Settings = self:Add("gWare.Utils.Settings")
     self.Vote = self:Add("gWare.Utils.Vote")
 
+    -- todo: translate these tabs
     self.Sidebar:AddTab("Optionen", VoidUI.Icons.Settings, self.Settings, false)
     self.Sidebar:AddTab("Vote", VoidUI.Icons.Stats, self.Vote, false)
 end
