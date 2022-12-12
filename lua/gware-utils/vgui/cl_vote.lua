@@ -80,13 +80,14 @@ function PANEL:Init()
                 VoidLib.Notify("gWare", "Du musst alle Felder ausfüllen!", VoidUI.Colors.Red, 5)
 
                 table.Empty(values)
-                break
+                return
             end
 
             table.insert(values, panelData:GetValue())
         end
 
-        gWare.Utils.SendVoteToServer(value)
+        VoidLib.Notify("gWare", "Du hast erfolgreich eine Abstimmung gestartet!", VoidUI.Colors.Green, 5)
+        gWare.Utils.SendVoteToServer(values)
     end
 end
 
