@@ -90,7 +90,7 @@ hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
 
     if ownerS64 == s64 then return end
 
-    ply:Kick("[gWare] Du wurdest aufgrund von Family Sharing gekickt!")
+    ply:Kick("[gWare] Family Sharing is not allowed!")
 end)
 
 
