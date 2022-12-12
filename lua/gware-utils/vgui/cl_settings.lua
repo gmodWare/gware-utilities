@@ -76,7 +76,7 @@ function PANEL:Init()
             option.input:SSetWide(150)
         end
 
-        if data.settingType == "dropdown" then
+        if data.settingType == "lang-dropdown" then
             option.input = option:Add("VoidUI.Dropdown")
             option.input:Dock(RIGHT)
             option.input:MarginRight(10)

@@ -195,7 +195,7 @@ gWare.Utils.AddSetting({
     name = "Sprache",
     description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = "english",
-    settingType = "dropdown"
+    settingType = "lang-dropdown"
 })
 
 gWare.Utils.AddSetting({

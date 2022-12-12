@@ -11,6 +11,14 @@ function gWare.Utils.AddPermission(type, name, description)
     end
 end
 
+local function AddPermissionsToSAM()
+    gWare.Utils.AddPermission("SAM", "can_access_c-menu")
+    gWare.Utils.AddPermission("SAM", "can_access_spawnmenu")
+    gWare.Utils.AddPermission("SAM", "can_access_vote")
+    gWare.Utils.AddPermission("SAM", "can_change_gware_settings")
+    gWare.Utils.AddPermission("SAM", "can_set_jobs-spawns_gware_tool")
+end
+
 
 ////////////////
 // META TABLE //
@@ -33,13 +41,13 @@ gWare.Utils.AddPermission("CAMI", "can_access_vote", "Can the player open the vo
 gWare.Utils.AddPermission("CAMI", "can_change_gware_settings", "Can the player change the gWare settings?")
 gWare.Utils.AddPermission("CAMI", "can_set_jobs-spawns_gware_tool", "Can the player set the job spawns per gWare tool?")
 
-hook.Add("SAM.LoadedConfig", "gWare.Utils.SamModules.WaitForClient", function()
-    gWare.Utils.AddPermission("SAM", "can_access_c-menu")
-    gWare.Utils.AddPermission("SAM", "can_access_spawnmenu")
-    gWare.Utils.AddPermission("SAM", "can_access_vote")
-    gWare.Utils.AddPermission("SAM", "can_change_gware_settings")
-    gWare.Utils.AddPermission("SAM", "can_set_jobs-spawns_gware_tool")
-end)
+if SAM_LOADED then
+    AddPermissionsToSAM()
+else
+    hook.Add("SAM.LoadedConfig", "gWare.Utils.SamModules.WaitForClient", function()
+        AddPermissionsToSAM()
+    end)
+end
 
 hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
     if not gWare.Utils.GetSettingValue("contextmenu") then return end

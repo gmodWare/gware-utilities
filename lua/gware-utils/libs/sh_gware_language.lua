@@ -189,7 +189,7 @@ function gWare.Lang:LoadLocalLanguages(addon, reload)
         local tbl = util.JSONToTable(json)
         local length = table.Count(tbl or {})
         if (!tbl or length < 1) then
-            print("Tried to load " .. v .. ", but langauge file is corrupt/empty!")
+            gWare.Utils.Print("Tried to load " .. v .. ", but langauge file is corrupt/empty!", "error")
             continue
         end
 

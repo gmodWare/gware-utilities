@@ -104,6 +104,7 @@ function gWare.Utils.LoadAll()
     gWare.Utils.Load(gWare.Utils.Dir .. "/settings")
     gWare.Utils.Load(gWare.Utils.Dir .. "/networking")
     gWare.Utils.Load(gWare.Utils.Dir .. "/commands")
+    gWare.Utils.Load(gWare.Utils.Dir .. "/permissions")
 
     -- finally add clientside files
     gWare.Utils.AddCSDir(gWare.Utils.Dir .. "/vgui")
@@ -118,6 +119,7 @@ hook.Add("Initialize", "gWare.Init", function()
         gWare.Utils.Print("DarkRP is required to run gWare Utilities.", "error")
         return
     end
+
     if not gWare.Utils.Loaded then
         if VoidLib then
             gWare.Utils.LoadAll()

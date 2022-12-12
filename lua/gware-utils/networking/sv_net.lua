@@ -135,8 +135,7 @@ function gWare.Utils.UpdateNPCJobs(name, jobCommand)
 end
 
 net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
-    -- TODO: why is this commented out?
-    //if not ply:HasGWarePermission("can_change_gware_settings") then return end
+    if not ply:HasGWarePermission("can_change_gware_settings") then return end
 
     local index = net.ReadUInt(5)
     local settingValue = net.ReadBool()
@@ -145,8 +144,7 @@ net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.UpdateServerString", function(len, ply)
-    -- TODO: why is this commented out?
-    //if not ply:HasGWarePermission("can_change_gware_settings") then return end
+    if not ply:HasGWarePermission("can_change_gware_settings") then return end
 
     local index = net.ReadUInt(5)
     local settingValue = net.ReadString()
