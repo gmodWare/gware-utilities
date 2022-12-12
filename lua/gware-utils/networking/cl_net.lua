@@ -20,13 +20,13 @@ net.Receive("gWare.Utils.SendJobsToClient", function(len)
 
     for i = 1, count do
         local jobDataCount = net.ReadUInt(7)
-        local settigID = net.ReadString()
+        local settingID = net.ReadString()
 
         for j = 1, jobDataCount do
             local jobCommand = net.ReadString()
 
-            gWare.Utils.JobAccess[settigID] = gWare.Utils.JobAccess[settigID] or {}
-            gWare.Utils.JobAccess[settigID][jobCommand] = true
+            gWare.Utils.JobAccess[settingID] = gWare.Utils.JobAccess[settingID] or {}
+            gWare.Utils.JobAccess[settingID][jobCommand] = true
         end
     end
 end)
