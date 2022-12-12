@@ -84,6 +84,7 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("vfunk", 
             gWare.Utils.Colors.Orange, "*", sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )

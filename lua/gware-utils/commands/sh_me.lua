@@ -15,10 +15,7 @@ if SERVER then
 
         local message = text:ReplacePrefix("me")
 
-        if message:Trim() == "" then
-            VoidLib.Notify(sender, L"notify_empty_name", L"notify_empty_desc", VoidUI.Colors.Red, 5)
-            return
-        end
+        if gWare.Utils.IsMessageEmpty(message, ply) then return end
 
         local receivers = {sender}
         local distSqr = 500 * 500

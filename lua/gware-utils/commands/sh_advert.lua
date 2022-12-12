@@ -14,6 +14,8 @@ if SERVER then
         if (text:lower():StartWithAny("/advert ", "!advert ")) then
             local message = text:ReplacePrefix("advert")
 
+            if gWare.Utils.IsMessageEmpty(message, ply) then return end
+
             net.Start("gWare.Commands.Advert.ChatMessage")
                 net.WriteString(message)
                 net.WriteEntity(ply)
@@ -29,6 +31,7 @@ if CLIENT then
         local receivedMessage = net.ReadString()
         local ply = net.ReadEntity()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("advert",
             ply:Nick() .. ": ", receivedMessage
         )

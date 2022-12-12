@@ -12,6 +12,8 @@ if SERVER then
         if (text:lower():StartWithAny("/akt ", "!akt ")) then
             local message = text:ReplacePrefix("akt")
 
+            if gWare.Utils.IsMessageEmpty(message, ply) then return end
+
             net.Start("gWare.Commands.Akt.ChatMessage")
                 net.WriteString(message)
                 net.WriteEntity(ply)
@@ -27,6 +29,7 @@ if CLIENT then
         local receivedMessage = net.ReadString()
         local ply = net.ReadEntity()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("akt", 
             ply:Nick() .. " ", receivedMessage
         )

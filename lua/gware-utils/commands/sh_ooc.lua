@@ -28,10 +28,7 @@ if SERVER then
             message = text:sub(4)
         end
 
-        if message:Trim() == "" then
-            VoidLib.Notify(ply, L"notify_empty_name", L"notify_empty_desc", VoidUI.Colors.Red, 5)
-            return
-        end
+        if gWare.Utils.IsMessageEmpty(message, ply) then return end
 
         net.Start("gWare.Commands.OOC.ChatMessage")
             net.WriteString(message)
@@ -52,6 +49,7 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("ooc", 
             sender:Nick() .. ": " .. message
         )

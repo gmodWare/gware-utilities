@@ -69,6 +69,7 @@ if CLIENT then
     net.Receive("gWare.Commands.unstuck.ChatMessage", function()
         local text = net.ReadString()
 
+        -- todo: translate command
         gWare.Utils.ChatPrint("Unstuck",
             text
         )
