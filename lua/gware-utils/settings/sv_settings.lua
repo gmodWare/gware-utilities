@@ -186,17 +186,9 @@ hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
 end)
 
 -- player-weapon-drop
-hook.Add("gWare.Utils.SettingChanged", "gWare.Utils.RestrictWeaponDrop", function(id, value)
-    print(id, value)
-    if (id != "player-weapon-drop") then return end
-
-    GAMEMODE.Config.restrictdrop = not value
+hook.Add("canDropWeapon", "gWare.Utils.DisablePlayerWepDrop", function()
+    return not gWare.Utils.GetSettingValue("player-weapon-drop")
 end)
-
-hook.Add("DarkRPFinishedLoading", "gWare.Utils.RestrictWeaponDrop", function()
-    GAMEMODE.Config.restrictdrop = not gWare.Utils.GetSettingValue("player-weapon-drop")
-end)
-
 
 ///////////////////////////
 // IN-GAME CONFIGURATION //
