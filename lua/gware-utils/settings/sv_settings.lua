@@ -10,6 +10,7 @@ end
 
 local i = 1
 function gWare.Utils.AddSetting(tblData)
+    -- todo: remove name and description
     gWare.Utils.Settings[i] = {id = tblData.id, name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
     gWare.Utils.IDs[tblData.id] = i
     i = i + 1
@@ -184,6 +185,7 @@ hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
     return false
 end)
 
+
 ///////////////////////////
 // IN-GAME CONFIGURATION //
 ///////////////////////////
@@ -304,6 +306,14 @@ gWare.Utils.AddSetting({
     id = "encrypted-comms",
     name = "Encrypted Comms Stuff?",
     description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
+    defaultValue = {},
+    settingType = "job_multi_select"
+})
+
+gWare.Utils.AddSetting({
+    id = "decode",
+    name = "decode",
+    description = "decode stuff?",
     defaultValue = {},
     settingType = "job_multi_select"
 })

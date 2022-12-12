@@ -30,13 +30,13 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
     end)
 
     hook.Add("ContextMenuOpen", "gWare.Utils.DisableCMenu", function()
-        if not gWare.Utils.GetSettingValue("contextmenu") then return end // TODO : add cami permission
+        if not gWare.Utils.GetSettingValue("contextmenu") then return end
 
         return false
     end)
 
     hook.Add( "SpawnMenuOpen", "gWare.Utils.DisallowSpawnMenu", function()
-        if not gWare.Utils.GetSettingValue("spawnmenu") then return end // TODO : add cami permission
+        if not gWare.Utils.GetSettingValue("spawnmenu") then return end
 
         return false
     end)

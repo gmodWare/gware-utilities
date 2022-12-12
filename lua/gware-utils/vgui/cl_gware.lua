@@ -16,7 +16,11 @@ list.Set("DesktopWindows", "gware_settings", {
     title = "gWare",
     icon = "gware/gware_icon.png",
     init = function(icon, window)
-        -- todo: check for access
+        if not LocalPlayer():HasGWarePermission("can_change_gware_settings") then
+            -- todo: translate this
+            VoidLib.Notify("ERROR", "You don't have enough permissions to open gware settings!", VoidUI.Colors.Red, 6)
+            return 
+        end
         OpenMenu()
     end
 })

@@ -2,7 +2,7 @@
 
 ## When done, this will be published on gmod workshop.
 
-#### ⚠️Settings: (ingame config)
+#### Settings: (ingame config)
 - ✅Disable NPC Weapon Drops
 - ✅Disable Toolgun Sounds
 - ✅Disable Toolgun Effects
@@ -10,20 +10,20 @@
 - ✅Disable Killfeed
 - ✅Disable Suicide
 - Disable All Weapon Drop
-- 🔄Which jobs can use vfunk (2)
-- 🔄Which jobs can decode (3)
+- ✅Which jobs can use encrypted comms (2)
+- ✅Which jobs can decode encrypted comms (3)
 - ✅Automatic Workshop Download
 - ✅Disable Advert (DarkRP Billboards)
 - ✅Enable Classic Advert
 - ✅Disable Family Sharing
 - ✅Disable Voice Panels
-- ✅Disable Q-Menu for Users (4)
-- ✅Disable C-Menu for Users (5)
-- ⚠️Language
+- ✅Disable spawnmenu for Users (4)
+- ✅Disable contextmenu for Users (5)
+- 🔄Language
 
 #### Additional Permissions:
-- ✅Disable Q-Menu for Users
-- ✅Diable C-Menu for Users
+- ✅Disable spawnmenu for Users
+- ✅Diable contextmenu for Users
 - 🔄Can Create Votes
 - ✅Can Set DarkRP Spawns
 
@@ -39,9 +39,9 @@
 - Custom Prefix for Commands
 
 #### Commands:
-- ✅funk
-- ✅vfunk (2)
-- ✅decode (3)
+- ✅comms
+- ✅encrypted comms (2)
+- ✅decode encrypted comms (3)
 - ✅ooc
 - ✅looc
 - ✅akt
@@ -50,10 +50,15 @@
 - ✅roll
 - 🔄unstuck
 
-#### Languages
+#### Language Service
 - ✅Add English
+- ✅Pull Languages from git
+- ✅Translate Settings
+- Translate Commands
+- Translate Command Prefix
+- Translate VoidLib Notifications
 
-#### Secure Database
+#### Security
 - ✅ gWare admin setting check in net receives
 
 #### Warnings

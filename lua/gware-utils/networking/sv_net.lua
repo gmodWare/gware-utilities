@@ -51,6 +51,7 @@ end
 function gWare.Utils.SendSettingToClient(ply)
     local count = #gWare.Utils.Settings
 
+    -- todo: remove name and description from networking
     net.Start("gWare.Utils.SendSettingToClient")
         net.WriteUInt(count, 7)
         for _, settingsData in ipairs(gWare.Utils.Settings) do
@@ -134,6 +135,7 @@ function gWare.Utils.UpdateNPCJobs(name, jobCommand)
 end
 
 net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
+    -- TODO: why is this commented out?
     //if not ply:HasGWarePermission("can_change_gware_settings") then return end
 
     local index = net.ReadUInt(5)
@@ -143,6 +145,7 @@ net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.UpdateServerString", function(len, ply)
+    -- TODO: why is this commented out?
     //if not ply:HasGWarePermission("can_change_gware_settings") then return end
 
     local index = net.ReadUInt(5)

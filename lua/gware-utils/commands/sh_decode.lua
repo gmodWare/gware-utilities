@@ -13,7 +13,11 @@ if SERVER then
 
         if not text:StartWithAny("!decode ", "/decode ") then return end
 
-        -- TODO: add permission check here
+        if not gWare.Utils.HasJobAccess("decode", ply) then
+            -- todo: translate this
+            VoidLib.Notify(ply, "error", "You cannot deocode encrypted comms!", VoidUI.Colors.Red, 4)
+            return 
+        end
 
         local encrypted = text:ReplacePrefix("decode")
 

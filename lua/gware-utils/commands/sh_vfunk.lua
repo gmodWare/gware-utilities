@@ -8,7 +8,7 @@
                 wieder leserlich machen.
     Example Command: /vfunk Ryzen* Antritt des Dienstes.
     Example Chat: [Verschlüsselter Funk] *1835 Menschlich an 5125 Ryzen* Antritt des Dienstes.
-    Example Encrypted Chat: [Verschlüsselter Funk] *1835 Menschlich an 5125 Ryzen* Borsjuu eft Ejfotuft.
+    Example Encrypted Chat: [Verschlüsselter Funk] *1835 Menschlich an 5125 Ryzen* 0f 12 3e 2d e3 f1 9d 5a 8b 4d 90
 ]]
 
 if SERVER then
@@ -19,7 +19,11 @@ if SERVER then
 
         if not text:StartWithAny("/vfunk ", "!vfunk ") then return end
 
-        -- TODO: add permission check here
+        if not gWare.Utils.HasJobAccess("encrypted-comms", ply) then
+            -- todo: translate this
+            VoidLib.Notify(ply, "error", "You cannot use encrypted comms!", VoidUI.Colors.Red, 4)
+            return 
+        end
 
         local args = text:Split("*")
         local start = args[1]

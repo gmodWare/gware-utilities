@@ -57,7 +57,6 @@ function PANEL:Init()
             end
 
             option.input.DoClick = function()
-                -- TODO: when VoidLib is updated on workshop we can use the normal ItemSelect again
                 local selector = vgui.Create("VoidUI.ItemSelect")
                 selector:SetParent(option)
                 selector:SetMultipleChoice(true)
@@ -91,8 +90,7 @@ function PANEL:Init()
             option.input.OnSelect = function(self, index, value, data)
                 gWare.Utils.Config.Language = value
 
-                -- todo add new function to update strings
-                gWare.Utils.UpdateSettingString(index, value) // TODO : dont know what the right value is
+                gWare.Utils.UpdateSettingString(index, value)
                 this:GetParent():Close()
             end
         end
