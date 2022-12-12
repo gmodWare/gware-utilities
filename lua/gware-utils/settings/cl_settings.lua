@@ -29,17 +29,13 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
         return false
     end)
 
-    -- todo: check is this a duplicate
-    hook.Add("ContextMenuOpen", "gWare.Utils.DisableCMenu", function()
+    hook.Add("ContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
         if not gWare.Utils.GetSettingValue("contextmenu") then return end
-
-        return false
+        if not LocalPlayer():HasGWarePermission("open_context_menu") then return false end
     end)
 
-    -- todo: check is this a duplicate
-    hook.Add( "SpawnMenuOpen", "gWare.Utils.DisallowSpawnMenu", function()
+    hook.Add("OnSpawnMenuOpen", "gWare.Utils.SpawnMenuCheck", function()
         if not gWare.Utils.GetSettingValue("spawnmenu") then return end
-
-        return false
+        if not LocalPlayer():HasGWarePermission("open_spawnmenu") then return false end
     end)
 end)

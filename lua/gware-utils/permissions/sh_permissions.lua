@@ -49,12 +49,5 @@ else
     end)
 end
 
-hook.Add("OnContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
-    if not gWare.Utils.GetSettingValue("contextmenu") then return end
-    if not LocalPlayer():HasGWarePermission("open_context_menu") then return false end
-end)
 
-hook.Add("OnSpawnMenuOpen", "gWare.Utils.SpawnMenuCheck", function()
-    if not gWare.Utils.GetSettingValue("spawnmenu") then return end
-    if not LocalPlayer():HasGWarePermission("open_spawnmenu") then return false end
-end)
+
