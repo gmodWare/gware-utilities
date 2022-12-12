@@ -14,6 +14,7 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.unstuck", function(ply, chatInput)
         local text = chatInput:lower()
 
+        -- todo: use string.StartWithAny
         if text != "/unstuck" and text != "!unstuck" then return end
 
         -- todo: refactor this command, its quite stupid to network the error message
