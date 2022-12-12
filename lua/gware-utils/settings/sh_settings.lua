@@ -17,7 +17,10 @@ end
 function gWare.Utils.HasJobAccess(settingID, ply)
     local command = ply:getJobTable().command
 
-    -- fix https://github.com/gmodWare/gware-utilities/issues/9
+    if not gWare.Utils.JobAccess[settingID] then
+        return false
+    end
+
     if gWare.Utils.JobAccess[settingID][command] then
         return true
     end
