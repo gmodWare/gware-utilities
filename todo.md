@@ -57,6 +57,7 @@
 - Translate Commands
 - Translate Command Prefix
 - Translate VoidLib Notifications
+- Translate Vote
 
 #### Security
 - ✅ gWare admin setting check in net receives
