@@ -4,7 +4,7 @@
 gWare = gWare or {}
 gWare.Utils = gWare.Utils or {}
 
-local authors = "by Menschlich, kxx & Ryzen"
+local authors = "by Menschlich, kxx & Luiggi"
 local UtilsBranding = [[  
      __          __            
      \ \        / /            

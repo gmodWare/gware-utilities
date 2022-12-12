@@ -156,7 +156,7 @@ function TOOL.BuildCPanel(panel)
         selector:SetMultipleChoice(true)
 
         local jobTbl = {}
-        local jobCache = {} // fuck u mouka
+        local jobCache = {}
 
         for _, jobData in pairs(RPExtraTeams) do
             local jobCommand = jobData.command

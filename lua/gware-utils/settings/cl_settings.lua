@@ -4,7 +4,7 @@
 
 hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
-    // Add hooks or functions in here, if u have to wait for client to get the settingsTable
+    -- Add hooks or functions in here, if u have to wait for client to get the settingsTable
     cvars.AddChangeCallback("gmod_drawtooleffects", function(convar_name, value_old, value_new)
         if (gWare.Utils.GetSettingValue("toolgun-effects") and value_new == "1") then
             RunConsoleCommand("gmod_drawtooleffects", "0")
