@@ -7,7 +7,7 @@ function gWare.Utils.AddPermission(type, name, description)
         })
     elseif type == "SAM" then
         CAMI.UnregisterPrivilege("gware_"..name)
-        sam.permissions.add(name, "gWare", "superadmin")
+        sam.permissions.add(name, "gmodWare", "superadmin")
     end
 end
 
