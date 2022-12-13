@@ -1,3 +1,5 @@
+local L = gWare.Utils.Lang.GetPhrase
+
 local PANEL = {}
 
 function PANEL:Init()
@@ -11,9 +13,8 @@ function PANEL:Init()
     self.Settings = self:Add("gWare.Utils.Settings")
     self.Vote = self:Add("gWare.Utils.Vote")
 
-    -- todo: translate these tabs
-    self.Sidebar:AddTab("Optionen", VoidUI.Icons.Settings, self.Settings, false)
-    self.Sidebar:AddTab("Vote", VoidUI.Icons.Stats, self.Vote, false)
+    self.Sidebar:AddTab(L"tab_options", VoidUI.Icons.Settings, self.Settings, false)
+    self.Sidebar:AddTab(L"tab_vote", VoidUI.Icons.Stats, self.Vote, false)
 end
 
 vgui.Register("gWare.Utils.Frame", PANEL, "VoidUI.Frame")
