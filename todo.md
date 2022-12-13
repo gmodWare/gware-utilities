@@ -47,7 +47,7 @@
 - ✅me (akt but locally)
 - ✅makt (medic akt)
 - ✅roll
-- 🔄unstuck
+- ✅unstuck
 
 #### Language Service
 - ✅Add English

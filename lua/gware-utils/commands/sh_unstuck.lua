@@ -5,23 +5,21 @@
     Example Chat: [Unstuck] You have 5 seconds to move out of the object.
 ]]
 
+local L = gWare.Utils.Lang.GetPhrase
+
 if SERVER then
     util.AddNetworkString("gWare.Commands.unstuck.ChatMessage")
 
     local delay = {}
-    local currentlyGhosted = {}
+    local noCollidedPlayers = {}
 
     hook.Add("PlayerSay", "gWare.Commands.unstuck", function(ply, chatInput)
         local text = chatInput:lower()
 
-        -- todo: use string.StartWithAny
-        if text != "/unstuck" and text != "!unstuck" then return end
+        if not text:StartWithAny("!unstuck", "/unstuck") then return end
 
-        -- todo: refactor this command, its quite stupid to network the error message
         if (delay[ply] or 0) > CurTime() then
-            net.Start("gWare.Commands.unstuck.ChatMessage")
-                net.WriteString("You are currently on cooldown for this command.")
-            net.Send(ply)
+            VoidLib.Notify(ply, L("notify_unstuck-error_name"), L("notify_unstuck-error-cooldown_desc"), VoidUI.Colors.Red, 2)
             return ""
         end
 
@@ -33,43 +31,30 @@ if SERVER then
             filter = ply
         })
 
-        if (not traceHull.Hit) then
-            net.Start("gWare.Commands.unstuck.ChatMessage")
-                net.WriteString("You seem to not be stuck in an object.")
-            net.Send(ply)
+        if (not traceHull.Hit or not IsValid(traceHull.Entity)) then
+            VoidLib.Notify(ply, L("notify_unstuck-error_name"), L("notify_unstuck-error-invalid_desc"), VoidUI.Colors.Red, 2)
             return ""
         end
 
-        currentlyGhosted[ply] = true
-        timer.Simple(5, function()
-            currentlyGhosted[ply] = nil
-            net.Start("gWare.Commands.unstuck.ChatMessage")
-                net.WriteString("You are now longer no collided.")
-            net.Send(ply)
+        timer.Simple(3, function()
+            if IsValid(ply) then
+                noCollidedPlayers[ply] = nil
+                ply:SetCustomCollisionCheck(false)
+            end
         end)
 
-        net.Start("gWare.Commands.unstuck.ChatMessage")
-            net.WriteString("You are no collided for 5 seconds.")
-        net.Send(ply)
+        ply:SetCustomCollisionCheck(true)
+        noCollidedPlayers[ply] = true
+        VoidLib.Notify(ply, L("notify_unstuck_name"), L("notify_unstuck-start_desc"), VoidUI.Colors.Green, 4)
 
-        delay[ply] = CurTime() + 1
+        delay[ply] = CurTime() + 15
 
         return ""
     end)
 
     hook.Add("ShouldCollide", "gWare.Commands.unstuck", function(ent1, ent2)
-        print(ent1, ent2)
-        if (ent1:IsPlayer() and currentlyGhosted[ent1]) or (ent2:IsPlayer() and currentlyGhosted[ent2]) then
+        if (ent1:IsPlayer() and noCollidedPlayers[ent1]) or (ent2:IsPlayer() and noCollidedPlayers[ent2]) then
             return false
         end
-    end)
-end
-
-if CLIENT then
-    net.Receive("gWare.Commands.unstuck.ChatMessage", function()
-        local text = net.ReadString()
-
-        -- todo: add chat print
-        -- we cant use gWare.Utils.PrintCommand function as this only should be used for command prints
     end)
 end
