@@ -84,9 +84,10 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
+        local toTranslated = " " .. L"general_to" .. " "
+
         gWare.Utils.PrintCommand("encrypted-comms", 
-            -- todo: translate this command
-            gWare.Utils.Colors.Orange, "*", sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
+            gWare.Utils.Colors.Orange, "*", sender:Nick() .. toTranslated .. receiverName .. "* ", color_white, message
         )
     end)
 end
