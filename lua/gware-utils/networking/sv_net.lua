@@ -1,12 +1,9 @@
-util.AddNetworkString("gWare.Utils.VoteSystem.SendVoteToAll")
 util.AddNetworkString("gWare.Utils.ClientReady")
 util.AddNetworkString("gWare.Utils.SendSettingToClient")
 util.AddNetworkString("gWare.Utils.SendJobsToClient")
 util.AddNetworkString("gWare.Utils.UpdateServerBool")
 util.AddNetworkString("gWare.Utils.UpdateServerString")
 util.AddNetworkString("gWare.Utils.ChangeJobAccess")
-util.AddNetworkString("gWare.Utils.VoteSystem.SendVoteToServer")
-util.AddNetworkString("gWare.Utils.JobSetter.SetJob")
 util.AddNetworkString("gWare.Utils.AddNPC")
 util.AddNetworkString("gWare.Utils.AddJobsToNPC")
 util.AddNetworkString("gWare.Utils.DeleteJobsFromNPC")
@@ -16,8 +13,6 @@ util.AddNetworkString("gWare.Utils.SendNPCSpawnsToClient")
 util.AddNetworkString("gWare.Utils.SendNPCJobsToClient")
 util.AddNetworkString("gWare.Utils.UpdateNPCSpawn")
 util.AddNetworkString("gWare.Utils.UpdateNPCJobs")
-util.AddNetworkString("gWare.Utils.UpdateVoteNum")
-util.AddNetworkString("gWare.Utils.UpdateVoteNumToClient")
 util.AddNetworkString("gWare.Utils.SendVoteToServer")
 util.AddNetworkString("gWare.Utils.BroadcastVote")
 util.AddNetworkString("gWare.Utils.SendResultToServer")
@@ -170,16 +165,6 @@ net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
 
     gWare.Utils.JobAccess[settingID][jobCommand] = true
     gWare.Utils.InsertJob(jobCommand, settingID)
-end)
-
-net.Receive("gWare.Utils.JobSetter.SetJob", function(len, ply)
-    local job = net.ReadString()
-    local ent = net.ReadEntity()
-
-    if not ply:HasGWarePermission("set_job_spawns") then return end
-
-    local setTeam = target_ply.changeTeam or target_ply.SetTeam
-    setTeam(ent, job, true)
 end)
 
 net.Receive("gWare.Utils.AddNPC", function(len, ply)
