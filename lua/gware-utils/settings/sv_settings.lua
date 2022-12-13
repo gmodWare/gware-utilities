@@ -1,3 +1,6 @@
+local L = gWare.Utils.Lang.GetPhrase
+
+
 local function getSetting(name)
     local val = false
 
@@ -108,8 +111,7 @@ end)
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     if not gWare.Utils.GetSettingValue("suicide") then return end
 
-    -- todo: translate this
-    VoidLib.Notify(ply, "Anti-Selbstmord", "Du kannst keinen Selbstmord begehen!", VoidUI.Colors.Red, 5)
+    VoidLib.Notify(ply, L"notify_disallowed-suicide_name", L"notify_disallowed-suicide_desc", VoidUI.Colors.Red, 5)
     return false
 end)
 
