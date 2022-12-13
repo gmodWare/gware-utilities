@@ -54,8 +54,8 @@
 - ✅Add English
 - ✅Pull Languages from git
 - ✅Translate Settings
-- Translate Commands
-- Translate Command Prefix
+- 🔄Translate Commands
+- ✅Translate Command Prefix
 - ✅Translate VoidLib Notifications
 - ✅Translate Tabs
 - Translate Vote
