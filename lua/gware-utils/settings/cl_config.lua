@@ -1,8 +1,3 @@
-gWare.Utils.Config = {}
-
--- set english to default and load correct language later
-gWare.Utils.Config.Language = gWare.Utils.Config.Language or "english"
-
 gWare.Utils.Colors = {
     Brackets = Color(50, 54, 61),
 

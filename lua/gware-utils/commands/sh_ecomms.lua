@@ -29,7 +29,7 @@ if SERVER then
         local args = text:Split("*")
         local start = args[1]
 
-        local namePart = start:ReplacePrefix("vfunk") 
+        local namePart = start:ReplacePrefix("vfunk", "ecomms", "encrypted", "ec") 
         local message = args[2]
 
         if not message then 

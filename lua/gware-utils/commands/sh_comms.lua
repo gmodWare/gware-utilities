@@ -17,9 +17,15 @@ if SERVER then
         if not (text:lower():StartWithAny("/funk ", "/comms ")) then return end
 
         local args = text:Split("*")
+
+        if #args < 2 then
+            VoidLib.Notify(ply, L("notify_invalid-comms_name"), L("notify_invalid-comms_desc"), VoidUI.Colors.Red, 10)
+            return
+        end
+
         local start = args[1]
 
-        local namePart = start:ReplacePrefix("funk") 
+        local namePart = start:ReplacePrefix("funk", "comms") 
         local message = args[2]:sub(2)
 
         if not message then

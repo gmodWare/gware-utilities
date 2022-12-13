@@ -6,6 +6,9 @@ gWare.Utils.NPCJobs = gWare.Utils.NPCJobs or {}
 gWare.Utils.Vote = gWare.Utils.Vote or {}
 gWare.Utils.VoteMember = gWare.Utils.VoteMember or {}
 
+gWare.Utils.Config = gWare.Utils.Config or {}
+gWare.Utils.Config.Language = gWare.Utils.Config.Language or "english"
+
 function gWare.Utils.GetSettingValue(index)
     local id = gWare.Utils.IDs[index]
 
