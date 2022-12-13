@@ -21,6 +21,7 @@ util.AddNetworkString("gWare.Utils.UpdateVoteNumToClient")
 util.AddNetworkString("gWare.Utils.SendVoteToServer")
 util.AddNetworkString("gWare.Utils.BroadcastVote")
 util.AddNetworkString("gWare.Utils.SendResultToServer")
+util.AddNetworkString("gWare.Utils.SendResultsToClients")
 
 
 function gWare.Utils.SendNPCSpawnsAndJobsToClient(ply)
@@ -249,6 +250,25 @@ function gWare.Utils.BroadcastVote(voteTable)
             net.WriteString(voteValue)
         end
     net.Broadcast()
+
+    timer.Simple(5, function()
+        local result = 0
+        local index = 1
+
+        for answerIndex, votes in ipairs(gWare.Utils.Vote) do
+            if votes > result then
+                result = votes
+                index = answerIndex
+            end
+        end
+
+        PrintTable(gWare.Utils.Vote)
+
+        net.Start("gWare.Utils.SendResultsToClients")
+            net.WriteUInt(index, 3)
+            net.WriteUInt(result, 7)
+        net.Broadcast()
+    end)
 end
 
 net.Receive("gWare.Utils.SendVoteToServer", function(len, ply)
@@ -256,6 +276,7 @@ net.Receive("gWare.Utils.SendVoteToServer", function(len, ply)
     local values = {}
 
     table.Empty(gWare.Utils.Vote)
+    table.Empty(gWare.Utils.VoteMember)
 
     for i = 1, count do
         local value = net.ReadString()
@@ -273,12 +294,12 @@ net.Receive("gWare.Utils.SendVoteToServer", function(len, ply)
 end)
 
 net.Receive("gWare.Utils.SendResultToServer", function(len, ply)
-    // TODO : check if player has already voted
+    if gWare.Utils.VoteMember[ply] then return end
+
     local index = net.ReadUInt(3)
 
+    gWare.Utils.VoteMember[ply] = true
     gWare.Utils.Vote[index] = gWare.Utils.Vote[index] + 1
-
-    // todo : send results to players
 end)
 
 

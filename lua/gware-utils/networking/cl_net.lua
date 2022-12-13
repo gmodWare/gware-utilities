@@ -170,15 +170,26 @@ end)
 
 net.Receive("gWare.Utils.BroadcastVote", function()
     local count = net.ReadUInt(3)
-    local voteTable = {}
+
+    table.Empty(gWare.Utils.Vote)
 
     for i = 1, count do
         local value = net.ReadString()
 
-        voteTable[i] = value
+        gWare.Utils.Vote[i] = value
     end
 
+    PrintTable(gWare.Utils.Vote)
+
     local voteMenu = vgui.Create("gWare.Utils.VoteMenu")
-    voteMenu:SetValueTable(voteTable)
+    voteMenu:SetValueTable(gWare.Utils.Vote)
     voteMenu:Vote()
+end)
+
+net.Receive("gWare.Utils.SendResultsToClients", function(len)
+    local winningAnswerIndex = net.ReadUInt(3) + 1
+    local result = net.ReadUInt(7)
+    local answerResult = gWare.Utils.Vote[winningAnswerIndex]
+
+    gWare.Utils.ChatPrint("gWare Vote", answerResult .. " | hat gewonnen [" .. result .. "]!")
 end)
