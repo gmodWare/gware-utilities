@@ -5,9 +5,10 @@ local L = gWare.Utils.Lang.GetPhrase
     Returns: varargs (colored string)
 ]]--
 function gWare.Utils.GetCommandPrefix(key)
+    print("trying to get " .. key)
     local colors = gWare.Utils.Colors
     local commandColor = colors.Commands[key] or colors.Commands["default"]
-    local commandPrefix = L(key)
+    local commandPrefix = L("command_" .. key)
     return {colors.Brackets, "[", commandColor, commandPrefix, colors.Brackets, "] ", color_white}
 end
 
@@ -22,7 +23,7 @@ end
 function gWare.Utils.PrintCommand(commandName, ...)
     local text = {...}
 
-    local prefixTbl = gWare.Utils.GetCommandPrefix("command_" .. commandName)
+    local prefixTbl = gWare.Utils.GetCommandPrefix(commandName)
     local combinedTable = table.Add(prefixTbl, text)
 
     chat.AddText(unpack(combinedTable))
