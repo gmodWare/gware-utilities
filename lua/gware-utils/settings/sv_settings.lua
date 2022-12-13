@@ -13,8 +13,8 @@ end
 
 local i = 1
 function gWare.Utils.AddSetting(tblData)
-    -- todo: remove name and description
-    gWare.Utils.Settings[i] = {id = tblData.id, name = tblData.name, description = tblData.description, value = tblData.defaultValue, settingType = tblData.settingType}
+    -- : remove name and description
+    gWare.Utils.Settings[i] = {id = tblData.id, value = tblData.defaultValue, settingType = tblData.settingType}
     gWare.Utils.IDs[tblData.id] = i
     i = i + 1
 

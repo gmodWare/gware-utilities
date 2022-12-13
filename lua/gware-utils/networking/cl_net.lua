@@ -3,12 +3,10 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
 
     for i = 1, count do
         local settingID = net.ReadString()
-        local settingName = net.ReadString()
-        local settingDescription = net.ReadString()
         local settingValue = net.ReadType()
         local settingType = net.ReadString()
 
-        gWare.Utils.Settings[i] = { id = settingID, name = settingName, description = settingDescription, value = settingValue, settingType = settingType}
+        gWare.Utils.Settings[i] = { id = settingID, value = settingValue, settingType = settingType}
         gWare.Utils.IDs[settingID] = i
     end
 

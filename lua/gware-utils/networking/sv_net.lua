@@ -60,8 +60,6 @@ function gWare.Utils.SendSettingToClient(ply)
         net.WriteUInt(count, 7)
         for _, settingsData in ipairs(gWare.Utils.Settings) do
             net.WriteString(settingsData.id)
-            net.WriteString(settingsData.name)
-            net.WriteString(settingsData.description)
             net.WriteType(settingsData.value)
             net.WriteString(settingsData.settingType)
         end
