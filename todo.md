@@ -9,7 +9,7 @@
 - ✅Auto-Cloak on NoClip
 - ✅Disable Killfeed
 - ✅Disable Suicide
-- 🔄Disable All Weapon Drop
+- ✅Disable All Weapon Drop
 - ✅Which jobs can use encrypted comms (2)
 - ✅Which jobs can decode encrypted comms (3)
 - ✅Automatic Workshop Download
