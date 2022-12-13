@@ -1,3 +1,5 @@
+local L = gWare.Utils.Lang.GetPhrase
+
 local PANEL = {}
 
 function PANEL:Init()
@@ -50,8 +52,7 @@ function PANEL:Init()
     self.addChoice:SetColor(VoidUI.Colors.Blue)
     self.addChoice.DoClick = function(s)
         if choiceCounter >= 5 + 1 then
-            -- todo: translate this
-            VoidLib.Notify("gWare", "Du kannst du nur 5 Wahlmöglichkeiten haben!", VoidUI.Colors.Red, 5)
+            VoidLib.Notify(L"notify_max-vote-answers_name", L"notify_max-vote-answers_desc!", VoidUI.Colors.Red, 5)
             return
         end
 
@@ -80,8 +81,7 @@ function PANEL:Init()
             if panelData:GetName() != "VoidUI.TextInput" then continue end
 
             if panelData:GetValue() == "" then
-                -- todo: translate this
-                VoidLib.Notify("gWare", "Du musst alle Felder ausfüllen!", VoidUI.Colors.Red, 5)
+                VoidLib.Notify(L"notify_vote-missing-fields_name", L"notify_vote-missing-fields_desc", VoidUI.Colors.Red, 5)
 
                 table.Empty(values)
                 return
@@ -90,8 +90,7 @@ function PANEL:Init()
             table.insert(values, panelData:GetValue())
         end
 
-        -- todo: translate this
-        VoidLib.Notify("gWare", "Du hast erfolgreich eine Abstimmung gestartet!", VoidUI.Colors.Green, 5)
+        VoidLib.Notify(L"notify_vote-success_name", L"notify_vote-success_name_desc", VoidUI.Colors.Green, 5)
         gWare.Utils.SendVoteToServer(values)
     end
 end
