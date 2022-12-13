@@ -39,10 +39,11 @@ if CLIENT then
         local ply = net.ReadEntity()
 
         local rollColor = getRollColor(randNum)
+        local numStr = tostring(randNum)
 
         gWare.Utils.PrintCommand("roll",
             -- todo: translate this command
-            ply:Nick() .. " hat eine ", rollColor, tostring(randNum), color_white, " gerollt!"
+            ply:Nick() .. " hat eine ", rollColor, numStr, color_white, " gerollt!"
         )
     end)
 end
