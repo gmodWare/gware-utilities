@@ -41,6 +41,7 @@ if CLIENT then
         local rollColor = getRollColor(randNum)
 
         gWare.Utils.PrintCommand("roll",
+            -- todo: translate this command
             ply:Nick() .. " hat eine ", rollColor, tostring(randNum), color_white, " gerollt!"
         )
     end)
