@@ -4,6 +4,7 @@ gWare.Utils.JobAccess = gWare.Utils.JobAccess or {}
 gWare.Utils.NPCSpawns = gWare.Utils.NPCSpawns or {}
 gWare.Utils.NPCJobs = gWare.Utils.NPCJobs or {}
 gWare.Utils.Vote = gWare.Utils.Vote or {}
+gWare.Utils.VoteMember = gWare.Utils.VoteMember or {}
 
 function gWare.Utils.GetSettingValue(index)
     local id = gWare.Utils.IDs[index]
