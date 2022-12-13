@@ -14,7 +14,7 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.Funk.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.funk", function(ply, text)
-        if not (text:lower():StartWithAny("/funk ", "!funk ")) then return end
+        if not (text:lower():StartWithAny("/funk ", "/comms ")) then return end
 
         local args = text:Split("*")
         local start = args[1]
@@ -52,8 +52,9 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
-        -- todo: translate command
-        gWare.Utils.ChatPrint("funk",
+        
+        gWare.Utils.ChatPrint("comms",
+            -- todo: translate this command
             "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )
     end)

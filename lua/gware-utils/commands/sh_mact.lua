@@ -9,7 +9,7 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.MAkt.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.MAkt", function(ply, text)
-        if (text:lower():StartWithAny("/makt ", "!makt ")) then
+        if (text:lower():StartWithAny("/makt ", "/mact ")) then
             local message = text:ReplacePrefix("makt")
 
             if gWare.Utils.IsMessageEmpty(message, ply) then return end
@@ -29,8 +29,7 @@ if CLIENT then
         local receivedMessage = net.ReadString()
         local ply = net.ReadEntity()
 
-        -- todo: translate command
-        gWare.Utils.ChatPrint("makt",
+        gWare.Utils.ChatPrint("mact",
             ply:Nick() .. " ", receivedMessage
         )
     end)

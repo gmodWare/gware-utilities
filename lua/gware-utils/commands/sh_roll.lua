@@ -8,7 +8,7 @@ if SERVER then
     util.AddNetworkString("GWare.RollCommand.ChatMessage")
 
     hook.Add("PlayerSay", "GWare.RollCommand", function(ply, text)
-        if not text:lower():StartWithAny("/roll", "!roll") then return end
+        if not text:lower():StartWithAny("/roll") then return end
 
         local randomNumber = math.Rand(1, 100)
 
@@ -40,7 +40,6 @@ if CLIENT then
 
         local rollColor = getRollColor(randNum)
 
-        -- todo: translate command
         gWare.Utils.ChatPrint("roll",
             ply:Nick() .. " hat eine ", rollColor, tostring(randNum), color_white, " gerollt!"
         )

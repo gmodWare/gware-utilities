@@ -11,7 +11,7 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.LOOC.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.LOOC", function(sender, text)
-        if not text:StartWithAny("/looc ", "!looc ") then return end
+        if not text:StartWithAny("/looc ") then return end
 
         local message = text:ReplacePrefix("looc")
 
@@ -43,8 +43,7 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
-        -- todo: translate command
-        gWare.Utils.PrChatPrintint("looc",
+        gWare.Utils.ChatPrint("looc",
             sender:Nick() .. ": " .. message
         )
     end)

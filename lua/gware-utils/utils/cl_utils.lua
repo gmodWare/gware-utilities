@@ -1,11 +1,14 @@
+local L = gWare.Utils.Lang.GetPhrase
+
 --[[
     Used to get the prefix for a command including colors
     Returns: varargs (colored string)
 ]]--
-function gWare.Utils.GetCommandPrefix(name)
+function gWare.Utils.GetCommandPrefix(key)
     local colors = gWare.Utils.Colors
-    local commandColor = colors.Commands[name] or colors.Commands["default"]
-    return {colors.Brackets, "[", commandColor, name:upper(), colors.Brackets, "] ", color_white}
+    local commandColor = colors.Commands[key] or colors.Commands["default"]
+    local commandPrefix = L(key)
+    return {colors.Brackets, "[", commandColor, commandPrefix, colors.Brackets, "] ", color_white}
 end
 
 --[[
@@ -16,10 +19,10 @@ end
     Example chat usage: '/akt isst eine Banane'
     Chat: '[AKT] Menschlich isst eine Banane'
 ]]
-function gWare.Utils.ChatPrint(prefix, ...)
+function gWare.Utils.ChatPrint(commandName, ...)
     local text = {...}
 
-    local prefixTbl = gWare.Utils.GetCommandPrefix(prefix)
+    local prefixTbl = gWare.Utils.GetCommandPrefix("command_" .. commandName)
     local combinedTable = table.Add(prefixTbl, text)
 
     chat.AddText(unpack(combinedTable))

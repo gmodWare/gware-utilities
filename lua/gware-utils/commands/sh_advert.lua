@@ -11,7 +11,7 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.Advert", function(ply, text)
         if not gWare.Utils.GetSettingValue("billboards") then return end
 
-        if (text:lower():StartWithAny("/advert ", "!advert ")) then
+        if (text:lower():StartWithAny("/advert ")) then
             local message = text:ReplacePrefix("advert")
 
             if gWare.Utils.IsMessageEmpty(message, ply) then return end
@@ -31,7 +31,6 @@ if CLIENT then
         local receivedMessage = net.ReadString()
         local ply = net.ReadEntity()
 
-        -- todo: translate command
         gWare.Utils.ChatPrint("advert",
             ply:Nick() .. ": ", receivedMessage
         )

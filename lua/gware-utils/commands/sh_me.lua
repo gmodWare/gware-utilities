@@ -11,7 +11,7 @@ if SERVER then
     util.AddNetworkString("gWare.Commands.Me.ChatMessage")
 
     hook.Add("PlayerSay", "gWare.Commands.me", function(sender, text)
-        if not text:StartWithAny("/me ", "!me ") then return end
+        if not text:StartWithAny("/me ") then return end
 
         local message = text:ReplacePrefix("me")
 
@@ -40,9 +40,8 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
-        -- todo: translate command
-        gWare.Utils.ChatPrint("me",
-            sender:Nick() .. " " .. message
-        )
+        local color = RPExtraTeams[sender:Team()].color
+
+        chat.AddText(color, sender .. " " .. message, color_white)
     end)
 end

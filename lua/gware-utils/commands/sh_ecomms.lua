@@ -19,7 +19,7 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.vfunk", function(ply, chatInput)
         local text = chatInput:lower()
 
-        if not text:StartWithAny("/vfunk ", "!vfunk ") then return end
+        if not text:StartWithAny("/vfunk ", "/ecomms ", "/encrypted ", "/ec ") then return end
 
         if not gWare.Utils.HasJobAccess("encrypted-comms", ply) then
             VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
@@ -84,8 +84,8 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
-        -- todo: translate command
-        gWare.Utils.ChatPrint("vfunk", 
+        gWare.Utils.ChatPrint("encrypted-comms", 
+            -- todo: translate this command
             gWare.Utils.Colors.Orange, "*", sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )
     end)

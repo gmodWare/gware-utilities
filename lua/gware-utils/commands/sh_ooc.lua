@@ -11,8 +11,6 @@
 -- example Chat : '[OOC] Menschlich:  Hallo'
 
 
-local L = gWare.Utils.Lang.GetPhrase
-
 if SERVER then
     util.AddNetworkString("gWare.Commands.OOC.ChatMessage")
 
@@ -49,7 +47,6 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
-        -- todo: translate command
         gWare.Utils.ChatPrint("ooc", 
             sender:Nick() .. ": " .. message
         )

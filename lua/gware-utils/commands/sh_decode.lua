@@ -13,7 +13,7 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.decode", function(ply, chatInput)
         local text = chatInput:lower()
 
-        if not text:StartWithAny("!decode ", "/decode ") then return end
+        if not text:StartWithAny("/decode ") then return end
 
         if not gWare.Utils.HasJobAccess("decode", ply) then
             VoidLib.Notify(ply, L"notify_decode_name", L"notify_decode_desc", VoidUI.Colors.Red, 4)
@@ -49,8 +49,7 @@ if CLIENT then
     net.Receive("gWare.Commands.decode.ChatMessage", function()
         local text = net.ReadString()
 
-        -- todo: translate command
-        gWare.Utils.ChatPrint("Entschlüsselt", 
+        gWare.Utils.ChatPrint("decode", 
             text
         )
     end)
