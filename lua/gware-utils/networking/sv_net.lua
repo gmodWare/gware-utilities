@@ -50,7 +50,6 @@ end
 function gWare.Utils.SendSettingToClient(ply)
     local count = #gWare.Utils.Settings
 
-    -- todo: remove name and description from networking
     net.Start("gWare.Utils.SendSettingToClient")
         net.WriteUInt(count, 7)
         for _, settingsData in ipairs(gWare.Utils.Settings) do
