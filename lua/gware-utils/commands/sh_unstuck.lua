@@ -70,6 +70,6 @@ if CLIENT then
         local text = net.ReadString()
 
         -- todo: add chat print
-        -- we cant use gWare.Utils.ChatPrint function as this only should be used for command prints
+        -- we cant use gWare.Utils.PrintCommand function as this only should be used for command prints
     end)
 end

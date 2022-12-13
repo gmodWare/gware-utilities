@@ -189,5 +189,5 @@ net.Receive("gWare.Utils.SendResultsToClients", function(len)
     local result = net.ReadUInt(7)
     local answerResult = gWare.Utils.Vote[winningAnswerIndex]
 
-    gWare.Utils.ChatPrint("gWare Vote", answerResult .. " | hat gewonnen [" .. result .. "]!")
+    gWare.Utils.PrintCommand("gWare Vote", answerResult .. " | hat gewonnen [" .. result .. "]!")
 end)

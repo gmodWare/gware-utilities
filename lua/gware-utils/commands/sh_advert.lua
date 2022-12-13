@@ -31,7 +31,7 @@ if CLIENT then
         local receivedMessage = net.ReadString()
         local ply = net.ReadEntity()
 
-        gWare.Utils.ChatPrint("advert",
+        gWare.Utils.PrintCommand("advert",
             ply:Nick() .. ": ", receivedMessage
         )
     end)

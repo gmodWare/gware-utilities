@@ -49,7 +49,7 @@ if CLIENT then
     net.Receive("gWare.Commands.decode.ChatMessage", function()
         local text = net.ReadString()
 
-        gWare.Utils.ChatPrint("decode", 
+        gWare.Utils.PrintCommand("decode", 
             text
         )
     end)

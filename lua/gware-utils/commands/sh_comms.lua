@@ -53,7 +53,7 @@ if CLIENT then
         local sender = net.ReadEntity()
 
         
-        gWare.Utils.ChatPrint("comms",
+        gWare.Utils.PrintCommand("comms",
             -- todo: translate this command
             "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )

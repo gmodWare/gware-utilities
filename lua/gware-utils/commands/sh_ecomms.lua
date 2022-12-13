@@ -84,7 +84,7 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
-        gWare.Utils.ChatPrint("encrypted-comms", 
+        gWare.Utils.PrintCommand("encrypted-comms", 
             -- todo: translate this command
             gWare.Utils.Colors.Orange, "*", sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
         )
