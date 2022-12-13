@@ -24,7 +24,7 @@
 #### Additional Permissions:
 - ✅Disable spawnmenu for Users
 - ✅Diable contextmenu for Users
-- 🔄Can Create Votes
+- ✅Can Create Votes
 - ✅Can Set DarkRP Spawns
 
 #### Menu Tools:
@@ -35,7 +35,7 @@
 
 #### Extra Stuff:
 - ❌Third Person
-- 🔄Simple Voting System
+- ✅Simple Voting System
 
 #### Commands:
 - ✅comms
@@ -57,7 +57,7 @@
 - ✅Translate Command Prefix
 - ✅Translate VoidLib Notifications
 - ✅Translate Tabs
-- Translate Vote
+- ✅Translate Vote
 
 #### Security
 - ✅ gWare admin setting check in net receives

@@ -14,22 +14,20 @@ function PANEL:Init()
     self.questionTextPanel:SSetPos(5, 0)
     self.questionTextPanel:SSetSize(550, 50)
     self.questionTextPanel.Paint = function(s, w, h)
-        -- todo: translate this
-        draw.SimpleText("Question:", "VoidUI.R20", 0, 0, VoidUI.Colors.White, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
+        draw.SimpleText(L"vote_question", "VoidUI.R20", 0, 0, VoidUI.Colors.White, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
     end
 
     self.choiceTextPanel = self.scrollBar:Add("DPanel")
     self.choiceTextPanel:SSetPos(5, 100)
     self.choiceTextPanel:SSetSize(550, 50)
     self.choiceTextPanel.Paint = function(s, w, h)
-        -- todo: translate this
-        draw.SimpleText("Multiple Choice:", "VoidUI.R20", 0, 0, VoidUI.Colors.White, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
+        draw.SimpleText(L"vote_multiple-choice", "VoidUI.R20", 0, 0, VoidUI.Colors.White, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
     end
 
     self.question = self.scrollBar:Add("VoidUI.TextInput")
     self.question:SSetPos(0, 30)
     self.question:SSetSize(550, 50)
-    self.question:SetPlaceholder("Question . . . ?")
+    self.question:SetPlaceholder(L"vote_question" .. " ...?")
 
     local yPos = 130
     local choiceCounter = 1
@@ -38,7 +36,7 @@ function PANEL:Init()
         local choice = self.scrollBar:Add("VoidUI.TextInput")
         choice:SSetPos(0, yPos)
         choice:SSetSize(550, 50)
-        choice:SetPlaceholder("Choice " .. i)
+        choice:SetPlaceholder(L"vote_choice" .. " " .. i)
 
         choiceCounter = choiceCounter + 1
         yPos = yPos + 60
@@ -47,7 +45,7 @@ function PANEL:Init()
     self.addChoice = self.scrollBar:Add("VoidUI.Button")
     self.addChoice:SSetPos(0, yPos + 5)
     self.addChoice:SSetSize(550, 35)
-    self.addChoice:SetText("Add Choice")
+    self.addChoice:SetText(L"vote_add-choice")
     self.addChoice:SetFont("VoidUI.R20")
     self.addChoice:SetColor(VoidUI.Colors.Blue)
     self.addChoice.DoClick = function(s)
@@ -59,7 +57,7 @@ function PANEL:Init()
         local choice = self.scrollBar:Add("VoidUI.TextInput")
         choice:SSetPos(0, yPos)
         choice:SSetSize(550, 50)
-        choice:SetPlaceholder("Choice " .. choiceCounter)
+        choice:SetPlaceholder(L"vote_choice" .. " " .. choiceCounter)
 
         choiceCounter = choiceCounter + 1
         yPos = yPos + 60
@@ -75,7 +73,7 @@ function PANEL:Init()
     self.submit:SDockMargin(0, 10, 25, 0)
     self.submit:SSetSize(550, 50)
     self.submit:SetFont("VoidUI.R28")
-    self.submit:SetText("Submit")
+    self.submit:SetText(L"vote_submit")
     self.submit.DoClick = function()
         for _, panelData in ipairs(self.scrollBar:GetChildren()[1]:GetChildren()) do
             if panelData:GetName() != "VoidUI.TextInput" then continue end

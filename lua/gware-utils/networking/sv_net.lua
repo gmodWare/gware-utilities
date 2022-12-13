@@ -244,8 +244,6 @@ function gWare.Utils.BroadcastVote(voteTable)
             end
         end
 
-        PrintTable(gWare.Utils.Vote)
-
         net.Start("gWare.Utils.SendResultsToClients")
             net.WriteUInt(index, 3)
             net.WriteUInt(result, 7)
