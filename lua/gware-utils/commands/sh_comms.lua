@@ -58,10 +58,10 @@ if CLIENT then
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
+        local toTranslated = " " .. L"general_to" .. " "
         
         gWare.Utils.PrintCommand("comms",
-            -- todo: translate this command
-            "*" .. sender:Nick() .. " an " .. receiverName .. "* ", color_white, message
+            "*" .. sender:Nick() .. toTranslated .. receiverName .. "* ", color_white, message
         )
     end)
 end
