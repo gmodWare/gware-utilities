@@ -94,7 +94,7 @@ function PANEL:Init()
                 option.input:AddChoice(lang, lang:lower(), selected)
             end
 
-            option.input.OnSelect = function(self, index, value, data)
+            option.input.OnSelect = function(self, indexDropdown, value, data)
                 gWare.Utils.Config.Language = value
 
                 gWare.Utils.UpdateSettingString(index, value)
