@@ -18,8 +18,8 @@ function gWare.Utils.AddSetting(tblData)
     gWare.Utils.IDs[tblData.id] = i
     i = i + 1
 
-    if not getSetting(tblData.name) then
-        gWare.Utils.InsertSetting(tblData.name, tblData.defaultValue)
+    if not getSetting(tblData.id) then
+        gWare.Utils.InsertSetting(tblData.id, tblData.defaultValue)
     end
 
     gWare.Utils.GetAllSettings(function (sqlData)
@@ -47,14 +47,14 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
 end)
 
 function gWare.Utils.ChangeSetting(index, settingValue)
-    local settingName = gWare.Utils.Settings[index].name
+    local settingName = gWare.Utils.Settings[index].id
 
     if not getSetting(settingName) then return end
 
     gWare.Utils.UpdateSetting(settingName, settingValue)
     gWare.Utils.Settings[index].value = settingValue
 
-    hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
+    hook.Run("gWare.Utils.SettingChanged", settingName, settingValue)
 end
 
 gWare.Utils.GetAllJobs(function(tblData)
@@ -80,6 +80,11 @@ gWare.Utils.GetAllNPCPos(function (npcTblData)
     end
 end)
 
+hook.Add("gWare.Utils.SettingChanged", "gWare.Utils.ChangeLanguageVar", function(settingID, settingValue)
+    if settingID != "language" then return end
+
+    gWare.Utils.Config.Language = settingValue
+end)
 
 ///////////////////////////
 //       SETTINGS        //
