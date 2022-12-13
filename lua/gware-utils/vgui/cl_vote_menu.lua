@@ -10,7 +10,7 @@ function PANEL:SetActivePanel(panel)
 end
 
 function PANEL:SendResultToServer()
-    timer.Simple(120, function()
+    timer.Simple(4, function()
         if not self.pick then return end
 
         net.Start("gWare.Utils.SendResultToServer")
@@ -28,7 +28,7 @@ function PANEL:Init()
     self:SetFont("VoidUI.R20")
     self:MakePopup()
 
-    //self:SendResultToServer()
+    self:SendResultToServer()
 end
 
 function PANEL:Vote()
@@ -65,17 +65,3 @@ function PANEL:Vote()
 end
 
 vgui.Register("gWare.Utils.VoteMenu", PANEL, "VoidUI.Frame")
-
-concommand.Add("gw", function()
-    local frame = vgui.Create("gWare.Utils.VoteMenu")
-
-    local tbl = {
-       [1] = "Das ist eine Frage?",
-       [2] = "Woman are niceaadadad",
-       [3] = "Humanity is niceadda",
-       [4] = "kxx is hot ><asdd",
-    }
-
-    frame:SetValueTable(tbl)
-    frame:Vote()
-end)
