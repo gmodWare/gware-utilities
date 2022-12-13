@@ -36,7 +36,6 @@
 #### Extra Stuff:
 - ❌Third Person
 - 🔄Simple Voting System
-- Custom Prefix for Commands
 
 #### Commands:
 - ✅comms
@@ -70,6 +69,7 @@
 
 #### Roadmap (Features aimed for after launch)
 - Ability to disable commands in settings (as staff member)
+- Custom Prefix for Commands
 
 ##
 ✅ Done —
