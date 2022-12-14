@@ -2,6 +2,8 @@
 //       SETTINGS        //
 ///////////////////////////
 
+local OldSettings = {}
+
 hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     -- Add hooks or functions in here, if u have to wait for client to get the settingsTable
@@ -12,19 +14,25 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
     end)
 
     hook.Add("gWare.Utils.SettingChanged", "gWare.Utils.PreventToolGunEffect", function(setting, value)
-        if (setting == "toolgunEffects" and value == false) then
-            RunConsoleCommand("gmod_drawtooleffects", "0")
-        end
+        if (setting ~= "toolgun-effects") then return end
+        RunConsoleCommand("gmod_drawtooleffects", value and "0" or "1")
     end)
 
     hook.Add("InitPostEntity", "gWare.Utils.PreventToolGunEffect", function()
+        OldSettings["gmod_drawtooleffects"] = GetConVar("gmod_drawtooleffects"):GetString()
         if (gWare.Utils.GetSettingValue("toolgun-effects")) then
             RunConsoleCommand("gmod_drawtooleffects", "0")
         end
     end)
- 
+
+    hook.Add("ShutDown", "gWare.Utils.ResetSettings", function()
+        for setting, value in pairs(OldSettings) do
+            RunConsoleCommand(setting, value)
+        end
+    end)
+
     hook.Add("DrawDeathNotice", "gWare.Utils.KillFeed", function()
-        if gWare.Utils.GetSettingValue("killfeed") then return end
+        if not gWare.Utils.GetSettingValue("killfeed") then return end
 
         return false
     end)
