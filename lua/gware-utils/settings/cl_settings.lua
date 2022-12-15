@@ -7,6 +7,19 @@ local OldSettings = {}
 hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     -- Add hooks or functions in here, if u have to wait for client to get the settingsTable
+
+    -- toolgun-sounds
+    hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
+        if not gWare.Utils.GetSettingValue("toolgun-sounds") then return end
+
+        local ent = data.Entity
+
+        if (ent:IsValid() and ent:IsPlayer() and ent:GetActiveWeapon():IsValid() and ent:GetActiveWeapon():GetClass() == "gmod_tool") then
+            return false
+        end
+    end)
+
+    -- toolgun-effects
     cvars.AddChangeCallback("gmod_drawtooleffects", function(convar_name, value_old, value_new)
         if (gWare.Utils.GetSettingValue("toolgun-effects") and value_new == "1") then
             RunConsoleCommand("gmod_drawtooleffects", "0")
@@ -31,17 +44,20 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
         end
     end)
 
+    -- killfeed
     hook.Add("DrawDeathNotice", "gWare.Utils.KillFeed", function()
         if not gWare.Utils.GetSettingValue("killfeed") then return end
 
         return false
     end)
 
+    -- contextmenu
     hook.Add("ContextMenuOpen", "gWare.Utils.ContextMenuCheck", function()
         if not gWare.Utils.GetSettingValue("contextmenu") then return end
         if not LocalPlayer():HasGWarePermission("open_context_menu") then return false end
     end)
 
+    -- spawnmenu
     hook.Add("OnSpawnMenuOpen", "gWare.Utils.SpawnMenuCheck", function()
         if not gWare.Utils.GetSettingValue("spawnmenu") then return end
         if not LocalPlayer():HasGWarePermission("open_spawnmenu") then return false end

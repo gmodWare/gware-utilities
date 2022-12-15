@@ -172,7 +172,7 @@ hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attack
     end
 end)
 
--- toolgunSounds
+-- toolgun-sounds
 hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
     if not gWare.Utils.GetSettingValue("toolgun-sounds") then return end
 
@@ -185,9 +185,7 @@ end)
 
 -- darkrpBlackboard
 hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
-    if not gWare.Utils.GetSettingValue("billboards") then return end
-
-    return false
+    if gWare.Utils.GetSettingValue("billboards") then return false end
 end)
 
 -- player-weapon-drop
