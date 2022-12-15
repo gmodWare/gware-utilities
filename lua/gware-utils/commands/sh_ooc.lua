@@ -25,7 +25,7 @@ if SERVER then
             message = text:sub(4)
         end
 
-        if gWare.Utils.IsMessageEmpty(message, ply) then return end
+        if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
         net.Start("gWare.Commands.OOC.ChatMessage")
             net.WriteString(message)

@@ -12,7 +12,7 @@ if SERVER then
         if (text:lower():StartWithAny("/akt ", "/act ")) then
             local message = text:ReplacePrefix("akt")
 
-            if gWare.Utils.IsMessageEmpty(message, ply) then return end
+            if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
             net.Start("gWare.Commands.Akt.ChatMessage")
                 net.WriteString(message)

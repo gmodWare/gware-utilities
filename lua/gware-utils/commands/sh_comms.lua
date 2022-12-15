@@ -20,7 +20,7 @@ if SERVER then
 
         if #args < 2 then
             VoidLib.Notify(ply, L("notify_invalid-comms_name"), L("notify_invalid-comms_desc"), VoidUI.Colors.Red, 10)
-            return
+            return ""
         end
 
         local start = args[1]
@@ -28,7 +28,7 @@ if SERVER then
         local namePart = start:ReplacePrefix("funk", "comms")
         local message = args[2]:sub(2)
 
-        if gWare.Utils.IsMessageEmpty(encrypted, ply) then return end
+        if gWare.Utils.IsMessageEmpty(encrypted, ply) then return "" end
 
         local target = gWare.Utils.GetPlayerByNamePart(namePart)
         local fullName = target and target:Name() or namePart

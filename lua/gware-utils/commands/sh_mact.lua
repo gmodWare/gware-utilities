@@ -12,7 +12,7 @@ if SERVER then
         if (text:lower():StartWithAny("/makt ", "/mact ")) then
             local message = text:ReplacePrefix("makt", "mact")
 
-            if gWare.Utils.IsMessageEmpty(message, ply) then return end
+            if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
             net.Start("gWare.Commands.MAkt.ChatMessage")
                 net.WriteString(message)

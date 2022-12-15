@@ -14,7 +14,7 @@ if SERVER then
         if (text:lower():StartWithAny("/advert ")) then
             local message = text:ReplacePrefix("advert")
 
-            if gWare.Utils.IsMessageEmpty(message, ply) then return end
+            if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
             net.Start("gWare.Commands.Advert.ChatMessage")
                 net.WriteString(message)
