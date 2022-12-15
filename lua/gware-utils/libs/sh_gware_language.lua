@@ -126,7 +126,7 @@ function gWare.Lang:GetLangPhrase(addon, phrase)
         gWare.Utils.Print("Langs table not initialized yet!", "error")
         return phrase
     end
-    
+
     local returnVal = phrase
     if (langs[lang] and langs[lang][phrase]) then
         -- If the language has the phrase
@@ -180,9 +180,7 @@ function gWare.Lang:LoadLocalLanguages(addon, reload)
 
     for k, v in pairs(files) do
         local langName = string.Replace(v, ".json", "")
-        if (!reload) then
-            if (gTable.Lang.Langs[langName]) then continue end
-        end
+        if (!reload and gTable.Lang.Langs[langName]) then continue end
 
         local json = file.Read("gware-languages/" .. addon .. "/" .. v)
 
@@ -239,7 +237,7 @@ function gWare.Lang:LoadLanguages(addon)
             gWare.Utils.Print("Tried to load " .. lang .. ", but langauge file is empty!", "warning")
             continue
         end
-        
+
         local tbl = util.JSONToTable(json)
         if (!tbl or table.Count(tbl) < 1) then
             gWare.Utils.Print("Tried to load " .. lang .. ", but langauge file is corrupt/empty!", "warning")
@@ -280,7 +278,7 @@ function gWare.Lang:DownloadLanguages(addon, callback)
             local url = rawURL .. branch .. "/" .. addon .. "/" .. lang .. ".json"
             http.Fetch(url, function (body, size, headers, code)
                 callbacksDone = callbacksDone + 1
-            
+
                 if (code != 200 or !body or body == "") then
                     gWare.Utils.Print("Couldn't get " .. lang .. " language: " .. code .. " (please try again later)", "error")
                     if (callbacksDone == #languages) then
@@ -311,8 +309,6 @@ function gWare.Lang:DownloadLanguages(addon, callback)
                 if (callbacksDone == #languages) then
                     callback()
                 end
-                
-
             end, function (err)
                 gWare.Utils.Print("Couldn't download " .. lang .. " language - error: " .. err, "error")
             end)

@@ -37,7 +37,7 @@ function string.isCommand(str, prefix)
     if not spacePos then
         message = ""
         cmdName = string.sub(str, 2)
-    else 
+    else
         cmdName = string.sub(str, 2, spacePos)
         message = string.sub(str, spacePos + 1)
     end

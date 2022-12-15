@@ -26,12 +26,12 @@ gWare.Utils.Dir = "gware-utils"
 -----------------------------------------------------------]]
 
 function gWare.Utils.Load(dir)
-    local files = file.Find(dir.. "/".. "*", "LUA")
+    local files = file.Find(dir .. "/" .. "*", "LUA")
 
     for k, filename in pairs(files) do
         if filename:StartWith("cl") then
 
-            AddCSLuaFile(dir.. "/".. filename)
+            AddCSLuaFile(dir .. "/" .. filename)
 
             if CLIENT then
                 local load = include(dir .. "/" .. filename)
@@ -49,20 +49,20 @@ function gWare.Utils.Load(dir)
         if filename:StartWith("sh") then
             AddCSLuaFile(dir .. "/" .. filename)
 
-            local load = include(dir .. "/".. filename)
+            local load = include(dir .. "/" .. filename)
             if load then load() end
         end
     end
 end
 
 function gWare.Utils.AddCSDir(dir)
-    local files = file.Find(dir .. "/".. "*", "LUA")
+    local files = file.Find(dir .. "/" .. "*", "LUA")
 
     for k, v in pairs(files) do
-        AddCSLuaFile(dir.. "/".. v)
+        AddCSLuaFile(dir .. "/" .. v)
 
         if CLIENT then
-            include(dir.. "/".. v)
+            include(dir .. "/" .. v)
         end
     end
 end

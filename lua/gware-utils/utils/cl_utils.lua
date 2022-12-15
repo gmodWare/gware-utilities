@@ -5,7 +5,6 @@ local L = gWare.Utils.Lang.GetPhrase
     Returns: varargs (colored string)
 ]]--
 function gWare.Utils.GetCommandPrefix(key)
-    print("trying to get " .. key)
     local colors = gWare.Utils.Colors
     local commandColor = colors.Commands[key] or colors.Commands["default"]
     local commandPrefix = L("command_" .. key)
@@ -32,7 +31,7 @@ end
 hook.Add("InitPostEntity", "gWare.Utils.InitPostEntity", function()
     function g_VoicePanelList:OnChildAdded(child)
         if not gWare.Utils.GetSettingValue("voice-panels") then return end
-        
+
         if (child:IsValid()) then
             child:Remove()
         end

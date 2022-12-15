@@ -25,13 +25,10 @@ if SERVER then
 
         local start = args[1]
 
-        local namePart = start:ReplacePrefix("funk", "comms") 
+        local namePart = start:ReplacePrefix("funk", "comms")
         local message = args[2]:sub(2)
 
-        if not message then
-            VoidLib.Notify(ply, L"notify_invalid-comms_name", L"notify_invalid-comms_desc", VoidUI.Colors.Red, 10)
-            return
-        end
+        if gWare.Utils.IsMessageEmpty(encrypted, ply) then return end
 
         local target = gWare.Utils.GetPlayerByNamePart(namePart)
         local fullName = target and target:Name() or namePart
@@ -47,19 +44,13 @@ if SERVER then
 end
 
 if CLIENT then
-    local colors = {
-        ["color1"] = Color(0, 38, 255),
-        ["brackets"] = Color(40, 42, 46),
-        ["commandColor"] = Color(245, 200, 75)
-    }
-
     net.Receive("gWare.Commands.Funk.ChatMessage", function()
         local message = net.ReadString()
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
 
         local toTranslated = " " .. L"general_to" .. " "
-        
+
         gWare.Utils.PrintCommand("comms",
             "*" .. sender:Nick() .. toTranslated .. receiverName .. "* ", color_white, message
         )

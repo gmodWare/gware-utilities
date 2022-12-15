@@ -18,7 +18,6 @@ util.AddNetworkString("gWare.Utils.BroadcastVote")
 util.AddNetworkString("gWare.Utils.SendResultToServer")
 util.AddNetworkString("gWare.Utils.SendResultsToClients")
 
-
 function gWare.Utils.SendNPCSpawnsAndJobsToClient(ply)
     local npcSpawnsCount = table.Count(gWare.Utils.NPCSpawns)
 
@@ -281,5 +280,3 @@ net.Receive("gWare.Utils.SendResultToServer", function(len, ply)
     gWare.Utils.VoteMember[ply] = true
     gWare.Utils.Vote[index] = gWare.Utils.Vote[index] + 1
 end)
-
-

@@ -23,19 +23,16 @@ if SERVER then
 
         if not gWare.Utils.HasJobAccess("encrypted-comms", ply) then
             VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
-            return 
+            return
         end
 
         local args = text:Split("*")
         local start = args[1]
 
-        local namePart = start:ReplacePrefix("vfunk", "ecomms", "encrypted", "ec") 
+        local namePart = start:ReplacePrefix("vfunk", "ecomms", "encrypted", "ec")
         local message = args[2]
 
-        if not message then 
-            VoidLib.Notify(ply, L"notify_invalid-encrypted-ecomms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 10)
-            return
-        end
+        if gWare.Utils.IsMessageEmpty(message, ply) then return end
 
         local target = gWare.Utils.GetPlayerByNamePart(namePart)
         local receiver = target or namePart

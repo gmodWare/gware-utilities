@@ -18,9 +18,10 @@ list.Set("DesktopWindows", "gware_settings", {
     title = "gWare",
     icon = "gware/gware_icon.png",
     init = function(icon, window)
+        // NOTE - This isn't displayed, i assume because the permissions arent loaded yet
         if not LocalPlayer():HasGWarePermission("edit_settings") then
             VoidLib.Notify(L"notify_no-permissions_name", L"notify_no-permissions_desc", VoidUI.Colors.Red, 6)
-            return 
+            return
         end
         OpenMenu()
     end

@@ -3,7 +3,7 @@ TOOL.Name = "DarkRP Job Spawn Setter"
 TOOL.Command = nil
 TOOL.ConfigName = ""
 TOOL.Information = {
-	{ name = "left", stage = 0 },
+    { name = "left", stage = 0 },
 }
 
 local L = gWare.Utils.Lang.GetPhrase
@@ -218,22 +218,22 @@ function TOOL:MakeGhostHuman(model, pos, angle)
     self.GhostHuman = ents.CreateClientProp(model)
     self.GhostHuman:SetModel(model)
     self.GhostHuman:SetPos( pos )
-	self.GhostHuman:SetAngles( angle )
-	self.GhostHuman:Spawn()
+    self.GhostHuman:SetAngles( angle )
+    self.GhostHuman:Spawn()
 
     self.GhostHuman:PhysicsDestroy()
 
-	self.GhostHuman:SetMoveType( MOVETYPE_NONE )
-	self.GhostHuman:SetNotSolid( true )
-	self.GhostHuman:SetRenderMode( RENDERMODE_TRANSCOLOR )
-	self.GhostHuman:SetColor( Color( 255, 255, 255, 150 ) )
+    self.GhostHuman:SetMoveType( MOVETYPE_NONE )
+    self.GhostHuman:SetNotSolid( true )
+    self.GhostHuman:SetRenderMode( RENDERMODE_TRANSCOLOR )
+    self.GhostHuman:SetColor( Color( 255, 255, 255, 150 ) )
 end
 
 function TOOL:UpdateGhostHuman()
     if SERVER then return end
 
     self.GhostHuman:SetPos(self:GetOwner():GetEyeTrace().HitPos)
-	self.GhostHuman:SetAngles(Angle(zero))
+    self.GhostHuman:SetAngles(Angle(zero))
 end
 
 function TOOL:Think()

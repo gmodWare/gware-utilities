@@ -17,15 +17,12 @@ if SERVER then
 
         if not gWare.Utils.HasJobAccess("decode", ply) then
             VoidLib.Notify(ply, L"notify_decode_name", L"notify_decode_desc", VoidUI.Colors.Red, 4)
-            return 
+            return
         end
 
         local encrypted = text:ReplacePrefix("decode")
 
-        if not encrypted then
-            VoidLib.Notify(ply, L"notify_invalid-decode_name", L"notify_invalid-decode_name", VoidUI.Colors.Red, 10)
-            return
-        end
+        if gWare.Utils.IsMessageEmpty(encrypted, ply) then return end
 
         local hexTbl = encrypted:Split(" ")
         local clearText = ""

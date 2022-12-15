@@ -5,8 +5,6 @@
     Example Chat: [me] 501st CMD Menschlich: Lol der ist einfach umgefallen xD
 ]]
 
-local L = gWare.Utils.Lang.GetPhrase
-
 if SERVER then
     util.AddNetworkString("gWare.Commands.Me.ChatMessage")
 
@@ -15,7 +13,7 @@ if SERVER then
 
         local message = text:ReplacePrefix("me")
 
-        if gWare.Utils.IsMessageEmpty(message, ply) then return end
+        if gWare.Utils.IsMessageEmpty(message, sender) then return "" end
 
         local receivers = {sender}
         local distSqr = 500 * 500

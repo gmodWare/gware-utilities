@@ -90,7 +90,7 @@ end)
 //       SETTINGS        //
 ///////////////////////////
 
--- FamilySharing
+-- family-sharing
 hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
     if not gWare.Utils.GetSettingValue("family-sharing") then return end
 
@@ -102,7 +102,7 @@ hook.Add("PlayerAuthed", "gWare.Utils.FamilySharing", function(ply)
     ply:Kick("[gWare] Family Sharing is not allowed!")
 end)
 
--- workshopDownload
+-- auto-workshop-dl
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function()
     if not gWare.Utils.GetSettingValue("auto-workshop-dl") then return end
     for _, addon in ipairs(engine.GetAddons()) do
@@ -112,7 +112,7 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.WorkshopDownload" , function
     end
 end)
 
--- commitSuicide
+-- suicide
 hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     if not gWare.Utils.GetSettingValue("suicide") then return end
 
@@ -120,7 +120,7 @@ hook.Add("CanPlayerSuicide", "gWare.Utils.PreventSuicide", function(ply)
     return false
 end)
 
--- automatic noclip
+-- auto-cloak
 local function hideWeapons(ply, shouldHide)
     for _, v in pairs(ply:GetWeapons()) do
         v:SetNoDraw(should_hide)
@@ -162,7 +162,7 @@ hook.Add("PlayerSwitchWeapon", "gWare.Utils.DisableCloak", function(ply)
     end
 end)
 
--- npcDisabledWeapons
+-- npc-weapon-drop
 hook.Add("OnNPCKilled", "gWare.Utils.DisableNPCWeaponDrop", function(npc, attacker, inflictor)
     if not gWare.Utils.GetSettingValue("npc-weapon-drop") then return end
 

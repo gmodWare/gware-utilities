@@ -45,8 +45,6 @@ function PANEL:Init()
             option.input = option:Add("VoidUI.SelectorButton")
             option.input.text = "Hinzufügen.."
 
-            local selected = {}
-
             gWare.Utils.JobAccess[data.id] = gWare.Utils.JobAccess[data.id] or {}
             local jobCache = gWare.Utils.JobAccess[data.id]
 
@@ -75,7 +73,6 @@ function PANEL:Init()
 
                 selector:InitItems(jobTbl, function (tblKeys, tblValues)
                     option.input:Select(tblKeys, tblValues)
-                    selected = selTbl
                     gWare.Utils.ChangeJobAccess(selector.recentItem.key, data.id)
                 end)
             end

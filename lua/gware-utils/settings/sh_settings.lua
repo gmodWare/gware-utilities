@@ -32,4 +32,3 @@ function gWare.Utils.HasJobAccess(settingID, ply)
 
     return false
 end
-

@@ -8,7 +8,7 @@ function meta:HasGWarePermission(name)
     if SAM_LOADED then
         return self:HasPermission(name)
     else
-        return CAMI.PlayerHasAccess(self, "gware_"..name)
+        return CAMI.PlayerHasAccess(self, "gware_" .. name)
     end
 end
 
@@ -25,7 +25,7 @@ function gWare.Utils.AddPermission(type, name, description)
             Description = description,
         })
     elseif type == "SAM" then
-        CAMI.UnregisterPrivilege("gware_"..name)
+        CAMI.UnregisterPrivilege("gware_" .. name)
         sam.permissions.add(name, "gmodWare", "superadmin")
     end
 end
