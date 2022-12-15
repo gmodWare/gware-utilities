@@ -183,7 +183,35 @@ hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
     end
 end)
 
--- darkrpBlackboard
+-- billboards
+local advertCommand
+
+hook.Add("DarkRPFinishedLoading", "gWare.Utils.DisableBlackboard", function()
+    advertCommand = DarkRP.getChatCommand("advert")
+
+    if gWare.Utils.GetSettingValue("billboards") then
+        for _, ent in ipairs(ents.FindByClass("darkrp_billboard")) do
+            ent:Remove()
+        end
+
+        DarkRP.removeChatCommand("advert")
+    end
+end)
+
+hook.Add("gWare.Utils.SettingChanged", "gWare.Utils.DisableBlackboard", function(settingID, settingValue)
+    if settingID != "billboards" then return end
+
+    if settingValue then
+        for _, ent in ipairs(ents.FindByClass("darkrp_billboard")) do
+            ent:Remove()
+        end
+
+        DarkRP.removeChatCommand("advert")
+    else
+        DarkRP.chatCommands["advert"] = table.Copy(advertCommand)
+    end
+end)
+
 hook.Add("canAdvert", "gWare.Utils.DisableBlackboard", function(ply)
     if gWare.Utils.GetSettingValue("billboards") then return false end
 end)
