@@ -177,8 +177,6 @@ net.Receive("gWare.Utils.BroadcastVote", function()
         gWare.Utils.Vote[i] = value
     end
 
-    PrintTable(gWare.Utils.Vote)
-
     local voteMenu = vgui.Create("gWare.Utils.VoteMenu")
     voteMenu:SetValueTable(gWare.Utils.Vote)
     voteMenu:Vote()
@@ -189,5 +187,5 @@ net.Receive("gWare.Utils.SendResultsToClients", function(len)
     local result = net.ReadUInt(7)
     local answerResult = gWare.Utils.Vote[winningAnswerIndex]
 
-    gWare.Utils.PrintCommand("gWare Vote", answerResult .. " | hat gewonnen [" .. result .. "]!")
+    gWare.Utils.PrintCommand("gWare Vote", answerResult .. " | " .. L"vote_winner" .. " [" .. result .. "]!")
 end)
