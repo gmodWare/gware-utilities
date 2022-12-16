@@ -1,3 +1,5 @@
+local L = gWare.Utils.Lang.GetPhrase
+
 net.Receive("gWare.Utils.SendSettingToClient", function(len)
     local count = net.ReadUInt(7)
 
@@ -187,5 +189,13 @@ net.Receive("gWare.Utils.SendResultsToClients", function(len)
     local result = net.ReadUInt(7)
     local answerResult = gWare.Utils.Vote[winningAnswerIndex]
 
-    gWare.Utils.PrintCommand("gWare Vote", answerResult .. " | " .. L"vote_winner" .. " [" .. result .. "]!")
+    local text = result > 0 and L"vote_winner" or L"vote_winner_none"
+
+    if result == 0 then
+        gWare.Utils.PrintCommand("gWare Vote", text .. " :c")
+
+        return
+    end
+
+    gWare.Utils.PrintCommand("gWare Vote", answerResult .. " | " .. text .. " [" .. result .. "]!")
 end)
