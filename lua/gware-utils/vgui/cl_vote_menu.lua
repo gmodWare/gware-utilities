@@ -1,4 +1,5 @@
 local PANEL = {}
+local pick
 
 function PANEL:SetValueTable(tbl)
     self.valueTable = tbl
@@ -10,14 +11,14 @@ function PANEL:SetActivePanel(panel)
 end
 
 function PANEL:SendResultToServer()
-    timer.Simple(4, function()
-        if not self.pick then return end
+    timer.Simple(120, function()
+        self:Remove()
+
+        if not pick then return end
 
         net.Start("gWare.Utils.SendResultToServer")
-            net.WriteUInt(self.pick, 3)
+            net.WriteUInt(pick, 3)
         net.SendToServer()
-
-        self:Remove()
     end)
 end
 
@@ -26,7 +27,8 @@ function PANEL:Init()
     self:SetPos(20, 250)
     self:ShowCloseButton(true)
     self:SetFont("VoidUI.R20")
-    self:MakePopup()
+
+    self:SetKeyboardInputEnabled(false)
 
     self:SendResultToServer()
 end
@@ -59,7 +61,7 @@ function PANEL:Vote()
 
         button.DoClick = function()
             self:SetActivePanel(button)
-            self.pick = index - 1
+            pick = index - 1
         end
     end
 end
