@@ -62,4 +62,13 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
         if not gWare.Utils.GetSettingValue("spawnmenu") then return end
         if not LocalPlayer():HasGWarePermission("open_spawnmenu") then return false end
     end)
+
+    -- voice-panels
+    hook.Add("HUDShouldDraw", "gWare.Utils.VoicePanels", function(name)
+        if not gWare.Utils.GetSettingValue("voice-panels") then return end
+
+        if (name == "DarkRP_ChatReceivers") then
+            return false
+        end
+    end)
 end)
