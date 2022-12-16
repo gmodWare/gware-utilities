@@ -27,7 +27,7 @@ function PANEL:Init()
     self.question = self.scrollBar:Add("VoidUI.TextInput")
     self.question:SSetPos(0, 30)
     self.question:SSetSize(550, 50)
-    self.question:SetPlaceholder(L"vote_question" .. " ...?")
+    self.question:SetPlaceholder(L"vote_question")
 
     local yPos = 130
     local choiceCounter = 1

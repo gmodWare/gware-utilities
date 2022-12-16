@@ -81,7 +81,7 @@ function gWare.Utils.Print(str, type)
         color = Color(255, 182, 23)
     end
 
-    MsgC(color, "[gWare Utilities]: ", Color(255, 255, 255), str, "\n")
+    MsgC(color, "gWare Utilities ", Color(255, 255, 255), "» ", Color(255, 255, 255), str, "\n")
 end
 
 --[[---------------------------------------------------------
@@ -109,7 +109,7 @@ function gWare.Utils.LoadAll()
     -- finally add clientside files
     gWare.Utils.AddCSDir(gWare.Utils.Dir .. "/vgui")
 
-    MsgC(Color(23, 89, 255), "\n", UtilsBranding, Color(255, 255, 255), authors, "\n\n")
+    MsgC(Color(23, 89, 255), UtilsBranding, Color(255, 255, 255), authors, "\n\n")
     gWare.Utils.Print("gWare successfully loaded.")
     gWare.Utils.Loaded = true
 end

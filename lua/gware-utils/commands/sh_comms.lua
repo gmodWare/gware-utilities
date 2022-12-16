@@ -19,7 +19,7 @@ if SERVER then
         local args = text:Split("*")
 
         if #args < 2 then
-            VoidLib.Notify(ply, L("notify_invalid-comms_name"), L("notify_invalid-comms_desc"), VoidUI.Colors.Red, 10)
+            VoidLib.Notify(ply, L("notify_invalid-comms_name"), L("notify_invalid-comms_desc"), VoidUI.Colors.Red, 8)
             return ""
         end
 
@@ -29,17 +29,25 @@ if SERVER then
         local message = args[2]:sub(2)
 
         if not message then
-            VoidLib.Notify(ply, L"notify_invalid-comms_name", L"notify_invalid-comms_desc", VoidUI.Colors.Red, 10)
+            VoidLib.Notify(ply, L"notify_invalid-comms_name", L"notify_invalid-comms_desc", VoidUI.Colors.Red, 8)
             return
         end
 
-        local target = gWare.Utils.GetPlayerByNamePart(namePart)
-        local fullName = target and target:Name() or namePart
+        local receiver = gWare.Utils.GetPlayerByNamePart(namePart)
+
+        local receiverName = namePart
+        local receiverColor = VoidUI.Colors.Blue
+
+        if IsEntity(receiver) then
+            receiverName = receiver:Name()
+            receiverColor = RPExtraTeams[receiver:Team()].color
+        end
 
         net.Start("gWare.Commands.Funk.ChatMessage")
             net.WriteString(message)
-            net.WriteString(fullName)
+            net.WriteString(receiverName)
             net.WriteEntity(ply)
+            net.WriteColor(receiverColor)
         net.Broadcast()
 
         return ""
@@ -47,15 +55,19 @@ if SERVER then
 end
 
 if CLIENT then
+    local toTranslated = (" " .. L"general_to" .. " ")
+    local col = gWare.Utils.Colors
+
     net.Receive("gWare.Commands.Funk.ChatMessage", function()
         local message = net.ReadString()
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
+        local receiverColor = net.ReadColor()
 
-        local toTranslated = " " .. L"general_to" .. " "
+        local senderColor = RPExtraTeams[sender:Team()].color
 
         gWare.Utils.PrintCommand("comms",
-            "*" .. sender:Nick() .. toTranslated .. receiverName .. "* ", color_white, message
+            senderColor, sender:Nick(), color_white, col.Orange, toTranslated, receiverColor, receiverName, col.Brackets, " » ", color_white, message
         )
     end)
 end

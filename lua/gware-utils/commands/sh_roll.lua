@@ -41,9 +41,11 @@ if CLIENT then
         local rollColor = getRollColor(randNum)
         local numStr = tostring(randNum)
 
+        local senderColor = RPExtraTeams[ply:Team()].color
+
         gWare.Utils.PrintCommand("roll",
             -- todo: translate this command
-            ply:Nick() .. " hat eine ", rollColor, numStr, color_white, " gerollt!"
+            senderColor, ply:Nick(), color_white, " hat eine ", rollColor, numStr, color_white, " gerollt!"
         )
     end)
 end

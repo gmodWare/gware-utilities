@@ -33,12 +33,10 @@ if SERVER then
         local message = args[2]
 
         if not message then
-            VoidLib.Notify(ply, L"notify_invalid-encrypted-ecomms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 10)
+            VoidLib.Notify(ply, L"notify_invalid-encrypted-ecomms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 8)
             return
         end
 
-        local target = gWare.Utils.GetPlayerByNamePart(namePart)
-        local receiver = target or namePart
 
         local charCodes = { string.byte(message, 1, string.len(message)) }
         local encrypted = ""
@@ -56,13 +54,22 @@ if SERVER then
             table.insert(clearTextReceivers, receiver)
         end
 
-        local receiverName = IsEntity(receiver) and receiver:Name() or receiver
+        local receiverName = namePart
+        local receiverColor = VoidUI.Colors.Blue
+
+        local receiver = gWare.Utils.GetPlayerByNamePart(namePart)
+
+        if IsEntity(receiver) then
+            receiverName = receiver:Name()
+            receiverColor = RPExtraTeams[receiver:Team()].color
+        end
 
         -- send encrypted message to everyone except receiver and sender
         net.Start("gWare.Commands.vFunk.ChatMessage")
             net.WriteString(encrypted)
             net.WriteString(receiverName)
             net.WriteEntity(ply)
+            net.WriteColor(receiverColor)
         net.SendOmit(clearTextReceivers)
 
         -- now send clear text to sender and receiver
@@ -70,6 +77,7 @@ if SERVER then
             net.WriteString(message)
             net.WriteString(receiverName)
             net.WriteEntity(ply)
+            net.WriteColor(receiverColor)
         net.Send(clearTextReceivers)
 
         return ""
@@ -78,16 +86,18 @@ end
 
 if CLIENT then
     local col = gWare.Utils.Colors
+    local toTranslated = " " .. L"general_to" .. " "
 
     net.Receive("gWare.Commands.vFunk.ChatMessage", function()
         local message = net.ReadString()
         local receiverName = net.ReadString()
         local sender = net.ReadEntity()
+        local receiverColor = net.ReadColor()
 
-        local toTranslated = " " .. L"general_to" .. " "
+        local senderColor = RPExtraTeams[sender:Team()].color
 
         gWare.Utils.PrintCommand("encrypted-comms", 
-            gWare.Utils.Colors.Orange, "*", sender:Nick() .. toTranslated .. receiverName .. "* ", color_white, message
+            senderColor, sender:Nick(), col.Orange, toTranslated, receiverColor, receiverName, col.Brackets, " » ", color_white, message
         )
     end)
 end

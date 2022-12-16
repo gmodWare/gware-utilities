@@ -62,8 +62,11 @@ end
     Returns: player | nil
 ]]
 function gWare.Utils.GetPlayerByNamePart(namePart)
+    namePart = namePart:lower()
+
     for _, ply in ipairs(player.GetAll()) do
-        if ply:Name():lower():find(namePart) then
+        print(ply:Name():lower() .. "=" .. namePart)
+        if ply:Name():lower():find(namePart) or namePart == ply:Name():lower() then
             return ply
         end
     end

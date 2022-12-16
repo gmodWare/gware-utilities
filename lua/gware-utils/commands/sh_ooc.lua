@@ -41,8 +41,10 @@ if CLIENT then
         local message = net.ReadString()
         local sender = net.ReadEntity()
 
+        local senderColor = RPExtraTeams[sender:Team()].color
+
         gWare.Utils.PrintCommand("ooc",
-            sender:Nick() .. ": " .. message
+            senderColor, sender:Nick() .. "» " .. message
         )
     end)
 end

@@ -12,14 +12,14 @@ gWare.Utils.Colors = {
         ["default"] = Color(150, 150, 150),
 
         -- these have their own translation
-        ["act"] = Color(234, 245, 75),
-        ["decode"] = Color(234, 245, 75),
-        ["comms"] = Color(0, 38, 255),
-        ["ooc"] = Color(169, 75, 245),
-        ["looc"] = Color(205, 75, 245),
-        ["roll"] = Color(75, 92, 245),
-        ["encrypted-comms"] = Color(48, 15, 194),
-        ["mact"] = Color(87, 32, 93),
-        ["advert"] = Color(2, 84, 17),
+        ["act"] = Color(180, 13, 13),
+        ["decode"] = Color(60, 175, 66),
+        ["comms"] = Color(255, 196, 0),
+        ["ooc"] = Color(71, 136, 221),
+        ["looc"] = Color(102, 153, 219),
+        ["roll"] = Color(156, 156, 156),
+        ["encrypted-comms"] = Color(194, 116, 15),
+        ["mact"] = Color(93, 32, 32),
+        ["advert"] = Color(255, 196, 0),
     }
 }
