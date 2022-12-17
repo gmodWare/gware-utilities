@@ -54,7 +54,7 @@ function TOOL:LeftClick(trace)
         ent:SetMaterial("models/shadertest/shader4")
 
         gWare.Utils.AddNPC(textInput, ent:GetPos())
-        VoidLib.Notify(L"notify_jobsetter-created_name", L("notify_jobsetter-created_desc"):format(textInput), VoidUI.Colors.Green, 5)
+        VoidLib.Notify(L("notify_jobsetter-created_name"), L("notify_jobsetter-created_desc"):format(textInput), VoidUI.Colors.Green, 5)
         Reload()
     end)
 
