@@ -41,8 +41,10 @@ function TOOL:LeftClick(trace)
     if not IsFirstTimePredicted() then return end
 
     local nameInput = vgui.Create("VoidUI.ValuePopup")
+    // todo: translate
     nameInput:SetText("DarkRP Job Spawn Setter", "Wähle einen Namen für deinen NPC und Spawne ihn.")
     nameInput:WrapText()
+    // todo: translate
     nameInput:Continue("Spawnen", function(textInput)
         local ent = ents.CreateClientside("gware_utils_spawnnpc")
         ent:SetModel("models/player/monk.mdl")
