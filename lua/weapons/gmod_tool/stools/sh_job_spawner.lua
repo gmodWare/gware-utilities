@@ -13,6 +13,7 @@ local npcSpawns
 if CLIENT then
     npcSpawns = false
 
+    // todo: translate
     language.Add("Tool.sh_job_spawner.name", "DarkRP Job Spawn Setter")
     language.Add("Tool.sh_job_spawner.desc", "Setze die Spawns, eines DarkRP Jobs")
     language.Add("Tool.sh_job_spawner.left", "Spawne einen NPC und gebe ihm einen Namen")
