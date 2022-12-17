@@ -248,6 +248,7 @@ function TOOL:Think()
 end
 
 function TOOL:Deploy()
+    if not L then L = gWare.Utils.Lang.GetPhrase end
     if SERVER then return end
     if not IsFirstTimePredicted() then return end
 
