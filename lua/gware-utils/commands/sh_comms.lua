@@ -55,7 +55,6 @@ if SERVER then
 end
 
 if CLIENT then
-    local toTranslated = (" " .. L"general_to" .. " ")
     local col = gWare.Utils.Colors
 
     net.Receive("gWare.Commands.Funk.ChatMessage", function()
@@ -65,6 +64,7 @@ if CLIENT then
         local receiverColor = net.ReadColor()
 
         local senderColor = RPExtraTeams[sender:Team()].color
+        local toTranslated = (" " .. L"general_to" .. " ")
 
         gWare.Utils.PrintCommand("comms",
             senderColor, sender:Nick(), color_white, col.Orange, toTranslated, receiverColor, receiverName, col.Brackets, " » ", color_white, message
