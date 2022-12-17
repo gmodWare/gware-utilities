@@ -36,20 +36,6 @@ if CLIENT then
         end
     end
 
-    local function insertAt(original, pos, ...)
-        local toInsert = {...}
-
-        local firstHalf = original:sub(1, pos)
-        local secondHalf = original:sub(pos + 1)
-
-        local tbl = { [1] = firstHalf }
-
-        table.Add(tbl, toInsert)
-        table.insert(tbl, secondHalf)
-
-        return tbl
-    end
-
     net.Receive("GWare.RollCommand.ChatMessage", function()
         local randNum = net.ReadUInt(7)
         local ply = net.ReadEntity()
