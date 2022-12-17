@@ -13,10 +13,9 @@ local npcSpawns
 if CLIENT then
     npcSpawns = false
 
-    // todo: translate
-    language.Add("Tool.sh_job_spawner.name", "DarkRP Job Spawn Setter")
-    language.Add("Tool.sh_job_spawner.desc", "Setze die Spawns, eines DarkRP Jobs")
-    language.Add("Tool.sh_job_spawner.left", "Spawne einen NPC und gebe ihm einen Namen")
+    language.Add("Tool.sh_job_spawner.name", L("tool_name"))
+    language.Add("Tool.sh_job_spawner.desc", L("tool_desc"))
+    language.Add("Tool.sh_job_spawner.left", L("tool_leftclick"))
 end
 
 local function Reload()
@@ -42,11 +41,9 @@ function TOOL:LeftClick(trace)
     if not IsFirstTimePredicted() then return end
 
     local nameInput = vgui.Create("VoidUI.ValuePopup")
-    // todo: translate
-    nameInput:SetText("DarkRP Job Spawn Setter", "Wähle einen Namen für deinen NPC und Spawne ihn.")
+    nameInput:SetText(L("tool_name"), L("tool_choose-name"))
     nameInput:WrapText()
-    // todo: translate
-    nameInput:Continue("Spawnen", function(textInput)
+    nameInput:Continue(l("tool_spawn"), function(textInput)
         local ent = ents.CreateClientside("gware_utils_spawnnpc")
         ent:SetModel("models/player/monk.mdl")
         ent:SetName(textInput)
@@ -58,7 +55,7 @@ function TOOL:LeftClick(trace)
         Reload()
     end)
 
-    nameInput:Cancel("Abbrechen", function()
+    nameInput:Cancel(L("tool_abort"), function()
         return
     end)
 end
@@ -109,7 +106,7 @@ function TOOL.BuildCPanel(panel)
     clearButton:SetPos(20, 450)
     clearButton:SSetSize(280, 50)
     clearButton:SetFont("VoidUI.R22")
-    clearButton:SetText("Delete Jobs from NPC")
+    clearButton:SetText(L("tool_delete-jobs"))
     clearButton:SetColor(VoidUI.Colors.Red)
     clearButton.DoClick = function()
         if not npcDropdown:GetSelected() then
@@ -140,10 +137,10 @@ function TOOL.BuildCPanel(panel)
     addButton:SetPos(20, 520)
     addButton:SSetSize(280, 50)
     addButton:SetFont("VoidUI.R22")
-    addButton:SetText("Add Jobs to NPC")
+    addButton:SetText(L("tool_add-jobs"))
     addButton.DoClick = function()
         if not npcDropdown:GetSelected() then
-            VoidLib.Notify(L"notify_jobsetter-select-npc_name", L"notify_jobsetter-select-npc_desc", VoidUI.Colors.Red, 5)
+            VoidLib.Notify(L("notify_jobsetter-select-npc_name"), L("notify_jobsetter-select-npc_desc"), VoidUI.Colors.Red, 5)
             return
         end
 
@@ -184,7 +181,7 @@ function TOOL.BuildCPanel(panel)
                 gWare.Utils.AddJobsToNPC(npcName, jobCommand)
             end
 
-            VoidLib.Notify(L"notify_jobsetter-spawn-added_name", L("notify_jobsetter-spawn-added_desc"):format(npcName), VoidUI.Colors.Green, 5)
+            VoidLib.Notify(L("notify_jobsetter-spawn-added_name"), L("notify_jobsetter-spawn-added_desc"):format(npcName), VoidUI.Colors.Green, 5)
             Reload()
         end
     end
@@ -193,17 +190,17 @@ function TOOL.BuildCPanel(panel)
     deleteButton:SetPos(20, 850)
     deleteButton:SSetSize(280, 75)
     deleteButton:SetFont("VoidUI.R22")
-    deleteButton:SetText("Delete Selected NPC")
+    deleteButton:SetText(L("tool_delete-npc"))
     deleteButton:SetColor(VoidUI.Colors.Red)
     deleteButton.DoClick = function()
         if not npcDropdown:GetSelected() then
-            VoidLib.Notify(L"notify_jobsetter-select-npc_name", L"notify_jobsetter-select-npc_desc", VoidUI.Colors.Red, 5)
+            VoidLib.Notify(L("notify_jobsetter-select-npc_name"), L("notify_jobsetter-select-npc_desc"), VoidUI.Colors.Red, 5)
             return
         end
 
         local npcName, data = npcDropdown:GetSelected()
 
-        VoidLib.Notify(L"notify_jobsetter-deleted_name", L("notify_jobsetter-deleted_name"):format(npcName), VoidUI.Colors.Red, 5)
+        VoidLib.Notify(L("notify_jobsetter-deleted_name"), L("notify_jobsetter-deleted_name"):format(npcName), VoidUI.Colors.Red, 5)
         gWare.Utils.DeleteNPC(npcName)
 
         Reload()
@@ -229,7 +226,7 @@ function TOOL:MakeGhostHuman(model, pos, angle)
     self.GhostHuman:SetMoveType( MOVETYPE_NONE )
     self.GhostHuman:SetNotSolid( true )
     self.GhostHuman:SetRenderMode( RENDERMODE_TRANSCOLOR )
-    self.GhostHuman:SetColor( Color( 255, 255, 255, 150 ) )
+    self.GhostHuman:SetColor(color_white)
 end
 
 function TOOL:UpdateGhostHuman()
