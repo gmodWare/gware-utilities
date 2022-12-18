@@ -63,6 +63,8 @@ net.Receive("gWare.Utils.UpdateClients", function()
     local index = net.ReadUInt(5)
     local settingValue = net.ReadType()
 
+    RunConsoleCommand("spawnmenu_reload")
+
     gWare.Utils.Settings[index].value = settingValue
 end)
 
