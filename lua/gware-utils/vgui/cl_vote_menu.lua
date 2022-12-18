@@ -11,7 +11,7 @@ function PANEL:SetActivePanel(panel)
 end
 
 function PANEL:SendResultToServer()
-    timer.Simple(30, function()
+    timer.Create("gWare.Vote", 30, 1, function()
         self:Remove()
 
         if not pick then return end
@@ -64,6 +64,14 @@ function PANEL:Vote()
             pick = index - 1
         end
     end
+end
+
+function PANEL:Paint(w, h)
+    draw.RoundedBox(0, 0, 0, w, h, VoidUI.Colors.Background)
+
+    self.timeLeft = math.Round(timer.TimeLeft("gWare.Vote"))
+
+    self:SetTitle(self.valueTable[1] .. " (" .. self.timeLeft .. ")")
 end
 
 vgui.Register("gWare.Utils.VoteMenu", PANEL, "VoidUI.Frame")
