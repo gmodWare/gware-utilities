@@ -13,9 +13,13 @@ local npcSpawns
 if CLIENT then
     npcSpawns = false
 
-    language.Add("Tool.sh_job_spawner.name", L("tool_name"))
-    language.Add("Tool.sh_job_spawner.desc", L("tool_desc"))
-    language.Add("Tool.sh_job_spawner.left", L("tool_leftclick"))
+    hook.Add("Utils.Lang.LanguagesLoaded", "gWare.Tool.WaitForLang", function()
+        L = gWare.Utils.Lang.GetPhrase
+        
+        language.Add("tool.sh_job_spawner.name", L("tool_name"))
+        language.Add("tool.sh_job_spawner.desc", L("tool_desc"))
+        language.Add("tool.sh_job_spawner.left", L("tool_leftclick"))
+    end)
 end
 
 local function Reload()
