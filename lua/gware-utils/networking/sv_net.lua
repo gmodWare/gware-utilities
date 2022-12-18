@@ -18,6 +18,7 @@ util.AddNetworkString("gWare.Utils.BroadcastVote")
 util.AddNetworkString("gWare.Utils.SendResultToServer")
 util.AddNetworkString("gWare.Utils.SendResultsToClients")
 util.AddNetworkString("gWare.Utils.UpdateClients")
+util.AddNetworkString("gWare.Utils.BroadcastUpdatedJobAccess")
 
 function gWare.Utils.SendNPCSpawnsAndJobsToClient(ply)
     local npcSpawnsCount = table.Count(gWare.Utils.NPCSpawns)
@@ -130,6 +131,13 @@ function gWare.Utils.UpdateNPCJobs(name, jobCommand)
     gWare.Utils.NPCJobs[name][jobCommand] = true
 end
 
+function gWare.Utils.BroadcastUpdatedJobAccess(jobCommand, settingID)
+    net.Start("gWare.Utils.BroadcastUpdatedJobAccess")
+        net.WriteString(jobCommand)
+        net.WriteString(settingID)
+    net.Broadcast()
+end
+
 net.Receive("gWare.Utils.UpdateServerBool", function(len, ply)
     if not ply:HasGWarePermission("edit_settings") then return end
 
@@ -153,6 +161,8 @@ net.Receive("gWare.Utils.ChangeJobAccess", function(len, ply)
 
     local jobCommand = net.ReadString()
     local settingID = net.ReadString()
+
+    gWare.Utils.BroadcastUpdatedJobAccess(jobCommand, settingID)
 
     gWare.Utils.JobAccess[settingID] = gWare.Utils.JobAccess[settingID] or {}
 

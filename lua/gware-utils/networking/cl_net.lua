@@ -101,14 +101,6 @@ function gWare.Utils.UpdateSettingString(index, settingValue)
 end
 
 function gWare.Utils.ChangeJobAccess(jobCommand, settingID)
-    gWare.Utils.JobAccess[settingID] = gWare.Utils.JobAccess[settingID] or {}
-
-    if gWare.Utils.JobAccess[settingID][jobCommand] then
-        gWare.Utils.JobAccess[settingID][jobCommand] = nil
-    else
-        gWare.Utils.JobAccess[settingID][jobCommand] = true
-    end
-
     net.Start("gWare.Utils.ChangeJobAccess")
         net.WriteString(jobCommand)
         net.WriteString(settingID)
@@ -212,4 +204,18 @@ net.Receive("gWare.Utils.SendResultsToClients", function(len)
     end
 
     gWare.Utils.PrintCommand("vote", answerResult .. " | " .. text .. " [" .. result .. "]!")
+end)
+
+net.Receive("gWare.Utils.BroadcastUpdatedJobAccess", function(lem)
+    local jobCommand = net.ReadString()
+    local settingID = net.ReadString()
+
+    gWare.Utils.JobAccess[settingID] = gWare.Utils.JobAccess[settingID] or {}
+
+    if gWare.Utils.JobAccess[settingID][jobCommand] then
+        gWare.Utils.JobAccess[settingID][jobCommand] = nil
+        return
+    end
+
+    gWare.Utils.JobAccess[settingID][jobCommand] = true
 end)
