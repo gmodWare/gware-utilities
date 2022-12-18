@@ -15,7 +15,7 @@ if CLIENT then
 
     hook.Add("Utils.Lang.LanguagesLoaded", "gWare.Tool.WaitForLang", function()
         L = gWare.Utils.Lang.GetPhrase
-        
+
         language.Add("tool.sh_job_spawner.name", L("tool_name"))
         language.Add("tool.sh_job_spawner.desc", L("tool_desc"))
         language.Add("tool.sh_job_spawner.left", L("tool_leftclick"))
@@ -47,7 +47,7 @@ function TOOL:LeftClick(trace)
     local nameInput = vgui.Create("VoidUI.ValuePopup")
     nameInput:SetText(L("tool_name"), L("tool_choose-name"))
     nameInput:WrapText()
-    nameInput:Continue(l("tool_spawn"), function(textInput)
+    nameInput:Continue(L("tool_spawn"), function(textInput)
         local ent = ents.CreateClientside("gware_utils_spawnnpc")
         ent:SetModel("models/player/monk.mdl")
         ent:SetName(textInput)
