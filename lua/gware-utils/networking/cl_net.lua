@@ -204,10 +204,10 @@ net.Receive("gWare.Utils.SendResultsToClients", function(len)
     local text = result > 0 and L"vote_winner" or L"vote_winner_none"
 
     if result == 0 then
-        gWare.Utils.PrintCommand("gWare Vote", text .. " :c")
+        gWare.Utils.PrintCommand(L"gware_vote", text .. " :c")
 
         return
     end
 
-    gWare.Utils.PrintCommand("gWare Vote", answerResult .. " | " .. text .. " [" .. result .. "]!")
+    gWare.Utils.PrintCommand(L"gware_vote", answerResult .. " | " .. text .. " [" .. result .. "]!")
 end)

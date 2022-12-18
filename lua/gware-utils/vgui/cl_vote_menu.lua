@@ -11,7 +11,7 @@ function PANEL:SetActivePanel(panel)
 end
 
 function PANEL:SendResultToServer()
-    timer.Simple(120, function()
+    timer.Simple(30, function()
         self:Remove()
 
         if not pick then return end

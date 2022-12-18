@@ -233,7 +233,7 @@ function gWare.Utils.BroadcastVote(voteTable)
         end
     net.Broadcast()
 
-    timer.Simple(121, function()
+    timer.Simple(31, function()
         local result = 0
         local index = 1
 
