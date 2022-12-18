@@ -71,6 +71,8 @@ net.Receive("gWare.Utils.UpdateClients", function()
     end
 
     gWare.Utils.Settings[index].value = settingValue
+
+    hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
 end)
 
 hook.Add("InitPostEntity", "gWare.Utils.ClientReady", function()
@@ -85,8 +87,6 @@ function gWare.Utils.UpdateSettingBool(index, settingValue)
     net.SendToServer()
 
     gWare.Utils.Settings[index].value = settingValue
-
-    hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
 end
 
 function gWare.Utils.UpdateSettingString(index, settingValue)
@@ -96,8 +96,6 @@ function gWare.Utils.UpdateSettingString(index, settingValue)
     net.SendToServer()
 
     gWare.Utils.Settings[index].value = settingValue
-
-    hook.Run("gWare.Utils.SettingChanged", gWare.Utils.Settings[index].id, settingValue)
 end
 
 function gWare.Utils.ChangeJobAccess(jobCommand, settingID)
