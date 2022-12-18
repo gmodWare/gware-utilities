@@ -20,7 +20,7 @@ if SERVER then
             return ""
         end
 
-        local encrypted = text:ReplacePrefix("decode ")
+        local encrypted = text:ReplacePrefix("decode")
 
         if gWare.Utils.IsMessageEmpty(encrypted, ply) then return "" end
 
@@ -45,6 +45,7 @@ end
 if CLIENT then
     net.Receive("gWare.Commands.decode.ChatMessage", function()
         local text = net.ReadString()
+        print(text)
 
         gWare.Utils.PrintCommand("decode", 
             text

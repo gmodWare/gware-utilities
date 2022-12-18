@@ -44,7 +44,7 @@ if CLIENT then
         local senderColor = RPExtraTeams[sender:Team()].color
 
         gWare.Utils.PrintCommand("ooc",
-            senderColor, sender:Nick() .. "» " .. message
+            senderColor, sender:Nick(),  gWare.Utils.Colors.Brackets, " » ", color_white, message
         )
     end)
 end
