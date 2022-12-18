@@ -65,6 +65,7 @@ net.Receive("gWare.Utils.UpdateClients", function()
 
     if settingValue == "language" then
         RunConsoleCommand("spawnmenu_reload")
+        gWare.Utils.Config.Language = value
     end
 
     gWare.Utils.Settings[index].value = settingValue
