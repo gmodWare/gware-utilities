@@ -15,7 +15,7 @@ hook.Add("OnPlayerChat", "gWare.Utils.OpenSettingsMenu1", function(ply, text)
     if text:lower():StartWithAny("!gware", "/gware", "!gw", "/gw") then
         OpenMenu()
 
-        return true
+        return ""
     end
 end)
 
