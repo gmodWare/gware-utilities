@@ -212,6 +212,8 @@ function TOOL.BuildCPanel(panel)
     end
 end
 
+local ghostColor = Color( 255, 255, 255, 150 )
+
 function TOOL:MakeGhostHuman(model, pos, angle)
     if SERVER then return end
 
@@ -220,7 +222,7 @@ function TOOL:MakeGhostHuman(model, pos, angle)
     end
 
     self.GhostHuman = ents.CreateClientProp(model)
-    self.GhostHuman:SetModel(model)
+    self.GhostHuman:SetModel( model )
     self.GhostHuman:SetPos( pos )
     self.GhostHuman:SetAngles( angle )
     self.GhostHuman:Spawn()
@@ -230,7 +232,7 @@ function TOOL:MakeGhostHuman(model, pos, angle)
     self.GhostHuman:SetMoveType( MOVETYPE_NONE )
     self.GhostHuman:SetNotSolid( true )
     self.GhostHuman:SetRenderMode( RENDERMODE_TRANSCOLOR )
-    self.GhostHuman:SetColor(color_white)
+    self.GhostHuman:SetColor( ghostColor )
 end
 
 function TOOL:UpdateGhostHuman()
