@@ -17,6 +17,7 @@ util.AddNetworkString("gWare.Utils.SendVoteToServer")
 util.AddNetworkString("gWare.Utils.BroadcastVote")
 util.AddNetworkString("gWare.Utils.SendResultToServer")
 util.AddNetworkString("gWare.Utils.SendResultsToClients")
+util.AddNetworkString("gWare.Utils.UpdateClients")
 
 function gWare.Utils.SendNPCSpawnsAndJobsToClient(ply)
     local npcSpawnsCount = table.Count(gWare.Utils.NPCSpawns)
@@ -89,10 +90,10 @@ end
 
 hook.Add("gWare.Utils.ClientReady", "gWare.Utils.SendEverythingToClient", gWare.Utils.SendEverythingToClient)
 
-function gWare.Utils.UpdateClient(index, settingValue)
-    net.Start("gWare.Utils.UpdateClient")
+function gWare.Utils.UpdateClients(index, settingValue)
+    net.Start("gWare.Utils.UpdateClients")
         net.WriteUInt(index, 5)
-        net.WriteBool(settingValue)
+        net.WriteType(settingValue)
     net.Broadcast()
 end
 

@@ -54,6 +54,7 @@ function gWare.Utils.ChangeSetting(index, settingValue)
     gWare.Utils.UpdateSetting(settingName, settingValue)
     gWare.Utils.Settings[index].value = settingValue
 
+    gWare.Utils.UpdateClients(index, settingValue)
     hook.Run("gWare.Utils.SettingChanged", settingName, settingValue)
 end
 

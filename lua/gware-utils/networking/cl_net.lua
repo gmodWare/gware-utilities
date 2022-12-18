@@ -59,6 +59,13 @@ net.Receive("gWare.Utils.SendNPCJobsToClient", function(len)
     end
 end)
 
+net.Receive("gWare.Utils.UpdateClients", function()
+    local index = net.ReadUInt(5)
+    local settingValue = net.ReadType()
+
+    gWare.Utils.Settings[index].value = settingValue
+end)
+
 hook.Add("InitPostEntity", "gWare.Utils.ClientReady", function()
     net.Start("gWare.Utils.ClientReady")
     net.SendToServer()
