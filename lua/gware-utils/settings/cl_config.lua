@@ -10,13 +10,13 @@ gWare.Utils.Colors = {
     Commands = {
         ["default"] = Color(150, 150, 150),
         ["act"] = Color(189, 39, 39),
-        ["decode"] = Color(60, 175, 66),
+        ["advert"] = Color(255, 196, 0),
         ["comms"] = Color(255, 196, 0),
+        ["encrypted-comms"] = Color(255, 166, 0),
+        ["decode"] =  Color(255, 166, 0),
         ["ooc"] = Color(71, 136, 221),
         ["looc"] = Color(102, 153, 219),
-        ["roll"] = Color(156, 156, 156),
-        ["encrypted-comms"] = Color(194, 116, 15),
-        ["mact"] = Color(93, 32, 32),
-        ["advert"] = Color(255, 196, 0),
+        ["mact"] = Color(189, 39, 39),
+        ["roll"] = Color(220, 220, 220),
     }
 }
