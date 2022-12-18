@@ -10,11 +10,11 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     -- toolgun-sounds
     hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
-        if not gWare.Utils.GetSettingValue("toolgun-sounds") then return end
-
         local ent = data.Entity
 
-        if (ent:IsValid() and ent:IsPlayer() and ent:GetActiveWeapon():IsValid() and ent:GetActiveWeapon():GetClass() == "gmod_tool") then
+        if (IsValid(ent) and ent:IsPlayer() and ent:GetActiveWeapon():IsValid() and ent:GetActiveWeapon():GetClass() == "gmod_tool") then
+            if not gWare.Utils.GetSettingValue("toolgun-sounds") then return end
+            
             return false
         end
     end)
@@ -65,10 +65,9 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     -- voice-panels
     hook.Add("HUDShouldDraw", "gWare.Utils.VoicePanels", function(name)
-        if not gWare.Utils.GetSettingValue("voice-panels") then return end
+        if (name != "DarkRP_ChatReceivers") then return end
 
-        if (name == "DarkRP_ChatReceivers") then
-            return false
-        end
+        if not gWare.Utils.GetSettingValue("voice-panels") then return end
+        return false
     end)
 end)
