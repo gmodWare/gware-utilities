@@ -12,7 +12,7 @@ if SERVER then
     hook.Add("PlayerSay", "GWare.RollCommand", function(ply, text)
         if not text:lower():StartWithAny("/roll") then return end
 
-        local randomNumber = math.Rand(1, 100)
+        local randomNumber = math.Rand(1, 101)
 
         net.Start("GWare.RollCommand.ChatMessage")
             net.WriteUInt(randomNumber, 7)
@@ -48,17 +48,17 @@ if CLIENT then
         local formatted = translationText:format(ply:Name(), randNum)
         
         local _, nameEnd = formatted:find(ply:Name(), 1, true)
-        local numberStart, numberEnd = formatted:find(tostring(randNum), 1, true)
+        local numberStart, numberEnd = formatted:find(tostring(randNum), nameEnd, true)
         
         local tbl = {
-            senderColor,
-            formatted:sub(1, nameEnd),
+            senderColor,                                 -- job color
+            formatted:sub(1, nameEnd),                   -- playername
             color_white,
-            formatted:sub(nameEnd + 1, numberStart - 1),
-            rollColor,
-            formatted:sub(numberStart, numberEnd),
+            formatted:sub(nameEnd + 1, numberStart - 1), -- message
+            rollColor,                                   -- can be red/yellow/orange/red
+            formatted:sub(numberStart, numberEnd),       -- rolled number
             color_white,
-            formatted:sub(numberEnd + 1)
+            formatted:sub(numberEnd + 1)                 -- end of message
         }
 
         gWare.Utils.PrintCommand("roll",
