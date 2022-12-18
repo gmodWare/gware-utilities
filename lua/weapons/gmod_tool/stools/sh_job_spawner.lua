@@ -222,17 +222,17 @@ function TOOL:MakeGhostHuman(model, pos, angle)
     end
 
     self.GhostHuman = ents.CreateClientProp(model)
-    self.GhostHuman:SetModel( model )
-    self.GhostHuman:SetPos( pos )
-    self.GhostHuman:SetAngles( angle )
+    self.GhostHuman:SetModel(model)
+    self.GhostHuman:SetPos(pos)
+    self.GhostHuman:SetAngles(angle)
     self.GhostHuman:Spawn()
 
     self.GhostHuman:PhysicsDestroy()
 
-    self.GhostHuman:SetMoveType( MOVETYPE_NONE )
-    self.GhostHuman:SetNotSolid( true )
-    self.GhostHuman:SetRenderMode( RENDERMODE_TRANSCOLOR )
-    self.GhostHuman:SetColor( ghostColor )
+    self.GhostHuman:SetMoveType(MOVETYPE_NONE)
+    self.GhostHuman:SetNotSolid(true)
+    self.GhostHuman:SetRenderMode(RENDERMODE_TRANSCOLOR)
+    self.GhostHuman:SetColor(ghostColor)
 end
 
 function TOOL:UpdateGhostHuman()
