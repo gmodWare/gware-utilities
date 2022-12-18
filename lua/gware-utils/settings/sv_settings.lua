@@ -42,6 +42,10 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
             else
                 gWare.Utils.Settings[index].value = settings.setting_value
             end
+
+            if settings.setting_name == "language" then
+                gWare.Utils.Config.Language = settings.setting_value
+            end
         end
     end)
 end)
