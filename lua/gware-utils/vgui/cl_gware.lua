@@ -16,7 +16,7 @@ end)
 
 list.Set("DesktopWindows", "gware_settings", {
     title = "gWare",
-    icon = "gware/gware_icon.png",
+    icon = "gware/gameicon.png",
     init = function(icon, window)
         // NOTE - This isn't displayed, i assume because the permissions arent loaded yet
         if not LocalPlayer():HasGWarePermission("edit_settings") then

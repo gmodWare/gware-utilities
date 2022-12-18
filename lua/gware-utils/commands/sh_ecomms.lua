@@ -50,14 +50,14 @@ if SERVER then
         local clearTextReceivers = {}
         table.insert(clearTextReceivers, ply)
 
+        local receiver = gWare.Utils.GetPlayerByNamePart(namePart)
+
         if IsEntity(receiver) then
             table.insert(clearTextReceivers, receiver)
         end
 
         local receiverName = namePart
         local receiverColor = VoidUI.Colors.Blue
-
-        local receiver = gWare.Utils.GetPlayerByNamePart(namePart)
 
         if IsEntity(receiver) then
             receiverName = receiver:Name()
