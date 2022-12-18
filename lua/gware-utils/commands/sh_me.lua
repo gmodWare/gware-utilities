@@ -40,6 +40,6 @@ if CLIENT then
 
         local color = RPExtraTeams[sender:Team()].color
 
-        chat.AddText(color, sender .. " " .. message, color_white)
+        chat.AddText(color, sender:Name() .. " " .. message, color_white)
     end)
 end

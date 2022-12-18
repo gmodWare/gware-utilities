@@ -8,11 +8,8 @@ gWare.Utils.Colors = {
     Orange = Color(218, 178, 0),
 
     Commands = {
-        -- no translation for this one
         ["default"] = Color(150, 150, 150),
-
-        -- these have their own translation
-        ["act"] = Color(180, 13, 13),
+        ["act"] = Color(189, 39, 39),
         ["decode"] = Color(60, 175, 66),
         ["comms"] = Color(255, 196, 0),
         ["ooc"] = Color(71, 136, 221),
