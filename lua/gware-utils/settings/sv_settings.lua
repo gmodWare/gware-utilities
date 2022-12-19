@@ -73,7 +73,7 @@ end)
 gWare.Utils.GetAllNPCPos(function (npcTblData)
     for _, npcData in ipairs(npcTblData) do
 
-        gWare.Utils.NPCSpawns[npcData.npc_name] = Vector(npcData.npc_pos)
+        gWare.Utils.NPCSpawns[npcData.npc_name] = gWare.Utils.StringToVector(npcData.npc_pos)
         gWare.Utils.NPCJobs[npcData.npc_name] = gWare.Utils.NPCJobs[npcData.npc_name] or {}
 
         gWare.Utils.GetNPCJobs(npcData.npc_name, function (jobTblData)
