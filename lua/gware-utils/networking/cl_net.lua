@@ -1,4 +1,8 @@
-local L = gWare.Utils.Lang.GetPhrase
+local L = function() end
+
+hook.Add("Utils.Lang.LanguagesLoaded", "gWare.net.waitForLang", function()
+    L = gWare.Utils.Lang.GetPhrase
+end)
 
 net.Receive("gWare.Utils.SendSettingToClient", function(len)
     local count = net.ReadUInt(7)
