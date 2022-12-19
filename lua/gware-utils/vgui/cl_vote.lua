@@ -50,7 +50,7 @@ function PANEL:Init()
     self.addChoice:SetColor(VoidUI.Colors.Blue)
     self.addChoice.DoClick = function(s)
         if choiceCounter >= 5 + 1 then
-            VoidLib.Notify(L"notify_max-vote-answers_name", L"notify_max-vote-answers_desc!", VoidUI.Colors.Red, 5)
+            VoidLib.Notify(L"notify_max-vote-answers_name", L"notify_max-vote-answers_desc", VoidUI.Colors.Red, 5)
             return
         end
 
@@ -63,7 +63,33 @@ function PANEL:Init()
         yPos = yPos + 60
 
         self.addChoice:SSetPos(0, yPos + 5)
+        self.removeChoice:SSetPos(0, yPos + 45)
         self.submit:SSetPos(0, yPos + 70)
+    end
+
+    self.removeChoice = self.scrollBar:Add("VoidUI.Button")
+    self.removeChoice:SSetPos(0, yPos + 45)
+    self.removeChoice:SSetSize(550, 35)
+    self.removeChoice:SetText(L"vote_remove-choice")
+    self.removeChoice:SetFont("VoidUI.R20")
+    self.removeChoice:SetColor(VoidUI.Colors.Red)
+    self.removeChoice.DoClick = function(s)
+        if choiceCounter <= 2 + 1 then
+            VoidLib.Notify(L"notify_min-vote-answers_name", L"notify_min-vote-answers_desc", VoidUI.Colors.Red, 5)
+            return
+        end
+
+        local tblCount = #self.scrollBar:GetChildren()[1]:GetChildren()
+        local choice = self.scrollBar:GetChildren()[1]:GetChildren()[tblCount]
+
+        choice:Remove()
+
+        choiceCounter = choiceCounter - 1
+        yPos = yPos - 60
+
+        self.addChoice:SSetPos(0, yPos + 5)
+        self.removeChoice:SSetPos(0, yPos + 45)
+        self.submit:SSetPos(0, yPos - 70)
     end
 
     local values = {}
@@ -88,7 +114,7 @@ function PANEL:Init()
             table.insert(values, panelData:GetValue())
         end
 
-        VoidLib.Notify(L"notify_vote-success_name", L"notify_vote-success_name_desc", VoidUI.Colors.Green, 5)
+        VoidLib.Notify(L"notify_vote-success_name", L"notify_vote-success_desc", VoidUI.Colors.Green, 5)
         gWare.Utils.SendVoteToServer(values)
     end
 end
