@@ -62,6 +62,8 @@ function PANEL:Init()
             end
 
             option.input.DoClick = function()
+                scrollbar:SetMouseInputEnabled(false)
+
                 local selector = vgui.Create("VoidUI.ItemSelect")
                 selector:SetParent(option)
                 selector:SetMultipleChoice(true)
@@ -69,6 +71,10 @@ function PANEL:Init()
                 -- select choices from jobCache
                 for jobCommand, bool in pairs(jobCache) do
                     selector.choices[jobCommand] = true
+                end
+
+                selector.OnRemove = function()
+                    scrollbar:SetMouseInputEnabled(true)
                 end
 
                 selector:InitItems(jobTbl, function (tblKeys, tblValues)
