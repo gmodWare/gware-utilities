@@ -9,9 +9,9 @@ function ENT:Draw()
     self:DrawModel()
 
     local mins, maxs = self:WorldSpaceAABB()
-    local height = maxs.z - mins.z
+    local entityHeight = maxs.z - mins.z
 
-    local offset = Vector( 0, 0, height + 10)
+    local offset = Vector( 0, 0, entityHeight + 10)
     local ang = LocalPlayer():EyeAngles()
     local pos = self:GetPos() + offset + ang:Up()
 

@@ -127,14 +127,9 @@ end)
 
 -- auto-cloak
 local function hideWeapons(ply, shouldHide)
-    for _, v in pairs(ply:GetWeapons()) do
-        v:SetNoDraw(should_hide)
-    end
-
-    local physgunBeams = ents.FindByClassAndParent("physgun_beam", ply)
-    if (physgunBeams) then
-        for i = 1, #physgunBeams do
-            physgunBeams[i]:SetNoDraw(should_hide)
+    for _, ent in ipairs(ents.GetAll()) do
+        if (ent:GetParent() == ply) then
+            ent:SetNoDraw(shouldHide)
         end
     end
 end
