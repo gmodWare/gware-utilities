@@ -53,7 +53,7 @@ function PANEL:Vote()
         button:SetText("")
         button.Paint = function(s, w, h)
             if s:IsHovered() || self.activePanel == s then
-                draw.RoundedBox(0, 0, 0, w, h, VoidUI.Colors.Blue)
+                draw.RoundedBox(12, 0, 0, w, h, VoidUI.Colors.Blue)
             end
 
             draw.SimpleText(index - 1 .. "  |  " .. values, "VoidUI.R20", 5, 5, VoidUI.Colors.White, TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
@@ -67,7 +67,7 @@ function PANEL:Vote()
 end
 
 function PANEL:Paint(w, h)
-    draw.RoundedBox(0, 0, 0, w, h, VoidUI.Colors.Background)
+    draw.RoundedBox(12, 0, 0, w, h, VoidUI.Colors.Background)
 
     self.timeLeft = math.Round(timer.TimeLeft("gWare.Vote"))
 
