@@ -17,7 +17,7 @@ function ENT:Draw()
 
     local myPos = LocalPlayer():GetPos()
 
-    if myPos:Distance(pos) > 600 then return end
+    if myPos:DistToSqr(pos) > (600 * 600) then return end
 
     ang:RotateAroundAxis(ang:Forward(), 90)
     ang:RotateAroundAxis(ang:Right(), 90)
@@ -28,7 +28,7 @@ function ENT:Draw()
     local boxWidth = width + 20
 
     cam.Start3D2D( pos, ang, 0.25 )
-        surface.SetDrawColor(Color(0, 0, 0, 160))
+        surface.SetDrawColor(0, 0, 0, 160)
         surface.DrawOutlinedRect(-boxWidth / 2, -br, boxWidth, height + (2 * br))
 
         surface.DrawRect(-boxWidth / 2 + 2, -br + 2, boxWidth - 4, height + (2 * br) - 4)
