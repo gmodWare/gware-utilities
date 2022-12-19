@@ -91,6 +91,14 @@ function gWare.Utils.HasPermission(name, ply)
 end
 
 --[[
+    Converts a string in to a vector data (fuck u sqllite)
+    Returns: Vector
+]]
+function gWare.Utils.StringToVector(str)
+    return Vector(str)
+end
+
+--[[
     Returns the job index of a DarkRP team by its command (fuck u darkrp)
     Returns: Integer
 ]]
