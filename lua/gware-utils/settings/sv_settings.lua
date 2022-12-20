@@ -353,3 +353,99 @@ gWare.Utils.AddSetting({
     defaultValue = {},
     settingType = "job_multi_select"
 })
+
+gWare.Utils.AddSetting({
+    id = "command_act",
+    name = "act",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_advert",
+    name = "advert",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_comms",
+    name = "comms",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_encrypted-comms",
+    name = "encrypted-comms",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_decode",
+    name = "decode",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_it",
+    name = "it",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_looc",
+    name = "looc",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_mact",
+    name = "mact",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_me",
+    name = "me",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_ooc",
+    name = "ooc",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_roll",
+    name = "roll",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_unstuck",
+    name = "unstuck",
+    description = "decode stuff?",
+    defaultValue = false,
+    settingType = "command"
+})
