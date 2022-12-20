@@ -31,6 +31,10 @@ if SERVER then
             if hex == "" then continue end
 
             local ascii = bit.tobit(tonumber(hex, 16))
+            if not isnumber(ascii) then 
+                VoidLib.Notify(ply, L"notify_invalid-decode_name", L"notify_invalid-decode_desc", VoidUI.Colors.Red, 5)
+                return ""
+            end
             clearText = clearText .. string.char(ascii)
         end
 
