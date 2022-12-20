@@ -16,6 +16,8 @@ function PANEL:Init()
     scrollbar:SDockMargin(5, 5, 5, 5)
 
     for index, data in ipairs(gWare.Utils.Settings) do
+        if data.settingType == "command" then continue end
+
         local option = scrollbar:Add("VoidUI.BackgroundPanel")
         option:Dock(TOP)
         option:SSetTall(60)
