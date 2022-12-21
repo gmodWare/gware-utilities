@@ -139,6 +139,11 @@ local hiddenPlayers = {}
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
     if not gWare.Utils.GetSettingValue("auto-cloak") then return end
 
+    -- NOTE - I know this is scuffed, but I dont really have a better solution
+    if ((ULX and ULib and not CAMI.PlayerHasAccess(ply, "ulx noclip")) or (SAM_LOADED and not ply:HasPermission("can_noclip")) or not ply:IsAdmin()) then
+        return
+    end
+
     ply:SetNoDraw(desiredNoClipState)
     ply:DrawWorldModel(not desiredNoClipState)
     ply:SetRenderMode(desiredNoClipState and RENDERMODE_TRANSALPHA or RENDERMODE_NORMAL)
