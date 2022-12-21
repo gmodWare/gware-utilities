@@ -8,6 +8,15 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     -- Add hooks or functions in here, if u have to wait for client to get the settingsTable
 
+    -- voice-panels
+    function g_VoicePanelList:OnChildAdded(child)
+        if not gWare.Utils.GetSettingValue("voice-panels") then return end
+
+        if (child:IsValid()) then
+            child:Remove()
+        end
+    end
+
     -- toolgun-sounds
     hook.Add("EntityEmitSound", "gWare.Utils.DisableToolGunSound", function(data)
         local ent = data.Entity
