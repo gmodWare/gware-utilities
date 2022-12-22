@@ -18,6 +18,8 @@ if SERVER then
 
         if not text:StartWithAny("!unstuck", "/unstuck") then return end
 
+        if gWare.Utils.GetSettingValue("command_unstuck") then return end
+
         if (delay[ply] or 0) > CurTime() then
             VoidLib.Notify(ply, L("notify_unstuck-error_name"), L("notify_unstuck-error-cooldown_desc"), VoidUI.Colors.Red, 2)
             return ""

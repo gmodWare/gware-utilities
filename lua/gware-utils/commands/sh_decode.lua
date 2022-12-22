@@ -15,6 +15,8 @@ if SERVER then
 
         if not text:StartWithAny("/decode ") then return end
 
+        if gWare.Utils.GetSettingValue("command_decode") then return end
+
         if not gWare.Utils.HasJobAccess("decode", ply) then
             VoidLib.Notify(ply, L"notify_decode_name", L"notify_decode_desc", VoidUI.Colors.Red, 4)
             return ""

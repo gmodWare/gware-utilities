@@ -16,6 +16,8 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.funk", function(ply, text)
         if not (text:lower():StartWithAny("/funk ", "/comms ")) then return end
 
+        if gWare.Utils.GetSettingValue("command_comms") then return end
+
         local args = text:Split("*")
 
         if #args < 2 then

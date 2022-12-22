@@ -13,6 +13,8 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.LOOC", function(sender, text)
         if not text:StartWithAny("/looc ") then return end
 
+        if gWare.Utils.GetSettingValue("command_looc") then return end
+
         local message = text:ReplacePrefix("looc")
 
         if gWare.Utils.IsMessageEmpty(message, sender) then return "" end

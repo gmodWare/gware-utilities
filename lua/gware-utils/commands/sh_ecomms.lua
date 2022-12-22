@@ -21,6 +21,8 @@ if SERVER then
 
         if not text:StartWithAny("/vfunk ", "/ecomms ", "/encrypted ", "/ec ") then return end
 
+        if gWare.Utils.GetSettingValue("command_encrypted-comms") then return end
+
         if not gWare.Utils.HasJobAccess("encrypted-comms", ply) then
             VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
             return ""
@@ -33,7 +35,7 @@ if SERVER then
         local message = args[2]
 
         if not message then
-            VoidLib.Notify(ply, L"notify_invalid-encrypted-ecomms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 8)
+            VoidLib.Notify(ply, L"notify_invalid-encrypted-comms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 8)
             return
         end
 

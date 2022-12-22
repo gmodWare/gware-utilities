@@ -17,6 +17,8 @@ if SERVER then
         local symbol = text[1]
         if not text:StartWithAny(symbol .. "ooc ", "// ") then return end
 
+        if gWare.Utils.GetSettingValue("command_ooc") then return end
+
         local message
 
         if text:StartWith(symbol .. "ooc ") then

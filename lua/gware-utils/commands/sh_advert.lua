@@ -12,6 +12,9 @@ if SERVER then
         if not gWare.Utils.GetSettingValue("billboards") then return end
 
         if (text:lower():StartWithAny("/advert ")) then
+
+            if gWare.Utils.GetSettingValue("command_advert") then return end
+
             local message = text:ReplacePrefix("advert")
 
             if gWare.Utils.IsMessageEmpty(message, ply) then return "" end

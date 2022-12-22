@@ -12,6 +12,8 @@ if SERVER then
     hook.Add("PlayerSay", "GWare.RollCommand", function(ply, text)
         if not text:lower():StartWithAny("/roll") then return end
 
+        if gWare.Utils.GetSettingValue("command_roll") then return end
+
         local randomNumber = math.Rand(1, 101)
 
         net.Start("GWare.RollCommand.ChatMessage")

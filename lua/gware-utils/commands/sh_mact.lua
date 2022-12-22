@@ -10,6 +10,9 @@ if SERVER then
 
     hook.Add("PlayerSay", "gWare.Commands.MAkt", function(ply, text)
         if (text:lower():StartWithAny("/makt ", "/mact ")) then
+
+            if gWare.Utils.GetSettingValue("command_mact") then return end
+
             local message = text:ReplacePrefix("makt", "mact")
 
             if gWare.Utils.IsMessageEmpty(message, ply) then return "" end

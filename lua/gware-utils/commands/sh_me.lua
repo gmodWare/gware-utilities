@@ -11,6 +11,8 @@ if SERVER then
     hook.Add("PlayerSay", "gWare.Commands.me", function(sender, text)
         if not text:StartWithAny("/me ") then return end
 
+        if gWare.Utils.GetSettingValue("command_me") then return end
+
         local message = text:ReplacePrefix("me")
 
         if gWare.Utils.IsMessageEmpty(message, sender) then return "" end
