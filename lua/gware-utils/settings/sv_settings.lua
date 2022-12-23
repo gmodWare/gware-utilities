@@ -137,10 +137,10 @@ end
 local hiddenPlayers = {}
 
 hook.Add("PlayerNoClip", "gWare.Utils.HandleNoclipVanish", function(ply, desiredNoClipState)
-    if not gWare.Utils.GetSettingValue("auto-cloak") then return end
+    if not gWare.Utils.GetSettingValue("auto-cloak") or desiredNoClipState == nil then return end
 
     -- NOTE - I know this is scuffed, but I dont really have a better solution
-    if ((ULX and ULib and not CAMI.PlayerHasAccess(ply, "ulx noclip")) or (SAM_LOADED and not ply:HasPermission("can_noclip")) or not ply:IsAdmin()) then
+    if (ulx and not CAMI.PlayerHasAccess(ply, "ulx noclip")) or (SAM_LOADED and not ply:HasPermission("can_noclip")) or not ply:IsAdmin() then
         return
     end
 
