@@ -11,7 +11,7 @@ local command = gWare.Utils.RegisterCommand({
 })
 
 command:OnServerSide(function(ply, message)
-    if message:Trim() == "" then return end
+    if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
     net.Start(command.netMsg)
         net.WriteString(message)
@@ -23,7 +23,7 @@ command:OnReceive(function()
     local receivedMessage = net.ReadString()
     local ply = net.ReadEntity()
 
-    gWare.Utils.PrintCommand("mact",
+    gWare.Utils.PrintCommand(command:GetPrefix(),
         ply:Nick() .. " ", receivedMessage
     )
 end)

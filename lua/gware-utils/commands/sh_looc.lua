@@ -5,47 +5,36 @@
     Example Chat: [LOOC] 501st CMD Menschlich: Lol der ist einfach umgefallen xD
 ]]
 
-local L = gWare.Utils.Lang.GetPhrase
+local command = gWare.Utils.RegisterCommand({
+    prefix = "looc",
+    triggers = {"looc"},
+})
 
-if SERVER then
-    util.AddNetworkString("gWare.Commands.LOOC.ChatMessage")
+command:OnServerSide(function(sender, message)
+    if gWare.Utils.IsMessageEmpty(message, sender) then return "" end
 
-    hook.Add("PlayerSay", "gWare.Commands.LOOC", function(sender, text)
-        if not text:StartWithAny("/looc ") then return end
+    local receivers = {sender}
+    local distSqr = 500 * 500
 
-        if gWare.Utils.GetSettingValue("command_looc") then return end
+    for _, ply in ipairs(player.GetAll()) do
+        if ply:GetPos():DistToSqr(sender:GetPos()) > distSqr then continue end
 
-        local message = text:ReplacePrefix("looc")
+        table.insert(receivers, ply)
+    end
 
-        if gWare.Utils.IsMessageEmpty(message, sender) then return "" end
+    net.Start(command.netMsg)
+        net.WriteString(message)
+        net.WriteEntity(sender)
+    net.Send(receivers)
+end)
 
-        local receivers = {sender}
-        local distSqr = 500 * 500
+command:OnReceive(function()
+    local message = net.ReadString()
+    local sender = net.ReadEntity()
 
-        for _, ply in ipairs(player.GetAll()) do
-            if ply:GetPos():DistToSqr(sender:GetPos()) > distSqr then continue end
+    local senderColor = RPExtraTeams[sender:Team()].color
 
-            table.insert(receivers, ply)
-        end
-
-        net.Start("gWare.Commands.Looc.ChatMessage")
-            net.WriteString(message)
-            net.WriteEntity(sender)
-        net.Send(receivers)
-
-        return ""
-    end)
-end
-
-if CLIENT then
-    net.Receive("gWare.Commands.LOOC.ChatMessage", function()
-        local message = net.ReadString()
-        local sender = net.ReadEntity()
-
-        local senderColor = RPExtraTeams[sender:Team()].color
-
-        gWare.Utils.PrintCommand("looc",
-            senderColor, sender:Nick(), gWare.Utils.Colors.Brackets, " » ", color_white, message
-        )
-    end)
-end
+    gWare.Utils.PrintCommand(command:GetPrefix(),
+        senderColor, sender:Nick(), gWare.Utils.Colors.Brackets, " » ", color_white, message
+    )
+end)
