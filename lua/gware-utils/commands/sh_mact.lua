@@ -13,7 +13,7 @@ local command = gWare.Utils.RegisterCommand({
 command:OnServerSide(function(ply, message)
     if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
-    net.Start(command.netMsg)
+    net.Start(command:GetNetID())
         net.WriteString(message)
         net.WriteEntity(ply)
     net.Broadcast()
