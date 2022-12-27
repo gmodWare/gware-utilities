@@ -5,32 +5,25 @@
     Example Chat: [Medic-Akt] 501st CMD Menschlich schaltet den Reaktor aus.
 ]]
 
-if SERVER then
-    util.AddNetworkString("gWare.Commands.MAkt.ChatMessage")
+local command = gWare.Utils.RegisterCommand({
+    prefix = "mact",
+    triggers = {"makt", "mact"},
+})
 
-    hook.Add("PlayerSay", "gWare.Commands.MAkt", function(ply, text)
-        if (text:lower():StartWithAny("/makt ", "/mact ")) then
-            local message = text:ReplacePrefix("makt", "mact")
+command:OnServerSide(function(ply, message)
+    if message:Trim() == "" then return end
 
-            if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
+    net.Start(command.netMsg)
+        net.WriteString(message)
+        net.WriteEntity(ply)
+    net.Broadcast()
+end)
 
-            net.Start("gWare.Commands.MAkt.ChatMessage")
-                net.WriteString(message)
-                net.WriteEntity(ply)
-            net.Broadcast()
+command:OnReceive(function()
+    local receivedMessage = net.ReadString()
+    local ply = net.ReadEntity()
 
-            return ""
-        end
-    end)
-end
-
-if CLIENT then
-    net.Receive("gWare.Commands.MAkt.ChatMessage", function()
-        local receivedMessage = net.ReadString()
-        local ply = net.ReadEntity()
-
-        gWare.Utils.PrintCommand("mact",
-            ply:Nick() .. " ", receivedMessage
-        )
-    end)
-end
+    gWare.Utils.PrintCommand("mact",
+        ply:Nick() .. " ", receivedMessage
+    )
+end)
