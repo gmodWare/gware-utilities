@@ -15,7 +15,7 @@ local L = gWare.Utils.Lang.GetPhrase
 
 local command = gWare.Utils.RegisterCommand({
     prefix = "encrypted-comms",
-    triggers = {"/vfunk", "/ecomms", "/encrypted", "/ec"},
+    triggers = {"vfunk", "ecomms", "encrypted", "ec"},
 })
 
 command:OnServerSide(function(ply, chatInput)
@@ -81,6 +81,8 @@ command:OnServerSide(function(ply, chatInput)
 end)
 
 command:OnReceive(function()
+    local col = gWare.Utils.Colors
+
     local message = net.ReadString()
     local receiverName = net.ReadString()
     local sender = net.ReadEntity()
