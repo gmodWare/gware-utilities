@@ -15,7 +15,7 @@ command:OnServerSide(function(ply, message)
 
     if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
-    net.Start("gWare.Commands.Advert.ChatMessage")
+    net.Start(command:GetNetID())
         net.WriteString(message)
         net.WriteEntity(ply)
     net.Broadcast()
