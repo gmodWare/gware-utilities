@@ -56,9 +56,15 @@ end
 function gWare.Utils.GetCommand(text)
     if text[1] != "/" then return nil end
 
-    local spacePos = text:find(" ") or #text
-    local cmd = text:sub(2, spacePos - 1)
-    local msg = text:sub(spacePos + 1)
+    local cmd = text:sub(2)
+    local msg
+
+    local spacePos = text:find(" ")
+    if spacePos then
+        cmd = text:sub(2, spacePos - 1)
+        msg = text:sub(spacePos + 1)
+    end
+
     local cmdObj = GWARE_COMMANDS[cmd]
 
     return cmdObj, msg
