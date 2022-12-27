@@ -30,9 +30,7 @@ end
 function COMMAND_CLASS:OnReceive(callback)
     if SERVER then return end
 
-    net.Receive(self.netMsg, function()
-        callback()
-    end)
+    net.Receive(self.netMsg, callback)
 end
 
 function COMMAND_CLASS:Run(sender, msg)
