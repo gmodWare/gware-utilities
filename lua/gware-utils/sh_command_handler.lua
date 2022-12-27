@@ -6,6 +6,12 @@ COMMAND_CLASS.__index = COMMAND_CLASS
 AccessorFunc(COMMAND_CLASS, "active", "Active", FORCE_BOOL)
 AccessorFunc(COMMAND_CLASS, "prefix", "Prefix", FORCE_STRING) -- upcoming feature
 
+
+/* 
+    dataTbl:
+    - prefix: string
+    - triggers: table<string>
+*/
 function COMMAND_CLASS:Create(dataTbl)
     local newObject = setmetatable({}, COMMAND_CLASS)
     newObject.prefix = dataTbl.prefix -- used for color & translation
@@ -37,13 +43,17 @@ function COMMAND_CLASS:Run(sender, msg)
     self.OnServerSideCalled(sender, msg)
 end
 
+function COMMAND_CLASS:GetNetID()
+    return self.netMsg
+end
+
+
 -- public constructor
 function gWare.Utils.RegisterCommand(dataTbl)
     return COMMAND_CLASS:Create(dataTbl)
 end
 
--- check if command exists & is active
-function gWare.Utils.GetActiveCommand(text)
+function gWare.Utils.GetCommand(text)
     if text[1] != "/" then return nil end
 
     local spacePos = text:find(" ") or #text
@@ -55,7 +65,7 @@ function gWare.Utils.GetActiveCommand(text)
 end
 
 hook.Add("PlayerSay", "gWare.Commands.CommandHandler", function(sender, text)
-    local cmdObj, msg = gWare.Utils.GetActiveCommand(text)
+    local cmdObj, msg = gWare.Utils.GetCommand(text)
 
     if not cmdObj then return end
     if not cmdObj:GetActive() then return end
