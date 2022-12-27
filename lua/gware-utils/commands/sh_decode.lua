@@ -7,51 +7,42 @@
 
 local L = gWare.Utils.Lang.GetPhrase
 
-if SERVER then
-    util.AddNetworkString("gWare.Commands.decode.ChatMessage")
+local command = gWare.Utils.RegisterCommand({
+    prefix = "decode",
+    triggers = {"decode"},
+})
 
-    hook.Add("PlayerSay", "gWare.Commands.decode", function(ply, chatInput)
-        local text = chatInput:lower()
+command:OnServerSide(function(ply, message)
+    if not gWare.Utils.HasJobAccess("decode", ply) then
+        VoidLib.Notify(ply, L"notify_decode_name", L"notify_decode_desc", VoidUI.Colors.Red, 4)
+        return ""
+    end
 
-        if not text:StartWithAny("/decode ") then return end
+    if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
-        if not gWare.Utils.HasJobAccess("decode", ply) then
-            VoidLib.Notify(ply, L"notify_decode_name", L"notify_decode_desc", VoidUI.Colors.Red, 4)
+    local hexTbl = message:Split(" ")
+    local clearText = ""
+
+    for i, hex in ipairs(hexTbl) do
+        if hex == "" then continue end
+
+        local ascii = bit.tobit(tonumber(hex, 16))
+        if not isnumber(ascii) then
+            VoidLib.Notify(ply, L"notify_invalid-decode_name", L"notify_invalid-decode_desc", VoidUI.Colors.Red, 5)
             return ""
         end
+        clearText = clearText .. string.char(ascii)
+    end
 
-        local encrypted = text:ReplacePrefix("decode")
+    net.Start(command:GetNetID())
+        net.WriteString(clearText)
+    net.Send(ply)
+end)
 
-        if gWare.Utils.IsMessageEmpty(encrypted, ply) then return "" end
+command:OnReceive(function()
+    local text = net.ReadString()
 
-        local hexTbl = encrypted:Split(" ")
-        local clearText = ""
-
-        for i, hex in ipairs(hexTbl) do
-            if hex == "" then continue end
-
-            local ascii = bit.tobit(tonumber(hex, 16))
-            if not isnumber(ascii) then 
-                VoidLib.Notify(ply, L"notify_invalid-decode_name", L"notify_invalid-decode_desc", VoidUI.Colors.Red, 5)
-                return ""
-            end
-            clearText = clearText .. string.char(ascii)
-        end
-
-        net.Start("gWare.Commands.decode.ChatMessage")
-            net.WriteString(clearText)
-        net.Send(ply)
-
-        return ""
-    end)
-end
-
-if CLIENT then
-    net.Receive("gWare.Commands.decode.ChatMessage", function()
-        local text = net.ReadString()
-
-        gWare.Utils.PrintCommand("decode", 
-            text
-        )
-    end)
-end
+    gWare.Utils.PrintCommand(command:GetPrefix(),
+        text
+    )
+end)
