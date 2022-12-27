@@ -22,7 +22,7 @@ command:OnServerSide(function(sender, message)
         table.insert(receivers, ply)
     end
 
-    net.Start(command.netMsg)
+    net.Start(command:GetNetID())
         net.WriteString(message)
         net.WriteEntity(sender)
     net.Send(receivers)
