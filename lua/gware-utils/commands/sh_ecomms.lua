@@ -13,91 +13,83 @@
 
 local L = gWare.Utils.Lang.GetPhrase
 
-if SERVER then
-    util.AddNetworkString("gWare.Commands.vFunk.ChatMessage")
+local command = gWare.Utils.RegisterCommand({
+    prefix = "encrypted-comms",
+    triggers = {"/vfunk", "/ecomms", "/encrypted", "/ec"},
+})
 
-    hook.Add("PlayerSay", "gWare.Commands.vfunk", function(ply, chatInput)
-        local text = chatInput:lower()
+command:OnServerSide(function(ply, chatInput)
+    local text = chatInput:lower()
 
-        if not text:StartWithAny("/vfunk ", "/ecomms ", "/encrypted ", "/ec ") then return end
-
-        if not gWare.Utils.HasJobAccess("encrypted-comms", ply) then
-            VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
-            return ""
-        end
-
-        local args = text:Split("*")
-        local start = args[1]
-
-        local namePart = start:ReplacePrefix("vfunk", "ecomms", "encrypted", "ec")
-        local message = args[2]
-
-        if not message then
-            VoidLib.Notify(ply, L"notify_invalid-encrypted-ecomms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 8)
-            return
-        end
-
-
-        local charCodes = { string.byte(message, 1, string.len(message)) }
-        local encrypted = ""
-
-        for _, ascii in pairs(charCodes) do
-            local hex = bit.tohex(ascii)
-            local modifiedHex = hex:gsub("0*", "", 1)
-            encrypted = encrypted .. modifiedHex .. " "
-        end
-
-        local clearTextReceivers = {}
-        table.insert(clearTextReceivers, ply)
-
-        local receiver = gWare.Utils.GetPlayerByNamePart(namePart)
-
-        if IsEntity(receiver) then
-            table.insert(clearTextReceivers, receiver)
-        end
-
-        local receiverName = namePart
-        local receiverColor = VoidUI.Colors.Blue
-
-        if IsEntity(receiver) then
-            receiverName = receiver:Name()
-            receiverColor = RPExtraTeams[receiver:Team()].color
-        end
-
-        -- send encrypted message to everyone except receiver and sender
-        net.Start("gWare.Commands.vFunk.ChatMessage")
-            net.WriteString(encrypted)
-            net.WriteString(receiverName)
-            net.WriteEntity(ply)
-            net.WriteColor(receiverColor)
-        net.SendOmit(clearTextReceivers)
-
-        -- now send clear text to sender and receiver
-        net.Start("gWare.Commands.vFunk.ChatMessage")
-            net.WriteString(message)
-            net.WriteString(receiverName)
-            net.WriteEntity(ply)
-            net.WriteColor(receiverColor)
-        net.Send(clearTextReceivers)
-
+    if not gWare.Utils.HasJobAccess(command:GetPrefix(), ply) then
+        VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
         return ""
-    end)
-end
+    end
 
-if CLIENT then
-    local col = gWare.Utils.Colors
+    local args = text:Split("*")
 
-    net.Receive("gWare.Commands.vFunk.ChatMessage", function()
-        local message = net.ReadString()
-        local receiverName = net.ReadString()
-        local sender = net.ReadEntity()
-        local receiverColor = net.ReadColor()
+    local namePart = text:sub(1, text:find("*"))
+    local message = args[2]
 
-        local senderColor = RPExtraTeams[sender:Team()].color
-        local toTranslated = " " .. L"general_to" .. " "
+    if not message then
+        VoidLib.Notify(ply, L"notify_invalid-encrypted-ecomms_name", L"notify_invalid-encrypted-ecomms_desc", VoidUI.Colors.Red, 8)
+        return
+    end
 
-        gWare.Utils.PrintCommand("encrypted-comms", 
-            senderColor, sender:Nick(), col.Orange, toTranslated, receiverColor, receiverName, col.Brackets, " » ", color_white, message
-        )
-    end)
-end
+
+    local charCodes = { string.byte(message, 1, string.len(message)) }
+    local encrypted = ""
+
+    for _, ascii in pairs(charCodes) do
+        local hex = bit.tohex(ascii)
+        local modifiedHex = hex:gsub("0*", "", 1)
+        encrypted = encrypted .. modifiedHex .. " "
+    end
+
+    local clearTextReceivers = {}
+    table.insert(clearTextReceivers, ply)
+
+    local receiver = gWare.Utils.GetPlayerByNamePart(namePart)
+
+    if IsEntity(receiver) then
+        table.insert(clearTextReceivers, receiver)
+    end
+
+    local receiverName = namePart
+    local receiverColor = VoidUI.Colors.Blue
+
+    if IsEntity(receiver) then
+        receiverName = receiver:Name()
+        receiverColor = RPExtraTeams[receiver:Team()].color
+    end
+
+    -- send encrypted message to everyone except receiver and sender
+    net.Start(command:GetNetID())
+        net.WriteString(encrypted)
+        net.WriteString(receiverName)
+        net.WriteEntity(ply)
+        net.WriteColor(receiverColor)
+    net.SendOmit(clearTextReceivers)
+
+    -- now send clear text to sender and receiver
+    net.Start(command:GetNetID())
+        net.WriteString(message)
+        net.WriteString(receiverName)
+        net.WriteEntity(ply)
+        net.WriteColor(receiverColor)
+    net.Send(clearTextReceivers)
+end)
+
+command:OnReceive(function()
+    local message = net.ReadString()
+    local receiverName = net.ReadString()
+    local sender = net.ReadEntity()
+    local receiverColor = net.ReadColor()
+
+    local senderColor = RPExtraTeams[sender:Team()].color
+    local toTranslated = " " .. L"general_to" .. " "
+
+    gWare.Utils.PrintCommand(command:GetPrefix(),
+        senderColor, sender:Nick(), col.Orange, toTranslated, receiverColor, receiverName, col.Brackets, " » ", color_white, message
+    )
+end)
