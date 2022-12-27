@@ -4,7 +4,7 @@ local COMMAND_CLASS = {}
 COMMAND_CLASS.__index = COMMAND_CLASS
 
 AccessorFunc(COMMAND_CLASS, "active", "Active", FORCE_BOOL)
-AccessorFunc(COMMAND_CLASS, "prefix", "Prefix", FORCE_BOOL) -- upcoming feature
+AccessorFunc(COMMAND_CLASS, "prefix", "Prefix", FORCE_STRING) -- upcoming feature
 
 function COMMAND_CLASS:Create(dataTbl)
     local newObject = setmetatable({}, COMMAND_CLASS)

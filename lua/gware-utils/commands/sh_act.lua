@@ -5,25 +5,25 @@
     Example Chat: [Akt] 501st CMD Menschlich schaltet den Reaktor aus.
 ]]
 
-local actCommand = gWare.Utils.RegisterCommand({
+local command = gWare.Utils.RegisterCommand({
     prefix = "act",
     triggers = {"akt", "act"},
 })
 
-actCommand:OnServerSide(function(ply, message)
-    if message:Trim() == "" then return end
+command:OnServerSide(function(ply, message)
+    if gWare.Utils.IsMessageEmpty(message, ply) then return "" end
 
-    net.Start(actCommand.netMsg)
+    net.Start(command.netMsg)
         net.WriteString(message)
         net.WriteEntity(ply)
     net.Broadcast()
 end)
 
-actCommand:OnReceive(function()
+command:OnReceive(function()
     local receivedMessage = net.ReadString()
     local ply = net.ReadEntity()
 
-    gWare.Utils.PrintCommand("act",
+    gWare.Utils.PrintCommand(command:GetPrefix(),
         ply:Nick() .. " ", receivedMessage
     )
 end)
