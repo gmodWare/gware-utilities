@@ -15,7 +15,7 @@ function PANEL:Init()
     self.Vote = self:Add("gWare.Utils.Vote")
 
     self.Sidebar:AddTab(L"tab_options", VoidUI.Icons.Settings, self.Settings, false)
-    self.Sidebar:AddTab(L"tab_commands", VoidUI.Icons.Settings, self.Commands, false)
+    self.Sidebar:AddTab(L"tab_commands", VoidUI.Icons.Upgrades, self.Commands, false)
     self.Sidebar:AddTab(L"tab_vote", VoidUI.Icons.Stats, self.Vote, false)
 end
 
