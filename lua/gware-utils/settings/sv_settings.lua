@@ -47,11 +47,39 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
                 gWare.Utils.Config.Language = settings.setting_value
             end
         end
+
+        for _, settingData in ipairs(gWare.Utils.Settings) do
+            local settingName = settingData.id
+            local settingType = settingData.settingType
+
+            if settingType == "command" then
+                local settingPrefix = settingName:Replace("command_", "")
+
+                for trigger, cmdObj in pairs(GWARE_COMMANDS) do
+                    if cmdObj:GetPrefix() == settingPrefix then
+                        cmdObj:SetActive(not settingData.value)
+                        break
+                    end
+                end
+            end
+        end
     end)
 end)
 
 function gWare.Utils.ChangeSetting(index, settingValue)
     local settingName = gWare.Utils.Settings[index].id
+    local settingType = gWare.Utils.Settings[index].settingType
+
+    if settingType == "command" then
+        local settingPrefix = settingName:Replace("command_", "")
+
+        for trigger, cmdObj in pairs(GWARE_COMMANDS) do
+            if cmdObj:GetPrefix() == settingPrefix then
+                cmdObj:SetActive(not settingValue)
+                break
+            end
+        end
+    end
 
     if not getSetting(settingName) then return end
 
@@ -399,13 +427,13 @@ gWare.Utils.AddSetting({
     settingType = "command"
 })
 
-gWare.Utils.AddSetting({
-    id = "command_it",
-    name = "it",
-    description = "decode stuff?",
-    defaultValue = false,
-    settingType = "command"
-})
+-- gWare.Utils.AddSetting({ Coming soon :D
+--     id = "command_it",
+--     name = "it",
+--     description = "decode stuff?",
+--     defaultValue = false,
+--     settingType = "command"
+-- })
 
 gWare.Utils.AddSetting({
     id = "command_looc",
