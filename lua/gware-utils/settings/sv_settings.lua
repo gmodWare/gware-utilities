@@ -372,6 +372,22 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "hide-door-owner",
+    name = "Door Owner HUD deaktivieren?",
+    description = "Soll man sehen können, wem eine Tür gehört?",
+    defaultValue = false,
+    settingType = "bool"
+})
+
+gWare.Utils.AddSetting({
+    id = "hide-fpp-owner",
+    name = "FPP Owner HUD deaktivieren?",
+    description = "Soll man sehen können, wem eine Prop gehört?",
+    defaultValue = false,
+    settingType = "bool"
+})
+
+gWare.Utils.AddSetting({
     id = "encrypted-comms",
     name = "Encrypted Comms Stuff?",
     description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
