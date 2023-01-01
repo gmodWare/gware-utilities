@@ -8,7 +8,7 @@ if (SERVER) then
     util.AddNetworkString("gWare.Lang.NetworkLocalLanguages")
 
     concommand.Add("gware_reloadlangs", function(ply, cmd, args)
-        if (!ply:IsSuperAdmin()) then return end
+        if CLIENT and not ply:IsSuperAdmin() then return end
 
         for name, v in pairs(gWare.Addons) do
             local gTable = _G["gWare"][name]
