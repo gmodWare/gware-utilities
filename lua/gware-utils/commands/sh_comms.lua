@@ -31,7 +31,12 @@ command:OnServerSide(function(ply, text)
         return
     end
 
-    local receiver = gWare.Utils.GetPlayerByNamePart(namePart)
+    local receiver = namePart
+
+    if not gWare.Utils.GetSettingValue("disable-name-completion") then 
+        receiver = gWare.Utils.GetPlayerByNamePart(namePart)
+        print("added whole name")
+    end
 
     local receiverName = namePart
     local receiverColor = VoidUI.Colors.Blue

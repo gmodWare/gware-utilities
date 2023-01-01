@@ -259,6 +259,8 @@ end)
 // IN-GAME CONFIGURATION //
 ///////////////////////////
 
+// Options
+
 gWare.Utils.AddSetting({
     id = "language",
     name = "Sprache",
@@ -402,6 +404,15 @@ gWare.Utils.AddSetting({
     defaultValue = {},
     settingType = "job_multi_select"
 })
+
+gWare.Utils.AddSetting({
+    id = "disable-name-completion",
+    defaultValue = false,
+    settingType = "bool"
+})
+
+
+// Disable Commands
 
 gWare.Utils.AddSetting({
     id = "command_act",
