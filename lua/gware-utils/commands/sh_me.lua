@@ -32,7 +32,7 @@ command:OnReceive(function()
     local message = net.ReadString()
     local ply = net.ReadEntity()
 
-    local color = RPExtraTeams[ply:Team()].color
+    local color = team.GetColor(ply:Team())
 
     chat.AddText(color, ply:Name() .. " " .. message, color_white)
 end)

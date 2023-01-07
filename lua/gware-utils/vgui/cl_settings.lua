@@ -18,6 +18,8 @@ function PANEL:Init()
     for index, data in ipairs(gWare.Utils.Settings) do
         if data.settingType == "command" then continue end
 
+        if data.darkRP and not DarkRP then continue end
+
         local option = scrollbar:Add("VoidUI.BackgroundPanel")
         option:Dock(TOP)
         option:SSetTall(60)

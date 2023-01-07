@@ -43,7 +43,7 @@ command:OnServerSide(function(ply, text)
 
     if IsEntity(receiver) then
         receiverName = receiver:Name()
-        receiverColor = RPExtraTeams[receiver:Team()].color
+        receiverColor = team.GetColor(receiver:Team())
     end
 
     net.Start(command:GetNetID())
@@ -62,7 +62,7 @@ command:OnReceive(function()
     local sender = net.ReadEntity()
     local receiverColor = net.ReadColor()
 
-    local senderColor = RPExtraTeams[sender:Team()].color
+    local senderColor = team.GetColor(sender:Team())
     local toTranslated = (" " .. L"general_to" .. " ")
 
     gWare.Utils.PrintCommand(command:GetPrefix(),

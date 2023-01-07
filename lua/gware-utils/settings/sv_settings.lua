@@ -14,7 +14,7 @@ end
 local i = 1
 function gWare.Utils.AddSetting(tblData)
     -- : remove name and description
-    gWare.Utils.Settings[i] = {id = tblData.id, value = tblData.defaultValue, settingType = tblData.settingType}
+    gWare.Utils.Settings[i] = {id = tblData.id, value = tblData.defaultValue, settingType = tblData.settingType, darkRP = tblData.darkRP or false}
     gWare.Utils.IDs[tblData.id] = i
     i = i + 1
 
@@ -338,7 +338,8 @@ gWare.Utils.AddSetting({
     name = "DarkRP Tafeln deaktvieren?",
     description = "Sollen bei '/advert' keine Tafeln gespawned werden?",
     defaultValue = false,
-    settingType = "bool"
+    settingType = "bool",
+    darkRP = true
 })
 
 gWare.Utils.AddSetting({
@@ -378,7 +379,8 @@ gWare.Utils.AddSetting({
     name = "Door Owner HUD deaktivieren?",
     description = "Soll man sehen können, wem eine Tür gehört?",
     defaultValue = false,
-    settingType = "bool"
+    settingType = "bool",
+    darkRP = true
 })
 
 gWare.Utils.AddSetting({
@@ -386,7 +388,8 @@ gWare.Utils.AddSetting({
     name = "FPP Owner HUD deaktivieren?",
     description = "Soll man sehen können, wem eine Prop gehört?",
     defaultValue = false,
-    settingType = "bool"
+    settingType = "bool",
+    darkRP = true
 })
 
 gWare.Utils.AddSetting({
@@ -394,7 +397,8 @@ gWare.Utils.AddSetting({
     name = "Encrypted Comms Stuff?",
     description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
     defaultValue = {},
-    settingType = "job_multi_select"
+    settingType = "job_multi_select",
+    darkRP = true
 })
 
 gWare.Utils.AddSetting({
@@ -402,7 +406,8 @@ gWare.Utils.AddSetting({
     name = "decode",
     description = "decode stuff?",
     defaultValue = {},
-    settingType = "job_multi_select"
+    settingType = "job_multi_select",
+    darkRP = true
 })
 
 gWare.Utils.AddSetting({

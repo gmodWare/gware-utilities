@@ -20,6 +20,8 @@ function gWare.Utils.GetSettingValue(index)
 end
 
 function gWare.Utils.HasJobAccess(settingID, ply)
+    if (not DarkRP) then return true end
+
     local command = ply:getJobTable().command
 
     if not gWare.Utils.JobAccess[settingID] then

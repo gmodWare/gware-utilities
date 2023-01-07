@@ -5,6 +5,7 @@ TOOL.ConfigName = ""
 TOOL.Information = {
     { name = "left", stage = 0 },
 }
+TOOL.AddToMenu = DarkRP and true or false
 
 local L = gWare.Utils.Lang.GetPhrase
 

@@ -37,7 +37,7 @@ command:OnReceive(function()
     local ply = net.ReadEntity()
 
     local rollColor = getRollColor(randNum)
-    local senderColor = RPExtraTeams[ply:Team()].color
+    local senderColor = team.GetColor(ply:Team())
 
     local translationText = L"command_roll_desc"
 

@@ -25,7 +25,7 @@ command:OnReceive(function()
     local receivedMessage = net.ReadString()
     local ply = net.ReadEntity()
 
-    local playerColor = RPExtraTeams[ply:Team()].color
+    local playerColor = team.GetColor(ply:Team())
 
     gWare.Utils.PrintCommand("advert",
         playerColor, ply:Nick(), gWare.Utils.Colors.Brackets, " » ", color_white, receivedMessage
