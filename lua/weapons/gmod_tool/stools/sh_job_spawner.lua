@@ -9,6 +9,7 @@ TOOL.Information = {
 local L = gWare.Utils.Lang.GetPhrase
 
 local npcSpawns
+local selector_JobSpawner
 
 if CLIENT then
     npcSpawns = false
@@ -92,13 +93,13 @@ function TOOL.BuildCPanel(panel)
     jobList:SetMultiSelect(true)
 
     npcDropdown.OnSelect = function()
-        local npcName, data = npcDropdown:GetSelected()
+        local npcName, _ = npcDropdown:GetSelected()
 
         jobList:Clear()
         column:SetName(npcName)
 
         for jobCommand, _ in pairs(gWare.Utils.NPCJobs[npcName]) do
-            for _, jobData in pairs(RPExtraTeams) do
+            for _, jobData in ipairs(RPExtraTeams) do
                 if jobData.command != jobCommand then continue end
 
                 jobList:AddLine(jobData.name)
@@ -123,10 +124,10 @@ function TOOL.BuildCPanel(panel)
             return
         end
 
-        local npcName, data = npcDropdown:GetSelected()
+        local npcName, _ = npcDropdown:GetSelected()
 
         for _, panelData in ipairs(jobList:GetSelected()) do
-            for _, jobData in pairs(RPExtraTeams) do
+            for _, jobData in ipairs(RPExtraTeams) do
                 if jobData.name != panelData:GetColumnText(1) then continue end
 
                 gWare.Utils.DeleteJobsFromNPC(npcName, jobData.command)
@@ -148,16 +149,15 @@ function TOOL.BuildCPanel(panel)
             return
         end
 
-        local npcName, data = npcDropdown:GetSelected()
+        local npcName, _ = npcDropdown:GetSelected()
 
-        local selector = vgui.Create("VoidUI.ItemSelect")
-        selector:SetParent(addButton)
-        selector:SetMultipleChoice(true)
+        selector_JobSpawner = vgui.Create("VoidUI.ItemSelect")
+        selector_JobSpawner:SetMultipleChoice(true)
 
         local jobTbl = {}
         local jobCache = {}
 
-        for _, jobData in pairs(RPExtraTeams) do
+        for _, jobData in ipairs(RPExtraTeams) do
             local jobCommand = jobData.command
             local jobName = jobData.name
 
@@ -170,15 +170,11 @@ function TOOL.BuildCPanel(panel)
             end
         end
 
-        selector:InitItems(jobTbl, function(tblKey, tblValue)
-            for index, jobCommand in ipairs(tblKey) do
-                if jobCache[jobCommand] then continue end
-
-                jobCache[index] = jobCommand
-            end
+        selector_JobSpawner:InitItems(jobTbl, function(tblKey, tblValue)
+            table.insert(jobCache, selector_JobSpawner.recentItem.key)
         end)
 
-        selector.OnRemove = function()
+        selector_JobSpawner.OnRemove = function()
             if table.IsEmpty(jobCache) then return end
 
             for _, jobCommand in ipairs(jobCache) do
@@ -202,7 +198,7 @@ function TOOL.BuildCPanel(panel)
             return
         end
 
-        local npcName, data = npcDropdown:GetSelected()
+        local npcName, _ = npcDropdown:GetSelected()
 
         VoidLib.Notify(L("notify_jobsetter-deleted_name"), L("notify_jobsetter-deleted_name"):format(npcName), VoidUI.Colors.Red, 5)
         gWare.Utils.DeleteNPC(npcName)
@@ -276,3 +272,15 @@ function TOOL:Holster()
     self.GhostHuman:Remove()
     RemoveClientEnts()
 end
+
+hook.Add("OnSpawnMenuClose", "gWare.Utils.PreventRemoving", function()
+    if IsValid(selector_JobSpawner) then return false end
+end)
+
+hook.Add("VGUIMousePressed" ,"gWare.Utils.RemovePanelCorrectly", function(panel)
+    if not IsValid(selector_JobSpawner) then return end
+
+    if not selector_JobSpawner:IsOurChild(panel) then
+        selector_JobSpawner:Remove()
+    end
+end)
