@@ -97,7 +97,7 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
 
     -- voice-panels
     hook.Add("HUDShouldDraw", "gWare.Utils.VoicePanels", function(name)
-        if (name != "DarkRP_ChatReceivers") then return end
+        if (name ~= "DarkRP_ChatReceivers") then return end
 
         if not gWare.Utils.GetSettingValue("voice-panels") then return end
         return false

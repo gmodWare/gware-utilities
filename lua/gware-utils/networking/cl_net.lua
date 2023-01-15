@@ -11,8 +11,9 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
         local settingID = net.ReadString()
         local settingValue = net.ReadType()
         local settingType = net.ReadString()
+        local darkRP = net.ReadBool()
 
-        gWare.Utils.Settings[i] = { id = settingID, value = settingValue, settingType = settingType}
+        gWare.Utils.Settings[i] = { id = settingID, value = settingValue, settingType = settingType, darkRP = darkRP }
         gWare.Utils.IDs[settingID] = i
     end
 

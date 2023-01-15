@@ -57,6 +57,7 @@ function gWare.Utils.SendSettingToClient(ply)
             net.WriteString(settingsData.id)
             net.WriteType(settingsData.value)
             net.WriteString(settingsData.settingType)
+            net.WriteBool(settingsData.darkRP == true) -- Not sure if this is needed
         end
     net.Send(ply)
 end

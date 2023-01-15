@@ -32,7 +32,7 @@ command:OnReceive(function()
     local message = net.ReadString()
     local sender = net.ReadEntity()
 
-    local senderColor = RPExtraTeams[sender:Team()].color
+    local senderColor = team.GetColor(sender:Team())
 
     gWare.Utils.PrintCommand(command:GetPrefix(),
         senderColor, sender:Nick(), gWare.Utils.Colors.Brackets, " » ", color_white, message
