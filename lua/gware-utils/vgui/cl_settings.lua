@@ -53,7 +53,7 @@ function PANEL:Init()
             local jobTbl = {}
 
             -- add all darkrp jobs to choices
-            for i, job in pairs(RPExtraTeams) do
+            for i, job in ipairs(RPExtraTeams) do
                 jobTbl[job.command] = job.name
             end
 
