@@ -224,7 +224,7 @@ function TOOL:MakeGhostHuman(model, pos, angle)
     self.GhostHuman:SetAngles(angle)
     self.GhostHuman:Spawn()
 
-    self.GhostHuman:PhysicsDestroy()
+    //self.GhostHuman:PhysicsDestroy()
 
     self.GhostHuman:SetMoveType(MOVETYPE_NONE)
     self.GhostHuman:SetNotSolid(true)
