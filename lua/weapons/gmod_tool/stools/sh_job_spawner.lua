@@ -227,7 +227,7 @@ function TOOL:MakeGhostHuman(model, pos, angle)
 
     -- self.GhostHuman:SetMoveType(MOVETYPE_NONE)
     -- self.GhostHuman:SetNotSolid(true)
-    -- self.GhostHuman:SetRenderMode(RENDERMODE_TRANSCOLOR)
+    self.GhostHuman:SetRenderMode(RENDERMODE_TRANSCOLOR)
     self.GhostHuman:SetColor(ghostColor)
 end
 
