@@ -19,7 +19,7 @@ local command = gWare.Utils.RegisterCommand({
 })
 
 command:OnServerSide(function(ply, chatInput)
-    local text = chatInput:lower()
+    local text = chatInput
 
     if not gWare.Utils.HasJobAccess(command:GetPrefix(), ply) then
         VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
