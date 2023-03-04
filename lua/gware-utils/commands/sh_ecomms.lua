@@ -18,9 +18,7 @@ local command = gWare.Utils.RegisterCommand({
     triggers = {"vfunk", "ecomms", "encrypted", "ec"},
 })
 
-command:OnServerSide(function(ply, chatInput)
-    local text = chatInput
-
+command:OnServerSide(function(ply, text)
     if not gWare.Utils.HasJobAccess(command:GetPrefix(), ply) then
         VoidLib.Notify(ply, L"notify_missing-perms-encrypted_name", L"notify_missing-perms-encrypted_desc", VoidUI.Colors.Red, 4)
         return ""
