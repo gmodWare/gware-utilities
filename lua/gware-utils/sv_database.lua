@@ -7,8 +7,6 @@ local database = VoidLib.Database:Create({
     useMySQL = false,
 })
 
-local jobsaccess_loaded = jobsaccess_loaded or false
-
 function database:OnConnected()
     local query = database:Create("gware_settings")
         query:Create("id", "INTEGER NOT NULL AUTO_INCREMENT")
@@ -22,10 +20,6 @@ function database:OnConnected()
         query:Create("job_command", "VARCHAR(15) NOT NULL")
         query:Create("setting_id", "VARCHAR(15) NOT NULL")
         query:PrimaryKey("id")
-        query:Callback(function(_, success)
-            jobsaccess_loaded = true
-            hook.Run("gWare.SQL.JobsAccess.Loaded")
-        end)
     query:Execute()
 
     query = database:Create("gware_npc_spawns")
@@ -134,43 +128,26 @@ function gWare.Utils.GetAllSettings(callback)
     query:Execute()
 end
 
-local function queryJobFunctionWhenLoaded(id, callback)
-    if jobsaccess_loaded then
-        callback()
-    else
-        hook.Add("gWare.SQL.JobsAccess.Loaded", "gWare.SQL." .. id, function()
-            callback()
-            hook.Remove("gWare.SQL.JobsAccess.Loaded", "gWare.SQL." .. id)
-        end)
-    end
-end
-
 function gWare.Utils.InsertJob(jobCommand, settingID)
-    queryJobFunctionWhenLoaded("InsertJob", function()
-        local query = database:Insert("gware_jobsaccess")
-            query:Insert("job_command", jobCommand)
-            query:Insert("setting_id", settingID)
-        query:Execute()
-    end)
+    local query = database:Insert("gware_jobsaccess")
+        query:Insert("job_command", jobCommand)
+        query:Insert("setting_id", settingID)
+    query:Execute()
 end
 
 function gWare.Utils.DeleteJob(jobCommand, settingID)
-    queryJobFunctionWhenLoaded("DeleteJob", function()
-        local query = database:Delete("gware_jobsaccess")
-            query:Where("job_command", jobCommand)
-            query:Where("setting_id", settingID)
-        query:Execute()
-    end)
+    local query = database:Delete("gware_jobsaccess")
+        query:Where("job_command", jobCommand)
+        query:Where("setting_id", settingID)
+    query:Execute()
 end
 
 function gWare.Utils.GetAllJobs(callback)
-    queryJobFunctionWhenLoaded("GetAllJobs", function()
-        local query = database:Select("gware_jobsaccess")
-            query:Select("job_command")
-            query:Select("setting_id")
-            query:Callback(function (tblData)
-                callback(tblData)
-            end)
-        query:Execute()
-    end)
+    local query = database:Select("gware_jobsaccess")
+        query:Select("job_command")
+        query:Select("setting_id")
+        query:Callback(function (tblData)
+            callback(tblData)
+        end)
+    query:Execute()
 end
