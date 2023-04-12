@@ -11,13 +11,13 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
     -- NOTE: Would be easier to create a system to set convars and autmatically handle everything
 
     -- voice-panels
-    function g_VoicePanelList:OnChildAdded(child)
+    hook.Add("PlayerStartVoice", "gWare.Utils.DisableVoicePanel", function()
         if not gWare.Utils.GetSettingValue("voice-panels") then return end
-
-        if (child:IsValid()) then
-            child:Remove()
+        if (IsValid(g_VoicePanelList)) then
+            g_VoicePanelList:Remove()
         end
-    end
+        return true
+    end)
 
     -- hide-door-owner
     hook.Add("HUDDrawDoorData", "gWare.Utils.DisableDarkRPOwnerHUD", function(ent)
