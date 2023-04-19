@@ -19,6 +19,11 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.WaitingForClient", function()
         return true
     end)
 
+    -- hide-chat-indicator
+    hook.Add("DrawChatIndicator", "gWare.Utils.HideChatIndicator", function()
+        return gWare.Utils.GetSettingValue("hide-chat-indicator")
+    end)
+
     -- hide-door-owner
     hook.Add("HUDDrawDoorData", "gWare.Utils.DisableDarkRPOwnerHUD", function(ent)
         return gWare.Utils.GetSettingValue("hide-door-owner")

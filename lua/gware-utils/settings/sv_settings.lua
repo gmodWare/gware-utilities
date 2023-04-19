@@ -393,6 +393,15 @@ gWare.Utils.AddSetting({
 })
 
 gWare.Utils.AddSetting({
+    id = "hide-chat-indicator",
+    name = "Chat Bubble deaktivieren?",
+    description = "Soll man den Chat Indicator beim tippen über dem Kopf sehen?",
+    defaultValue = false,
+    settingType = "bool",
+    darkRP = true
+})
+
+gWare.Utils.AddSetting({
     id = "encrypted-comms",
     name = "Encrypted Comms Stuff?",
     description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
