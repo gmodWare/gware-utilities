@@ -17,7 +17,8 @@ net.Receive("gWare.Utils.SendSettingToClient", function(len)
         gWare.Utils.IDs[settingID] = i
     end
 
-    gWare.Utils.Config.Language = gWare.Utils.Settings[gWare.Utils.IDs["language"]].value
+    local loadedLanguage = gWare.Utils.Settings[gWare.Utils.IDs["language"]]
+    local language = loadedLanguage and loadedLanguage.value or "english"
 
     hook.Run("gWare.Utils.ClientReady", LocalPlayer())
 end)
