@@ -18,5 +18,6 @@ gWare.Utils.Colors = {
         ["looc"] = Color(102, 153, 219),
         ["mact"] = Color(189, 39, 39),
         ["roll"] = Color(220, 220, 220),
+        ["id"] = Color(47, 155, 47),
     }
 }

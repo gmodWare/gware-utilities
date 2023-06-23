@@ -263,80 +263,60 @@ end)
 
 gWare.Utils.AddSetting({
     id = "language",
-    name = "Sprache",
-    description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = "english",
     settingType = "lang-dropdown"
 })
 
 gWare.Utils.AddSetting({
     id = "npc-weapon-drop",
-    name = "Waffen Drop von NPCs",
-    description = "Waffendrop von NPCs deaktivieren?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "toolgun-sounds",
-    name = "Toolgun Geräusche",
-    description = "Toolgun Geräusche deaktiviern?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "toolgun-effects",
-    name = "Toolgun Effekte",
-    description = "Toolgun Effekte deaktivieren?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "auto-cloak",
-    name = "Automatischer Cloak bei Noclip",
-    description = "Automatisch Cloaken bei Noclip?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "killfeed",
-    name = "Killfeed ausblenden",
-    description = "Sollen Spielertode ausgeblendet werden?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "suicide",
-    name = "Selbstmord verbieten?",
-    description = "'Kill' in Konsole verbieten?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "player-weapon-drop",
-    name = "Spieler Waffen drop verbieten?",
-    description = "Der Spieler kann keine Waffen fallen lassen?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "auto-workshop-dl",
-    name = "Automatischer Workshop-Download",
-    description = "Sollen alle User bei joinen die Kollektion automatisch downloaden?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "billboards",
-    name = "DarkRP Tafeln deaktvieren?",
-    description = "Sollen bei '/advert' keine Tafeln gespawned werden?",
     defaultValue = false,
     settingType = "bool",
     darkRP = true
@@ -344,40 +324,30 @@ gWare.Utils.AddSetting({
 
 gWare.Utils.AddSetting({
     id = "family-sharing",
-    name = "Family Sharing verbieten?",
-    description = "Sollen User die Family-Sharing benutzen, sofort gekickt werden?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "voice-panels",
-    name = "Sprachanzeige deaktiveren?",
-    description = "Sprachanzeige rechts unten deaktivieren?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "spawnmenu",
-    name = "Spawnmenü deaktivieren?",
-    description = "Braucht man eine permission um das Spawnmenü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "contextmenu",
-    name = "Context-Menü deaktivieren?",
-    description = "Braucht man eine permission um das C-Menü öffnen zu können?",
     defaultValue = false,
     settingType = "bool"
 })
 
 gWare.Utils.AddSetting({
     id = "hide-door-owner",
-    name = "Door Owner HUD deaktivieren?",
-    description = "Soll man sehen können, wem eine Tür gehört?",
     defaultValue = false,
     settingType = "bool",
     darkRP = true
@@ -385,8 +355,6 @@ gWare.Utils.AddSetting({
 
 gWare.Utils.AddSetting({
     id = "hide-fpp-owner",
-    name = "FPP Owner HUD deaktivieren?",
-    description = "Soll man sehen können, wem eine Prop gehört?",
     defaultValue = false,
     settingType = "bool",
     darkRP = true
@@ -394,8 +362,6 @@ gWare.Utils.AddSetting({
 
 gWare.Utils.AddSetting({
     id = "hide-chat-indicator",
-    name = "Chat Bubble deaktivieren?",
-    description = "Soll man den Chat Indicator beim tippen über dem Kopf sehen?",
     defaultValue = false,
     settingType = "bool",
     darkRP = true
@@ -403,8 +369,6 @@ gWare.Utils.AddSetting({
 
 gWare.Utils.AddSetting({
     id = "encrypted-comms",
-    name = "Encrypted Comms Stuff?",
-    description = "Braucht der user eine permission um das Context-Menü öffnen zu können?",
     defaultValue = {},
     settingType = "job_multi_select",
     darkRP = true
@@ -412,8 +376,6 @@ gWare.Utils.AddSetting({
 
 gWare.Utils.AddSetting({
     id = "decode",
-    name = "decode",
-    description = "decode stuff?",
     defaultValue = {},
     settingType = "job_multi_select",
     darkRP = true
@@ -431,7 +393,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_act",
     name = "act",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -439,7 +400,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_advert",
     name = "advert",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -447,7 +407,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_comms",
     name = "comms",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -455,7 +414,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_encrypted-comms",
     name = "encrypted-comms",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -463,7 +421,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_decode",
     name = "decode",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -479,7 +436,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_looc",
     name = "looc",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -487,7 +443,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_mact",
     name = "mact",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -495,7 +450,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_me",
     name = "me",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -503,7 +457,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_ooc",
     name = "ooc",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -511,7 +464,6 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_roll",
     name = "roll",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
 })
@@ -519,7 +471,14 @@ gWare.Utils.AddSetting({
 gWare.Utils.AddSetting({
     id = "command_unstuck",
     name = "unstuck",
-    description = "decode stuff?",
     defaultValue = false,
     settingType = "command"
+})
+
+gWare.Utils.AddSetting({
+    id = "command_id",
+    name = "id",
+    defaultValue = false,
+    darkRP = true,
+    settingType = "command",
 })
