@@ -1,9 +1,10 @@
+-- WORK IN PROGRESS
 --[[
     Command: /id
     Description: Shows your cloneid to to other players in your area
     Example Command: /id
     Example Chat: [ID] 501st CMD Menschlich shows his ID: 5431
-]]
+
 
 local L = gWare.Utils.Lang.GetPhrase
 
@@ -47,3 +48,5 @@ command:OnReceive(function()
         color, idFrom, ply:Nick(), gWare.Utils.Colors.Brackets, " » ", color_white, cloneid
     )
 end)
+
+--]]
