@@ -263,6 +263,8 @@ function gWare.Utils.BroadcastVote(voteTable)
 end
 
 net.Receive("gWare.Utils.SendVoteToServer", function(len, ply)
+    if not ply:HasGWarePermission("create_vote") then return end
+
     local count = net.ReadUInt(3)
     local values = {}
 
