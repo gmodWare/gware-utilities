@@ -32,9 +32,7 @@ end
 
 local function RemoveClientEnts()
     timer.Simple(0, function()
-        for _, ent in ipairs(ents.GetAll()) do
-            if ent:GetClass() != "gware_utils_spawnnpc" then continue end
-
+        for _, ent in ipairs(ents.FindByClass("gware_utils_spawnnpc")) do
             ent:Remove()
         end
 
