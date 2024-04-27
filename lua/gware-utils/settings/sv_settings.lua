@@ -475,10 +475,10 @@ gWare.Utils.AddSetting({
     settingType = "command"
 })
 
---gWare.Utils.AddSetting({
---    id = "command_id",
---    name = "id",
---    defaultValue = false,
---    darkRP = true,
---    settingType = "command",
---})
+gWare.Utils.AddSetting({
+    id = "command_id",
+    name = "id",
+    defaultValue = false,
+    darkRP = true,
+    settingType = "command",
+})
