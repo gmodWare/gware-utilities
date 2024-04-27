@@ -72,6 +72,8 @@ net.Receive("gWare.Utils.UpdateClients", function()
     local index = net.ReadUInt(5)
     local settingValue = net.ReadType()
 
+    if not gWare.Utils.Settings[index] then return end
+
     if gWare.Utils.Settings[index].id == "language" then
         RunConsoleCommand("spawnmenu_reload")
         gWare.Utils.Config.Language = settingValue
@@ -93,6 +95,8 @@ function gWare.Utils.UpdateSettingBool(index, settingValue)
         net.WriteBool(settingValue)
     net.SendToServer()
 
+    if not gWare.Utils.Settings[index] then return end
+
     gWare.Utils.Settings[index].value = settingValue
 end
 
@@ -101,6 +105,8 @@ function gWare.Utils.UpdateSettingString(index, settingValue)
         net.WriteUInt(index, 5)
         net.WriteString(settingValue)
     net.SendToServer()
+
+    if not gWare.Utils.Settings[index] then return end
 
     gWare.Utils.Settings[index].value = settingValue
 end
