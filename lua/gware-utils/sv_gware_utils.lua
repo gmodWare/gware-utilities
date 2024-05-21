@@ -11,3 +11,17 @@ hook.Add("gWare.Utils.ClientReady", "gWare.Utils.CheckDependency", function(ply)
     ply:PrintMessage(HUD_PRINTCONSOLE, voidlibStr)
     ply:ChatPrint(voidlibStr)
 end)
+
+hook.Add("PlayerSay", "gWare.Utils.SendMenu", function(ply, text)
+    if text:lower():StartWithAny("!gware", "/gware", "!gw", "/gw") then
+        if not ply:HasGWarePermission("edit_settings") then
+            VoidLib.Notify(ply, L"notify_no-permissions_name", L"notify_no-permissions_desc", VoidUI.Colors.Red, 6)
+            return
+        end
+
+        net.Start("gWare.Utils.SendMenu")
+        net.Send(ply)
+
+        return ""
+    end
+end)

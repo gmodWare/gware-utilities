@@ -9,15 +9,15 @@ local function OpenMenu()
     vgui.Create("gWare.Utils.Frame")
 end
 
-hook.Add("OnPlayerChat", "gWare.Utils.OpenSettingsMenu1", function(ply, text)
-    if LocalPlayer() != ply then return end
+-- hook.Add("OnPlayerChat", "gWare.Utils.OpenSettingsMenu1", function(ply, text)
+--     if LocalPlayer() != ply then return end
 
-    if text:lower():StartWithAny("!gware", "/gware", "!gw", "/gw") then
-        OpenMenu()
+--     if text:lower():StartWithAny("!gware", "/gware", "!gw", "/gw") then
+--         OpenMenu()
 
-        return ""
-    end
-end)
+--         return ""
+--     end
+-- end)
 
 list.Set("DesktopWindows", "gware_settings", {
     title = "gWare",

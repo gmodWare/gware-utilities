@@ -19,6 +19,7 @@ util.AddNetworkString("gWare.Utils.SendResultToServer")
 util.AddNetworkString("gWare.Utils.SendResultsToClients")
 util.AddNetworkString("gWare.Utils.UpdateClients")
 util.AddNetworkString("gWare.Utils.BroadcastUpdatedJobAccess")
+util.AddNetworkString("gWare.Utils.SendMenu")
 
 function gWare.Utils.SendNPCSpawnsAndJobsToClient(ply)
     local npcSpawnsCount = table.Count(gWare.Utils.NPCSpawns)

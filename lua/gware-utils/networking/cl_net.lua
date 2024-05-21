@@ -230,3 +230,7 @@ net.Receive("gWare.Utils.BroadcastUpdatedJobAccess", function(lem)
 
     gWare.Utils.JobAccess[settingID][jobCommand] = true
 end)
+
+net.Receive("gWare.Utils.SendMenu", function(len)
+    vgui.Create("gWare.Utils.Frame")
+end)
