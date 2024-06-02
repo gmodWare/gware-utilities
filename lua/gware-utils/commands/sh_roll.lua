@@ -8,7 +8,7 @@ local L = gWare.Utils.Lang.GetPhrase
 
 local command = gWare.Utils.RegisterCommand({
     prefix = "roll",
-    triggers = {"roll"},
+    triggers = {"roll", "würfel"},
 })
 
 command:OnServerSide(function(ply, message)
