@@ -115,11 +115,6 @@ function gWare.Utils.LoadAll()
 end
 
 hook.Add("Initialize", "gWare.Init", function()
-    -- if (not DarkRP) then
-    --     gWare.Utils.Print("DarkRP is required to run gWare Utilities.", "error")
-    --     return
-    -- end
-
     if not gWare.Utils.Loaded then
         if VoidLib then
             gWare.Utils.LoadAll()
