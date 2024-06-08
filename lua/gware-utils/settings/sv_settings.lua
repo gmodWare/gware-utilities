@@ -46,15 +46,15 @@ hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
             local settingName = settingData.id
             local settingType = settingData.settingType
 
-            if settingType == "command" then
-                local settingPrefix = settingName:Replace("command_", "")
+            if settingType != "command" then continue end
 
-                for trigger, cmdObj in pairs(GWARE_COMMANDS) do
-                    if cmdObj:GetPrefix() == settingPrefix then
-                        cmdObj:SetActive(not settingData.value)
-                        break
-                    end
-                end
+            local settingPrefix = settingName:Replace("command_", "")
+
+            for trigger, cmdObj in pairs(GWARE_COMMANDS) do
+                if cmdObj:GetPrefix() != settingPrefix then continue end
+
+                cmdObj:SetActive(not settingData.value)
+                break
             end
         end
     end)
