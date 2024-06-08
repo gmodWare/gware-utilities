@@ -13,7 +13,6 @@ end
 
 local i = 1
 function gWare.Utils.AddSetting(tblData)
-    -- : remove name and description
     gWare.Utils.Settings[i] = {id = tblData.id, value = tblData.defaultValue, settingType = tblData.settingType, darkRP = tblData.darkRP or false}
     gWare.Utils.IDs[tblData.id] = i
     i = i + 1
@@ -425,14 +424,6 @@ gWare.Utils.AddSetting({
     settingType = "command"
 })
 
--- gWare.Utils.AddSetting({ Coming soon :D
---     id = "command_it",
---     name = "it",
---     description = "decode stuff?",
---     defaultValue = false,
---     settingType = "command"
--- })
-
 gWare.Utils.AddSetting({
     id = "command_looc",
     name = "looc",
@@ -473,12 +464,4 @@ gWare.Utils.AddSetting({
     name = "unstuck",
     defaultValue = false,
     settingType = "command"
-})
-
-gWare.Utils.AddSetting({
-    id = "command_id",
-    name = "id",
-    defaultValue = false,
-    darkRP = true,
-    settingType = "command",
 })
