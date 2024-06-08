@@ -319,3 +319,5 @@ function gWare.Lang:DownloadLanguages(addon, callback)
         callback(true)
     end)
 end
+
+gWare.Lang:Init("Utils")

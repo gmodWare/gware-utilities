@@ -89,19 +89,19 @@ end
 -----------------------------------------------------------]]
 
 function gWare.Utils.LoadAll()
-    -- load libraries first
     gWare.Utils.Load(gWare.Utils.Dir .. "/libs")
-
-    -- init languages
-    gWare.Lang:Init("Utils")
-
-    -- then database
     gWare.Utils.Load(gWare.Utils.Dir)
-
-    -- then the rest in best order
     gWare.Utils.Load(gWare.Utils.Dir .. "/utils")
-    gWare.Utils.Load(gWare.Utils.Dir)
-    gWare.Utils.Load(gWare.Utils.Dir .. "/settings")
+
+    -- trying to load settings on server too early will cause issues
+    if CLIENT or gWare.Utils.DatabaseLoaded then
+        gWare.Utils.Load(gWare.Utils.Dir .. "/settings")
+    else
+        hook.Add("gWare.Utils.DatabaseLoaded", "gWare.Utils.LoadSettingsFromDB", function()
+            gWare.Utils.Load(gWare.Utils.Dir .. "/settings")
+        end)
+    end
+
     gWare.Utils.Load(gWare.Utils.Dir .. "/networking")
     gWare.Utils.Load(gWare.Utils.Dir .. "/commands")
     gWare.Utils.Load(gWare.Utils.Dir .. "/permissions")
@@ -109,19 +109,19 @@ function gWare.Utils.LoadAll()
     -- finally add clientside files
     gWare.Utils.AddCSDir(gWare.Utils.Dir .. "/vgui")
 
+    gWare.Utils.Loaded = true
     MsgC(Color(23, 89, 255), UtilsBranding, Color(255, 255, 255), authors, "\n\n")
     gWare.Utils.Print("gWare successfully loaded.")
-    gWare.Utils.Loaded = true
 end
 
 hook.Add("Initialize", "gWare.Init", function()
-    if not gWare.Utils.Loaded then
-        if VoidLib then
+    if gWare.Utils.Loaded then return end
+
+    if VoidLib then
+        gWare.Utils.LoadAll()
+    else
+        hook.Add("VoidLib.Loaded", "gWare.Init.WaitForVoidLib", function ()
             gWare.Utils.LoadAll()
-        else
-            hook.Add("VoidLib.Loaded", "gWare.Init.WaitForVoidLib", function ()
-                gWare.Utils.LoadAll()
-            end)
-        end
+        end)
     end
 end)

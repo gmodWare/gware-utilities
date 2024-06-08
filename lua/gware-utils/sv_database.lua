@@ -35,6 +35,9 @@ function database:OnConnected()
         query:Create("job_command", "VARCHAR(15) NOT NULL")
         query:PrimaryKey("id")
     query:Execute()
+
+    hook.Run("gWare.Utils.DatabaseLoaded")
+    gWare.Utils.DatabaseLoaded = true
 end
 
 database:Connect()
