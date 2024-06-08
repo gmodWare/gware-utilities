@@ -20,30 +20,25 @@ function gWare.Utils.AddSetting(tblData)
     if not getSetting(tblData.id) then
         gWare.Utils.InsertSetting(tblData.id, tblData.defaultValue)
     end
-
-    gWare.Utils.GetAllSettings(function (sqlData)
-        local sqlDataCount = table.Count(sqlData)
-        local settingsDataCount = table.Count(gWare.Utils.Settings)
-
-        if settingsDataCount != sqlDataCount then return end
-
-        timer.Simple(0, function ()
-            hook.Run("gWare.Utils.SettingsLoaded")
-        end)
-    end)
 end
 
 hook.Add("gWare.Utils.SettingsLoaded", "gWare.Utils.CacheSettings", function()
     gWare.Utils.GetAllSettings(function (tblData)
-        for index, settings in ipairs(tblData) do
-            if settings.setting_value == "0" or settings.setting_value == "1" then
-                gWare.Utils.Settings[index].value = gWare.Utils.IntToBool(tonumber(settings.setting_value))
-            else
-                gWare.Utils.Settings[index].value = settings.setting_value
+        for index, setting in ipairs(tblData) do
+            -- clear out non-existent settings
+            -- only happens if a setting is in the db, but not added via AddSetting()
+            if not gWare.Utils.IDs[setting.setting_name] then
+                continue
             end
 
-            if settings.setting_name == "language" then
-                gWare.Utils.Config.Language = settings.setting_value
+            if setting.setting_value == "0" or setting.setting_value == "1" then
+                gWare.Utils.Settings[index].value = gWare.Utils.IntToBool(tonumber(setting.setting_value))
+            else
+                gWare.Utils.Settings[index].value = setting.setting_value
+            end
+
+            if setting.setting_name == "language" then
+                gWare.Utils.Config.Language = setting.setting_value
             end
         end
 
@@ -465,3 +460,6 @@ gWare.Utils.AddSetting({
     defaultValue = false,
     settingType = "command"
 })
+
+
+hook.Run("gWare.Utils.SettingsLoaded")
