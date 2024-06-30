@@ -17,17 +17,17 @@ command:OnServerSide(function(ply, message)
 
     net.Start(command:GetNetID())
         net.WriteString(message)
-        net.WriteEntity(ply)
+        net.WriteString(ply:Name())
+        net.WriteTeam(ply)
     net.Broadcast()
 end)
 
 command:OnReceive(function()
     local receivedMessage = net.ReadString()
-    local ply = net.ReadEntity()
-
-    local playerColor = team.GetColor(ply:Team())
+    local name = net.ReadString
+    local playerColor = team.GetColor(net.ReadTeam())
 
     gWare.Utils.PrintCommand("advert",
-        playerColor, ply:Nick(), gWare.Utils.Colors.Brackets, " » ", color_white, receivedMessage
+        playerColor, name, gWare.Utils.Colors.Brackets, " » ", color_white, receivedMessage
     )
 end)

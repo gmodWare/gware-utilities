@@ -65,7 +65,8 @@ command:OnServerSide(function(ply, text)
     net.Start(command:GetNetID())
         net.WriteString(encrypted)
         net.WriteString(receiverName)
-        net.WriteEntity(ply)
+        net.WriteString(ply:Name())
+        net.WriteTeam(ply)
         net.WriteColor(receiverColor)
     net.SendOmit(clearTextReceivers)
 
@@ -73,7 +74,8 @@ command:OnServerSide(function(ply, text)
     net.Start(command:GetNetID())
         net.WriteString(message)
         net.WriteString(receiverName)
-        net.WriteEntity(ply)
+        net.WriteString(ply:Name())
+        net.WriteTeam(ply)
         net.WriteColor(receiverColor)
     net.Send(clearTextReceivers)
 end)
@@ -83,13 +85,13 @@ command:OnReceive(function()
 
     local message = net.ReadString()
     local receiverName = net.ReadString()
-    local sender = net.ReadEntity()
+    local senderName = net.ReadString()
+    local senderColor = team.GetColor(net.ReadTeam())
     local receiverColor = net.ReadColor()
 
-    local senderColor = team.GetColor(sender:Team())
     local toTranslated = " " .. L"general_to" .. " "
 
     gWare.Utils.PrintCommand(command:GetPrefix(),
-        senderColor, sender:Nick(), col.Orange, toTranslated, receiverColor, receiverName, col.Brackets, " » ", color_white, message
+        senderColor, senderName, col.Orange, toTranslated, receiverColor, receiverName, col.Brackets, " » ", color_white, message
     )
 end)

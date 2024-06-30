@@ -16,17 +16,17 @@ command:OnServerSide(function(sender, message)
 
     net.Start(command:GetNetID())
         net.WriteString(message)
-        net.WriteEntity(sender)
+        net.WriteString(sender:Name())
+        net.WriteTeam(sender)
     net.Broadcast()
 end)
 
 command:OnReceive(function()
     local message = net.ReadString()
-    local sender = net.ReadEntity()
-
-    local senderColor = team.GetColor(sender:Team())
+    local senderName = net.ReadString()
+    local senderColor = team.GetColor(net.ReadTeam())
 
     gWare.Utils.PrintCommand(command:GetPrefix(),
-        senderColor, sender:Nick(),  gWare.Utils.Colors.Brackets, " » ", color_white, message
+        senderColor, senderName,  gWare.Utils.Colors.Brackets, " » ", color_white, message
     )
 end)

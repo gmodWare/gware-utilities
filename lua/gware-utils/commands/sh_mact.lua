@@ -15,15 +15,15 @@ command:OnServerSide(function(ply, message)
 
     net.Start(command:GetNetID())
         net.WriteString(message)
-        net.WriteEntity(ply)
+        net.WriteString(ply:Name())
     net.Broadcast()
 end)
 
 command:OnReceive(function()
     local receivedMessage = net.ReadString()
-    local ply = net.ReadEntity()
+    local plyName = net.ReadString()
 
     gWare.Utils.PrintCommand(command:GetPrefix(),
-        ply:Nick() .. " ", receivedMessage
+        plyName .. " ", receivedMessage
     )
 end)

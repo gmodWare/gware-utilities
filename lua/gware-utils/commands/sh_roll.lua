@@ -16,7 +16,8 @@ command:OnServerSide(function(ply, message)
 
     net.Start(command:GetNetID())
         net.WriteUInt(randomNumber, 7)
-        net.WriteEntity(ply)
+        net.WriteString(ply:Name())
+        net.WriteTeam(ply)
     net.Broadcast()
 end)
 
@@ -34,16 +35,16 @@ end
 
 command:OnReceive(function()
     local randNum = net.ReadUInt(7)
-    local ply = net.ReadEntity()
+    local plyName = net.ReadString()
 
     local rollColor = getRollColor(randNum)
-    local senderColor = team.GetColor(ply:Team())
+    local senderColor = team.GetColor(net.ReadTeam())
 
     local translationText = L"command_roll_desc"
 
-    local formatted = translationText:format(ply:Name(), randNum)
+    local formatted = translationText:format(plyName, randNum)
 
-    local _, nameEnd = formatted:find(ply:Name(), 1, true)
+    local _, nameEnd = formatted:find(plyName, 1, true)
     local numberStart, numberEnd = formatted:find(tostring(randNum), nameEnd, true)
 
     local tbl = {

@@ -24,15 +24,15 @@ command:OnServerSide(function(sender, message)
 
     net.Start(command:GetNetID())
         net.WriteString(message)
-        net.WriteEntity(sender)
+        net.WriteString(sender:Name())
     net.Send(receivers)
 end)
 
 command:OnReceive(function()
     local message = net.ReadString()
-    local ply = net.ReadEntity()
+    local plyName = net.ReadString()
 
     local color = team.GetColor(ply:Team())
 
-    chat.AddText(color, ply:Name() .. " " .. message, color_white)
+    chat.AddText(color, plyName .. " " .. message, color_white)
 end)
