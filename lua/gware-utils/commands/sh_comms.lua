@@ -59,7 +59,7 @@ command:OnReceive(function()
 
     local message = net.ReadString()
     local receiverName = net.ReadString()
-    local senderName = net.ReadEntity()
+    local senderName = net.ReadString()
     local senderColor = team.GetColor(net.ReadTeam())
     local receiverColor = net.ReadColor()
 
