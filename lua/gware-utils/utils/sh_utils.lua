@@ -123,3 +123,27 @@ function gWare.Utils.IsMessageEmpty(str, ply)
 
     return false
 end
+
+--[[
+    Calculates and caches bit size of sandbox Teams/DarkRP Jobs
+    This will mainly be used for net.WriteTeam
+]]--
+function gWare.Utils.GetJobsSizeInBits()
+    if not isnumber(gWare.Utils.JobSizeCache) then
+        gWare.Utils.JobSizeCache = #math.IntToBin(#RPExtraTeams):TrimLeft("0")
+    end
+
+    return gWare.Utils.JobSizeCache
+end
+
+--[[
+    Easy networking of a player's team index
+]]--
+function net.WriteTeam(ply)
+    local bits = gWare.Utils.GetJobsSizeInBits()
+    net.WriteUInt(ply:Team(), bits)
+end
+
+function net.ReadTeam()
+    return net.ReadUInt(gWare.Utils.GetJobsSizeInBits())
+end
